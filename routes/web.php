@@ -29,6 +29,9 @@ Route::get('/add-category-product', [CategoryProduct::class, 'add_category_produ
 Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
 
+Route::post('/edit-category-product/{category_product_id}', [CategoryProduct::class, 'edit_category_product']);
+Route::post('/delete-category-product/{category_product_id}', [CategoryProduct::class, 'delete_category_product']);
+
 //- Update Category Product
-Route::get('/active-category-product', [CategoryProduct::class, 'active_category_product']);
-Route::get('/inactive-category-product', [CategoryProduct::class, 'inactive_category_product']);
+Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
+Route::get('/inactive-category-product/{category_product_id}', [CategoryProduct::class, 'inactive_category_product']);
