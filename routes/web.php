@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController; 
 use App\Http\Controllers\AdminController; 
+use App\Http\Controllers\CategoryProduct; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,9 +14,21 @@ use App\Http\Controllers\AdminController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-//FE
+//User
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 
-//BE
+//Admin
 Route::get('/admin', [AdminController::class, 'index']);
+Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
+Route::get('/logout', [AdminController::class, 'logout']);
+Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
+
+//Category Product
+Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
+Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
+Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
+
+//- Update Category Product
+Route::get('/active-category-product', [CategoryProduct::class, 'active_category_product']);
+Route::get('/inactive-category-product', [CategoryProduct::class, 'inactive_category_product']);
