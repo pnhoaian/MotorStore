@@ -55,9 +55,6 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-						<div class="logo pull-left">
-							<a href="index.html"><img src="{{asset('public/frontend/images/logo-no-background.png')}}" alt="" style="width: 350px; height: auto" /></a>
-						</div>
 
 						<!-- <div class="btn-group pull-right"> 
 							<div class="btn-group">
@@ -111,7 +108,14 @@
 								<span class="icon-bar"></span>
 							</button>
 						</div>
-						<div class="mainmenu pull-left">
+						<div class="logo pull-left">
+							<a href="index.html"><img src="{{asset('public/frontend/images/logo-no-background.jpg')}}" alt="" 
+							style="margin-top: -50px;
+							margin-left: -150px;
+							width: 275px;
+							height: auto;"/></a>
+						</div>
+						<div class="mainmenu center">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="{{URL::to('trang-chu')}}" class="active">Home</a></li>
 								<li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
@@ -159,20 +163,20 @@
 							<div class="item active">
 								<div class="col-sm-6">
 									<h1><span>An Hoai</span> Motor</h1>
-									<h2>Just ride it</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-									<button type="button" class="btn btn-default get">Get it now</button>
+									<h2>Ride With Passion</h2>
+									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
+									<button type="button" class="btn btn-default get">Tham khảo ngay</button>
 								</div>
 								<div class="col-sm-6">
 									<img src="{{asset('public/frontend/images/girl1.jpg')}}" class="girl img-responsive" alt="" />
-									<img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" />
+									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 								</div>
 							</div>
 							<div class="item">
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
 									<h2>100% Responsive Design</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -185,7 +189,7 @@
 								<div class="col-sm-6">
 									<h1><span>E</span>-SHOPPER</h1>
 									<h2>Free Ecommerce Template</h2>
-									<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
+									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
@@ -449,8 +453,8 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull-left">Copyright © 2023 Hoai An Motor. All rights reserved.</p>
-					<p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+					<p class="pull">Copyright © 2023 Hoai An Motor. All rights reserved.</p>
+					<p class="pull">Designed by <span><a target="_blank" href="#">An Hoài</a></span></p>
 				</div>
 			</div>
 		</div>

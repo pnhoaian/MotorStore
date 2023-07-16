@@ -251,6 +251,7 @@ a#scrollUp i{
 .mainmenu ul li a:hover, .mainmenu ul li a.active,  .shop-menu ul li a.active{
 	background:none;
 	color:#EE3E38;
+  padding-left: 120px;
 }
 
 .search_box input {
