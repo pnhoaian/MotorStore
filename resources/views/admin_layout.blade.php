@@ -40,7 +40,7 @@
 <header class="header fixed-top clearfix">
 <!--logo start-->
 <div class="brand">
-    <a href="index.html" class="logo">
+    <a href="{{URL::to('/dashboard')}}" class="logo">
         Admin
     </a>
     <div class="sidebar-toggle-box">
@@ -93,7 +93,7 @@
         <div class="leftside-navigation">
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
-                    <a class="active" href="index.html">
+                    <a class="active" href="{{URL::to('/dashboard')}}">
                         <i class="fa fa-dashboard"></i>
                         <span>Dashboard</span>
                     </a>
@@ -109,6 +109,19 @@
 						<li><a href="{{URL::to('/all-category-product')}}">Danh Sách Danh Mục</a></li>
                     </ul>
                 </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-list-alt"></i>
+                        <span>Hãng - Thương hiệu</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-brand-product')}}">Thêm Hãng Xe</a></li>
+						<li><a href="{{URL::to('/all-brand-product')}}">Danh Sách Hãng Xe</a></li>
+                    </ul>
+                </li>
+
+
                 <li class="sub-menu">
                     <a href="javascript:;">
                         <i class="fa fa-th"></i>

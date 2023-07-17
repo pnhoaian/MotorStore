@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 session_start();
 
-
 class CategoryProduct extends Controller
 {
     public function add_category_product(){
@@ -47,13 +46,24 @@ class CategoryProduct extends Controller
     }
 
     public function edit_category_product($category_product_id){
-        $all_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->first();
-        return view('admin.all_category_product')->with('all_category_product', $all_category_product);
+        $all_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
+        return view('admin.edit_category_product')->with('edit_category_product', $all_category_product);
         //return view('admin.all_category_product');
     }
 
     public function delete_category_product($category_product_id){
-        $edit_category_product = DB::table('tbl_category_product')->delete(); 
-        return view('admin_layout')->with('admin.edit_category_product', $edit_category_product);
+        DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
+        Session::put('message','Xóa danh mục thành công');
+        return Redirect::to('all-category-product');
+    }
+
+    public function update_category_product(Request $request, $category_product_id){
+        $data = array();
+        $data['category_name'] = $request ->category_product_name;
+        $data['category_desc']= $request ->category_product_desc;
+        DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
+        Session::put('message','Đã cập nhật danh mục sản phẩm');
+        return Redirect::to('all-category-product');
     }
 }
+

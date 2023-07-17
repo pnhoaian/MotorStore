@@ -1,8 +1,9 @@
 @extends('welcome')
 @section('content')
+
 <div class="features_items">
                         <!--       features_items            -->
-						<h2 class="title text-center">Features Items</h2>
+						<h2 class="title text-center">Honda</h2>
 						<div class="col-sm-4">
 							<div class="product-image-wrapper">
 								<div class="single-products">
@@ -30,9 +31,11 @@
 						</div>
 						
 					</div><!--features_items-->
-
+					
                     
-					<div class="category-tab"><!--category-tab-->
+					<!--category-tab-->
+
+					<div class="category-tab">
 						<div class="col-sm-12">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#tshirt" data-toggle="tab">T-Shirt</a></li>
@@ -42,6 +45,7 @@
 								<li><a href="#poloshirt" data-toggle="tab">Polo shirt</a></li>
 							</ul>
 						</div>
+
 						<div class="tab-content">
 							<div class="tab-pane fade active in" id="tshirt" >
 								<div class="col-sm-3">
@@ -226,7 +230,9 @@
 						</div>
 					</div><!--/category-tab-->
 
-                    <div class="recommended_items"><!--recommended_items-->
+
+					<!--recommended_items-->
+                    <div class="recommended_items">
 						<h2 class="title text-center">recommended items</h2>
 						
 						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
