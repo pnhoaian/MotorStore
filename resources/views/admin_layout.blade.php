@@ -55,9 +55,9 @@
 <div class="top-nav clearfix">
     <!--search & user info start-->
     <ul class="nav pull-right top-menu">
-        <li>
+        {{-- <li>
             <input type="text" class="form-control search" placeholder=" Search">
-        </li>
+        </li> --}}
         <!-- user login dropdown start-->
         <li class="dropdown">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
@@ -112,7 +112,7 @@
 
                 <li class="sub-menu">
                     <a href="javascript:;">
-                        <i class="fa fa-list-alt"></i>
+                        <i class="fa fa-road"></i>
                         <span>Hãng - Thương hiệu</span>
                     </a>
                     <ul class="sub">
@@ -123,7 +123,7 @@
 
                 <li class="sub-menu">
                     <a href="javascript:;">
-                        <i class="fa fa-list-alt"></i>
+                        <i class="fa fa-list-alt "></i>
                         <span>Sản Phẩm</span>
                     </a>
                     <ul class="sub">
@@ -158,15 +158,21 @@
     </div>
 </aside>
 <!--sidebar end-->
-<!--main content start-->
+
+
+
+                        <!--main content start-->
 <section id="main-content">
 	<section class="wrapper">
 		@yield('admin_content')
 </section>
+
+
+
  <!-- footer -->
 		  <div class="footer">
 			<div class="wthree-copyright">
-			  <p>© 2023 All rights reserved | Design by <a href="http://w3layouts.com">AnHoai</a></p>
+			  <p>© 2023 All rights reserved | Design by AnHoai</p>
 			</div>
 		  </div>
   <!-- / footer -->

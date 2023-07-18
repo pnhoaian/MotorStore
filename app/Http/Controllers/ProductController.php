@@ -11,7 +11,9 @@ session_start();
 class ProductController extends Controller
 {
     public function add_product(){
-        return view('admin.add_product');
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
+        return view('admin.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
 
     public function all_product(){
@@ -23,10 +25,28 @@ class ProductController extends Controller
     public function save_product(Request $request){
         $data = array();
         $data['product_name'] = $request ->product_name;
+        $data['category_id']= $request->product_cate;
+        $data['brand_id']= $request->product_brand;
         $data['product_desc']= $request ->product_desc;
+        $data['product_image']= $request ->product_image;
+        $data['product_price']= $request ->product_price;
         $data['product_status']= $request ->product_status;
 
+        $get_image = $request->file('product_image');
+        if($get_image){
+            //lấy tên file hình ảnh
+            $get_name_image = $get_image->getClientOriginalName();
+            //
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/product',$new_image);
+            $data['product_image']=$new_image;
+            DB::table('tbl_product')->insert($data);
+            $request->session()->put('message', 'Thêm Sản phẩm thành công!');
+            return Redirect::to('add-product');
+        }
         //insert du lieu va tbl-product
+        $data['product_image']='';
         DB::table('tbl_product')->insert($data);
         $request->session()->put('message', 'Thêm Sản phẩm thành công!');
         return Redirect::to('add-product');
