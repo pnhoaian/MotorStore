@@ -18,6 +18,7 @@
                     <div class="position-center">
                         <form role="form" action="{{URL::to('/save-product')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            
                         <div class="form-group">
                             <label for="exampleInputEmail1">Tên Sản phẩm</label>
                             <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Sản phẩm">
@@ -65,8 +66,9 @@
                         </div>
 
                         <div class="form-group">
-                        <button type="submit" name="add_product" class="btn btn-info">Thêm</button>
+                            <button type="submit" name="add_product" class="btn btn-info">Thêm</button>
+                        </div>
                     </form>
-                    </div>
+                </div>
 
 @endsection

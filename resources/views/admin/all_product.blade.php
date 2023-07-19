@@ -44,28 +44,37 @@
                 </label>
               </th>
               <th>Tên Sản phẩm</th>
+              <th>Giá</th>
+              <th>Hình ảnh</th>
+              <th>Danh Mục</th>
+              <th>Thương Hiệu</th>
               <th>Trạng thái</th>
               {{-- <th>Ngày thêm</th> --}}
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($all_product as $key => $cate_pro)
+            @foreach ($all_product as $key => $pro)
               
             <tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td>{{ $cate_pro->product_name }}</td>
-              {{-- status  --}}
+              <td>{{ $pro->product_name }}</td>
+              <td>{{ $pro->product_price }}</td>
+              <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
+              <td>{{ $pro->category_name }}</td>
+              <td>{{ $pro->brand_name }}</td>
+
+              {{---- status  ----}}
               <td><span class="text-ellipsis">
                 <?php
-                if($cate_pro->product_status == 0){
+                if($pro->product_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-product/'.$cate_pro->product_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-product/'.$pro->product_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-product/'.$cate_pro->product_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-product/'.$pro->product_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }
@@ -74,9 +83,10 @@
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td>
-                <a href="{{URL::to('/edit-product/'.$cate_pro->product_id)}}" class="active styling" ui-toggle-class="">
+                <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
-                <a onclick="return confirm('Xác nhận xóa Sản phẩm này?')" href="{{URL::to('/delete-product/'.$cate_pro->product_id)}}" class="active styling" ui-toggle-class=""> 
+                  
+                <a onclick="return confirm('Xác nhận xóa Sản phẩm này?')" href="{{URL::to('/delete-product/'.$pro->product_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

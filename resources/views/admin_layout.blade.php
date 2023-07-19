@@ -3,7 +3,7 @@
 <title>AnHoai Motor | Administrator  </title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1) } </script>
 
 <!-- bootstrap-css -->
 <link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
@@ -100,7 +100,7 @@
                 </li>
                 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:">
                         <i class="fa fa-book"></i>
                         <span>Danh Mục</span>
                     </a>
@@ -111,7 +111,7 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:">
                         <i class="fa fa-road"></i>
                         <span>Hãng - Thương hiệu</span>
                     </a>
@@ -122,7 +122,7 @@
                 </li>
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:">
                         <i class="fa fa-list-alt "></i>
                         <span>Sản Phẩm</span>
                     </a>
@@ -134,7 +134,7 @@
 
 
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:">
                         <i class="fa fa-envelope"></i>
                         <span>Mail </span>
                     </a>
@@ -144,7 +144,7 @@
                     </ul>
                 </li>
                 <li class="sub-menu">
-                    <a href="javascript:;">
+                    <a href="javascript:">
                         <i class=" fa fa-bar-chart-o"></i>
                         <span>Thống Kê</span>
                     </a>

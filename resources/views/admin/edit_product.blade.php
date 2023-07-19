@@ -15,44 +15,57 @@
                 }
                 ?>
                                     <div class="position-center">
-                                        <form role="form" action="{{URL::to('/save-product')}}" method="POST" enctype="m">
+                                        @foreach ($edit_product as $key => $pro)
+                                        
+                                        <form role="form" action="{{URL::to('/update-product/'.$pro->product_id)}}"
+                                         method="POST" enctype="multipart/form-data">
                                             {{ csrf_field() }}
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Tên Sản phẩm</label>
-                                            <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Sản phẩm">
+                                            <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" value="{{ $pro->product_name}}">
                                         </div>
                 
                                         <div class="form-group">
-                                            <label for="exampleInputPassword1">Danh Mục Sản Phẩm</label>
-                                            <select name="product_cate" class="form-control m-bot15">
-                                                @foreach ($cate_product as $key =>$cate) 
-                                                 <option value="{{ $cate->category_id}}">{{ $cate->category_name}}</option>
+                                            <label for="">Danh mục sản phẩm</label>
+                                            <select name="product_cate" class="form-control input-sm m-bot15">
+                                                @foreach ($cate_product as $key => $cate)
+                                                    <option {{ $cate->category_id == $pro->category_id ? 'selected' : ' ' }}
+                                                        value="{{ $cate->category_id }}">
+                                                        {{ $cate->category_name }}
+                                                    </option>
                                                 @endforeach
                                             </select>
+        
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Hãng - Thương hiệu</label>
                                             <select name="product_brand" class="form-control m-bot15">
-                                                @foreach ($brand_product as $key =>$brand) 
-                                                 <option value="{{ $brand->brand_id}}">{{ $brand->brand_name }}</option>
-                                                @endforeach   
+                                                @foreach ($brand_product as $key => $brand)
+                                            @if ($brand->brand_id == $pro->brand_id)
+                                                <option selected value="{{ $brand->brand_id }}">{{ $brand->brand_name }}
+                                                </option>
+                                            @else
+                                                <option value="{{ $brand->brand_id }}">{{ $brand->brand_name }}</option>
+                                            @endif
+                                        @endforeach> 
                                             </select>
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Mô tả Sản phẩm</label>
-                                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="exampleInputPassword1" placeholder="Thêm mô tả"></textarea>
+                                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="exampleInputPassword1" >{{ $pro->product_desc}}"</textarea>
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Hình ảnh Sản phẩm</label>
-                                            <input type="file" name="product_image" class="form-control" id="exampleInputEmail1" placeholder="">
+                                            <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
+                                            <img src="{{ URL::to('public/upload/product/'.$pro->product_image)}}" height="200px" width="200px">
                                         </div>
                 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Giá Sản phẩm</label>
-                                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Sản phẩm">
+                                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{ $pro->product_price}}">
                                         </div>
                 
                                         <div class="form-group">
@@ -65,7 +78,6 @@
                         <div class="form-group">
                         <button type="submit" name="edit" class="btn btn-info">Cập nhật</button>
                     </form>
-                    </div>
-
-                    
+                    @endforeach
+                    </div>        
 @endsection
