@@ -1,5 +1,5 @@
-@extends('admin_layout');
-@section('admin_content');
+@extends('admin_layout')
+@section('admin_content')
 
 <div class="row">
     <div class="col-lg-12">

@@ -263,7 +263,7 @@ ul.sidebar-menu li a.active i {
     width:100%;
 }
 .brand {
-    background:#FF7A7B;
+    background:linear-gradient(to right, #b92b27, #1565c0);
     float:left;
     width:240px;
     height:80px;

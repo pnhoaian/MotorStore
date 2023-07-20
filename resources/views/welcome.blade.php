@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="An Hoài">
     <title>Home | Hoai An Motor</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -24,9 +24,11 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 </head><!--/head-->
 
-<body>
-	<header id="header"><!--header-->
-		<div class="header_top"><!--header_top-->
+<body><!--header-->
+	<header id="header">
+
+		<!--header_top-->
+		<div class="header_top">
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-6">
@@ -49,7 +51,8 @@
 					</div>
 				</div>
 			</div>
-		</div><!--/header_top-->
+		</div>
+		<!--/end header_top-->
 		
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
@@ -114,7 +117,7 @@
 					</div>
 					<div class="col-sm-3">
 						<div class="search_box pull-right">
-							<input type="text" placeholder="Search"/>
+							<input type="text" placeholder="Tìm kiếm sản phẩm"/>
 						</div>
 					</div>
 				</div>
@@ -181,127 +184,39 @@
 					<div class="left-sidebar">
 						<h2>Danh Mục</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
+							@foreach ($category as $key =>$cate )
+								
 							<div class="panel panel-default">
 								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#sportswear">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Sportswear
-										</a>
-									</h4>
-								</div>
-								<div id="sportswear" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Nike </a></li>
-											<li><a href="#">Under Armour </a></li>
-											<li><a href="#">Adidas </a></li>
-											<li><a href="#">Puma</a></li>
-											<li><a href="#">ASICS </a></li>
-										</ul>
-									</div>
+									<h4 class="panel-title"><a href="{{URL::to('/danh-muc-san-pham'.$cate->category_id)}}">{{ $cate->category_name }}</a></h4>
 								</div>
 							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#mens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Mens
-										</a>
-									</h4>
-								</div>
-								<div id="mens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-											<li><a href="#">Armani</a></li>
-											<li><a href="#">Prada</a></li>
-											<li><a href="#">Dolce and Gabbana</a></li>
-											<li><a href="#">Chanel</a></li>
-											<li><a href="#">Gucci</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title">
-										<a data-toggle="collapse" data-parent="#accordian" href="#womens">
-											<span class="badge pull-right"><i class="fa fa-plus"></i></span>
-											Womens
-										</a>
-									</h4>
-								</div>
-								<div id="womens" class="panel-collapse collapse">
-									<div class="panel-body">
-										<ul>
-											<li><a href="#">Fendi</a></li>
-											<li><a href="#">Guess</a></li>
-											<li><a href="#">Valentino</a></li>
-											<li><a href="#">Dior</a></li>
-											<li><a href="#">Versace</a></li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Kids</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Fashion</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Households</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Interiors</a></h4>
-								</div>
-							</div>
-							<div class="panel panel-default">
-								<div class="panel-heading">
-									<h4 class="panel-title"><a href="#">Clothing</a></h4>
-								</div>
-							</div>
-
+							@endforeach
 						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Hãng</h2>
 							<div class="brands-name">
+								@foreach ($brand as $key =>$brand )
 								<ul class="nav nav-pills nav-stacked">
-									<li><a href="#"> <span class="pull-right">(50)</span>Honda</a></li>
-									<li><a href="#"> <span class="pull-right">(56)</span>Yamaha</a></li>
-									<li><a href="#"> <span class="pull-right">(27)</span>Suzuki</a></li>
-									<li><a href="#"> <span class="pull-right">(32)</span>SYM</a></li>
-									<li><a href="#"> <span class="pull-right">(5)</span>Piaggio - Vespa</a></li>
-									</ul>
+									<li><a href="{{URL::to('/thuong-hieu'.$brand->brand_id)}}"> <span class="pull-right">(50)</span>{{ $brand->brand_name }}</a></li>
+								</ul>
+								@endforeach
 							</div>
 						</div><!--/brands_products-->
 						
-						<div class="price-range"><!--price-range-->
+						{{-- <div class="price-range"><!--price-range-->
 							<h2>Giá Tiền</h2>
 							<div class="well text-center">
 								 <input type="text" class="span2" value="" data-slider-min="0" data-slider-max="500000000" data-slider-step="5" data-slider-value="[0,500000000]" id="sl2" ><br />
 								 <b class="pull-left">0 VNĐ</b> <b class="pull-right">500.000.000 VNĐ</b>
 							</div>
-						</div><!--/price-range-->
+						</div><!--/price-range--> --}}
 						
-						<div class="shipping text-center"><!--shipping-->
+						{{-- hình ship --}}
+						{{-- <div class="shipping text-center"><!--shipping-->
 							<img src="{{asset('public/frontend/images/shipping.jpg')}}" alt="" />
-						</div><!--/shipping-->
+						</div><!--/shipping--> --}}
 					
 					</div>
 				</div>
