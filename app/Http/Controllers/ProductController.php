@@ -106,7 +106,7 @@ class ProductController extends Controller
         $data['category_id']= $request->product_cate;
         $data['brand_id']= $request->product_brand;
         $data['product_desc']= $request ->product_desc;
-        $data['product_image']= $request ->product_image;
+        // $data['product_image']= $request ->product_image;
         $data['product_price']= $request ->product_price;
         $data['product_status']= $request ->product_status;
         
@@ -118,12 +118,10 @@ class ProductController extends Controller
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/upload/product',$new_image);
             $data['product_image']=$new_image;
-            DB::table('tbl_product')->where('product_id',$product_id)->update($data);
-            $request->session()->put('message', 'Cập nhật Sản phẩm thành công!');
-            return Redirect::to('add-product');
+            
         }
         DB::table('tbl_product')->where('product_id',$product_id)->update($data);
-        Session::put('message','Cập nhật Sản phẩm thất bại');
-        return Redirect::to('all-product');
+            $request->session()->put('message', 'Cập nhật Sản phẩm thành công!');
+            return Redirect::to('all-product');
     }
 }

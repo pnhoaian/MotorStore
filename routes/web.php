@@ -18,19 +18,30 @@ use App\Http\Controllers\ProductController;
 
 */
 
-//********************************* User ***************************
+//  ------------------------- User------------------------- 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 
+//Show Items Danh Mục Sản Phẩm 
 
-//********************************* Admin ***************************
+Route::get('/danh-muc-san-pham/{category_id}',[CategoryProduct::class, 'show_category_home']);
+//Show Item Thương hiệu Sản Phẩm 
+Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_home']);
+
+
+
+
+
+
+
+//-------------------------  Admin ------------------------- 
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
 
-//********************************* Category Product ***************************
+//************* Category Product *************
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
 Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
@@ -44,7 +55,7 @@ Route::get('/active-category-product/{category_product_id}', [CategoryProduct::c
 Route::get('/inactive-category-product/{category_product_id}', [CategoryProduct::class, 'inactive_category_product']);
 
 
-//********************************* Brand Product ************************
+//************* Brand Product *************
 Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
 Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product']);
 Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
@@ -58,7 +69,7 @@ Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'ac
 Route::get('/inactive-brand-product/{brand_product_id}', [BrandProduct::class, 'inactive_brand_product']);
 
 
-//*********************************** Product *****************************
+//******************* Product **********************
 Route::get('/add-product', [ProductController::class, 'add_product']);
 Route::get('/all-product', [ProductController::class, 'all_product']);
 Route::post('/save-product', [ProductController::class, 'save_product']);
