@@ -23,11 +23,11 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 
 //Show Items Danh Mục Sản Phẩm 
-
 Route::get('/danh-muc-san-pham/{category_id}',[CategoryProduct::class, 'show_category_home']);
 //Show Item Thương hiệu Sản Phẩm 
 Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_home']);
-
+//Show chi tiết sản phẩm
+Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
 

@@ -124,4 +124,15 @@ class ProductController extends Controller
             $request->session()->put('message', 'Cập nhật Sản phẩm thành công!');
             return Redirect::to('all-product');
     }
+    //End Admin Page
+
+    public function detail_product($product_id){
+        $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
+       
+        $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
+        
+        return view('pages.product.show_detail')
+        ->with('category', $cate_product)
+        ->with('brand', $brand_product);
+    }
 }
