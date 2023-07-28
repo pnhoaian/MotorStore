@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CategoryProduct; 
 use App\Http\Controllers\BrandProduct; 
 use App\Http\Controllers\ProductController; 
+use App\Http\Controllers\CartController; 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,9 +30,6 @@ Route::get('/danh-muc-san-pham/{category_id}',[CategoryProduct::class, 'show_cat
 Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_home']);
 //Show chi tiết sản phẩm
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
-
-
-
 
 
 
@@ -69,7 +68,7 @@ Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'ac
 Route::get('/inactive-brand-product/{brand_product_id}', [BrandProduct::class, 'inactive_brand_product']);
 
 
-//******************* Product **********************
+//-------------------------  Product ------------------------- 
 Route::get('/add-product', [ProductController::class, 'add_product']);
 Route::get('/all-product', [ProductController::class, 'all_product']);
 Route::post('/save-product', [ProductController::class, 'save_product']);
@@ -81,3 +80,6 @@ Route::post('/update-product/{product_id}', [ProductController::class, 'update_p
 //- Update Brand Product
 Route::get('/active-product/{product_id}', [ProductController::class, 'active_product']);
 Route::get('/inactive-product/{product_id}', [ProductController::class, 'inactive_product']);
+
+//-------------------------  Cart ------------------------- 
+Route::post('/save-cart', [CartController::class, 'save_cart']);
