@@ -6,7 +6,6 @@
     <div class="col-sm-5">
         <div class="view-product">
             <img src="{{URL::to('/public/upload/product/'.$value->product_image)}}" alt="" />
-            <h3>ZOOM</h3>
         </div>
         <div id="similar-product" class="carousel slide" data-ride="carousel">
             
@@ -44,9 +43,8 @@
         <div class="product-information"><!--/product-information-->
             <img src="images/product-details/new.jpg" class="newarrival" alt="" />
             <h2>{{ $value->product_name }}</h2>
-            <p>ID Sản Phẩm: {{ $value->product_id }}</p>
+            {{-- <p>ID Sản Phẩm: {{ $value->product_id }}</p> --}}
             <img src="images/product-details/rating.png" alt="" />
-
             <form action="{{URL::to('/save-cart')}}" method="POST">
                 {{ csrf_field()}}
                 <span>
@@ -57,7 +55,7 @@
                     <input name="soluong" type="number" min="1" value="1" />
                     <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
                     <button type="submit" class="btn btn-fefault cart">
-                        <i class="fa fa-shopping-cart"></i>
+                        <i class="fa fa-shopping-cart" name="add-to-cart"></i>
                         Thêm vào giỏ hàng
                     </button>
                 </span>
@@ -81,7 +79,7 @@
         </ul>
     </div>
     <div class="tab-content">
-        <div class="tab-pane fade" id="details" >
+        <div class="tab-pane fade active in" id="details" >
             <p>{!!$value->product_desc!!}</p>
                 
         </div>
@@ -101,7 +99,7 @@
             </div>
         </div>
         
-        <div class="tab-pane fade active in" id="reviews" >
+        <div class="tab-pane fade" id="reviews" >
             <div class="col-sm-12">
                 <ul>
                     <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
@@ -135,15 +133,14 @@
             <div class="item active">
                 @foreach ( $related_pro as $key => $SPLQ)
                     
-                
                 <div class="col-sm-4">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                             <div class="productinfo text-center">
                                 <img src="{{URL::to('/public/upload/product/'.$SPLQ->product_image)}}" alt="" />
-                                <h2>{{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
-                                <p>{{ $value->product_name }}</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+                                <h2>{{number_format( $SPLQ->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
+                                <p>{{ $SPLQ->product_name }}</p>
+                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart" name="add-to-cart"></i>Thêm vào giỏ hàng</button>
                             </div>
                         </div>
                     </div>

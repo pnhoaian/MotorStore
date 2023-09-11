@@ -13,6 +13,7 @@
     <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
+	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
@@ -64,7 +65,7 @@
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li>
-								<li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+								<li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
 								<li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
@@ -76,7 +77,7 @@
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-9">
+					<div class="col-sm-8">
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -86,39 +87,47 @@
 							</button>
 						</div>
 						<div class="logo pull-left">
-							<a href="index.html"><img src="{{asset('public/frontend/images/logo-no-background.jpg')}}" alt="" 
+							<a href="index.html"><img src="{{asset('public/frontend/images/logo-no-backgroundd.png')}}" alt="" 
 							style="margin-top: -50px;
 							margin-left: -150px;
 							width: 275px;
-							height: auto;"/></a>
+							height: 190px;"/></a>
 						</div>
 						<div class="mainmenu center">
 							<ul class="nav navbar-nav collapse navbar-collapse">
 								<li><a href="{{URL::to('trang-chu')}}" class="active">Home</a></li>
+
 								<li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-                                        <li><a href="shop.html">Products</a></li>
-										<li><a href="product-details.html">Product Details</a></li> 
-										<li><a href="checkout.html">Checkout</a></li> 
-										<li><a href="cart.html">Giỏ hàng</a></li> 
-										<li><a href="login.html">Đăng nhập</a></li> 
-                                    </ul>
+									<h4 class="panel-title"></h4>
+									<ul role="menu" class="sub-menu">
+										@foreach ($category as $key =>$cate )
+                                        	<li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{ $cate->category_name }}</a></li>
+										@endforeach
+									</ul>
                                 </li> 
+
 								<li class="dropdown"><a href="#">Hãng<i class="fa fa-angle-down"></i></a>
                                     <ul role="menu" class="sub-menu">
-                                        <li><a href="blog.html">Blog List</a></li>
-										<li><a href="blog-single.html">Blog Single</a></li>
+										@foreach ($brand as $key =>$brand1 )
+                                        	<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand1->brand_id)}}">{{ $brand1->brand_name }}</a></li>
+										@endforeach
                                     </ul>
                                 </li> 
+
 								<li><a href="#">Giới thiệu</a></li>
 								<li><a href="contact-us.html">Liên Hệ</a></li>
 							</ul>
 						</div>
 					</div>
 					<div class="col-sm-3">
-						<div class="search_box pull-right">
-							<input type="text" placeholder="Tìm kiếm sản phẩm"/>
-						</div>
+						<form action="{{URL::to('/tim-kiem')}}" method="POST">
+							{{ csrf_field() }}
+							<div class="search_box pull-right">
+								<input type="text" name="keyword_submit" placeholder="Tìm kiếm sản phẩm"/>
+								<input type="submit" name="search_items" class="btn btn-danger btn-sm" value="Tìm kiếm"/>
+							
+							</div>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -138,7 +147,7 @@
 						<div class="carousel-inner">
 							<div class="item active">
 								<div class="col-sm-6">
-									<h1><span>An Hoai</span> Motor</h1>
+									<h1><span>Hoài An</span> Motor</h1>
 									<h2>Ride With Passion</h2>
 									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
 									<button type="button" class="btn btn-default get">Tham khảo ngay</button>
@@ -180,8 +189,8 @@
 	<section>
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-3">
-					<div class="left-sidebar">
+				{{--  <div class="col-sm-3">
+					 <div class="left-sidebar">
 						<h2>Danh Mục</h2>
 						<div class="panel-group category-products" id="accordian"><!--category-productsr-->
 							@foreach ($category as $key =>$cate )
@@ -203,7 +212,8 @@
 								</ul>
 								@endforeach
 							</div>
-						</div><!--/brands_products-->
+						</div> --}}
+						<!--/brands_products-->
 						
 						{{-- <div class="price-range"><!--price-range-->
 							<h2>Giá Tiền</h2>
@@ -216,12 +226,12 @@
 						{{-- hình ship --}}
 						{{-- <div class="shipping text-center"><!--shipping-->
 							<img src="{{asset('public/frontend/images/shipping.jpg')}}" alt="" />
-						</div><!--/shipping--> --}}
+						</div><!--/shipping--> 
 					
-					</div>
+					</div> --}}
 				</div>
 				
-				<div class="col-sm-9 padding-right">
+				<div class="col-sm-12 padding-right">
                     @yield('content')
 				</div>
 			</div>
@@ -336,5 +346,42 @@
 	<script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+	<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
+
+	
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.add-to-cart').click(function(){
+                var id = $(this).data('id_product');
+                var cart_product_id = $('.cart_product_id_' + id).val();
+                var cart_product_name = $('.cart_product_name_' + id).val();
+                var cart_product_image = $('.cart_product_image_' + id).val();
+                var cart_product_price = $('.cart_product_price_' + id).val();
+                var cart_product_qty = $('.cart_product_qty_' + id).val();
+                var _token = $('input[name="_token"]').val();
+
+			$.ajax({
+                	url: '{{url('/add-cart-ajax')}}',
+                    method: 'POST',
+					data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token},
+					success:function(data){
+						swal({
+							title: "Đã thêm sản phẩm vào giỏ hàng",
+							text: "Bạn có thể tiếp tục mua hàng hoặc tới giỏ hàng để tiến hành thanh toán",
+							showCancelButton: true,
+							cancelButtonText: "Xem tiếp",
+							confirmButtonClass: "btn-success",
+							confirmButtonText: "Đi đến giỏ hàng",
+							closeOnConfirm: false
+						},
+		function() {
+			window.location.href = "{{url('/show-cart')}}"; });
+		}
+
+					});
+		});
+		});
+	</script>
+
 </body>
 </html>

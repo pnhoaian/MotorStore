@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Models\Brand;
 session_start();
 
 class BrandProduct extends Controller
@@ -27,20 +28,31 @@ class BrandProduct extends Controller
 
     public function all_brand_product(){
         $this->AuthLogin();
-        $all_brand_product = DB::table('tbl_brand')->get(); 
+        //DB
+        // $all_brand_product = DB::table('tbl_brand')->get(); 
+
+        //model
+        $all_brand_product = Brand::orderBy('brand_id','desc')->get();
         return view('admin.all_brand_product')->with('all_brand_product', $all_brand_product);
         //return view('admin.all_brand_product');
     }
 
     public function save_brand_product(Request $request){
         $this->AuthLogin();
-        $data = array();
-        $data['brand_name'] = $request ->brand_product_name;
-        $data['brand_desc']= $request ->brand_product_desc;
-        $data['brand_status']= $request ->brand_product_status;
+        $data = $request->all();
+        $brand = new Brand();
+        $brand->brand_name = $data['brand_product_name'];
+        $brand->brand_desc = $data['brand_product_desc'];
+        $brand->brand_status = $data['brand_product_status'];
+        $brand->save();
+        // $data = array();
+        // $data['brand_name'] = $request ->brand_product_name;
+        // $data['brand_desc']= $request ->brand_product_desc;
+        // $data['brand_status']= $request ->brand_product_status;
 
         //insert du lieu va tbl-brand-product
-        DB::table('tbl_brand')->insert($data);
+        // DB::table('tbl_brand')->insert($data);
+
         $request->session()->put('message', 'Thêm Hãng - Thương hiệu thành công!');
         return Redirect::to('add-brand-product');
         //return view('admin.save_brand_product');
@@ -62,9 +74,15 @@ class BrandProduct extends Controller
 
     public function edit_brand_product($brand_product_id){
         $this->AuthLogin();
-        $all_brand_product = DB::table('tbl_brand')->where('brand_id',$brand_product_id)->get();
-        return view('admin.edit_brand_product')->with('edit_brand_product', $all_brand_product);
-        //return view('admin.all_brand_product');
+        //C1: DB
+        // $all_brand_product = DB::table('tbl_brand')->where('brand_id',$brand_product_id)->get();
+        
+        //C2: Model + foreach
+        //$edit_brand_product = Brand::where('brand_id',$brand_product_id)->get();
+
+        //C3: Model
+        $edit_brand_product = Brand::find($brand_product_id);
+        return view('admin.edit_brand_product')->with('edit_brand_product', $edit_brand_product);
     }
 
     public function delete_brand_product($brand_product_id){
@@ -76,10 +94,16 @@ class BrandProduct extends Controller
 
     public function update_brand_product(Request $request, $brand_product_id){
         $this->AuthLogin();
-        $data = array();
-        $data['brand_name'] = $request ->brand_product_name;
-        $data['brand_desc']= $request ->brand_product_desc;
-        DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
+        $data = $request->all();
+        $brand =Brand::find($brand_product_id);
+        $brand->brand_name = $data['brand_product_name'];
+        $brand->brand_desc = $data['brand_product_desc'];
+        //$brand->brand_status = $data['brand_product_status'];
+        $brand->save();
+        // $data = array();
+        // $data['brand_name'] = $request ->brand_product_name;
+        // $data['brand_desc']= $request ->brand_product_desc;
+        //DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
         Session::put('message','Đã cập nhật Hãng - Thương hiệu sản phẩm');
         return Redirect::to('all-brand-product');
     }

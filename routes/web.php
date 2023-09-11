@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryProduct;
 use App\Http\Controllers\BrandProduct; 
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\CartController; 
+use App\Http\Controllers\CouponController; 
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ use App\Http\Controllers\CartController;
 //  ------------------------- User------------------------- 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
+Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 
 //Show Items Danh Mục Sản Phẩm 
 Route::get('/danh-muc-san-pham/{category_id}',[CategoryProduct::class, 'show_category_home']);
@@ -77,9 +79,34 @@ Route::get('/edit-product/{product_id}', [ProductController::class, 'edit_produc
 Route::get('/delete-product/{product_id}', [ProductController::class, 'delete_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
 
+//-------------------------  Card ------------------------- 
+Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
+Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::post('/update-cart', [CartController::class, 'update_cart']);
+Route::post('/add-cart', [CartController::class, 'add_cart']);
+
+Route::get('/show-cart', [CartController::class, 'show_cart']);
+Route::get('/delete-to-cart', [CartController::class, 'delete_to_cart']);
+
+Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
+Route::get('/del-all-product',[CartController::class, 'del_all_product']);
+
+//-------------------------  Coupon ------------------------- 
+//User
+Route::post('/check-coupon', [CartController::class, 'check_coupon']);
+
+//Admin
+Route::get('/insert-coupon', [CouponController::class, 'insert_coupon']);
+Route::get('/list-coupon', [CouponController::class, 'list_coupon']);
+Route::get('/delete-coupon/{coupon_id}', [CouponController::class, 'delete_coupon']);
+
+Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code']);
+
+
 //- Update Brand Product
 Route::get('/active-product/{product_id}', [ProductController::class, 'active_product']);
 Route::get('/inactive-product/{product_id}', [ProductController::class, 'inactive_product']);
 
 //-------------------------  Cart ------------------------- 
 Route::post('/save-cart', [CartController::class, 'save_cart']);
+Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
