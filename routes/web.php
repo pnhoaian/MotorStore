@@ -94,6 +94,7 @@ Route::get('/del-all-product',[CartController::class, 'del_all_product']);
 //-------------------------  Coupon ------------------------- 
 //User
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
+Route::get('/unset-coupon', [CouponController::class, 'unset_coupon']);
 
 //Admin
 Route::get('/insert-coupon', [CouponController::class, 'insert_coupon']);

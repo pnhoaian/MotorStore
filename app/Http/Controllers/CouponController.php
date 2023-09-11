@@ -10,6 +10,13 @@ session_start();
 
 class CouponController extends Controller
 {
+    public function unset_coupon(){
+        $coupon = Session::get('coupon');
+        if($coupon==true){
+            Session::forget('coupon');
+            return redirect()->back()->with('message','Đã xóa mã Coupon khuyến mãi');
+        }
+    }
     public function insert_coupon(){
         return view('admin.coupon.insert_coupon');
     }
@@ -26,16 +33,17 @@ class CouponController extends Controller
         $coupon->coupon_condition = $data['coupon_condition'];
         $coupon->save();
 
-        Session::put('message','Thêm mã giảm giá thành công');
-        return redirect('/insert-coupon');
+        Session::put('message','Thêm mã Coupon khuyến mãi thành công');
+        return redirect('/list-coupon');
     }
     public function delete_coupon($coupon_id){
         $coupon = Coupon::find($coupon_id);
         // $coupon->delete();
-        Session::put('message','Xóa coupon thành công');
+        Session::put('message','Xóa Coupon thành công');
         // return redirect('admin.coupon.list_coupon');
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
+
 
     public function list_coupon(){
         $coupon = Coupon::orderby('coupon_id','desc')->get();

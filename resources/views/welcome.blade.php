@@ -87,7 +87,7 @@
 							</button>
 						</div>
 						<div class="logo pull-left">
-							<a href="index.html"><img src="{{asset('public/frontend/images/logo-no-backgroundd.png')}}" alt="" 
+							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-backgroundd.png')}}" alt="" 
 							style="margin-top: -50px;
 							margin-left: -150px;
 							width: 275px;
@@ -153,21 +153,21 @@
 									<button type="button" class="btn btn-default get">Tham khảo ngay</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{{asset('public/frontend/images/girl1.jpg')}}" class="girl img-responsive" alt="" />
+									<img src="{{asset('public/frontend/images/girl1.jpg')}}" class="girl img-responsive" />
 									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 								</div>
 							</div>
 							
 							<div class="item">
 								<div class="col-sm-6">
-									<h1><span>An Hoai</span> Motor</h1>
+									<h1><span>Hoài An</span> Motor</h1>
 									<h2>Ride With Passion</h2>
 									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
 									<button type="button" class="btn btn-default get">Get it now</button>
 								</div>
 								<div class="col-sm-6">
-									<img src="{{asset('public/frontend/images/girl3.jpg')}}" class="girl img-responsive" alt="" />
-									<img src="{{asset('public/frontend/images/pricing.png')}}" class="pricing" alt="" />
+									<img src="{{asset('public/frontend/images/girl3.jpg')}}" class="girl img-responsive" style="width:490px;height:80%;"/>
+									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}" class="pricing" alt="" /> --}}
 								</div>
 							</div>
 							

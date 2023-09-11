@@ -57,11 +57,11 @@
                 <?php
                 if($cou->coupon_condition == 1){
                 ?>
-                   Giảm theo phần trăm
+                   Giảm theo  phần trăm
                 <?php
                 }else{
                 ?>
-                  Giảm theo phần trăm
+                  Giảm theo tiền hóa đơn
                 <?php 
                 }
                 ?>

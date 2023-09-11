@@ -113,7 +113,7 @@
 
                 <li class="sub-menu">
                     <a href="javascript:">
-                        <i class="fa fa-road"></i>
+                        <i class="fa fa-scribd"></i>
                         <span>Hãng - Thương hiệu</span>
                     </a>
                     <ul class="sub">
@@ -135,7 +135,7 @@
 
                 <li class="sub-menu">
                     <a href="javascript:">
-                        <i class="fa fa-list-alt "></i>
+                        <i class="fa fa-truck "></i>
                         <span>Đơn Hàng</span>
                     </a>
                     <ul class="sub">
@@ -145,7 +145,7 @@
 
                 <li class="sub-menu">
                     <a href="javascript:">
-                        <i class="fa fa-list-alt "></i>
+                        <i class="fa fa-gift"></i>
                         <span>Mã Giảm Giá</span>
                     </a>
                     <ul class="sub">

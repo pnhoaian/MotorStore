@@ -23,7 +23,7 @@
 													<h2>{{ number_format($product->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
 													<p>{{ $product->product_name }}</p>
 													</a>
-													<button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">
+													<button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart" >
 														Thêm vào giỏ hàng</button>
 												</form>
 											</div>

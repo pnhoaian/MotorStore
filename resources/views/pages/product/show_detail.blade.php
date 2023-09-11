@@ -47,16 +47,37 @@
             <img src="images/product-details/rating.png" alt="" />
             <form action="{{URL::to('/save-cart')}}" method="POST">
                 {{ csrf_field()}}
+                <input type="hidden" value="{{ $value->product_id }}"
+                            class="cart_product_id_{{ $value->product_id }}">
+
+                        <input type="hidden" value="{{ $value->product_name }}"
+                            class="cart_product_name_{{ $value->product_id }}">
+
+                        <input type="hidden" value="{{ $value->product_image }}"
+                            class="cart_product_image_{{ $value->product_id }}">
+
+                        {{-- <input type="hidden" value="{{ $value->product_qty }}"
+                            class="cart_product_qty_{{ $value->product_id }}"> --}}
+
+                        <input type="hidden" value="{{ $value->product_price }}"
+                            class="cart_product_price_{{ $value->product_id }}">
+
                 <span>
                     <span>Giá Bán: {{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
                 </span>
                 <span>
                     <label>Số Lượng:</label>
-                    <input name="soluong" type="number" min="1" value="1" />
+                    <input name="product_qty" type="number" min="1"
+                                class="cart_product_qty_{{ $value->product_id }}" value="1" />
                     <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
-                    <button type="submit" class="btn btn-fefault cart">
+                    {{-- <button type="submit" class="btn btn-fefault cart">
                         <i class="fa fa-shopping-cart" name="add-to-cart"></i>
                         Thêm vào giỏ hàng
+                    </button> --}}
+                    <button type="button"
+                            
+                    class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
+                            name="add-to-cart"><i class="fa fa-shopping-cart"></i>
                     </button>
                 </span>
             </form>

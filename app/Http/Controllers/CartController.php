@@ -168,21 +168,21 @@ class CartController extends Controller
         // $data['options']['image']=$product_info->$product_image;
         // Cart::add($data);
         // return redirect('/show-cart');
-        $productId = $request->productid_hidden;
-        $quantity = $request->soluong;
-        $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
+        // $productId = $request->productid_hidden;
+        // $quantity = $request->soluong;
+        // $product_info = DB::table('tbl_product')->where('product_id',$productId)->first();
 
-        $data['id'] = $product_info->product_id;
-        $data['qty'] = $quantity;
-        $data['name'] = $product_info->product_name;
-        $data['price'] = $product_info->product_price;
-        $data['weight'] = '123';
-        $data['options']['image'] = $product_info->product_image;
+        // $data['id'] = $product_info->product_id;
+        // $data['qty'] = $quantity;
+        // $data['name'] = $product_info->product_name;
+        // $data['price'] = $product_info->product_price;
+        // $data['weight'] = '123';
+        // $data['options']['image'] = $product_info->product_image;
 
-        Cart::add($data);
-        Cart::setGlobalTax(0);
-        // Cart::destroy();
-        return Redirect::to('/show-cart');
+        // Cart::add($data);
+        // Cart::setGlobalTax(0);
+        // // Cart::destroy();
+        // return Redirect::to('/show-cart');
 
     }
 }
