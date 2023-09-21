@@ -100,6 +100,16 @@
                     </a>
                 </li>
                 
+                <li class="active">
+                    <a href="javascript:">
+                        <i class="fa fa-picture-o"></i>
+                        <span>Banner</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-slider')}}">Thêm Slide - Banner</a></li>
+                        <li><a href="{{URL::to('/manage-banner')}}">Danh Sách Slide - Banner</a></li>
+                    </ul>
+                </li>
                 <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-book"></i>
@@ -154,7 +164,6 @@
                     </ul>
                 </li>
 
-
                 <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-envelope"></i>
@@ -175,6 +184,21 @@
                         <li><a href="flot_chart.html">Flot Charts</a></li>
                     </ul>
                 </li>
+
+                <li>
+                    <a href="{{URL::to('/introduce')}}">
+                        <i class="fa fa-info"></i>
+                        <span>Thông tin Giới thiệu</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{URL::to('/information')}}">
+                        <i class="fa fa-phone-square"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </li>
+
             </ul>            </div>
         <!-- sidebar menu end-->
     </div>

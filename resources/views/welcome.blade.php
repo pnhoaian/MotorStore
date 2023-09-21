@@ -114,8 +114,8 @@
                                     </ul>
                                 </li> 
 
-								<li><a href="#">Giới thiệu</a></li>
-								<li><a href="contact-us.html">Liên Hệ</a></li>
+								<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
+								<li><a href="{{URL::to('lien-he')}}">Liên Hệ</a></li>
 							</ul>
 						</div>
 					</div>
@@ -125,7 +125,6 @@
 							<div class="search_box pull-right">
 								<input type="text" name="keyword_submit" placeholder="Tìm kiếm sản phẩm"/>
 								<input type="submit" name="search_items" class="btn btn-danger btn-sm" value="Tìm kiếm"/>
-							
 							</div>
 						</form>
 					</div>
@@ -145,32 +144,20 @@
 						</ol>
 						
 						<div class="carousel-inner">
-							<div class="item active">
-								<div class="col-sm-6">
-									<h1><span>Hoài An</span> Motor</h1>
-									<h2>Ride With Passion</h2>
-									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
-									<button type="button" class="btn btn-default get">Tham khảo ngay</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{asset('public/frontend/images/girl1.jpg')}}" class="girl img-responsive" />
+							@php
+								$i=0;
+							@endphp
+							@foreach ($slider as $key => $slide)
+								@php
+									$i++;
+								@endphp
+							<div class="item {{ $i==1 ? 'active' : '' }}">
+								<div class="col-sm-12">
+									<img alt="{{ $slide->slider_desc }}" src="public/upload/slider/{{ $slide->slider_image }}" class="img img-responsive">
 									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 								</div>
 							</div>
-							
-							<div class="item">
-								<div class="col-sm-6">
-									<h1><span>Hoài An</span> Motor</h1>
-									<h2>Ride With Passion</h2>
-									<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
-									<button type="button" class="btn btn-default get">Get it now</button>
-								</div>
-								<div class="col-sm-6">
-									<img src="{{asset('public/frontend/images/girl3.jpg')}}" class="girl img-responsive" style="width:490px;height:80%;"/>
-									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}" class="pricing" alt="" /> --}}
-								</div>
-							</div>
-							
+							@endforeach
 						</div>
 						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
@@ -231,14 +218,156 @@
 					</div> --}}
 				</div>
 				
-				<div class="col-sm-12 padding-right">
+				<div class="col-sm-12 padding-right" style="margin-bottom: 60px">
                     @yield('content')
+				</div>
+
+				<div class="section-content relative">
+					<div class="row row-large" id="row-1482279903">
+						<div id="col-319689862" class="col-md-4">
+							<div class="col-inner">
+								<div class="icon-box featured-box icon-box-center text-center">
+									<div class="icon-box-img" style="width: 50px">
+										<div class="icon">
+											<div class="icon-inner">
+												<img style="width: 50px;
+												height: 53px;
+												margin-left: 155px;"
+													src="https://quangphuong.vn/wp-content/uploads/2023/03/customer-service-5.png"
+													class="attachment-medium size-medium" alt="" decoding="async"
+													loading="lazy"
+													srcset="https://quangphuong.vn/wp-content/uploads/2023/03/customer-service-5.png 120w, https://julyscent.com/wp-content/uploads/2023/07/customer-service-line-100x100.png 100w"
+													sizes="(max-width: 120px) 100vw, 120px">
+											</div>
+										</div>
+									</div>
+									<div class="icon-box-text last-reset">
+		
+										<div id="text-2452321903" class="text">
+		
+											<h2 style="margin-top: 0;"><span
+													style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
+												font-size: 20px;
+												font-weight: 700;
+												color: #000000;">Hỗ
+													trợ 24/7</span></h2>
+											<p><span style="color: #000000;">Tư vấn và hỗ trợ giải đáp nhanh chóng, chính xác với đầy đủ các dòng xe hiện đại.</span></p>
+		
+											<style>
+												#text-2452321903 {
+													color: rgb(0, 0, 0);
+												}
+		
+												#text-2452321903>* {
+													color: rgb(0, 0, 0);
+												}
+											</style>
+										</div>
+		
+									</div>
+								</div>
+		
+		
+							</div>
+						</div>
+		
+		
+		
+						<div id="col-125498996" class="col-md-4">
+							<div class="col-inner">
+								<div class="icon-box featured-box icon-box-center text-center">
+									<div class="icon-box-img" style="width: 50px">
+										<div class="icon">
+											<div class="icon-inner">
+												<img style="width: 50px;
+												height: 53px;
+												margin-left: 155px;"
+													src="{{asset('public/frontend/images/shipping2.png')}}"
+													class="attachment-medium size-medium" alt="" decoding="async"
+													loading="lazy"
+													srcset="{{asset('public/frontend/images/shipping2.png')}} 120w, https://julyscent.com/wp-content/uploads/2023/07/archive-line-2-100x100.png 100w"
+													sizes="(max-width: 120px) 100vw, 120px">
+											</div>
+										</div>
+									</div>
+									<div class="icon-box-text last-reset">
+										<div id="text-2973815044" class="text">
+											<h2 style="margin-top: 0;"><span
+													style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
+											font-size: 20px;
+											font-weight: 700;
+											color: #000000;">Vận
+													Chuyển</span></h2>
+											<p>Miễn phí giao hàng tận nơi hoặc nhận trực tiếp cửa hàng</p>
+		
+											<style>
+												#text-2973815044 {
+													color: rgb(0, 0, 0);
+												}
+		
+												#text-2973815044>* {
+													color: rgb(0, 0, 0);
+												}
+											</style>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+		
+		
+						<div id="col-1248956169" class="col-md-4">
+							<div class="col-inner">
+								<div class="icon-box featured-box icon-box-center text-center">
+									<div class="icon-box-img" style="width: 50px">
+										<div class="icon">
+											<div class="icon-inner">
+												<img style="width: 50px;
+												height: 53px;
+												margin-left: 155px;"
+													src="//theme.hstatic.net/200000281285/1000677821/14/policy_icon2.png?v=798"
+													class="attachment-medium size-medium" alt="" decoding="async"
+													loading="lazy"
+													srcset="//theme.hstatic.net/200000281285/1000677821/14/policy_icon2.png?v=798 120w, https://julyscent.com/wp-content/uploads/2023/07/arrow-go-back-line-100x100.png 100w"
+													sizes="(max-width: 120px) 100vw, 120px">
+											</div>
+										</div>
+									</div>
+									<div class="icon-box-text last-reset">
+		
+										<div id="text-3652484110" class="text">
+		
+											<h2 style="margin-top: 0;"><span
+													style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
+											font-size: 20px;
+											font-weight: 700;
+											color: #000000;">Thanh Toán</span></h2>
+											<p>Chấp nhận thanh toán bằng thẻ, tiền mặt hoặc hỗ trợ trả góp các hình thức khác</p>
+		
+											<style>
+												#text-3652484110 {
+													color: rgb(0, 0, 0);
+												}
+		
+												#text-3652484110>* {
+													color: rgb(0, 0, 0);
+												}
+											</style>
+										</div>
+		
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	
-	<footer id="footer"><!--Footer-->
+
+	<!--Footer-->
+	<footer id="footer" style="margin-top: 20px">
 		<div class="footer-top">
 			<div class="container">
 				<div class="row">
@@ -281,8 +410,8 @@
 						<div class="single-widget">
 							<h2>Thông tin</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Giới thiệu</a></li>
-								<li><a href="#">Liên hệ</a></li>
+								<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
+								<li><a href="{{URL::to('lien-he')}}">Liên hệ</a></li>
 							</ul>
 						</div>
 					</div>

@@ -8,7 +8,9 @@ use App\Http\Controllers\BrandProduct;
 use App\Http\Controllers\ProductController; 
 use App\Http\Controllers\CartController; 
 use App\Http\Controllers\CouponController; 
-
+use App\Http\Controllers\SliderController; 
+use App\Http\Controllers\ContactController; 
+use App\Http\Controllers\IntroController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,10 +23,25 @@ use App\Http\Controllers\CouponController;
 
 */
 
-//  ------------------------- User------------------------- 
+//  --------------------------------- User----------------------------------- 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
+
+//// ***FE: Page Liên hệ
+Route::get('/lien-he',[ContactController::class, 'lien_he']);
+//// BE: Page Liên hệ
+Route::get('/information',[ContactController::class, 'information']);
+Route::post('/save-information',[ContactController::class, 'save_information']);
+Route::post('/update-info/{info_id}',[ContactController::class, 'update_info']);
+
+//// ***FE: Page Gioi thieu
+Route::get('/gioi-thieu',[IntroController::class, 'gioi_thieu']);
+//// BE: Page Liên hệ
+Route::get('/introduce',[IntroController::class, 'introduce']);
+Route::post('/save-intro',[IntroController::class, 'save_intro']);
+Route::post('/update-intro/{intro_id}',[IntroController::class, 'update_intro']);
+
 
 //Show Items Danh Mục Sản Phẩm 
 Route::get('/danh-muc-san-pham/{category_id}',[CategoryProduct::class, 'show_category_home']);
@@ -34,8 +51,7 @@ Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_h
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
-
-//-------------------------  Admin ------------------------- 
+//--------------------------------------  Admin --------------------------------------- 
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
@@ -103,7 +119,6 @@ Route::get('/delete-coupon/{coupon_id}', [CouponController::class, 'delete_coupo
 
 Route::post('/insert-coupon-code', [CouponController::class, 'insert_coupon_code']);
 
-
 //- Update Brand Product
 Route::get('/active-product/{product_id}', [ProductController::class, 'active_product']);
 Route::get('/inactive-product/{product_id}', [ProductController::class, 'inactive_product']);
@@ -111,3 +126,14 @@ Route::get('/inactive-product/{product_id}', [ProductController::class, 'inactiv
 //-------------------------  Cart ------------------------- 
 Route::post('/save-cart', [CartController::class, 'save_cart']);
 Route::post('/add-cart-ajax', [CartController::class, 'add_cart_ajax']);
+
+//-------------------------  Banner ------------------------- 
+Route::get('/manage-banner', [SliderController::class, 'manage_banner']);
+Route::get('/add-slider', [SliderController::class, 'add_slider']);
+Route::post('/insert-slider', [SliderController::class, 'insert_slider']);
+
+Route::get('/edit-slider/{slider_id}', [SliderController::class, 'edit_slider']);
+Route::get('/delete-slider/{slider_id}', [SliderController::class, 'delete_slider']);
+Route::get('/active-slider/{slider_id}', [SliderController::class, 'active_slider']);
+Route::get('/inactive-slider/{slider_id}', [SliderController::class, 'inactive_slider']);
+

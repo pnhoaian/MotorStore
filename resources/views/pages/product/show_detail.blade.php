@@ -29,13 +29,14 @@
                     
                 </div>
 
-              <!-- Controls -->
-              <a class="left item-control" href="#similar-product" data-slide="prev">
+              <!-- Hình ảnh chi tiết -->
+
+              {{-- <a class="left item-control" href="#similar-product" data-slide="prev">
                 <i class="fa fa-angle-left"></i>
               </a>
               <a class="right item-control" href="#similar-product" data-slide="next">
                 <i class="fa fa-angle-right"></i>
-              </a>
+              </a> --}}
         </div>
 
     </div>
@@ -63,7 +64,7 @@
                             class="cart_product_price_{{ $value->product_id }}">
 
                 <span>
-                    <span>Giá Bán: {{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
+                    <span class="col-sm-12">Giá Bán: {{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
                 </span>
                 <span>
                     <label>Số Lượng:</label>
@@ -75,17 +76,17 @@
                         Thêm vào giỏ hàng
                     </button> --}}
                     <button type="button"
-                            
-                    class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
-                            name="add-to-cart"><i class="fa fa-shopping-cart"></i>
+                            class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
+                            name="add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
                     </button>
                 </span>
             </form>
 
-            <p><b>Số Lượng:</b> Còn hàng</p>
-            <p><b>Tình trạng:</b> New 100%</p>
+            <p><b>Tình trạng:</b> Còn hàng</p>
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
+            {{-- <p><b>Đã bán:</b> {{ $value->category_name }}</p>
+            <p><b>Tồn kho:</b> {{ $value->category_name }} sản phẩm</p> --}}
             <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
         </div><!--/product-information-->
     </div>
@@ -95,7 +96,7 @@
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#details" data-toggle="tab">Chi tiết</a></li>
-            <li><a href="#companyprofile" data-toggle="tab">Company Profile</a></li>
+            <li><a href="#companyprofile" data-toggle="tab">Sản phẩm liên quan</a></li>
             <li><a href="#reviews" data-toggle="tab">Đánh giá</a></li>
         </ul>
     </div>

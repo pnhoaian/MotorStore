@@ -21,8 +21,9 @@
 											<a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_id)}}">
 											<img src="{{URL::to('/public/upload/product/'.$product->product_image)}}" alt="" />
 											{{-- <h2>{{ number_format($product->product_price).' '.'VNĐ'}}</h2> --}}
-											<h2>{{ number_format($product->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
-											<p>{{ $product->product_name }}</p>
+											<h2>{{ $product->product_name }}</h2>
+											<p>{{ number_format($product->product_price, 0, ',', '.') . ' ' . 'VNĐ' }}</p>
+											
 											</a>
 											<button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart">
 												Thêm vào giỏ hàng</button>
@@ -30,7 +31,7 @@
 									</div>
 										<div class="choose">
 											<ul class="nav nav-pills nav-justified">
-												<li><a href="#"><i class="fa fa-plus-square"></i>Danh sách yêu thích</a></li>
+												<li><a href="#"><i class="fa fa-heart"></i>Danh sách yêu thích</a></li>
 												<li><a href="#"><i class="fa fa-plus-square"></i>So Sánh Sản Phẩm</a></li>
 											</ul>
 										</div>
