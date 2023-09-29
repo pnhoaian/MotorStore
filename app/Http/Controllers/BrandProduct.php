@@ -7,6 +7,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
+use App\Models\Slider;
 session_start();
 
 class BrandProduct extends Controller
@@ -111,6 +112,8 @@ class BrandProduct extends Controller
 
 
     public function show_brand_home($brand_id){
+        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
+
         $cate_product =DB::table('tbl_category_product')
         ->where('category_status','1')->orderby('category_id','desc')->get();
 
@@ -128,7 +131,8 @@ class BrandProduct extends Controller
         ->with('category', $cate_product)
         ->with('brand', $brand_product)
         ->with('brand_by_id',$brand_by_id)
-        ->with('brand_name',$brand_name);
+        ->with('brand_name',$brand_name)
+        ->with('slider',$slider);
         
     }
 }

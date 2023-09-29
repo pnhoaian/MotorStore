@@ -11,6 +11,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\SliderController; 
 use App\Http\Controllers\ContactController; 
 use App\Http\Controllers\IntroController; 
+use App\Http\Controllers\CustomerController; 
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -28,6 +29,11 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 
+Route::get('/login', [CustomerController::class, 'login']);
+Route::get('/register', [CustomerController::class, 'register']);
+Route::post('/dashboard', [CustomerController::class, 'show_dashboard']);
+Route::get('/user-logout', [CustomerController::class, 'user_logout']);
+
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);
 //// BE: Page Liên hệ
@@ -41,6 +47,8 @@ Route::get('/gioi-thieu',[IntroController::class, 'gioi_thieu']);
 Route::get('/introduce',[IntroController::class, 'introduce']);
 Route::post('/save-intro',[IntroController::class, 'save_intro']);
 Route::post('/update-intro/{intro_id}',[IntroController::class, 'update_intro']);
+
+// Route::post('/update-intro/{intro_id}',[IntroController::class, 'update_intro']);
 
 
 //Show Items Danh Mục Sản Phẩm 

@@ -1,7 +1,7 @@
 
 <!DOCTYPE html>
 <head>
-<title>AnHoai Motor | Admin Login</title>
+<title>Admin Login | Hoai An Motor</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="keywords" content="meta description" />
@@ -51,6 +51,9 @@
 				<input type="submit" value="Sign In" name="login">
 		</form>
 </div>
+</div>
+<div style="text-align: center ;color:white">
+	<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Motor</a></p>
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>

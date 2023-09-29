@@ -17,7 +17,11 @@
                     ?>
                     <div class="position-center">
                         @foreach ($intr as $key =>$val)
-                        <form role="form" action="{{URL::to('/update-intro')}}" method="POST">
+                        {{-- <form role="form" action="{{URL::to('/update-intro')}}" method="POST"> --}}
+
+                            <form role="form" action="{{ URL::to('/update-intro/' . $val->intro_id) }}" method="post">
+
+
                             {{ csrf_field() }}
 
                         <div class="form-group">
@@ -28,7 +32,7 @@
                         </div>
 
                         <div class="form-group">
-                        <button type="submit" name="add_intro" class="btn btn-info">Thêm</button>
+                        <button type="submit" name="add_intro" class="btn btn-info">Cập nhật</button>
                     </form>
                     @endforeach
                     </div>

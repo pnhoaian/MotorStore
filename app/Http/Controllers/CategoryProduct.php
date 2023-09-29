@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Models\Slider;
 session_start();
 
 class CategoryProduct extends Controller
@@ -85,6 +86,7 @@ class CategoryProduct extends Controller
         //End Function Admin
 
     public function show_category_home(Request $request,$category_id){
+        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
 
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
        
@@ -99,7 +101,8 @@ class CategoryProduct extends Controller
         ->with('category', $cate_product)
         ->with('brand', $brand_product)
         ->with('category_by_id',$category_by_id)
-        ->with('category_name',$category_name);
+        ->with('category_name',$category_name)
+        ->with('slider',$slider);
     
     }
 

@@ -66,7 +66,7 @@
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li>
 								<li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-								<li><a href="login.html"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<li><a href="{{URL::to('/login')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
 					</div>
@@ -153,10 +153,15 @@
 								@endphp
 							<div class="item {{ $i==1 ? 'active' : '' }}">
 								<div class="col-sm-12">
-									<img alt="{{ $slide->slider_desc }}" src="public/upload/slider/{{ $slide->slider_image }}" class="img img-responsive">
+									<img alt="{{ $slide->slider_desc }}" src="{{ asset('public/upload/slider/' . $slide->slider_image) }}" class="img img-responsive">
 									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 								</div>
 							</div>
+
+
+
+
+
 							@endforeach
 						</div>
 						

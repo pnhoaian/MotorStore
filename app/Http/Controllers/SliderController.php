@@ -49,10 +49,10 @@ class SliderController extends Controller
             $slider -> slider_status = $data['slider_status'];
             $slider->save();
             $request->session()->put('message', 'Thêm Slide - Banner thành công!');
-            return Redirect::to('list_slider');
+            return view('admin.slider.list_slider')->with(compact('all_slide'));
         }else{
-            $request->session()->put('erro', 'Chưa thêm hình ảnh Slide - Banner');
-            return Redirect::to('list_slider');;
+            $request->session()->put('error', 'Chưa thêm hình ảnh Slide - Banner');
+            return view('admin.slider.add_slider');
         }
         //insert du lieu va tbl-slider
         

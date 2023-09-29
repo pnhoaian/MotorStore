@@ -18,7 +18,7 @@
                     <div class="position-center">
                         @foreach ($contact as $key =>$val)
                             
-                        <form role="form" action="{{URL::to('/update-info')}}" method="POST">
+                        <form role="form" action="{{ URL::to('/update-info/' . $val->info_id) }}" method="post">
                             {{ csrf_field() }}
 
                         {{-- <div class="form-group">

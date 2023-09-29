@@ -7,10 +7,10 @@
         <div class="view-product">
             <img src="{{URL::to('/public/upload/product/'.$value->product_image)}}" alt="" />
         </div>
-        <div id="similar-product" class="carousel slide" data-ride="carousel">
+        {{-- <div id="similar-product" class="carousel slide" data-ride="carousel">
             
               <!-- Wrapper for slides -->
-                <div class="carousel-inner">
+                <div class="carousel-inner1">
                     <div class="item active">
                       <a href=""><img src="images/product-details/similar1.jpg" alt=""></a>
                       <a href=""><img src="images/product-details/similar2.jpg" alt=""></a>
@@ -37,7 +37,7 @@
               <a class="right item-control" href="#similar-product" data-slide="next">
                 <i class="fa fa-angle-right"></i>
               </a> --}}
-        </div>
+        {{-- </div> --}} 
 
     </div>
     <div class="col-sm-7">

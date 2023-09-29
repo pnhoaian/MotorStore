@@ -221,7 +221,6 @@ a#scrollUp i{
 
 
 .header-bottom {
-  padding-bottom: 30px;
   padding-top: 30px;
   padding-left: 50px;
 }
@@ -647,9 +646,9 @@ ul.sub-menu {
 
 .control-carousel {
   position: absolute;
-  top: 50%;
+  top: 40%;
   font-size: 60px;
-  color: #C2C2C1;
+  color: #002795;
 }
 
 .control-carousel:hover{

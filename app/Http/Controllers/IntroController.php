@@ -40,20 +40,22 @@ class introController extends Controller
         return view('admin.intro.add_intro')->with(compact('intr'));
     }
 
-    public function update_intro(Request $request, $intro_id){
-        $data = $request->all();
-        $intr = Intro::find($intro_id);
-        $intr->intro_desc = $data['intro_desc'];
-        $intr->save();
-        return redirect()->back()->with('Cập nhật thông tin thành công!');
-    }
-
     public function save_intro(Request $request){
         $data = $request->all();
         $intr = new Intro();
         $intr->intro_desc = $data['intro_desc'];
         $intr->save();
-        return redirect()->back()->with('Thêm thông tin thành công!');
+        // return redirect()->back()->with('Thêm thông tin thành công!');
+        return redirect::to('introduce');
     }
+
+    public function update_intro(Request $request, $intro_id){
+        $data = $request->all();
+        $intr = Intro::find($intro_id);
+        $intr->intro_desc = $data['intro_desc'];
+        $intr->save();
+        //  return view('admin.intro.add_intro')->with('Cập nhật thông tin thành công!');
+         return redirect::to('introduce');
+        }
 
 }
