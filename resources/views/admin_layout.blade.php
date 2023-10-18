@@ -127,8 +127,8 @@
                         <span>Hãng - Thương hiệu</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/add-brand-product')}}">Thêm Hãng Xe</a></li>
-						<li><a href="{{URL::to('/all-brand-product')}}">Danh Sách Hãng Xe</a></li>
+						<li><a href="{{URL::to('/add-brand-product')}}">Thêm Hãng</a></li>
+						<li><a href="{{URL::to('/all-brand-product')}}">Danh Sách Hãng</a></li>
                     </ul>
                 </li>
 

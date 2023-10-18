@@ -870,7 +870,7 @@ h2.title {
 .productinfo h2{
 	color: #EE3E38;
 	font-family: 'Roboto', sans-serif;
-	font-size: 24px;
+	font-size: 16px;
 	font-weight: 700;
 }
 .product-overlay h2{
@@ -882,10 +882,11 @@ h2.title {
 
 
 .productinfo p{
-  font-family: 'Roboto', sans-serif;
-  font-size: 14px;
+  font-family:sans-serif;
+  font-size: 16px;
   font-weight: 400;
   color: #696763;
+  font-weight: bold;
 }
 
 .productinfo img{
@@ -1314,6 +1315,7 @@ h2.title {
   padding-bottom: 10px;
   /* background: #D6D6D0; */
   background: #F0F0E9;
+  border-radius: 10px;
 }
 .shop-details-tab .col-sm-12 {
 	padding-left: 0;

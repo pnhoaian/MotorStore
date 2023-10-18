@@ -9,7 +9,7 @@
         <div class="grid__item md-pd-left15 large--one-third medium--one-half small--one-whole" style="box-sizing: border-box;
         float: left;
         min-height: 1px;
-        padding-left: 30px;
+        padding-left: 25px;
         vertical-align: top;">
         <h4 class="info" style="color: #EE3E38;">Thông tin liên hệ</h4>
                 <div class="contact-wrapper text-center" 

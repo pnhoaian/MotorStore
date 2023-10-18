@@ -87,7 +87,7 @@
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
             {{-- <p><b>Đã bán:</b> {{ $value->category_name }}</p>
             <p><b>Tồn kho:</b> {{ $value->category_name }} sản phẩm</p> --}}
-            <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+            {{-- <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a> --}}
         </div><!--/product-information-->
     </div>
 </div><!--/product-details-->

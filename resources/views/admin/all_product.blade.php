@@ -81,7 +81,6 @@
                 ?>
               </span></td>
 
-              {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td>
                 <a href="{{URL::to('/edit-product/'.$pro->product_id)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="An Hoài">
-    <title>Home | Hoai An Motor</title>
+    <title>Hoài An Store | Pin, Sạc chính hãng</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
@@ -59,7 +59,13 @@
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-4">
-                  
+						<div class="logo pull-left">
+							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-background.png')}}" alt="" 
+							style="margin-top: 0px;
+							margin-left: 0px;
+							width: 90%;
+							height: 70%;"/></a>
+						</div>
 					</div>
 					<div class="col-sm-8">
 						<div class="shop-menu pull-right">
@@ -85,13 +91,6 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-						</div>
-						<div class="logo pull-left">
-							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-backgroundd.png')}}" alt="" 
-							style="margin-top: -50px;
-							margin-left: -150px;
-							width: 275px;
-							height: 190px;"/></a>
 						</div>
 						<div class="mainmenu center">
 							<ul class="nav navbar-nav collapse navbar-collapse">
@@ -378,8 +377,8 @@
 				<div class="row">
 					<div class="col-sm-2">
 						<div class="companyinfo">
-							<h2><span>Hoài An</span> Motor</h2>
-							<p>Tự hào là nhà phân phối xe Mô-tô phân khối lớn, phụ tùng và dịch vụ bảo trì xe chất lượng cao hàng đầu tại TP.HCM.</p>
+							<h2><span>Hoài An</span> Store</h2>
+							<p>Tự hào là nhà phân phối phụ kiện pin, sạc chính hãng - chất lượng - an toàn - giá thành thành tốt nhất hàng đầu tại TP.HCM.</p>
 						</div>
 					</div>
 					<div class="col-sm-7">
@@ -393,7 +392,7 @@
 										<i class="fa fa-play-circle-o"></i>
 									</div>
 								</a>
-								<p>Founder Of HAM</p>
+								<p>Founder Of HAS</p>
 								<h2>14 JULY 2023</h2>
 							</div>
 						</div>
@@ -401,7 +400,7 @@
 					<div class="col-sm-3">
 						<div class="address">
 							<img src="{{asset('public/frontend/images/map.png')}}" alt="" />
-							<p>505 S Atlantic Ave Virginia Beach, VA(Virginia)</p>
+							<p style="text-align: center">180 Cao Lỗ, phường 4, Quận 8, Tp HCM</p>
 						</div>
 					</div>
 				</div>

@@ -133,6 +133,14 @@ class ProductController extends Controller
        
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
+        //test
+        $sdp =DB::table('tbl_product')
+        ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
+        ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
+        ->where('tbl_product.product_id',$product_id)
+        ->where('category_id','9')
+        ->get();
+
         $detail_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
@@ -151,6 +159,7 @@ class ProductController extends Controller
         ->with('brand', $brand_product)
         ->with('product_detail', $detail_product)
         ->with('related_pro', $related_product)
-        ->with('slider',$slider);
+        ->with('slider',$slider)
+        ->with('sdp',$sdp);
     }
 }
