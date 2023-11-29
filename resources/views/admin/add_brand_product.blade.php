@@ -16,11 +16,16 @@
                     }
                     ?>
                     <div class="position-center">
-                        <form role="form" action="{{URL::to('/save-brand-product')}}" method="POST">
+                        <form role="form" action="{{URL::to('/save-brand-product')}}" method="POST" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên Hãng - Thương hiệu</label>
                             <input type="text" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Hãng - Thương hiệu">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Hình ảnh</label>
+                            <input type="file" name="brand_image" class="form-control" id="exampleInputEmail1" placeholder="">
                         </div>
 
                         <div class="form-group">

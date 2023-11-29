@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <head>
-<title>Administrator | Hoài An Motor</title>
+<title>Administrator | Hoài An Store</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1) } </script>
@@ -161,6 +161,17 @@
                     <ul class="sub">
 						<li><a href="{{URL::to('/insert-coupon')}}">Thêm Coupon</a></li>
 						<li><a href="{{URL::to('/list-coupon')}}">Danh Sách Coupon</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:">
+                        <i class="fa fa-newspaper-o"></i>
+                        <span>Tin tức</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-category-post')}}">Thêm Danh mục bài viết</a></li>
+						<li><a href="{{URL::to('/all-category-post')}}">Danh Sách Danh mục bài viết</a></li>
                     </ul>
                 </li>
 

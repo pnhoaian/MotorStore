@@ -2,12 +2,13 @@
 /*************************
 *******Typography******
 **************************/
+
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100);
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700);
 @import url(http://fonts.googleapis.com/css?family=Abel);
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
   background:none;
   position: relative;
   font-weight:400px;
@@ -20,6 +21,12 @@ ul li {
 a:hover {
 outline: none;
 text-decoration:none;
+}
+
+.button-timkiem {
+  background: #0213B0;
+  border: none;
+  height: 35px;
 }
 
 a:focus {
@@ -68,7 +75,7 @@ a#scrollUp i{
 **************************/
 
 .header_top {
-  background: none repeat scroll 0 0 #F0F0E9;
+  background: none repeat scroll 0 0 #EE3E38;
 }
 
 .contactinfo ul li:first-child{
@@ -76,9 +83,9 @@ a#scrollUp i{
 }
 
 .contactinfo ul li a{
-  font-size: 12px;
-  color: #696763;
-  font-family: 'Roboto', sans-serif;
+  font-weight: 600;
+    font-size: 13px;
+    color: #FFF;
 }
 
 
@@ -90,7 +97,7 @@ a#scrollUp i{
 .social-icons ul li a {
   border: 0 none;
   border-radius: 0;
-  color: #696763;
+  color: #FFF;
   padding:0px;
 }
 
@@ -137,11 +144,13 @@ a#scrollUp i{
 }
 
 .header-middle .container .row {
-  border-bottom: 1px solid #f5f5f5;
+  width: 110%;
+  margin-top: 20px;
+  /* border-bottom: 1px solid #f5f5f5;
   margin-left: 0;
   margin-right: 0;
   padding-bottom: 20px;
-  padding-top: 20px;
+  padding-top: 20px; */
 }
 
 .header-middle .container .row .col-sm-4{
@@ -200,9 +209,8 @@ a#scrollUp i{
 .shop-menu ul li a {
   background: #FFFFFF;
   color: #696763;
-  font-family: 'Roboto', sans-serif;
   font-size: 14px;
-  font-weight: 300;
+  font-weight: 600;
   padding:0;
   padding-right: 0;
   margin-top: 10px;
@@ -226,6 +234,7 @@ a#scrollUp i{
 }
 
 .navbar-collapse.collapse{
+  width: 115%;
   padding-left: 0;
 }
 
@@ -240,9 +249,9 @@ a#scrollUp i{
 
 .mainmenu ul li a {
 	color: #696763;
-	font-family: 'Roboto', sans-serif;
-	font-size: 17px;
-	font-weight: 300;
+	font-family: -apple-system, system-ui, BlinkMacSystemFont;
+	font-size: 14;
+	font-weight: 700;
 	padding: 0;
 	padding-bottom: 10px;
 }
@@ -263,7 +272,7 @@ a#scrollUp i{
   height: 35px;
   outline: medium none;
   padding-left: 10px;
-  width: 155px;
+  width: 220px;
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
   background-position: 130px;
@@ -363,8 +372,7 @@ ul.sub-menu {
 
 .companyinfo h2 {
   color: #B4B1AB;
-  font-family: abel;
-  font-size: 27px;
+  font-size: 20px;
   text-transform: uppercase;
 }
 
@@ -852,7 +860,7 @@ h2.title {
 }
 
 .product-image-wrapper{
-	border:1px solid #F7F7F5;
+	border:1px solid #000;
 	overflow: hidden;
 	margin-bottom:30px;
 }
@@ -890,12 +898,13 @@ h2.title {
 }
 
 .productinfo img{
-  width: 250px;
-  min-width: 250px;
-  max-width: 250px;
-  height: 185px;
-  max-height: 185px;
-  min-height: 185px;
+  margin-top: 10px;
+   width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+    height: 200px;
+  max-height: 200px;
+  min-height: 200px;
 }
 
 .productinfo{
@@ -2537,5 +2546,26 @@ h2.title {
 .contact-info .social-networks ul li a:hover{
   color: #EE3E38;
 }
+.brands__content {
+  overflow-x: auto;
+}
+.list-brand {
+  display: flex;
+  flex-wrap: wrap;
+}
 
+a.list-brand__item {
+  align-items: center;
+  border: 1px solid rgb(0 0 0 / 100%);
+  display: flex;
+  height: 35px;
+  justify-content: center;
+  margin: 0 10px 10px 0;
+  padding: 2px 4px;
+}
+
+img.filter-brand__img {
+  height: 20px;
+  max-width: none;
+}
 

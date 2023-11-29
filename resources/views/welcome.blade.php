@@ -31,7 +31,7 @@
 		<!--header_top-->
 		<div class="header_top">
 			<div class="container">
-				<div class="row">
+				<div class="row" >
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
@@ -44,9 +44,7 @@
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-								<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+
 							</ul>
 						</div>
 					</div>
@@ -58,21 +56,79 @@
 		<div class="header-middle"><!--header-middle-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-4">
+					<div class="col-sm-3">
 						<div class="logo pull-left">
 							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-background.png')}}" alt="" 
 							style="margin-top: 0px;
-							margin-left: 0px;
-							width: 90%;
-							height: 70%;"/></a>
+							margin-left: -110px;
+							width: 60%;
+							height: 80%;"/></a>
 						</div>
 					</div>
-					<div class="col-sm-8">
+					<div class="mainmenu center col-sm-5" style="
+					width: 58%;
+					margin-left: -210px;
+				">
+						
+						<ul class="nav navbar-nav collapse navbar-collapse">
+							<li><a href="{{URL::to('trang-chu')}}" class="active">Home</a></li>
+
+							<li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
+								<h4 class="panel-title"></h4>
+								<ul role="menu" class="sub-menu">
+									@foreach ($category as $key =>$cate )
+										<li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{ $cate->category_name }}</a></li>
+									@endforeach
+								</ul>
+							</li> 
+
+							<li class="dropdown"><a href="#">Hãng<i class="fa fa-angle-down"></i></a>
+								<ul role="menu" class="sub-menu">
+									@foreach ($brand as $key =>$brand1 )
+										<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand1->brand_id)}}">{{ $brand1->brand_name }}</a></li>
+									@endforeach
+								</ul>
+							</li> 
+							<li class="dropdown"><a href="#">Tin tức<i class="fa fa-angle-down"></i></a>
+								<ul role="menu" class="sub-menu">
+									@foreach ($category_post as $key =>$cate_post )
+										<li><a href="{{URL::to('/tin-tuc/'.$cate_post->cate_post_slug)}}">{{ $cate_post->cate_post_name }}</a></li>
+									@endforeach
+								</ul>
+							</li> 
+
+							<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
+							<li><a href="{{URL::to('lien-he')}}">Liên Hệ</a></li>
+							<li class="test-s" style="
+							margin-top: -6px;>
+								<form action="{{URL::to('/tim-kiem')}}" method="POST">
+									{{ csrf_field() }}
+									<div class="search_box pull-right">
+										<div style="display: flex">
+											<input type="text" name="keywords_submit" id="keywords"
+												placeholder="Tìm kiếm sản phẩm..." />
+											<button class="button-timkiem" name="search_item"><i class="fa fa-search"
+													style="color: #fff"></i></button>
+		
+										</div>
+									</div>
+								</form>
+							</li>
+						</ul>
+						
+					</div>
+
+
+
+
+					<div class="col-sm-4" style="
+					margin-top: -6px;
+				">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li>
+								{{-- <li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li> --}}
 								<li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-								<li><a href="{{URL::to('/login')}}"><i class="fa fa-lock"></i> Đăng nhập</a></li>
+								<li><a href="{{URL::to('/login')}}"><i class="fa fa-user"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
 					</div>
@@ -85,48 +141,16 @@
 				<div class="row">
 					<div class="col-sm-8">
 						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							{{-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
-							</button>
+							</button> --}}
 						</div>
-						<div class="mainmenu center">
-							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="{{URL::to('trang-chu')}}" class="active">Home</a></li>
-
-								<li class="dropdown"><a href="#">Danh Mục<i class="fa fa-angle-down"></i></a>
-									<h4 class="panel-title"></h4>
-									<ul role="menu" class="sub-menu">
-										@foreach ($category as $key =>$cate )
-                                        	<li><a href="{{URL::to('/danh-muc-san-pham/'.$cate->category_id)}}">{{ $cate->category_name }}</a></li>
-										@endforeach
-									</ul>
-                                </li> 
-
-								<li class="dropdown"><a href="#">Hãng<i class="fa fa-angle-down"></i></a>
-                                    <ul role="menu" class="sub-menu">
-										@foreach ($brand as $key =>$brand1 )
-                                        	<li><a href="{{URL::to('/thuong-hieu-san-pham/'.$brand1->brand_id)}}">{{ $brand1->brand_name }}</a></li>
-										@endforeach
-                                    </ul>
-                                </li> 
-
-								<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
-								<li><a href="{{URL::to('lien-he')}}">Liên Hệ</a></li>
-							</ul>
-						</div>
+						
 					</div>
-					<div class="col-sm-3">
-						<form action="{{URL::to('/tim-kiem')}}" method="POST">
-							{{ csrf_field() }}
-							<div class="search_box pull-right">
-								<input type="text" name="keyword_submit" placeholder="Tìm kiếm sản phẩm"/>
-								<input type="submit" name="search_items" class="btn btn-danger btn-sm" value="Tìm kiếm"/>
-							</div>
-						</form>
-					</div>
+					
 				</div>
 			</div>
 		</div><!--/header-bottom-->
@@ -157,10 +181,6 @@
 								</div>
 							</div>
 
-
-
-
-
 							@endforeach
 						</div>
 						
@@ -176,9 +196,37 @@
 			</div>
 		</div>
 	</section><!--/slider-->
+
+	<section>
+		<div class="brands__content">
+			<div class="container">
+				<div class="row">
+					<div class="brands__content">
+						<div class="list-brand">
+	
+							@foreach ($brand as $key => $brand1)
+								@if ($brand1->brand_image != '')
+									<a class="list-brand__item"
+										href="{{ URL::to('/thuong-hieu-san-pham/' . $brand1->brand_id) }}"><img
+											class="filter-brand__img"
+											src="{{ asset('public/upload/brand/' . $brand1->brand_image) }}"></a>
+								@else
+								@endif
+							@endforeach
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</section>
+
+
+
 	
 	<section>
-		<div class="container">
+		<div class="container"></div>
 			<div class="row">
 				{{--  <div class="col-sm-3">
 					 <div class="left-sidebar">

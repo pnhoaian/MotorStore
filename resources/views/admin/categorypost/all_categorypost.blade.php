@@ -4,13 +4,13 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Danh Sách Hãng - Thương hiệu
+        Danh Sách Danh mục bài viết
       </div>
       <div class="row w3-res-tb">
         <div class="col-sm-5 m-b-xs">
           <select class="input-sm form-control w-sm inline v-middle">
-            <option value="0">Hãng - Thương hiệu Đang Ẩn</option>
-            <option value="1">Hãng - Thương hiệu Đang Hiện Thị</option>
+            <option value="0">Danh mục bài viết Đang Ẩn</option>
+            <option value="1">Danh mục bài viết Đang Hiện Thị</option>
           </select>
           <button class="btn btn-sm btn-default">Áp dụng</button>                
         </div>
@@ -38,34 +38,34 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th>Tên Hãng - Thương hiệu</th>
-              <th>Hình ảnh</th>
+              <th style="width:20px;">
+                <label class="i-checks m-b-none">
+                  <input type="checkbox"><i></i>
+                </label>
+              </th>
+              <th>Tên Danh mục bài viết</th>
               <th>Trạng thái</th>
-              <th>Tác vụ</th>
               {{-- <th>Ngày thêm</th> --}}
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($all_brand_product as $key => $brand_pro)
+            @foreach ($all_category_post as $key => $cate_post)
               
             <tr>
-              <td>{{ $brand_pro->brand_name}}</td>
-              <td>
-                  <img src="public/upload/brand/{{$brand_pro->brand_image}}" height="40px" width="180px">
-              </td>
-              
+              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              <td>{{ $cate_post->cate_post_name }}</td>
               {{-- status  --}}
               <td><span class="text-ellipsis">
                 <?php
-                if($brand_pro->brand_status == 0){
+                if($cate_post->cate_post_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-brand-product/'.$brand_pro->brand_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-category-post/'.$cate_post->cate_post_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-brand-product/'.$brand_pro->brand_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-category-post/'.$cate_post->cate_post_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }
@@ -74,9 +74,9 @@
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td>
-                <a href="{{URL::to('/edit-brand-product/'.$brand_pro->brand_id)}}" class="active styling" ui-toggle-class="">
+                <a href="{{URL::to('/edit-category-post/'.$cate_post->cate_post_id)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
-                <a onclick="return confirm('Xác nhận xóa Hãng - Thương hiệu này?')" href="{{URL::to('/delete-brand-product/'.$brand_pro->brand_id)}}" class="active styling" ui-toggle-class=""> 
+                <a onclick="return confirm('Xác nhận xóa Danh mục này?')" href="{{URL::to('/delete-category-post/'.$cate_post->cate_post_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

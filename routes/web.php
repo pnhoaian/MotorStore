@@ -12,6 +12,7 @@ use App\Http\Controllers\SliderController;
 use App\Http\Controllers\ContactController; 
 use App\Http\Controllers\IntroController; 
 use App\Http\Controllers\CustomerController; 
+use App\Http\Controllers\CategoryPost;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -59,7 +60,7 @@ Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_h
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
-//--------------------------------------  Admin --------------------------------------- 
+//*********************************************************** Admin *************************************************************
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
@@ -93,8 +94,18 @@ Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'u
 Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'active_brand_product']);
 Route::get('/inactive-brand-product/{brand_product_id}', [BrandProduct::class, 'inactive_brand_product']);
 
+//-------------------------  Category Post ------------------------- 
+Route::get('/add-category-post', [CategoryPost::class, 'add_category_post']);
+Route::get('/all-category-post', [CategoryPost::class, 'all_category_post']);
+Route::post('/save-category-post', [CategoryPost::class, 'save_category_post']);
+Route::get('/edit-category-post/{category_post_id}', [CategoryPost::class, 'edit_category_post']);
 
-//-------------------------  Product ------------------------- 
+Route::post('/update-category-post/{cate_id }', [CategoryPost::class, 'update_category_post']);
+Route::get('/delete-category-post/{cate_id}', [CategoryPost::class, 'delete_category_post']);
+Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_muc_bai_viet']);
+
+
+//---------------------------  Product --------------------------- 
 Route::get('/add-product', [ProductController::class, 'add_product']);
 Route::get('/all-product', [ProductController::class, 'all_product']);
 Route::post('/save-product', [ProductController::class, 'save_product']);
@@ -103,7 +114,7 @@ Route::get('/edit-product/{product_id}', [ProductController::class, 'edit_produc
 Route::get('/delete-product/{product_id}', [ProductController::class, 'delete_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
 
-//-------------------------  Card ------------------------- 
+//---------------------------  Cart --------------------------- 
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::post('/save-cart', [CartController::class, 'save_cart']);
 Route::post('/update-cart', [CartController::class, 'update_cart']);
@@ -115,7 +126,7 @@ Route::get('/delete-to-cart', [CartController::class, 'delete_to_cart']);
 Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
 Route::get('/del-all-product',[CartController::class, 'del_all_product']);
 
-//-------------------------  Coupon ------------------------- 
+//---------------------------  Coupon --------------------------- 
 //User
 Route::post('/check-coupon', [CartController::class, 'check_coupon']);
 Route::get('/unset-coupon', [CouponController::class, 'unset_coupon']);

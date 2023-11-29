@@ -10,11 +10,13 @@ use Session;
 use App\Models\Intro;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Redirect;
+use App\Models\CatePost;
 session_start();
 
 class introController extends Controller
 {
     public function gioi_thieu(Request $request){
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
         //slide
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
 
@@ -33,6 +35,7 @@ class introController extends Controller
         ->with('brand', $brand_product)
         ->with('all_product',$all_product)
         ->with('slider',$slider)
+        ->with('category_post',$category_post)
         ->with('intr',$intr);
     }
     public function introduce(){

@@ -7,11 +7,14 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
+use App\Models\CatePost;
 session_start();
 
 class HomeController extends Controller
 {
     public function index(){
+        //post
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         //slide
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
 
@@ -28,12 +31,15 @@ class HomeController extends Controller
         ->with('category', $cate_product)
         ->with('brand', $brand_product)
         ->with('all_product',$all_product)
-        ->with('slider',$slider);
+        ->with('slider',$slider)
+        ->with('category_post',$category_post);
     }
     
     public function search(Request $request){
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
+        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
         $keyword = $request->keyword_submit;
         
         $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->get();
@@ -41,6 +47,8 @@ class HomeController extends Controller
         return view('pages.product.search')
         ->with('category', $cate_product)
         ->with('brand', $brand_product)
+        ->with('slider',$slider)
+        ->with('category_post',$category_post)
         ->with('search_product',$search_product);
     }
 }

@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
 use App\Models\Slider;
+use App\Models\CatePost;
+
 session_start();
 
 class BrandProduct extends Controller
@@ -39,24 +41,73 @@ class BrandProduct extends Controller
     }
 
     public function save_brand_product(Request $request){
+        // $this->AuthLogin();
+        // $data = $request->all();
+        // $brand = new Brand();
+        // $brand->brand_name = $data['brand_product_name'];
+        // $brand->brand_desc = $data['brand_product_desc'];
+        // $brand->brand_status = $data['brand_product_status'];
+        // $brand->brand_image = $data['brand_image'];
+        // $get_image = $request->file('brand_image');
+        // $brand->save();
+
+        // if($get_image){
+        //     //lấy tên file hình ảnh
+        //     $get_name_image = $get_image->getClientOriginalName();
+        //     $name_image = current(explode('.',$get_name_image));
+        //     $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+        //     $get_image->move('public/upload/brand',$new_image);
+        //     $data['brand_image']=$new_image;
+        //     DB::table('tbl_brand')->insert($data);
+        //     $request->session()->put('message', 'Thêm Hãng - thương hiệu thành công!');
+        //     return Redirect::to('all-brand-product');
+        // }
+        // //insert du lieu va tbl-product
+        // $data['brand_image']='';
+        // DB::table('tbl_brand')->insert($data);
+        // $request->session()->put('message', 'Thêm Hãng - thương hiệu thành công!');
+        // return Redirect::to('all-brand-product');
+
         $this->AuthLogin();
         $data = $request->all();
         $brand = new Brand();
         $brand->brand_name = $data['brand_product_name'];
         $brand->brand_desc = $data['brand_product_desc'];
         $brand->brand_status = $data['brand_product_status'];
-        $brand->save();
-        // $data = array();
-        // $data['brand_name'] = $request ->brand_product_name;
-        // $data['brand_desc']= $request ->brand_product_desc;
-        // $data['brand_status']= $request ->brand_product_status;
+        $get_image = $request->file('brand_image');
+        if ($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.', $get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/brand',$new_image);
+            $data['brand_image'] = $new_image;
+            $brand->brand_image = $new_image;
+        }
+        $thuonghieu = Brand::where('brand_name','=',$data['brand_product_name'])->get();
+        if($thuonghieu){
+            $count_thuonghieu = $thuonghieu->count();
+            if($count_thuonghieu==0){
+                $brand->save();
+                
+                 return Redirect::to('all-brand-product');
+            }
+            else{
+               
+                return Redirect::to('all-brand-product');
+            }
+        }
 
-        //insert du lieu va tbl-brand-product
-        // DB::table('tbl_brand')->insert($data);
+
+
+
+
+
+
+
 
         $request->session()->put('message', 'Thêm Hãng - Thương hiệu thành công!');
         return Redirect::to('add-brand-product');
-        //return view('admin.save_brand_product');
+
     }
 
     public function active_brand_product($brand_product_id){
@@ -94,11 +145,76 @@ class BrandProduct extends Controller
     }
 
     public function update_brand_product(Request $request, $brand_product_id){
-        $this->AuthLogin();
+        // $this->AuthLogin();
+        // $data = $request->all();
+        // $brand =Brand::find($brand_product_id);
+        // $brand->brand_name = $data['brand_product_name'];
+        // $brand->brand_desc = $data['brand_product_desc'];
+
+        // $get_image = $request->file('brand_image');
+        // if ($get_image){
+        //     $get_name_image = $get_image->getClientOriginalName();
+        //     $name_image = current(explode('.', $get_name_image));
+        //     $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+        //     $get_image->move('public/upload/brand',$new_image);
+        //     $data['brand_image'] = $new_image;
+        //     $brand->brand_image = $new_image;
+        // }
+        // $thuonghieu = Brand::where('brand_name','=',$data['brand_product_name'])->get();
+        // if($thuonghieu){
+        //     $count_thuonghieu = $thuonghieu->count();
+        //     if($count_thuonghieu==0){
+        //         $brand->save();
+                
+        //          return Redirect::to('all-brand-product');
+        //     }
+        //     else{
+               
+        //         return Redirect::to('all-brand-product');
+        //     }
+        // }
+
+
         $data = $request->all();
-        $brand =Brand::find($brand_product_id);
+        $brand = Brand::find($brand_product_id);
         $brand->brand_name = $data['brand_product_name'];
         $brand->brand_desc = $data['brand_product_desc'];
+
+        $get_image = $request->file('brand_image');
+        if ($get_image){
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.', $get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/brand',$new_image);
+            $data['brand_image'] = $new_image;
+            $brand->brand_image = $new_image;
+        }
+
+
+        $brand->save();
+        Session::put('message','Cập nhật Hãng - Thương hiệu thành công');
+        return Redirect::to('all-brand-product');
+
+
+
+
+
+
+
+
+        $get_image = $request->file('brand_image');
+        if($get_image){
+            //lấy tên file hình ảnh
+            $get_name_image = $get_image->getClientOriginalName();
+            $name_image = current(explode('.',$get_name_image));
+            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+            $get_image->move('public/upload/brand',$new_image);
+            $data['brand_image']=$new_image;
+            
+        }
+        DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
+            $request->session()->put('message', 'Cập nhật Hãng - Thương hiệu thành công!');
+            return Redirect::to('all-brand-product');
         //$brand->brand_status = $data['brand_product_status'];
         $brand->save();
         // $data = array();
@@ -125,6 +241,7 @@ class BrandProduct extends Controller
 
         $brand_name = DB::table('tbl_brand')
         ->where('tbl_brand.brand_id',$brand_id)->limit(1)->get();
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
 
 
         return view('pages.brand.show_brand')
@@ -132,6 +249,7 @@ class BrandProduct extends Controller
         ->with('brand', $brand_product)
         ->with('brand_by_id',$brand_by_id)
         ->with('brand_name',$brand_name)
+        ->with('category_post',$category_post)
         ->with('slider',$slider);
         
     }

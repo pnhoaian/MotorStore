@@ -7,6 +7,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
+use App\Models\CatePost;
 session_start();
 
 class CategoryProduct extends Controller
@@ -89,6 +90,8 @@ class CategoryProduct extends Controller
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
 
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
+        
        
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
@@ -102,6 +105,7 @@ class CategoryProduct extends Controller
         ->with('brand', $brand_product)
         ->with('category_by_id',$category_by_id)
         ->with('category_name',$category_name)
+        ->with('category_post',$category_post)
         ->with('slider',$slider);
     
     }
