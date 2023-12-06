@@ -167,11 +167,22 @@
                 <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-newspaper-o"></i>
-                        <span>Tin tức</span>
+                        <span>Danh mục Tin tức - Bài viết</span>
                     </a>
                     <ul class="sub">
 						<li><a href="{{URL::to('/add-category-post')}}">Thêm Danh mục bài viết</a></li>
 						<li><a href="{{URL::to('/all-category-post')}}">Danh Sách Danh mục bài viết</a></li>
+                    </ul>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="javascript:">
+                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                        <span>Bài viết</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/add-post')}}">Thêm bài viết</a></li>
+						<li><a href="{{URL::to('/all-post')}}">Danh sách bài viết</a></li>
                     </ul>
                 </li>
 

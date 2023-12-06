@@ -3,8 +3,9 @@
 @foreach ($product_detail as $key =>$value)
     
 <div class="product-details"><!--product-details-->
-    <div class="col-sm-5">
+    <div class="col-sm-4">
         <div class="view-product">
+
             <img src="{{URL::to('/public/upload/product/'.$value->product_image)}}" alt="" />
         </div>
         {{-- <div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -40,7 +41,8 @@
         {{-- </div> --}} 
 
     </div>
-    <div class="col-sm-7">
+
+    <div class="col-sm-5">
         <div class="product-information"><!--/product-information-->
             <img src="images/product-details/new.jpg" class="newarrival" alt="" />
             <h2>{{ $value->product_name }}</h2>
@@ -90,6 +92,70 @@
             {{-- <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a> --}}
         </div><!--/product-information-->
     </div>
+
+    <div class="col-sm-3">
+        <div class="block" style="margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 6px;
+        clear: both;">
+            <div class="phone" style="margin-bottom: 15px;">
+                <strong>
+                    <span data-redactor-tag="span" style="color: rgb(0, 0, 0); margin-left:50px; ">Hồ Chí Minh</span> : 0912 456 789</strong><br>
+            </div>
+
+            <div class="GiaoHang">
+                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ ATM miễn phí tại cửa hàng<span style="color: rgb(238, 236, 225);"></span></i>
+                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Trả Góp: Trả trước 30% + CMND + Hộ khẩu / Bằng lái</span></i> 
+                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Trả Góp: Dùng thẻ tín dụng lãi suất 0%</span></i> 
+                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ MASTER, VISA +<strong>1.5%</strong></span></i> 
+            </div>
+        </div>
+
+        <div class="block" style="margin-bottom: 10px;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 6px;
+        clear: both;">
+            <div class="pr-top" style="    border: 1px solid #e0e0e0;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            background-color: #f6f6f6;">
+                <h4 class="pr-txtb" style="margin-left: 5px; text-align: center"> Khuyến Mãi</h4>
+                <i class="pr-txt" style="margin-left: 5px;"> Đặt ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn từ Hoài An Store </i>
+            </div>
+            <div class="pr-content">
+                <div class="pr-item">
+            <div>
+                <ul>
+                    <li></li>
+                        
+                    </li>
+                </ul>
+                <p>Nhập mã UUDAI50k giảm ngay 50K cho đơn hàng khi mua sắm online</a></p>
+                            
+                
+            </div>
+            <div class="divb t5" data-promotion="2039089" data-group="WebNote" data-discount="0" data-productcode="" data-tovalue="20">
+                <span class="nb">2</span>
+                <div class="divb-right">
+                            <p>Hoàn 200,000đ cho chủ thẻ tín dụng HOME CREDIT khi thanh toán đơn hàng từ 5,000,000đ <a href="https://www.thegioididong.com/tin-tuc/hoan-tien-den-200K-khi-thanh-toan-qua-homecredit-1553498" target="_blank">(Xem chi tiết tại đây)</a></p>
+                </div>
+            </div>
+                </div>
+
+                
+
+
+                
+            <div class="pr-item text">
+                <p><span class="note">(*)</span> Giá hoặc khuyến mãi không áp dụng trả góp lãi suất đặc biệt (0%, 0.5%, 1%, 1.5%, 2%)</p>
+            </div>
+ 
+            </div>
+        </div>
+    </div>
+
 </div><!--/product-details-->
 
 <div class="category-tab shop-details-tab"><!--category-tab-->

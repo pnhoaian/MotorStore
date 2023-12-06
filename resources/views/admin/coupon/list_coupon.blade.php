@@ -41,7 +41,7 @@
               <th>Tên chương trình</th>
               <th>Mã giảm giá</th>
               <th>Số lượng</th>
-              <th>Điều kiện</th>
+              <th>Loại khuyến mãi</th>
               <th>Giảm</th>
             </tr>
           </thead>

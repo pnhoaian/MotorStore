@@ -4,13 +4,13 @@
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
-        Danh sách Banner - Slider
+        Danh sách Bài viết
       </div>
       <div class="row w3-res-tb">
         <div class="col-sm-5 m-b-xs">
           <select class="input-sm form-control w-sm inline v-middle">
-            <option value="0">Hãng - Thương hiệu Đang Ẩn</option>
-            <option value="1">Hãng - Thương hiệu Đang Hiện Thị</option>
+            <option value="0">Bài viết Đang Ẩn</option>
+            <option value="1">Bài viết Đang Hiện Thị</option>
           </select>
           <button class="btn btn-sm btn-default">Áp dụng</button>                
         </div>
@@ -38,15 +38,11 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
-              <th>Tên Slider</th>
+              <th>Tiêu đề Bài viết</th>
+              <th>URL</th>
+              <th>Mô tả ngắn</th>
               <th>Hình ảnh</th>
-              <th>Loại Banner</th>
-              <th>Mô tả</th>
+              <th>Danh mục</th>
               <th>Trạng thái</th>
               <th>Tác vụ</th>
               {{-- <th>Ngày thêm</th> --}}
@@ -54,55 +50,28 @@
             </tr>
           </thead>
           <tbody>
-            @foreach ($all_slide as $key => $slide)
+            @foreach ($all_post as $key => $allpost)
               
             <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
-              <td>{{ $slide->slider_name }}</td>
+              <td>{{ $allpost->post_title}}</td>
+              <td>{{ $allpost->post_slug}}</td>
+              <td>{{ $allpost->post_desc}}</td>
               
               <td>
-                <?php
-                if($slide->slider_type == 0){
-                ?>
-                   <img src="public/upload/slider/{{ $slide->slider_image }}" height="180px" width="400px"></td>
-                   {{-- echo'Banner Lớn'; --}}
-                <?php
-                }else{
-            ?>
-                  <img src="public/upload/slider/{{ $slide->slider_image }}" height="120px" width="300px"></td>
-                  {{--  echo'Banner Nhỏ'; --}}
-                <?php 
-                }
-                ?>
-
-              <td><span class="text-ellipsis">
-              <?php
-              if($slide->slider_type == 0){
-              ?>
-                 <span>Banner Lớn</span>
-                 {{-- echo'Banner Lớn'; --}}
-              <?php
-              }else{
-          ?>
-                <span>Banner Nhỏ</span>
-                {{--  echo'Banner Nhỏ'; --}}
-              <?php 
-              }
-              ?>
-              </span></td>
-
-              <td>{{ $slide->slider_desc }}</td>
+                  <img src="public/upload/post/{{$allpost->post_image}}" height="100px" width="200px">
+              </td>
+              <td>{{ $allpost->cate_post->cate_post_name}}</td>
               {{-- status  --}}
               <td><span class="text-ellipsis">
                 <?php
-                if($slide->slider_status == 0){
+                if($allpost->post_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-slider/'.$slide->slider_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-post/'.$allpost->post_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-slider/'.$slide->slider_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-post/'.$allpost->post_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }
@@ -111,9 +80,9 @@
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td>
-                {{-- <a href="{{URL::to('/edit-slider/'.$slide->slider_id)}}" class="active styling" ui-toggle-class="">
-                  <i class="fa fa-pencil-square-o text-success text-active"></i> --}}
-                <a onclick="return confirm('Xác nhận xóa Slide - Banner này?')" href="{{URL::to('/delete-slider/'.$slide->slider_id)}}" class="active styling" ui-toggle-class=""> 
+                <a href="{{URL::to('/edit-post/'.$allpost->post_id)}}" class="active styling" ui-toggle-class="">
+                  <i class="fa fa-pencil-square-o text-success text-active"></i>
+                <a onclick="return confirm('Xác nhận xóa Bài viết này?')" href="{{URL::to('/delete-post/'.$allpost->post_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

@@ -13,6 +13,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\IntroController; 
 use App\Http\Controllers\CustomerController; 
 use App\Http\Controllers\CategoryPost;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,9 +91,10 @@ Route::get('/edit-brand-product/{brand_product_id}', [BrandProduct::class, 'edit
 Route::get('/delete-brand-product/{brand_product_id}', [BrandProduct::class, 'delete_brand_product']);
 Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'update_brand_product']);
 
-//- Update Brand Product
+//- Update Brand Product Status
 Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'active_brand_product']);
 Route::get('/inactive-brand-product/{brand_product_id}', [BrandProduct::class, 'inactive_brand_product']);
+
 
 //-------------------------  Category Post ------------------------- 
 Route::get('/add-category-post', [CategoryPost::class, 'add_category_post']);
@@ -100,9 +102,17 @@ Route::get('/all-category-post', [CategoryPost::class, 'all_category_post']);
 Route::post('/save-category-post', [CategoryPost::class, 'save_category_post']);
 Route::get('/edit-category-post/{category_post_id}', [CategoryPost::class, 'edit_category_post']);
 
-Route::post('/update-category-post/{cate_id }', [CategoryPost::class, 'update_category_post']);
+Route::post('/update-category-post/{cate_id}', [CategoryPost::class, 'update_category_post']);
 Route::get('/delete-category-post/{cate_id}', [CategoryPost::class, 'delete_category_post']);
 Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_muc_bai_viet']);
+//-------------------------  Post ------------------------- 
+Route::get('/add-post', [PostController::class, 'add_post']);
+Route::get('/all-post', [PostController::class, 'all_post']);
+Route::post('/save-post', [PostController::class, 'save_post']);
+Route::get('/edit-post/{post_id}', [PostController::class, 'edit_post']);
+
+Route::post('/update-post/{post_id}', [PostController::class, 'update_post']);
+Route::get('/delete-post/{post_id}', [PostController::class, 'delete_post']);
 
 
 //---------------------------  Product --------------------------- 

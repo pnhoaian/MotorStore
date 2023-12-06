@@ -30,7 +30,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Slug</label>
-                            <textarea style="resize:none" rows="6" name="cate_post_slug" value="{{$category_post->cate_post_slug}}" class="form-control" id="convert_slug" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="cate_post_slug" class="form-control" id="convert_slug" placeholder="Thêm mô tả">{{$category_post->cate_post_slug}}</textarea>
                         </div>
 
                         <div class="form-group">

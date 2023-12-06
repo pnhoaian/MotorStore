@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,8 +36,8 @@
 					<div class="col-sm-6">
 						<div class="contactinfo">
 							<ul class="nav nav-pills">
-								<li><a href="#"><i class="fa fa-phone"></i> +84 99 1919 191</a></li>
-								<li><a href="#"><i class="fa fa-envelope"></i> anhoaimotor@gmail.com</a></li>
+								<li><a href="#"><i class="fa fa-phone"></i> Hotline: +84 99 1919 191</a></li>
+								<li><a href="#"><i class="fa fa-envelope"></i> hoaianstore.vn@gmail.com</a></li>
 							</ul>
 						</div>
 					</div>
@@ -44,7 +45,7 @@
 						<div class="social-icons pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-
+								<li><a href="{{URL::to('/login')}}"><i class="fa fa-user"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
 					</div>
@@ -61,13 +62,13 @@
 							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-background.png')}}" alt="" 
 							style="margin-top: 0px;
 							margin-left: -110px;
-							width: 60%;
-							height: 80%;"/></a>
+							width: 70%;
+							height: 85%;"/></a>
 						</div>
 					</div>
 					<div class="mainmenu center col-sm-5" style="
 					width: 58%;
-					margin-left: -210px;
+					margin-left: -115px;
 				">
 						
 						<ul class="nav navbar-nav collapse navbar-collapse">
@@ -123,12 +124,12 @@
 
 					<div class="col-sm-4" style="
 					margin-top: -6px;
+					width: 25%;
 				">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								{{-- <li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li> --}}
 								<li><a href="{{URL::to('/show-cart')}}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
-								<li><a href="{{URL::to('/login')}}"><i class="fa fa-user"></i> Đăng nhập</a></li>
 							</ul>
 						</div>
 					</div>
@@ -155,16 +156,13 @@
 			</div>
 		</div><!--/header-bottom-->
 	</header><!--/header-->
-	
-	<section id="slider"><!--slider-->
+
+													<!--slider-->
+	<section id="slider">
 		<div class="container">
 			<div class="row">
-				<div class="col-sm-12">
+				<div class="col-sm-8" style="width:73%;margin-left: -95px;">
 					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						<ol class="carousel-indicators">
-							<li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
-							<li data-target="#slider-carousel" data-slide-to="1"></li>
-						</ol>
 						
 						<div class="carousel-inner">
 							@php
@@ -175,8 +173,8 @@
 									$i++;
 								@endphp
 							<div class="item {{ $i==1 ? 'active' : '' }}">
-								<div class="col-sm-12">
-									<img alt="{{ $slide->slider_desc }}" src="{{ asset('public/upload/slider/' . $slide->slider_image) }}" class="img img-responsive">
+								<div class="">
+									<img style="height:320px;min-height:320px;max-height:320px;width:745px;min-width:745px;max-width:745px;margin-left: 40px;" alt="{{ $slide->slider_desc }}" src="{{ asset('public/upload/slider/' . $slide->slider_image) }}" class="img img-responsive">
 									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 								</div>
 							</div>
@@ -190,13 +188,43 @@
 						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
 							<i class="fa fa-angle-right"></i>
 						</a>
-					</div>
-					
-				</div>
-			</div>
-		</div>
-	</section><!--/slider-->
 
+
+
+
+					</div>
+				</div>
+
+
+				<div class="col-sm-4" style="width:35%;height:100px">
+					<div class="carousel-inner1" style="
+						position: relative">
+
+						@foreach ($slidermini as $key => $slidemini)
+	
+						<div >
+							<div >
+								<img style="height: 100px;margin-bottom: 10px;;width:345px;min-width:345px;max-width:345px"  alt="{{ $slidemini->slider_desc }}" src="{{ asset('public/upload/slider/' . $slidemini->slider_image) }}" class="img img-responsive">
+								{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
+							</div>
+						</div>
+
+						@endforeach
+					</div>
+				</div>
+
+
+
+
+
+
+
+				
+		</div>
+	</section>
+												<!--/slider-->
+
+											<!--Thuong Hieu San Pham-->
 	<section>
 		<div class="brands__content">
 			<div class="container">
@@ -221,8 +249,7 @@
 		</div>
 		</div>
 	</section>
-
-
+													<!--Thuong Hieu San Pham-->
 
 	
 	<section>
@@ -270,7 +297,7 @@
 					</div> --}}
 				</div>
 				
-				<div class="col-sm-12 padding-right" style="margin-bottom: 60px">
+				<div class="col-sm-12 " style="padding-left:0">
                     @yield('content')
 				</div>
 
@@ -429,7 +456,8 @@
 							<p>Tự hào là nhà phân phối phụ kiện pin, sạc chính hãng - chất lượng - an toàn - giá thành thành tốt nhất hàng đầu tại TP.HCM.</p>
 						</div>
 					</div>
-					<div class="col-sm-7">
+
+					{{-- <div class="col-sm-7">
 						<div class="col-sm-3">
 							<div class="video-gallery text-center">
 								<a href="#">
@@ -445,19 +473,14 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="col-sm-3">
 						<div class="address">
 							<img src="{{asset('public/frontend/images/map.png')}}" alt="" />
 							<p style="text-align: center">180 Cao Lỗ, phường 4, Quận 8, Tp HCM</p>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		
-		<div class="footer-widget">
-			<div class="container">
-				<div class="row">
+					</div> --}}
+
 					<div class="col-sm-2">
 						<div class="single-widget">
 							<h2>Thông tin</h2>
@@ -470,11 +493,11 @@
 					<div class="col-sm-2">
 						<div class="single-widget">
 							<h2>Sản Phẩm & Dịch Vụ</h2>
-							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Honda</a></li>
-								<li><a href="#">Kawasaki</a></li>
-								<li><a href="#">BMW</a></li>
-								<li><a href="#">Phụ Tùng & Đồ chơi xe chính hãng</a></li>
+							<ul class="nav nav-pills nav-stacked"></ul>
+								<li><a href="#">Apple</a></li>
+								<li><a href="#">Samsung</a></li>
+								<li><a href="#">Baseus</a></li>
+
 							</ul>
 						</div>
 					</div>
@@ -484,7 +507,6 @@
 							<ul class="nav nav-pills nav-stacked">
 								<li><a href="#">Thanh toán</a></li>
 								<li><a href="#">Bảo hành - Bảo trì</a></li>
-								<li><a href="#">Mua xe trả góp</a></li>
 							</ul>
 						</div>
 					</div>
@@ -503,16 +525,25 @@
 							</form>
 						</div>
 					</div>
-					
+
 				</div>
 			</div>
 		</div>
 		
+		{{-- <div class="footer-widget">
+			<div class="container">
+				<div class="row">
+					
+					
+				</div>
+			</div>
+		</div> --}}
+		
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull">Copyright © 2023 Hoai An Motor. All rights reserved.</p>
-					<p class="pull">Designed by <span><a target="_blank" href="#">An Hoài</a></span></p>
+					<p class="pull">Copyright © 2023 Hoai An Store. All rights reserved.</p>
+					<p class="pull">Designed by <a href="#">An Hoài</a></p>
 				</div>
 			</div>
 		</div>

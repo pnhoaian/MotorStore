@@ -34,10 +34,18 @@
                             </div>
 
                             <div class="form-group">
+                                <label for="exampleInputEmail1">Loại Banner</label>
+                                <select name="slider_type" class="form-control input-sm m-bot15">
+                                    <option value="0" selected>Banner Lớn </option>
+                                    <option value="1">Banner Nhỏ</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
                                 <label for="exampleInputEmail1">Hiện thị</label>
                                 <select name="slider_status" class="form-control input-sm m-bot15">
                                     <option value="0">Ẩn Slide - Banner</option>
-                                    <option value="1">Hiện thị Slide - Banner</option>
+                                    <option value="1" selected>Hiện thị Slide - Banner</option>
                                 </select>
                             </div>
 

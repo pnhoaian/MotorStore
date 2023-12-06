@@ -16,8 +16,8 @@ class HomeController extends Controller
         //post
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         //slide
-        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
-
+        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',0)->take(4)->get();
+        $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         //
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
@@ -32,6 +32,7 @@ class HomeController extends Controller
         ->with('brand', $brand_product)
         ->with('all_product',$all_product)
         ->with('slider',$slider)
+        ->with('slidermini',$slidermini)
         ->with('category_post',$category_post);
     }
     

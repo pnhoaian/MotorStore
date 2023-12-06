@@ -595,7 +595,7 @@ ul.sub-menu {
 }
 
 .item {
-  padding-left: 100px;
+  
 }
 
 
@@ -845,6 +845,8 @@ h2.title:before{
 
 .features_items{
 	overflow:hidden;
+  padding-left: 80px;
+    padding-right: 80px;
 }
 
 
@@ -876,7 +878,7 @@ h2.title {
 }
 
 .productinfo h2{
-	color: #EE3E38;
+	color: #002795;
 	font-family: 'Roboto', sans-serif;
 	font-size: 16px;
 	font-weight: 700;
@@ -893,7 +895,7 @@ h2.title {
   font-family:sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: #696763;
+  color: #EE3E38;
   font-weight: bold;
 }
 
@@ -1190,6 +1192,7 @@ h2.title {
 
 .view-product {
   position: relative;
+  text-align: right;
 }
 
 .view-product img {
@@ -1251,7 +1254,7 @@ h2.title {
 }
 
 .product-information h2 {
-  color: #EE3E38;
+  color: #002795;
   font-family: 'Roboto', sans-serif;
   font-size: 32px;
   margin-top: 0;
@@ -1272,7 +1275,7 @@ h2.title {
 }
 
 .product-information span span {
-  color: #696763;
+  color: #EE3E38;
   float: left;
   font-family: 'Roboto', sans-serif;
   font-size: 23px;
@@ -2556,7 +2559,8 @@ h2.title {
 
 a.list-brand__item {
   align-items: center;
-  border: 1px solid rgb(0 0 0 / 100%);
+  border-radius: 15px;
+  border: 1px solid rgb(0 0 0 / 20%);
   display: flex;
   height: 35px;
   justify-content: center;

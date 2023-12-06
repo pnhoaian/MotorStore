@@ -33,6 +33,7 @@ class SliderController extends Controller
     public function insert_slider(Request $request){
         $this->AuthLogin();
         $data = $request->all();
+        $all_slide = Slider::orderby('slider_id','desc')->get();
         $get_image = $request->file('slider_image');
         
         if($get_image){
@@ -47,6 +48,7 @@ class SliderController extends Controller
             $slider -> slider_image = $new_image;
             $slider -> slider_desc = $data['slider_desc'];
             $slider -> slider_status = $data['slider_status'];
+            $slider -> slider_type = $data['slider_type'];
             $slider->save();
             $request->session()->put('message', 'Thêm Slide - Banner thành công!');
             return view('admin.slider.list_slider')->with(compact('all_slide'));

@@ -80,17 +80,30 @@ class CategoryPost extends Controller
         return Redirect::to('/all-category-post');
     }
 
-    public function update_category_post(Request $request, $category_post_id){
+    public function update_category_post(Request $request, $cate_id){
+        // $this->AuthLogin();
+        // $data = $request->all();
+        // $category_post = CatePost::find($cate_id);
+        // $category_post ->category_post_name = $data['cate_post_name'];
+        // $category_post ->category_post_desc = $data['cate_post_desc'];
+        // $category_post ->category_post_slug = $data['cate_post_slug'];
+        // $category_post ->category_post_status = $data['cate_post_status'];
+        // $category_post ->save();
+        // Session::put('message','Đã cập nhật danh mục bài viết');
+        // return Redirect::to('/all-category-post');
+
         $this->AuthLogin();
         $data = $request->all();
-        $category_post = CatePost::find($cate_post_id);
-        $category_post ->category_post_name = $data['category_name'];
-        $category_post ->category_post_desc = $data['category_desc'];
-        $category_post ->category_post_slug = $data['category_slug'];
-        $category_post ->category_post_status = $data['category_post_status'];
-        $category_post ->save();
-        Session::put('message','Đã cập nhật danh mục bài viết');
-        return Redirect::to('/all-category-post');
+        $cate_post = CatePost::find($cate_id);
+        $cate_post ->cate_post_name = $data['cate_post_name'];
+        $cate_post ->cate_post_desc = $data['cate_post_desc'];
+        $cate_post ->cate_post_slug = $data['cate_post_slug'];
+        $cate_post ->cate_post_status = $data['cate_post_status'];
+        $cate_post->save();
+        //insert du lieu va tbl-category-post
+        // DB::table('tbl_category_post')->insert($data);
+        Session::put('message', 'Cập nhật danh mục bài viết thành công!');
+        return Redirect::to('all-category-post');
     }
         //End Function Admin
 

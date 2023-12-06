@@ -14,6 +14,6 @@ class CatePost extends Model
     protected $table = 'tbl_category_post';
 
     public function post(){
-        $this->hasMany('App\Models\Post');
+       $this->hasMany('App\Models\Post');
     }
 }
