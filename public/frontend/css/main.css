@@ -14,6 +14,7 @@ body {
   font-weight:400px;
 }
 
+
 ul li {
   list-style: none;
 }
@@ -367,7 +368,7 @@ ul.sub-menu {
 }
 
 .companyinfo {
-  margin-top: 57px;
+  margin-top: 20px;
 }
 
 .companyinfo h2 {
@@ -384,10 +385,10 @@ ul.sub-menu {
 }
 
 .companyinfo p {
-  color: #B3B3AD;
-  font-family: 'Roboto', sans-serif;
-  font-size: 12px;
-  font-weight: 300;
+  color: #333333;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+  font-size: 13px;
+  font-weight: 400;
 }
 
 .footer-top .col-sm-3{
@@ -488,24 +489,26 @@ ul.sub-menu {
 }
 
 .single-widget h2 {
-  color: #666663;
-  font-family: 'Roboto', sans-serif;
-  font-size: 16px;
+  color: #333333;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+  font-size: 15px;
   font-weight: 500;
-  margin-bottom: 22px;
+  margin-bottom: 10px;
   text-transform: uppercase;
 }
 
 .single-widget h2 i{
 	margin-right:15px;
 }
-
+li.ftsanpham{
+  list-style-type: none;
+}
 .single-widget ul li a{
-	color: #8C8C88;
-	font-family: 'Roboto', sans-serif;
-	font-size: 14px;
-	font-weight: 300;
-	padding: 5px 0;
+	color: #333333;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+	font-size: 13px;
+	font-weight: 400;
+	padding: 5px 10px;
 }
 
 .single-widget ul li a i {
@@ -558,14 +561,14 @@ ul.sub-menu {
 }
 
 .footer-bottom {
-  background: #D6D6D0;
+  background: #002795;
   padding-top: 10px;
 }
 
 .footer-bottom p {
-  color: #363432;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  color: #FFF;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+  font-weight: 500;
   text-align:center;
 }
 
@@ -845,15 +848,13 @@ h2.title:before{
 
 .features_items{
 	overflow:hidden;
-  padding-left: 80px;
-    padding-right: 80px;
 }
 
 
 h2.title {
   color: #EE3E38;
-  font-family: 'Roboto', sans-serif;
-  font-size: 19px;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont;
+  font-size: 21px;
   font-weight: 700;
   margin: 0 15px;
   text-transform: uppercase;
@@ -862,7 +863,8 @@ h2.title {
 }
 
 .product-image-wrapper{
-	border:1px solid #000;
+  border-top-right-radius: 20px;
+	border:2px solid #000;
 	overflow: hidden;
 	margin-bottom:30px;
 }
@@ -878,10 +880,16 @@ h2.title {
 }
 
 .productinfo h2{
-	color: #002795;
-	font-family: 'Roboto', sans-serif;
-	font-size: 16px;
-	font-weight: 700;
+	text-align: left;
+    padding-left: 10px;
+    width: 240px;
+    color: #002795;
+    font-size: 16px;
+    font-weight: 700;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont;
 }
 .product-overlay h2{
 	color: #fff;
@@ -900,7 +908,6 @@ h2.title {
 }
 
 .productinfo img{
-  margin-top: 10px;
    width: 220px;
   min-width: 220px;
   max-width: 220px;
@@ -2558,9 +2565,11 @@ h2.title {
 }
 
 a.list-brand__item {
+  width: 130px;
+  min-width: 130px;
+  max-width: 130px;
   align-items: center;
-  border-radius: 15px;
-  border: 1px solid rgb(0 0 0 / 20%);
+  border: 2px solid #000;
   display: flex;
   height: 35px;
   justify-content: center;
@@ -2573,3 +2582,51 @@ img.filter-brand__img {
   max-width: none;
 }
 
+p.giamgia {
+  border-bottom-right-radius: 20px;
+  border-top-right-radius: 15px;
+  background: rgb(215 0 24 / 80%) !important;
+  font-size: 12px !important;
+  text-align: center !important;
+  left: 135px !important;
+  top: -175px !important;
+  width: 90px !important;
+  min-height: 0px !important;
+  height: 23px !important;
+  color: #fff !important;
+  line-height: 21px;
+  margin-bottom: 0;
+}
+p.khonggiamgia {
+
+  left: 135px !important;
+  top: -175px !important;
+  width: 90px !important;
+  min-height: 0px !important;
+  height: 23px !important;
+  line-height: 21px;
+  margin-bottom: 0;
+}
+div.filter-sort__title{
+font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    margin-left: 200px;
+}
+div.filter-wrapper{
+  margin-left: 200px;
+}
+button.btn-filter.button__filter-parent {
+  align-items: center;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  color: #444;
+  cursor: pointer;
+  display: flex;
+  font-size: 12px;
+  height: 34px;
+  margin: 0 10px 10px 0;
+  padding: 5px 10px;
+  white-space: nowrap;
+}

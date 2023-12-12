@@ -53,15 +53,20 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="exampleInputEmail1">Giá Sản phẩm</label>
+                            <label for="exampleInputEmail1">Giá Gốc</label>
                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Sản phẩm">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Giá Khuyến Mãi</label>
+                            <input type="text" name="product_price_sale" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hiện thị</label>
                             <select name="product_status" class="form-control m-bot15">
                                 <option value="0">Ẩn Sản phẩm</option>
-                                <option value="1">Hiện thị Sản phẩm</option>
+                                <option selected value="1">Hiện thị Sản phẩm</option>
                             </select>
                         </div>
 

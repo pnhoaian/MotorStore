@@ -38,13 +38,9 @@
         <table class="table table-striped b-t b-light">
           <thead>
             <tr>
-              <th style="width:20px;">
-                <label class="i-checks m-b-none">
-                  <input type="checkbox"><i></i>
-                </label>
-              </th>
               <th>Tên Sản phẩm</th>
-              <th>Giá</th>
+              <th>Giá gốc</th>
+              <th>Giá khuyến mãi</th>
               <th>Hình ảnh</th>
               <th>Danh Mục</th>
               <th>Thương Hiệu</th>
@@ -57,9 +53,22 @@
             @foreach ($all_product as $key => $pro)
               
             <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td>{{ $pro->product_name }}</td>
               <td>{{ $pro->product_price }}</td>
+              <td> <?php
+                if($pro->product_price_sale == 0){
+                ?>
+                   <span >không có</span>
+                   {{-- echo'Ẩn'; --}}
+                <?php
+                }else{
+            ?>
+                  <span>{{ $pro->product_price_sale}}</span>
+                  {{--  echo'Hiện Thị'; --}}
+                <?php 
+                }
+                ?>
+              </span></td>
               <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
               <td>{{ $pro->category_name }}</td>
               <td>{{ $pro->brand_name }}</td>

@@ -37,7 +37,7 @@
                             <label for="exampleInputEmail1">Hiện thị</label>
                             <select name="brand_product_status" class="form-control input-sm m-bot15">
                                 <option value="0">Ẩn Hãng - Thương hiệu</option>
-                                <option value="1">Hiện thị Hãng - Thương hiệu</option>
+                                <option selected value="1">Hiện thị Hãng - Thương hiệu</option>
                             </select>
                         </div>
 

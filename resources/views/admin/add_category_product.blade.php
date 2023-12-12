@@ -32,7 +32,7 @@
                             <label for="exampleInputEmail1">Hiện thị</label>
                             <select name="category_product_status" class="form-control input-sm m-bot15">
                                 <option value="0">Ẩn Danh Mục</option>
-                                <option value="1">Hiện thị Danh Mục</option>
+                                <option selected value="1">Hiện thị Danh Mục</option>
                             </select>
                         </div>
 

@@ -48,6 +48,7 @@ class ProductController extends Controller
         $data['product_desc']= $request ->product_desc;
         $data['product_image']= $request ->product_image;
         $data['product_price']= $request ->product_price;
+        $data['product_price_sale']= $request ->product_price_sale;
         $data['product_status']= $request ->product_status;
         $get_image = $request->file('product_image');
         
@@ -110,6 +111,7 @@ class ProductController extends Controller
         $data['product_desc']= $request ->product_desc;
         // $data['product_image']= $request ->product_image;
         $data['product_price']= $request ->product_price;
+        $data['product_price_sale']= $request ->product_price_sale;
         $data['product_status']= $request ->product_status;
         
         $get_image = $request->file('product_image');

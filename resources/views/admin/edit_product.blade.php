@@ -67,6 +67,11 @@
                                             <label for="exampleInputEmail1">Giá Sản phẩm</label>
                                             <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" value="{{ $pro->product_price}}">
                                         </div>
+
+                                        <div class="form-group">
+                                            <label for="exampleInputEmail1">Giá Khuyến Mãi</label>
+                                            <input type="text" name="product_price_sale" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
+                                        </div>
                 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Hiện thị</label>

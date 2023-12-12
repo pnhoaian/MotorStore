@@ -61,7 +61,7 @@
 						<div class="logo pull-left">
 							<a href="{{URL::to('trang-chu')}}"><img src="{{asset('public/frontend/images/logo-no-background.png')}}" alt="" 
 							style="margin-top: 0px;
-							margin-left: -110px;
+							margin-left: -60px;
 							width: 70%;
 							height: 85%;"/></a>
 						</div>
@@ -122,9 +122,9 @@
 
 
 
-					<div class="col-sm-4" style="
+					<div class="col-sm-4" style="margin-right: 15px;
 					margin-top: -6px;
-					width: 25%;
+					width: 22%;
 				">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
@@ -140,7 +140,7 @@
 		<div class="header-bottom"><!--header-bottom-->
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-8">
+					<div class="col-sm-7">
 						<div class="navbar-header">
 							{{-- <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
 								<span class="sr-only">Toggle navigation</span>
@@ -204,7 +204,7 @@
 	
 						<div >
 							<div >
-								<img style="height: 100px;margin-bottom: 10px;;width:345px;min-width:345px;max-width:345px"  alt="{{ $slidemini->slider_desc }}" src="{{ asset('public/upload/slider/' . $slidemini->slider_image) }}" class="img img-responsive">
+								<img style="height: 100px;margin-bottom: 10px;;width:410px;min-width:410px;max-width:410px"  alt="{{ $slidemini->slider_desc }}" src="{{ asset('public/upload/slider/' . $slidemini->slider_image) }}" class="img img-responsive">
 								{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
 							</div>
 						</div>
@@ -230,7 +230,8 @@
 			<div class="container">
 				<div class="row">
 					<div class="brands__content">
-						<div class="list-brand">
+						<div class="list-brand" style="margin-bottom: 20px;     padding-left: 30px;
+						">
 	
 							@foreach ($brand as $key => $brand1)
 								@if ($brand1->brand_image != '')
@@ -250,10 +251,18 @@
 		</div>
 	</section>
 													<!--Thuong Hieu San Pham-->
-
+													{{-- <!--Lọc sản phẩm -->
+		<div class="filter-sort__title" >Chọn theo danh mục</div>
+		<div class="filter-wrapper" style="display:flex;">
+			@foreach ($category as $key =>$cate )
+			<button class="btn-filter button__filter-parent">
+				{{ $cate->category_name }}
+			@endforeach
+			</button>
+		</div> --}}
 	
 	<section>
-		<div class="container"></div>
+		<div class="container"> 
 			<div class="row">
 				{{--  <div class="col-sm-3">
 					 <div class="left-sidebar">
@@ -297,12 +306,12 @@
 					</div> --}}
 				</div>
 				
-				<div class="col-sm-12 " style="padding-left:0">
+				<div class="col-sm-12 " style="padding-left:0; margin-bottom: 20px;">
                     @yield('content')
 				</div>
 
-				<div class="section-content relative">
-					<div class="row row-large" id="row-1482279903">
+				<div class="section-content relative" >
+					<div class="row row-large" id="row-1482279903" >
 						<div id="col-319689862" class="col-md-4">
 							<div class="col-inner">
 								<div class="icon-box featured-box icon-box-center text-center">
@@ -494,9 +503,9 @@
 						<div class="single-widget">
 							<h2>Sản Phẩm & Dịch Vụ</h2>
 							<ul class="nav nav-pills nav-stacked"></ul>
-								<li><a href="#">Apple</a></li>
-								<li><a href="#">Samsung</a></li>
-								<li><a href="#">Baseus</a></li>
+								<li class="ftsanpham"><a href="#">Apple</a></li>
+								<li class="ftsanpham"><a href="#">Samsung</a></li>
+								<li class="ftsanpham"><a href="#">Baseus</a></li>
 
 							</ul>
 						</div>
@@ -542,8 +551,7 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull">Copyright © 2023 Hoai An Store. All rights reserved.</p>
-					<p class="pull">Designed by <a href="#">An Hoài</a></p>
+					<p class="pull">Copyright © 2023 - Hoai An Store</p>
 				</div>
 			</div>
 		</div>

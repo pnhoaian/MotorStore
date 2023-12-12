@@ -221,15 +221,80 @@
             <div class="item active">
                 @foreach ( $related_pro as $key => $SPLQ)
                     
-                <div class="col-sm-4">
+                <div class="col-sm-3" >
                     <div class="product-image-wrapper">
                         <div class="single-products">
-                            <div class="productinfo text-center">
-                                <img src="{{URL::to('/public/upload/product/'.$SPLQ->product_image)}}" alt="" />
-                                <h2>{{number_format( $SPLQ->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
-                                <p>{{ $SPLQ->product_name }}</p>
-                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart" name="add-to-cart"></i>Thêm vào giỏ hàng</button>
-                            </div>
+                                <div class="productinfo text-center">
+                                    <form style="height: 370px;">
+                                        @csrf
+                                        <input type="hidden" value="{{$SPLQ->product_id}}" class="cart_product_id_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="{{$SPLQ->product_name}}" class="cart_product_name_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="{{$SPLQ->product_image}}" class="cart_product_image_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="{{$SPLQ->product_price}}" class="cart_product_price_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="1" class="cart_product_qty_{{$SPLQ->product_id}}">
+
+                                        <a href="{{URL::to('/chi-tiet-san-pham/'.$SPLQ->product_id)}}">
+                                            @if ($SPLQ->product_price_sale != '0')
+                            <p class="giamgia" style="font-size: 15px">
+                                Giảm&nbsp;
+                                {{ number_format(100 - ($SPLQ->product_price_sale * 100) / $SPLQ->product_price, 0, ',', '.') . ' ' . '%' }}
+
+                            </p>
+                        @else
+                        <p class="khonggiamgia" ></p>
+                        @endif
+                                        <img src="{{URL::to('/public/upload/product/'.$SPLQ->product_image)}}" alt="" />
+                                        {{-- <h2>{{ number_format($product->product_price).' '.'VNĐ'}}</h2> --}}
+                                        <h2>{{ $SPLQ->product_name }}</h2>
+
+
+                                        <div class="price_sale" style="    align-items: flex-end;
+                                        color: #444;
+                                        font-family: sans-serif;
+                                        font-weight: 700;
+                                        line-height: 1.4;
+                                        display: flex;">
+
+                                            
+                                        
+                                            @if ($SPLQ->product_price_sale != 0)
+                                            <p style="color: #d70018;
+                                            display: inline-block;
+                                            font-size: 18px;
+                                            font-weight: 700;
+                                            line-height: 1.1;" >{{ number_format($SPLQ->product_price_sale, 0, ',', '.') . ' ' . '₫' }}</p>
+                                            <p style="color: #707070;
+                                            display: inline-block;
+                                            font-size: 14px;
+                                            font-weight: 600;
+                                            position: relative;
+                                            -webkit-text-decoration: line-through;
+                                            text-decoration: line-through;
+                                            top: 2px;">{{ number_format($SPLQ->product_price, 0, ',', '.') . ' ' . '₫' }}</p>
+                                   
+                                </p>
+                                
+                            @else
+                            <p style="color: #d70018;
+                            display: inline-block;
+                            font-size: 18px;
+                            font-weight: 700;
+                            text-align: center;
+                            line-height: 1.1;" >{{ number_format($SPLQ->product_price, 0, ',', '.') . ' ' . '₫' }}</p>
+                            @endif</div>
+                                        
+                                        </a>
+                                        
+                                        <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$SPLQ->product_id}}" name="add-to-cart" >
+                                            Thêm vào giỏ hàng</button>
+                                    </form>
+                                </div>
+                        </div>
+                        <div class="choose">
+                            <ul class="nav nav-pills nav-justified">
+                                <li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
+                                <li><a href="#"><i class="fa fa-plus-square"></i>So Sánh Sản Phẩm</a></li>
+                            </ul>
                         </div>
                     </div>
                 </div>

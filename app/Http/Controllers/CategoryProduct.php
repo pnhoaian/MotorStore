@@ -88,7 +88,7 @@ class CategoryProduct extends Controller
 
     public function show_category_home(Request $request,$category_id){
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
-
+        $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
         
@@ -106,7 +106,8 @@ class CategoryProduct extends Controller
         ->with('category_by_id',$category_by_id)
         ->with('category_name',$category_name)
         ->with('category_post',$category_post)
-        ->with('slider',$slider);
+        ->with('slider',$slider)
+        ->with('slidermini',$slidermini);
     
     }
 
