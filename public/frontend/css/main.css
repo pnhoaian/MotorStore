@@ -863,9 +863,10 @@ h2.title {
 }
 
 .product-image-wrapper{
-  border-top-right-radius: 20px;
+  border-radius: 15px;
 	border:2px solid #000;
 	overflow: hidden;
+  margin-top:30px;
 	margin-bottom:30px;
 }
 

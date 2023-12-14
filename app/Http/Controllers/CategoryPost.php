@@ -7,6 +7,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\CatePost;
+use Toastr;
 session_start();
 
 class CategoryPost extends Controller
@@ -40,27 +41,26 @@ class CategoryPost extends Controller
         $cate_post = new CatePost();
         $cate_post ->cate_post_name = $data['cate_post_name'];
         $cate_post ->cate_post_desc = $data['cate_post_desc'];
-        $cate_post ->cate_post_slug = $data['cate_post_slug'];
         $cate_post ->cate_post_status = $data['cate_post_status'];
         $cate_post->save();
         //insert du lieu va tbl-category-post
         // DB::table('tbl_category_post')->insert($data);
-        Session::put('message', 'Thêm danh mục bài viết thành công!');
+        Toastr::success('Thêm danh mục bài viết thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-post');
         //return view('admin.save_category_post');
     }
 
-    public function active_category_post($cate_post_id ){
+    public function active_cate_post($cate_post_id ){
         $this->AuthLogin();
-        DB::table('tbl_category_post')->where('category_id',$category_post_id)->update(['category_status' =>1]);
-        Session::put('message','Đã hiện thị danh mục bài viết');
+        DB::table('tbl_category_post')->where('cate_post_id',$cate_post_id)->update(['cate_post_status' =>1]);
+        Toastr::success('Đã hiện thị danh mục bài viết!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-post');
     }
 
-    public function inactive_category_post($cate_post_id ){
+    public function inactive_cate_post($cate_post_id ){
         $this->AuthLogin();
-        DB::table('tbl_category_post')->where('category_id',$category_post_id)->update(['category_status' =>0]);
-        Session::put('message','Đã ẩn danh mục bài viết');
+        DB::table('tbl_category_post')->where('cate_post_id',$cate_post_id)->update(['cate_post_status' =>0]);
+        Toastr::success('Đã ẩn danh mục bài viết!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-post');
     }
 
@@ -76,7 +76,7 @@ class CategoryPost extends Controller
         $this->AuthLogin();
         $category_post = CatePost::find($cate_id);
         $category_post->delete();
-        Session::put('message','Xóa danh mục thành công');
+        Toastr::warning('Xóa danh mục bài viết thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('/all-category-post');
     }
 
@@ -97,12 +97,11 @@ class CategoryPost extends Controller
         $cate_post = CatePost::find($cate_id);
         $cate_post ->cate_post_name = $data['cate_post_name'];
         $cate_post ->cate_post_desc = $data['cate_post_desc'];
-        $cate_post ->cate_post_slug = $data['cate_post_slug'];
         $cate_post ->cate_post_status = $data['cate_post_status'];
         $cate_post->save();
         //insert du lieu va tbl-category-post
         // DB::table('tbl_category_post')->insert($data);
-        Session::put('message', 'Cập nhật danh mục bài viết thành công!');
+        Toastr::success('Đã cập nhật danh mục bài viết!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-post');
     }
         //End Function Admin

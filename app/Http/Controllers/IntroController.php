@@ -11,6 +11,7 @@ use App\Models\Intro;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
+use Toastr;
 session_start();
 
 class introController extends Controller

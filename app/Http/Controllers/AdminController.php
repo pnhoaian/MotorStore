@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use Toastr;
 session_start();
 
 class AdminController extends Controller

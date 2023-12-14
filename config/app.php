@@ -155,6 +155,8 @@ return [
     |
     */
 
+    
+
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
@@ -164,6 +166,7 @@ return [
          * Application Service Providers...
          */
         App\Providers\AppServiceProvider::class,
+        Brian2694\Toastr\ToastrServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
@@ -183,6 +186,7 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'Example' => App\Facades\Example::class,
+        'Toastr'  => Brian2694\Toastr\Facades\Toastr::class,
     ])->toArray(),
 
 ];

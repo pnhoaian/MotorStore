@@ -10,6 +10,7 @@ use Carbon\Carbon;
 use App\Models\CategoryPostModel;
 use Session;
 use Illuminate\Support\Facades\Redirect;
+use Toastr;
 session_start();
 
 class SliderController extends Controller
@@ -50,10 +51,10 @@ class SliderController extends Controller
             $slider -> slider_status = $data['slider_status'];
             $slider -> slider_type = $data['slider_type'];
             $slider->save();
-            $request->session()->put('message', 'Thêm Slide - Banner thành công!');
+            Toastr::success('Thêm Banner thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return view('admin.slider.list_slider')->with(compact('all_slide'));
         }else{
-            $request->session()->put('error', 'Chưa thêm hình ảnh Slide - Banner');
+            Toastr::error('Chưa thêm hình ảnh Banner','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return view('admin.slider.add_slider');
         }
         //insert du lieu va tbl-slider
@@ -69,14 +70,14 @@ class SliderController extends Controller
     public function active_slider($slider_id){
         $this->AuthLogin();
         DB::table('tbl_slider')->where('slider_id',$slider_id)->update(['slider_status' =>1]);
-        Session::put('message','Đã hiện thị Slide - Banner');
+        Toastr::success('Đã hiện thị Banner!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-banner');
     }
 
     public function inactive_slider($slider_id){
         $this->AuthLogin();
         DB::table('tbl_slider')->where('slider_id',$slider_id)->update(['slider_status' =>0]);
-        Session::put('message','Đã ẩn Slide - Banner');
+        Toastr::success('Đã ẩn Banner!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-banner');
     }
 
@@ -86,13 +87,14 @@ class SliderController extends Controller
         $brand_slider = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
         
         $edit_slider = DB::table('tbl_slider')->where('slider_id',$slider_id)->get();
+        Toastr::success('Đã cập nhật Banner!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return view('admin.slider.edit_slider')->with('edit_slider', $edit_slider)->with('cate_slider', $cate_slider)->with('brand_slider', $brand_slider);
     }
 
     public function delete_slider($slider_id){
         $this->AuthLogin();
         DB::table('tbl_slider')->where('slider_id',$slider_id)->delete();
-        Session::put('message','Xóa Slide - Banner thành công');
+        Toastr::warning('Xóa Banner thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-banner');
     }
 

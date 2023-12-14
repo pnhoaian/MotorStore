@@ -7,6 +7,8 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
+use Toastr;
+
 use App\Models\CatePost;
 session_start();
 
@@ -42,22 +44,22 @@ class CategoryProduct extends Controller
 
         //insert du lieu va tbl-category-product
         DB::table('tbl_category_product')->insert($data);
-        $request->session()->put('message', 'Thêm danh mục thành công!');
-        return Redirect::to('add-category-product');
+        Toastr::success('Thêm danh mục sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('all-category-product');
         //return view('admin.save_category_product');
     }
 
     public function active_category_product($category_product_id){
         $this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->update(['category_status' =>1]);
-        Session::put('message','Đã hiện thị danh mục sản phẩm');
+        Toastr::success('Đã hiện thị danh mục sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-product');
     }
 
     public function inactive_category_product($category_product_id){
         $this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->update(['category_status' =>0]);
-        Session::put('message','Đã ẩn danh mục sản phẩm');
+        Toastr::success('Đã ẩn danh mục sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-product');
     }
 
@@ -71,7 +73,7 @@ class CategoryProduct extends Controller
     public function delete_category_product($category_product_id){
         $this->AuthLogin();
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->delete();
-        Session::put('message','Xóa danh mục thành công');
+        Toastr::warning('Xóa danh mục sản phẩm thành công','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-product');
     }
 
@@ -81,7 +83,7 @@ class CategoryProduct extends Controller
         $data['category_name'] = $request ->category_product_name;
         $data['category_desc']= $request ->category_product_desc;
         DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
-        Session::put('message','Đã cập nhật danh mục sản phẩm');
+        Toastr::success('Đã cập nhật danh mục sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-product');
     }
         //End Function Admin

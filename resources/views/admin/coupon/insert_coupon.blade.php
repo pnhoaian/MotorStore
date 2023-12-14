@@ -1,6 +1,13 @@
 @extends('admin_layout')
 @section('admin_content')
 
+<td>
+    <a href="{{ URL::to('/list-coupon') }}">
+        <button class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
+                style="padding-right: 5px;font-size:15px"></i>Danh sách mã khuyến mãi</button>
+    </a>
+  </td>
+
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">
@@ -8,13 +15,7 @@
                     Thêm Coupon mới
                 </header>
                 <div class="panel-body">
-                    <?php 
-                    $message = Session::get('message');
-                    if($message){
-                        echo '<span class="text-alert">'.$message.'</span>';
-                        Session::put('message', null);
-                    }
-                    ?>
+                    
                     <div class="position-center">
                         <form role="form" action="{{URL::to('/insert-coupon-code')}}" method="POST">
                             {{ csrf_field() }}

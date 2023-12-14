@@ -10,6 +10,7 @@ use Session;
 use App\Models\Contact;
 use App\Models\Slider;
 use App\Models\CatePost;
+use Toastr;
 use Illuminate\Support\Facades\Redirect;
 session_start();
 

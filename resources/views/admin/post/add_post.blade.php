@@ -1,6 +1,13 @@
 @extends('admin_layout')
 @section('admin_content')
 
+<td>
+    <a href="{{ URL::to('/all-post') }}">
+        <button class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
+                style="padding-right: 5px;font-size:15px"></i>Quản lý bài viết</button>
+    </a>
+</td>
+
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">
@@ -8,24 +15,13 @@
                     Thêm bài viết
                 </header>
                 <div class="panel-body">
-                    <?php 
-                    $message = Session::get('message');
-                    if($message){
-                        echo '<span class="text-alert">'.$message.'</span>';
-                        Session::put('message', null);
-                    }
-                    ?>
+
                     <div class="position-center">
                         <form role="form" action="{{URL::to('/save-post')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên bài viết</label>
                             <input type="text" rows="3" name="post_title" class="form-control" onkeyup="ChangeToSlug();" id="slug" placeholder="Nhập tiêu đề bài viết">
-                        </div>
-
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Slug</label>
-                            <textarea style="resize:none" rows="5" name="post_slug" class="form-control" placeholder="Thêm mô tả"></textarea>
                         </div>
 
                         <div class="form-group"></div>

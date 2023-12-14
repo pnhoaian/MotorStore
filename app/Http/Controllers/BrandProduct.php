@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\CatePost;
-
+use Toastr;
 session_start();
 
 class BrandProduct extends Controller
@@ -97,30 +97,23 @@ class BrandProduct extends Controller
             }
         }
 
-
-
-
-
-
-
-
-
-        $request->session()->put('message', 'Thêm Hãng - Thương hiệu thành công!');
-        return Redirect::to('add-brand-product');
+        
+        Toastr::success('Thêm thương hiệu sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('all-brand-product');
 
     }
 
     public function active_brand_product($brand_product_id){
         $this->AuthLogin();
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update(['brand_status' =>1]);
-        Session::put('message','Đã hiện thị Hãng - Thương hiệu sản phẩm');
+        Toastr::success('Đã hiện thị thương hiệu','Thông báo !');
         return Redirect::to('all-brand-product');
     }
 
     public function inactive_brand_product($brand_product_id){
         $this->AuthLogin();
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update(['brand_status' =>0]);
-        Session::put('message','Đã ẩn Hãng - Thương hiệu sản phẩm');
+        Toastr::success('Đã ẩn Hãng - Thương hiệu sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
     }
 
@@ -140,7 +133,7 @@ class BrandProduct extends Controller
     public function delete_brand_product($brand_product_id){
         $this->AuthLogin();
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->delete();
-        Session::put('message','Xóa Hãng - Thương hiệu thành công');
+        Toastr::warning('Xóa thương hiệu sản phẩm thành công','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
     }
 
@@ -192,7 +185,7 @@ class BrandProduct extends Controller
 
 
         $brand->save();
-        Session::put('message','Cập nhật Hãng - Thương hiệu thành công');
+        Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
 
 
@@ -213,7 +206,7 @@ class BrandProduct extends Controller
             
         }
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
-            $request->session()->put('message', 'Cập nhật Hãng - Thương hiệu thành công!');
+            $request->session()->put('message', 'Cập nhật Hãng - Thương hiệu thành công!', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-brand-product');
         //$brand->brand_status = $data['brand_product_status'];
         $brand->save();
@@ -221,7 +214,7 @@ class BrandProduct extends Controller
         // $data['brand_name'] = $request ->brand_product_name;
         // $data['brand_desc']= $request ->brand_product_desc;
         //DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
-        Session::put('message','Đã cập nhật Hãng - Thương hiệu sản phẩm');
+        Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !');
         return Redirect::to('all-brand-product');
     }
     // End Function Admin Page

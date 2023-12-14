@@ -67,6 +67,10 @@ Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
+//// *** Bài viết
+Route::get('/danh-muc-bai-viet/{post_slug}', [PostController::class, 'danh_muc_bai_viet']);
+Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
+
 
 //************* Category Product *************
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
@@ -105,6 +109,10 @@ Route::get('/edit-category-post/{category_post_id}', [CategoryPost::class, 'edit
 Route::post('/update-category-post/{cate_id}', [CategoryPost::class, 'update_category_post']);
 Route::get('/delete-category-post/{cate_id}', [CategoryPost::class, 'delete_category_post']);
 Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_muc_bai_viet']);
+
+Route::get('/active-category-post/{cate_post_id}', [CategoryPost::class, 'active_cate_post']);
+Route::get('/inactive-category-post/{cate_post_id}', [CategoryPost::class, 'inactive_cate_post']);
+
 //-------------------------  Post ------------------------- 
 Route::get('/add-post', [PostController::class, 'add_post']);
 Route::get('/all-post', [PostController::class, 'all_post']);

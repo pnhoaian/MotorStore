@@ -7,13 +7,6 @@
                 <header class="panel-heading">
                     Cập Nhật Sản phẩm
                 </header>
-                <?php 
-                $message = Session::get('message');
-                if($message){
-                    echo '<span class="text-alert">'.$message.'</span>';
-                    Session::put('message', null);
-                }
-                ?>
                                     <div class="position-center">
                                         @foreach ($edit_product as $key => $pro)
                                         
@@ -70,7 +63,7 @@
 
                                         <div class="form-group">
                                             <label for="exampleInputEmail1">Giá Khuyến Mãi</label>
-                                            <input type="text" name="product_price_sale" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
+                                            <input type="text" name="product_price_sale" class="form-control" id="exampleInputEmail1" value="{{ $pro->product_price_sale}}">
                                         </div>
                 
                                         <div class="form-group">

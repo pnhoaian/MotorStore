@@ -1,6 +1,13 @@
 @extends('admin_layout')
 @section('admin_content')
 
+<td>
+    <a href="{{ URL::to('/all-category-post') }}">
+        <button class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
+                style="padding-right: 5px;font-size:15px"></i>Quản lý danh mục bài viết</button>
+    </a>
+</td>
+
 <div class="row">
     <div class="col-lg-12">
             <section class="panel">
@@ -8,13 +15,7 @@
                     Cập nhật danh mục bài viết
                 </header>
                 <div class="panel-body">
-                    <?php 
-                    $message = Session::get('message');
-                    if($message){
-                        echo '<span class="text-alert">'.$message.'</span>';
-                        Session::put('message', null);
-                    }
-                    ?>
+
                     <div class="position-center">
                         <form role="form" action="{{URL::to('/update-category-post/'.$category_post->cate_post_id)}}" method="POST">
                             {{ csrf_field() }}
@@ -28,10 +29,6 @@
                             <textarea style="resize:none" rows="6" name="cate_post_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả">{{$category_post->cate_post_desc}}</textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="exampleInputPassword1">Slug</label>
-                            <textarea style="resize:none" rows="6" name="cate_post_slug" class="form-control" id="convert_slug" placeholder="Thêm mô tả">{{$category_post->cate_post_slug}}</textarea>
-                        </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hiện thị</label>

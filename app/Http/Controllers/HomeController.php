@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\CatePost;
+use Toastr;
 session_start();
 
 class HomeController extends Controller

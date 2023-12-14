@@ -1,41 +1,33 @@
 @extends('admin_layout')
 @section('admin_content')
 
+
+<td>
+  <a href="{{ URL::to('/insert-coupon') }}">
+      <button style="width: fit-content;
+      padding: 0.5em 1em;text-align: center;float: inherit;
+      margin: 0em auto;
+      color: #ffffff;
+      background: #00000026;
+      border-radius:5px;
+      background: 	#CC0033 !important;
+      margin-bottom: 10px;
+      font-family: -apple-system, system-ui, BlinkMacSystemFont;
+      font-weight: 700;
+      " class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
+              style="padding-right: 5px;font-size:15px;
+              "></i>Thêm mã khuyến mãi</button>
+  </a>
+</td>
+
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
         Danh Sách Coupon - Mã giảm giá
       </div>
-      <div class="row w3-res-tb">
-        <div class="col-sm-5 m-b-xs">
-          <select class="input-sm form-control w-sm inline v-middle">
-            <option value="0">Hãng - Thương hiệu Đang Ẩn</option>
-            <option value="1">Hãng - Thương hiệu Đang Hiện Thị</option>
-          </select>
-          <button class="btn btn-sm btn-default">Áp dụng</button>                
-        </div>
-        <div class="col-sm-4">
-        </div>
-        <div class="col-sm-3">
-          <div class="input-group">
-            <input type="text" class="input-sm form-control" placeholder="Search">
-            <span class="input-group-btn">
-              <button class="btn btn-sm btn-default" type="button">Tìm Kiếm</button>
-            </span>
-          </div>
-        </div>
-      </div>
+
       <div class="table-responsive">
-
-        <?php 
-        $message = Session::get('message');
-        if($message){
-            echo '<span class="text-alert">'.$message.'</span>';
-            Session::put('message', null);
-        }
-        ?>
-
-        <table class="table table-striped b-t b-light">
+        <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
               <th>Tên chương trình</th>
@@ -43,6 +35,7 @@
               <th>Số lượng</th>
               <th>Loại khuyến mãi</th>
               <th>Giảm</th>
+              <th>Tác vụ</th>
             </tr>
           </thead>
           <tbody>
@@ -95,24 +88,6 @@
           </tbody>
         </table>
       </div>
-      <footer class="panel-footer">
-        <div class="row">
-          
-          <div class="col-sm-5 text-center">
-            <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
-          </div>
-          <div class="col-sm-7 text-right text-center-xs">                
-            <ul class="pagination pagination-sm m-t-none m-b-none">
-              <li><a href=""><i class="fa fa-chevron-left"></i></a></li>
-              <li><a href="">1</a></li>
-              <li><a href="">2</a></li>
-              <li><a href="">3</a></li>
-              <li><a href="">4</a></li>
-              <li><a href=""><i class="fa fa-chevron-right"></i></a></li>
-            </ul>
-          </div>
-        </div>
-      </footer>
     </div>
   </div>
 

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\CatePost;
+use Toastr;
 session_start();
 
 class ProductController extends Controller
@@ -60,13 +61,13 @@ class ProductController extends Controller
             $get_image->move('public/upload/product',$new_image);
             $data['product_image']=$new_image;
             DB::table('tbl_product')->insert($data);
-            $request->session()->put('message', 'Thêm Sản phẩm thành công!');
+            Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-product');
         }
         //insert du lieu va tbl-product
         $data['product_image']='';
         DB::table('tbl_product')->insert($data);
-        $request->session()->put('message', 'Thêm Sản phẩm thành công!');
+        Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
         //return view('admin.save_product');
     }
@@ -74,14 +75,14 @@ class ProductController extends Controller
     public function active_product($product_id){
         $this->AuthLogin();
         DB::table('tbl_product')->where('product_id',$product_id)->update(['product_status' =>1]);
-        Session::put('message','Đã hiện thị Sản phẩm sản phẩm');
+        Toastr::success('Đã hiện thị sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
     }
 
     public function inactive_product($product_id){
         $this->AuthLogin();
         DB::table('tbl_product')->where('product_id',$product_id)->update(['product_status' =>0]);
-        Session::put('message','Đã ẩn Sản phẩm sản phẩm');
+        Toastr::success('Đã ẩn sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
     }
 
@@ -98,7 +99,7 @@ class ProductController extends Controller
     public function delete_product($product_id){
         $this->AuthLogin();
         DB::table('tbl_product')->where('product_id',$product_id)->delete();
-        Session::put('message','Xóa Sản phẩm thành công');
+        Toastr::success('Đã xóa sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
     }
 
@@ -125,7 +126,7 @@ class ProductController extends Controller
             
         }
         DB::table('tbl_product')->where('product_id',$product_id)->update($data);
-            $request->session()->put('message', 'Cập nhật Sản phẩm thành công!');
+        Toastr::success('Đã cập nhật sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-product');
     }
     //End Admin Page

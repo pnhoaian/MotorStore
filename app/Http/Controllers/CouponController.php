@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\Coupon;
+use Toastr;
 use Session;
 session_start();
 
@@ -45,14 +46,14 @@ class CouponController extends Controller
         $coupon->coupon_condition = $data['coupon_condition'];
         $coupon->save();
 
-        Session::put('message','Thêm mã Coupon khuyến mãi thành công');
+        Toastr::success('Thêm mã khuyến mãi thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return redirect('/list-coupon');
     }
     public function delete_coupon($coupon_id){
         $this->AuthLogin();
         $coupon = Coupon::find($coupon_id);
         // $coupon->delete();
-        Session::put('message','Xóa Coupon thành công');
+        Toastr::warning('Đã xóa mã khuyến mãi!','Thông báo !');
         // return redirect('admin.coupon.list_coupon');
         return view('admin.coupon.list_coupon')->with(compact('coupon'));
     }
