@@ -26,7 +26,7 @@ class BrandProduct extends Controller
     
     public function add_brand_product(){
         $this->AuthLogin();
-        return view('admin.add_brand_product');
+        return view('admin.brand.add_brand_product');
     }
 
     public function all_brand_product(){
@@ -36,7 +36,7 @@ class BrandProduct extends Controller
 
         //model
         $all_brand_product = Brand::orderBy('brand_id','desc')->get();
-        return view('admin.all_brand_product')->with('all_brand_product', $all_brand_product);
+        return view('admin.brand.all_brand_product')->with('all_brand_product', $all_brand_product);
         //return view('admin.all_brand_product');
     }
 
@@ -106,7 +106,7 @@ class BrandProduct extends Controller
     public function active_brand_product($brand_product_id){
         $this->AuthLogin();
         DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update(['brand_status' =>1]);
-        Toastr::success('Đã hiện thị thương hiệu','Thông báo !');
+        Toastr::success('Đã hiện thị thương hiệu','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
     }
 
@@ -127,7 +127,7 @@ class BrandProduct extends Controller
 
         //C3: Model
         $edit_brand_product = Brand::find($brand_product_id);
-        return view('admin.edit_brand_product')->with('edit_brand_product', $edit_brand_product);
+        return view('admin.brand.edit_brand_product')->with('edit_brand_product', $edit_brand_product);
     }
 
     public function delete_brand_product($brand_product_id){
@@ -187,14 +187,6 @@ class BrandProduct extends Controller
         $brand->save();
         Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
-
-
-
-
-
-
-
-
         $get_image = $request->file('brand_image');
         if($get_image){
             //lấy tên file hình ảnh
@@ -214,7 +206,7 @@ class BrandProduct extends Controller
         // $data['brand_name'] = $request ->brand_product_name;
         // $data['brand_desc']= $request ->brand_product_desc;
         //DB::table('tbl_brand')->where('brand_id',$brand_product_id)->update($data);
-        Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !');
+        Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
     }
     // End Function Admin Page

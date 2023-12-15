@@ -3,7 +3,17 @@
 
 <td>
     <a href="{{ URL::to('/manage-banner') }}">
-        <button class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
+        <button style="width: fit-content;
+        padding: 0.5em 1em;text-align: center;float: inherit;
+        margin: 0em auto;
+        color: #ffffff;
+        background: #00000026;
+        border-radius:5px;
+        background: 	#CC0033 !important;
+        margin-bottom: 10px;
+        font-family: -apple-system, system-ui, BlinkMacSystemFont;
+        font-weight: 700;
+        " class="button-chuyen" role="button"><i class="fa fa-long-arrow-right"
                 style="padding-right: 5px;font-size:15px"></i>Quản lý Banner</button>
     </a>
 </td>

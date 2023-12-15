@@ -25,13 +25,13 @@ class CategoryProduct extends Controller
     }
     public function add_category_product(){
         $this->AuthLogin();
-        return view('admin.add_category_product');
+        return view('admin.categoryproduct.add_category_product');
     }
 
     public function all_category_product(){
         $this->AuthLogin();
         $all_category_product = DB::table('tbl_category_product')->get(); 
-        return view('admin.all_category_product')->with('all_category_product', $all_category_product);
+        return view('admin.categoryproduct.all_category_product')->with('all_category_product', $all_category_product);
         //return view('admin.all_category_product');
     }
 
@@ -66,7 +66,7 @@ class CategoryProduct extends Controller
     public function edit_category_product($category_product_id){
         $this->AuthLogin();
         $all_category_product = DB::table('tbl_category_product')->where('category_id',$category_product_id)->get();
-        return view('admin.edit_category_product')->with('edit_category_product', $all_category_product);
+        return view('admin.categoryproduct.edit_category_product')->with('edit_category_product', $all_category_product);
         //return view('admin.all_category_product');
     }
 
