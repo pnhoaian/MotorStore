@@ -135,7 +135,7 @@ class PostController extends Controller
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
         $catepost = CatePost::where('cate_post_id',$post_id)->take(1)->get();
         
@@ -164,7 +164,7 @@ class PostController extends Controller
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','0')->orderby('brand_id','desc')->get();
+        $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
         // $catepost = CatePost::where('cate_post_id',$post_id)->take(1)->get();
         $post = Post::with('cate_post')->where('post_status',1)->where('post_id',$post_id)->take(1)->get();

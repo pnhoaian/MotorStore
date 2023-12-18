@@ -24,14 +24,20 @@
                                     style="display:block;font-size:18px;font-weight:700;font-family: -apple-system, system-ui, BlinkMacSystemFont;color:#0213B0;line-height:28px;text-align:left;margin-bottom:10px;margin-top:10px;margin-left: 290px;max-height: 40px;
                                     min-height: 40px;
                                     height: 40px;">
-                                    {{ $p->post_title }}</h3>
-                                <a style="font-size: 13px;color:#555;text-align:left;margin-left:20px">
+                                    {{ $p->post_title }}
+                                </h3>
+
                                     <p style="margin-left: 290px; height: 50px;
                                     margin-left: 290px;
                                     min-height: 50px;
-                                    max-height: 50px;">{!! $p->post_desc !!}</p>
+                                    max-height: 50px;
+                                    font-size: 13px;color:#EE3E38;text-align:left;"
+                                    
+                                    
+                                    
+                                    >{!! $p->post_desc !!}</p>
                                 </a>
-
+                                
 
                         </div>
                         <div><a style="    border-radius: 10px;

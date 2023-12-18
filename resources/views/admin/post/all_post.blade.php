@@ -29,8 +29,8 @@
           <thead>
             <tr>
               <th></th>
-              <th>Tiêu đề Bài viết</th>
-              <th>Mô tả ngắn</th>
+              <th style="width: 200px;">Tiêu đề Bài viết</th>
+              <th style="width: 250px;">Mô tả ngắn</th>
               <th>Hình ảnh</th>
               <th>Danh mục</th>
               <th>Trạng thái</th>
@@ -87,7 +87,7 @@
                     background: 		#33CC33 !important;
                     margin-bottom: 10px;
                     font-family: -apple-system, system-ui, BlinkMacSystemFont;
-                    font-weight: 700;" class="button-chuyen" role="button">Hiện thị</button>
+                    font-weight: 700;" class="button-chuyen" role="button">Hiển thị</button>
 
                   </a>
                   {{--  echo'Hiện Thị'; --}}

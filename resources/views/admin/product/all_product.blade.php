@@ -102,7 +102,7 @@
                     background: 		#33CC33 !important;
                     margin-bottom: 10px;
                     font-family: -apple-system, system-ui, BlinkMacSystemFont;
-                    font-weight: 700;" class="button-chuyen" role="button">Hiện thị</button>
+                    font-weight: 700;" class="button-chuyen" role="button">Hiển thị</button>
 
                   </a>
                   {{--  echo'Hiện Thị'; --}}

@@ -268,7 +268,7 @@
 			</button>
 		</div> --}}
 	
-	<section style="overflow: hidden">
+	<section >
 		<div class="container"> 
 			<div class="row">
 				{{--  <div class="col-sm-3">
@@ -470,6 +470,7 @@
 		</div>
 	</section>
 
+	
 	<!--Footer-->
 	<footer id="footer" style="margin-top: 20px">
 		<div class="footer-top">
@@ -564,6 +565,7 @@
 			</div>
 		</div> --}}
 		
+		
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
@@ -573,7 +575,31 @@
 		</div>
 		
 	</footer><!--/Footer-->
+	<!-- Messenger Plugin chat Code -->
+    
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0"
+        nonce="ObII9EbG">
+	</script>
 	
+	<script>
+        window.fbAsyncInit = function() {
+            FB.init({
+                xfbml: true,
+                version: 'v17.0'
+            });
+        };
+
+        (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 
   
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
@@ -584,6 +610,11 @@
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
 	<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
 
+	
+
+    
+
+    
 	
 	<script type="text/javascript">
 		$(document).ready(function(){
