@@ -52,10 +52,10 @@ class SliderController extends Controller
             $slider -> slider_type = $data['slider_type'];
             $slider->save();
             Toastr::success('Thêm Banner thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-            return view('admin.slider.list_slider')->with(compact('all_slide'));
+            return Redirect::to('manage-banner');
         }else{
             Toastr::error('Chưa thêm hình ảnh Banner','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-            return view('admin.slider.add_slider');
+            return Redirect::to('manage-banner');
         }
         //insert du lieu va tbl-slider
         
@@ -64,6 +64,7 @@ class SliderController extends Controller
     public function manage_banner(){
         $this->AuthLogin();
         $all_slide = Slider::orderby('slider_id','desc')->get();
+
         return view('admin.slider.list_slider')->with(compact('all_slide'));
     }
 

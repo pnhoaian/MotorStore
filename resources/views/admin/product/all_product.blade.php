@@ -29,12 +29,13 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
+              <th></th>
               <th>Tên Sản phẩm</th>
               <th>Giá gốc</th>
-              <th>Giá khuyến mãi</th>
+              <th style="width: 115px;">Giá khuyến mãi</th>
               <th>Hình ảnh</th>
               <th>Danh Mục</th>
-              <th>Thương Hiệu</th>
+              <th style="width: 95px;">Thương Hiệu</th>
               <th>Trạng thái</th>
               {{-- <th>Ngày thêm</th> --}}
               <th style="width:30px;"></th>
@@ -44,6 +45,7 @@
             @foreach ($all_product as $key => $pro)
               
             <tr>
+              <td></td>
               <td>{{ $pro->product_name }}</td>
               <td>{{ $pro->product_price }}</td>
               <td> <?php
@@ -69,12 +71,40 @@
                 <?php
                 if($pro->product_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-product/'.$pro->product_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-product/'.$pro->product_id)}}">
+                    {{-- <span class="fa-thump-styling-down fa fa-thumbs-down"></span> --}}
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 	#CC0033 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Đang ẩn</button>
+
+                  </a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-product/'.$pro->product_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-product/'.$pro->product_id)}}">
+                    {{-- <span class="fa-thump-styling fa fa-thumbs-up"></span> --}}
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 		#33CC33 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Hiện thị</button>
+
+                  </a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }

@@ -52,10 +52,10 @@ class CouponController extends Controller
     public function delete_coupon($coupon_id){
         $this->AuthLogin();
         $coupon = Coupon::find($coupon_id);
-        // $coupon->delete();
+        $coupon->delete();
         Toastr::warning('Đã xóa mã khuyến mãi!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         // return redirect('admin.coupon.list_coupon');
-        return view('admin.coupon.list_coupon')->with(compact('coupon'));
+        return redirect('/list-coupon');
     }
 
 

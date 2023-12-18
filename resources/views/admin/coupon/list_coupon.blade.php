@@ -30,6 +30,7 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
+              <th></th>
               <th>Tên chương trình</th>
               <th>Mã giảm giá</th>
               <th>Số lượng</th>
@@ -42,6 +43,7 @@
             @foreach ($coupon as $key => $cou)
               
             <tr>
+              <td></td>
                 <td>{{ $cou->coupon_name }}</td>
                 <td>{{ $cou->coupon_code }}</td>
                 <td>{{ $cou->coupon_times }}</td>

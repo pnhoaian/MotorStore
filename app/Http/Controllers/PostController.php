@@ -116,6 +116,20 @@ class PostController extends Controller
         return Redirect::to('all-post');
     }
 
+    public function active_post($post_id ){
+        $this->AuthLogin();
+        DB::table('tbl_posts')->where('post_id',$post_id)->update(['post_status' =>1]);
+        Toastr::success('Đã hiện thị bài viết!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('all-post');
+    }
+
+    public function inactive_post($post_id ){
+        $this->AuthLogin();
+        DB::table('tbl_posts')->where('post_id',$post_id)->update(['post_status' =>0]);
+        Toastr::success('Đã ẩn bài viết!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('all-post');
+    }
+
     public function danh_muc_bai_viet(Request $request, $post_id){
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();

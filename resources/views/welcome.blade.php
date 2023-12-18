@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="An Hoài">
-    <title>Hoài An Store | Pin, Sạc chính hãng</title>
+    <title>Hoài An Store | Cáp, Sạc chính hãng</title>
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
@@ -15,6 +15,9 @@
 	<link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
+	
+	<!--fontawesome bản mới-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
     <!--[if lt IE 9]>
     <script src="js/html5shiv.js"></script>
@@ -25,6 +28,7 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+
 </head><!--/head-->
 
 <body><!--header-->
@@ -186,10 +190,10 @@
 						</div>
 						
 						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-							<i class="fa fa-angle-left"></i>
+							<i class="fas fa-caret-square-left"></i>
 						</a>
 						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fa fa-angle-right"></i>
+							<i class="fas fa-caret-square-right"></i></i>
 						</a>
 
 
@@ -264,7 +268,7 @@
 			</button>
 		</div> --}}
 	
-	<section>
+	<section style="overflow: hidden">
 		<div class="container"> 
 			<div class="row">
 				{{--  <div class="col-sm-3">

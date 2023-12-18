@@ -2,7 +2,7 @@
 @section('content')
 
 
-    <div class="row" style="overflow: hidden">
+    <div class="row" style="overflow: hidden ">
         <div class="col-sm-12">
             <div class="features_items" style="font-family: -apple-system, system-ui, BlinkMacSystemFont;">
                 <!--features_items-->

@@ -29,6 +29,7 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
+              <th></th>
               <th>Tên Slider</th>
               <th>Hình ảnh</th>
               <th>Loại Banner</th>
@@ -36,14 +37,13 @@
               <th>Trạng thái</th>
               <th>Tác vụ</th>
               {{-- <th>Ngày thêm</th> --}}
-              <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
             @foreach ($all_slide as $key => $slide)
               
             <tr>
-              <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
+              <td></td>
               <td>{{ $slide->slider_name }}</td>
               
               <td>
@@ -83,12 +83,40 @@
                 <?php
                 if($slide->slider_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-slider/'.$slide->slider_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-slider/'.$slide->slider_id)}}">
+                    {{-- <span class="fa-thump-styling-down fa fa-thumbs-down"></span> --}}
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 	#CC0033 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Đang ẩn</button>
+
+                  </a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-slider/'.$slide->slider_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-slider/'.$slide->slider_id)}}">
+                    {{-- <span class="fa-thump-styling fa fa-thumbs-up"></span> --}}
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 		#33CC33 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Hiện thị</button>
+
+                  </a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }

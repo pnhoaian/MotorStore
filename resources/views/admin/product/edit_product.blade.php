@@ -86,8 +86,8 @@
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Hiện thị</label>
                                             <select name="product_status" class="form-control m-bot15">
-                                                <option value="0">Ẩn Sản phẩm</option>
-                                                <option selected value="1">Hiện thị Sản phẩm</option>
+                                                <option {{ $pro->product_status == 0 ? 'selected' : ' ' }} value="0">Ẩn Sản phẩm</option>
+                                                <option {{ $pro->product_status == 1 ? 'selected' : ' ' }} value="1">Hiện thị Sản phẩm</option>
                                             </select>
                                         </div>
                         <div class="form-group">

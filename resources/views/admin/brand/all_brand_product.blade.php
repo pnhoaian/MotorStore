@@ -27,6 +27,7 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
+              <th></th>
               <th>Tên Hãng - Thương hiệu</th>
               <th>Hình ảnh</th>
               <th>Trạng thái</th>
@@ -39,6 +40,7 @@
             @foreach ($all_brand_product as $key => $brand_pro)
               
             <tr>
+              <td></td>
               <td>{{ $brand_pro->brand_name}}</td>
               <td>
                   <img src="public/upload/brand/{{$brand_pro->brand_image}}" height="40px" width="180px">
@@ -49,12 +51,39 @@
                 <?php
                 if($brand_pro->brand_status == 0){
                 ?>
-                   <a href="{{URL::to('/active-brand-product/'.$brand_pro->brand_id)}}"><span class="fa-thump-styling-down fa fa-thumbs-down"></span></a>
+                   <a href="{{URL::to('/active-brand-product/'.$brand_pro->brand_id)}}">
+                    {{-- <span class="fa-thump-styling-down fa fa-thumbs-down"></span> --}}
+
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 	#CC0033 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Đang ẩn</button>
+                  </a>
                    {{-- echo'Ẩn'; --}}
                 <?php
                 }else{
             ?>
-                  <a href="{{URL::to('/inactive-brand-product/'.$brand_pro->brand_id)}}"><span class="fa-thump-styling fa fa-thumbs-up"></span></a>
+                  <a href="{{URL::to('/inactive-brand-product/'.$brand_pro->brand_id)}}">
+                    {{-- <span class="fa-thump-styling fa fa-thumbs-up"></span> --}}
+                    <button style="
+                    width: 110px;
+                    padding: 0.5em 1em;text-align: center;float: inherit;
+                    margin: 0em auto;
+                    color: #ffffff;
+                    background: #00000026;
+                    border-radius:5px;
+                    background: 		#33CC33 !important;
+                    margin-bottom: 10px;
+                    font-family: -apple-system, system-ui, BlinkMacSystemFont;
+                    font-weight: 700;" class="button-chuyen" role="button">Hiện thị</button>
+                  </a>
                   {{--  echo'Hiện Thị'; --}}
                 <?php 
                 }
