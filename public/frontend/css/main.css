@@ -863,11 +863,27 @@ h2.title {
 }
 
 .product-image-wrapper{
-  border-radius: 15px;
-	border:2px solid #000;
+  border-radius: 5px;
+	border:2px solid #ccc;
 	overflow: hidden;
-  margin-top:30px;
-	margin-bottom:30px;
+  margin-top:5px;
+	margin-bottom:20px;
+}
+
+
+.textboxthongtin{
+
+  background: #F0F0E9;
+  border: 0 none;
+  margin-bottom: 10px;
+  padding: 10px;
+  width: 100%;
+  font-weight: 300;
+}
+
+.lithongtin{
+  margin-bottom: 5px;
+list-style-type: none;
 }
 
 .single-products {
@@ -883,13 +899,14 @@ h2.title {
 .productinfo h2{
 	text-align: left;
     padding-left: 10px;
-    width: 240px;
+    padding-right: 10px;
+    width: 214px;
     color: #002795;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: 700;
-    height: 50px;
-    min-height: 50px;
-    max-height: 50px;
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
     font-family: -apple-system, system-ui, BlinkMacSystemFont;
 }
 .product-overlay h2{
@@ -909,9 +926,9 @@ h2.title {
 }
 
 .productinfo img{
-   width: 220px;
-  min-width: 220px;
-  max-width: 220px;
+   width: 200px;
+  min-width: 200px;
+  max-width: 200px;
     height: 200px;
   max-height: 200px;
   min-height: 200px;
@@ -1204,9 +1221,10 @@ h2.title {
 }
 
 .view-product img {
-  border: 1px solid #F7F7F0;
-  height: 350px;
-  width: 400px;
+  padding: 20px 20px;
+  border: 1px solid #ccc;
+  height: 360px;
+  width: 360px;
 }
 
 .view-product h3 {
@@ -1251,7 +1269,7 @@ h2.title {
   overflow: hidden;
   padding-bottom: 60px;
   padding-left: 60px;
-  padding-top: 60px;
+  padding-top: 20px;
   position: relative;
 }
 
@@ -1263,16 +1281,14 @@ h2.title {
 
 .product-information h2 {
   color: #002795;
-  font-family: 'Roboto', sans-serif;
-  font-size: 32px;
-  margin-top: 0;
-  text-align: center;
+  font-weight: 600;
+  font-size: 30px;
+  margin-left: 5px;
 }
 
 .product-information p {
   color: #696763;
   font-family: 'Roboto', sans-serif;
-  margin-bottom: 5px;
 }
 
 .product-information span {

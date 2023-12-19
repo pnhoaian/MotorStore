@@ -21,7 +21,7 @@
                                 <img style="float:left;width:290px; height:200px;padding:5px;"
                                 src="{{ URL::to('public/upload/post/' . $p->post_image) }}" />
                                 <h3
-                                    style="display:block;font-size:18px;font-weight:700;font-family: -apple-system, system-ui, BlinkMacSystemFont;color:#0213B0;line-height:28px;text-align:left;margin-bottom:10px;margin-top:10px;margin-left: 290px;max-height: 40px;
+                                    style="display:block;font-size:18px;font-weight:700;font-family: -apple-system, system-ui, BlinkMacSystemFont;color:#0213B0;line-height:28px;text-align:left;margin-bottom:10px;margin-top:10px;margin-left: 300px;max-height: 40px;
                                     min-height: 40px;
                                     height: 40px;">
                                     {{ $p->post_title }}
@@ -31,7 +31,7 @@
                                     margin-left: 290px;
                                     min-height: 50px;
                                     max-height: 50px;
-                                    font-size: 13px;color:#EE3E38;text-align:left;"
+                                    font-size: 13px;color:#333;text-align:left;"
                                     
                                     
                                     
@@ -40,7 +40,7 @@
                                 
 
                         </div>
-                        <div><a style="    border-radius: 10px;
+                        <div><a style="
                             margin-right: 10px;
                             background: #0213B0;
                             float: right;

@@ -84,6 +84,11 @@
                                         </div>
                 
                                         <div class="form-group">
+                                            <label for="exampleInputEmail1">Số lượng sản phẩm</label>
+                                            <input type="text" name="product_quantity" class="form-control" placeholder="Nhập số lượng" value="{{ $pro->product_quantity}}">
+                                        </div>
+
+                                        <div class="form-group">
                                             <label for="exampleInputPassword1">Hiện thị</label>
                                             <select name="product_status" class="form-control m-bot15">
                                                 <option {{ $pro->product_status == 0 ? 'selected' : ' ' }} value="0">Ẩn Sản phẩm</option>

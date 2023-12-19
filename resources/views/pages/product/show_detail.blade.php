@@ -43,7 +43,8 @@
     </div>
 
     <div class="col-sm-5">
-        <div class="product-information"><!--/product-information-->
+        <div class="product-information" style="
+        border: 1px solid #ccc;"><!--/product-information-->
             <img src="images/product-details/new.jpg" class="newarrival" alt="" />
             <h2>{{ $value->product_name }}</h2>
             {{-- <p>ID Sản Phẩm: {{ $value->product_id }}</p> --}}
@@ -65,28 +66,45 @@
                         <input type="hidden" value="{{ $value->product_price }}"
                             class="cart_product_price_{{ $value->product_id }}">
 
-                <span>
-                    <span class="col-sm-12">Giá Bán: {{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
-                </span>
-                <span>
-                    <label>Số Lượng:</label>
-                    <input name="product_qty" type="number" min="1"
-                                class="cart_product_qty_{{ $value->product_id }}" value="1" />
-                    <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
-                    {{-- <button type="submit" class="btn btn-fefault cart">
-                        <i class="fa fa-shopping-cart" name="add-to-cart"></i>
-                        Thêm vào giỏ hàng
-                    </button> --}}
-                    <button type="button"
-                            class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
-                            name="add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
-                    </button>
-                </span>
             </form>
-
-            <p><b>Tình trạng:</b> Còn hàng</p>
+            <p><b>Mã sản phẩm:</b> {{ $value->product_id }}</p>
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
+            <p><b>Số lượng tồn kho: </b> </p>
+            <p><b>Tình trạng:</b> Còn hàng</p>
+            <p><b>Đánh giá: </b> </p>
+
+
+
+            <div>
+                <p style="margin-top: -20px;"><b>Giá bán:</b><span style="    font-family: Tahoma, Geneva, sans-serif;
+                font-size: 20px;
+                font-weight: bold;
+                font-style: normal;
+                text-decoration: none;
+                color: #f00;">{{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
+                
+
+            <!--price_update_43154--></p>
+
+            </div>
+            <span style="margin-top: -10px;">
+                <label>Số Lượng:</label>
+                <input name="product_qty" type="number" min="1"
+                            class="cart_product_qty_{{ $value->product_id }}" value="1" />
+                <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
+                {{-- <button type="submit" class="btn btn-fefault cart">
+                    <i class="fa fa-shopping-cart" name="add-to-cart"></i>
+                    Thêm vào giỏ hàng
+                </button> --}}
+                <button type="button"
+                        class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
+                        name="add-to-cart" style="
+                        margin-bottom: 8px;
+                        margin-left: 10px;><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                </button>
+            </span>
+            <p><b>Tags sản phẩm: </b> </p>
             {{-- <p><b>Đã bán:</b> {{ $value->category_name }}</p>
             <p><b>Tồn kho:</b> {{ $value->category_name }} sản phẩm</p> --}}
             {{-- <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a> --}}
@@ -97,17 +115,14 @@
         <div class="block" style="margin-bottom: 10px;
         border: 1px solid #ccc;
         padding: 10px;
-        border-radius: 6px;
         clear: both;">
             <div class="phone" style="margin-bottom: 15px;">
                 <strong>
-                    <span data-redactor-tag="span" style="color: rgb(0, 0, 0); margin-left:50px; ">Hồ Chí Minh</span> : 0912 456 789</strong><br>
+                    <span data-redactor-tag="span" style="color: rgb(0, 0, 0); margin-left:350px; ">Hồ Chí Minh</span> : 0912 456 789</strong><br>
             </div>
 
             <div class="GiaoHang">
                 <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ ATM miễn phí tại cửa hàng<span style="color: rgb(238, 236, 225);"></span></i>
-                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Trả Góp: Trả trước 30% + CMND + Hộ khẩu / Bằng lái</span></i> 
-                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Trả Góp: Dùng thẻ tín dụng lãi suất 0%</span></i> 
                 <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ MASTER, VISA +<strong>1.5%</strong></span></i> 
             </div>
         </div>
@@ -115,14 +130,13 @@
         <div class="block" style="margin-bottom: 10px;
         border: 1px solid #ccc;
         padding: 10px;
-        border-radius: 6px;
         clear: both;">
             <div class="pr-top" style="    border: 1px solid #e0e0e0;
             border-radius: 4px;
             margin-bottom: 10px;
             background-color: #f6f6f6;">
                 <h4 class="pr-txtb" style="margin-left: 5px; text-align: center"> Khuyến Mãi</h4>
-                <i class="pr-txt" style="margin-left: 5px;"> Đặt ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn từ Hoài An Store </i>
+                <i class="pr-txt" style="margin-left: 5px;font-style: normal;"> Đặt ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn.</i>
             </div>
             <div class="pr-content">
                 <div class="pr-item">
@@ -221,7 +235,7 @@
             <div class="item active">
                 @foreach ( $related_pro as $key => $SPLQ)
                     
-                <div class="col-sm-3" >
+                <div class="col-sm-2" style="width: 20%;padding-right: 0">
                     <div class="product-image-wrapper">
                         <div class="single-products">
                                 <div class="productinfo text-center">
@@ -293,7 +307,6 @@
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
                                 <li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
-                                <li><a href="#"><i class="fa fa-plus-square"></i>So Sánh Sản Phẩm</a></li>
                             </ul>
                         </div>
                     </div>
@@ -302,12 +315,12 @@
                 @endforeach	
             </div>
         </div>
-         <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
+         {{-- <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
             <i class="fa fa-angle-left"></i>
           </a>
           <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
             <i class="fa fa-angle-right"></i>
-          </a>			
+          </a>			 --}}
     </div>
 </div><!--/recommended_items-->
 

@@ -50,6 +50,7 @@ class ProductController extends Controller
         $data['product_image']= $request ->product_image;
         $data['product_price']= $request ->product_price;
         $data['product_price_sale']= $request ->product_price_sale;
+        $data['product_quantity']= $request ->product_quantity;
         $data['product_status']= $request ->product_status;
         $get_image = $request->file('product_image');
         
@@ -113,6 +114,7 @@ class ProductController extends Controller
         // $data['product_image']= $request ->product_image;
         $data['product_price']= $request ->product_price;
         $data['product_price_sale']= $request ->product_price_sale;
+        $data['product_quantity']= $request ->product_quantity;
         $data['product_status']= $request ->product_status;
         
         $get_image = $request->file('product_image');
@@ -157,7 +159,7 @@ class ProductController extends Controller
         $related_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
-        ->where('tbl_category_product.category_id',$category_id)->get();
+        ->where('tbl_category_product.category_id',$category_id)->take(5)->get();
 
         return view('pages.product.show_detail')
         ->with('category', $cate_product)

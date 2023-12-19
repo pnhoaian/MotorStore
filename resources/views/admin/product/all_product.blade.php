@@ -30,10 +30,11 @@
           <thead>
             <tr>
               <th></th>
+              <th>Hình ảnh</th>
               <th>Tên Sản phẩm</th>
               <th>Giá gốc</th>
               <th style="width: 115px;">Giá khuyến mãi</th>
-              <th>Hình ảnh</th>
+              <th style="width: 80px;">Số lượng</th>
               <th>Danh Mục</th>
               <th style="width: 95px;">Thương Hiệu</th>
               <th>Trạng thái</th>
@@ -46,6 +47,7 @@
               
             <tr>
               <td></td>
+              <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
               <td>{{ $pro->product_name }}</td>
               <td>{{ $pro->product_price }}</td>
               <td> <?php
@@ -62,7 +64,7 @@
                 }
                 ?>
               </span></td>
-              <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
+              <td>{{ $pro->product_quantity }}</td>
               <td>{{ $pro->category_name }}</td>
               <td>{{ $pro->brand_name }}</td>
 

@@ -59,7 +59,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title> Login | Hoai An Motor </title>
+<title> Login | Hoài An Store </title>
 <!-- Meta tag Keywords -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -89,21 +89,23 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="wthree-pro">
 				<h2>Đăng nhập tài khoản</h2>
 			</div>
-			<form action="{{URL::to('/admin-dashboard')}}" method="post">
+			<form action="{{URL::to('/login-customer')}}" method="post">
 				{{ csrf_field() }}
 				<div class="pom-agile">
-					<input placeholder="E-mail" name="customer_email" class="user" type="email" required="">
+					<input name="email_account" class="user" type="email" required="">
 					<span class="icon1"><i class="fa fa-user" aria-hidden="true"></i></span>
 				</div>
 				<div class="pom-agile">
-					<input  placeholder="Password" name="customer_password" class="pass" type="password" required="">
+					<input  name="password_account" class="pass" type="password">
 					<span class="icon2"><i class="fa fa-unlock" aria-hidden="true"></i></span>
 				</div>
 				<div class="sub-w3l">
 					<h6><a href="#">Quên mật khẩu</a></h6>
-					<h6><a href="{{URL::to('register')}}">Đăng ký tài khoản</a></h6>
+					<h6>
+						<a href="{{URL::to('register')}}">Đăng ký tài khoản</a>
+					</h6>
 					<div class="right-w3l">
-						<input type="submit" value="Login">
+						<input type="submit" value="Login" >Đăng nhập
 					</div>
 				</div>
 			</form>
@@ -112,7 +114,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--//main-->
 	<!--footer-->
 	<div class="footer">
-		<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Motor</a></p>
+		<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Store</a></p>
 	</div>
 	<!--//footer-->
 </div>

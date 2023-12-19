@@ -46,14 +46,66 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-6">
-						<div class="social-icons pull-right">
-							<ul class="nav navbar-nav">
-								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-								<li><a href="{{URL::to('/login')}}"><i class="fa fa-user"></i> Đăng nhập</a></li>
-							</ul>
-						</div>
-					</div>
+
+
+
+
+<?php 
+									$customer_id = Session::get('customer_id');
+									if($customer_id!=NULL){
+
+								?>
+                                <li class="dropdown"
+                                    style="display: inline;
+                                width: 132px;
+								left: 465px;
+								top: 7px"><i
+                                        class="fas fa-user" style="font-weight: 600;font-size: 15px;color: #FFF;"></i>
+                                    <a style="display: inline-flex;" data-toggle="dropdown" class="dropdown-toggle"
+                                        href="#">
+                                        <span class="username" style="font-weight: 600;font-size: 15px;color: #FFF;"> Xin chào, 
+                                            {{ Session::get('customer_name') }}
+                                        </span>
+                                        <b style="margin-top: 9px;
+                                        margin-left: 3px;"
+                                            class="caret"></b>
+                                    </a>
+                                    <ul class="dropdown-menu extended logout"
+                                        style="width: 165px;
+                                    left: -10px;">
+                                        <li><a href="{{ URL::to('/my-page') }}"></i>
+											<i class="fa fa-cogs" aria-hidden="true"></i>    Chỉnh sửa thông tin</a></li>
+                                        <li><a href="{{ URL::to('/logout-customer') }}">
+											<i class="fa fa-sign-in" aria-hidden="true"></i>    Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+
+
+
+
+
+
+
+
+
+
+                                {{-- <li><a href="{{ URL::to('/logout-checkout') }}"><i class="fas fa-user"></i>Đăng
+                                        xuất</a></li> --}}
+
+                                <?php 
+
+									} else{
+								?>
+                                <li style="display: inline-flex;width: 132px; margin-left: 450px; padding-top: 9px; font-weight: 600; font-size: 15px; color: #FFF;">
+									<a href="{{ URL::to('/login') }}" style="font-weight: 600;font-size: 15px;color: #FFF;">
+										<i class="fas fa-user" ></i>  Đăng nhập</a></li>
+                                <?php
+									}
+								?>
+				</ul>
+
+
+
 				</div>
 			</div>
 		</div>
@@ -165,99 +217,8 @@
 	</header><!--/header-->
 
 													<!--slider-->
-	<section id="slider">
-		<div class="container">
-			<div class="row">
-				<div class="col-sm-8" style="width:73%;margin-left: -95px;">
-					<div id="slider-carousel" class="carousel slide" data-ride="carousel">
-						
-						<div class="carousel-inner">
-							@php
-								$i=0;
-							@endphp
-							@foreach ($slider as $key => $slide)
-								@php
-									$i++;
-								@endphp
-							<div class="item {{ $i==1 ? 'active' : '' }}">
-								<div class="">
-									<img style="height:320px;min-height:320px;max-height:320px;width:745px;min-width:745px;max-width:745px;margin-left: 40px;" alt="{{ $slide->slider_desc }}" src="{{ asset('public/upload/slider/' . $slide->slider_image) }}" class="img img-responsive">
-									{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
-								</div>
-							</div>
+		@yield('slider')
 
-							@endforeach
-						</div>
-						
-						<a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
-							<i class="fas fa-caret-square-left"></i>
-						</a>
-						<a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
-							<i class="fas fa-caret-square-right"></i></i>
-						</a>
-
-
-
-
-					</div>
-				</div>
-
-
-				<div class="col-sm-4" style="width:35%;height:100px">
-					<div class="carousel-inner1" style="
-						position: relative">
-
-						@foreach ($slidermini as $key => $slidemini)
-	
-						<div >
-							<div >
-								<img style="height: 100px;margin-bottom: 10px;;width:410px;min-width:410px;max-width:410px"  alt="{{ $slidemini->slider_desc }}" src="{{ asset('public/upload/slider/' . $slidemini->slider_image) }}" class="img img-responsive">
-								{{-- <img src="{{asset('public/frontend/images/pricing.png')}}"  class="pricing" alt="" /> --}}
-							</div>
-						</div>
-
-						@endforeach
-					</div>
-				</div>
-
-
-
-
-
-
-
-				
-		</div>
-	</section>
-												<!--/slider-->
-
-											<!--Thuong Hieu San Pham-->
-	<section>
-		<div class="brands__content">
-			<div class="container">
-				<div class="row">
-					<div class="brands__content">
-						<div class="list-brand" style="margin-bottom: 20px;     padding-left: 30px;
-						">
-	
-							@foreach ($brand as $key => $brand1)
-								@if ($brand1->brand_image != '')
-									<a class="list-brand__item"
-										href="{{ URL::to('/thuong-hieu-san-pham/' . $brand1->brand_id) }}"><img
-											class="filter-brand__img"
-											src="{{ asset('public/upload/brand/' . $brand1->brand_image) }}"></a>
-								@else
-								@endif
-							@endforeach
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		</div>
-	</section>
-													<!--Thuong Hieu San Pham-->
 													{{-- <!--Lọc sản phẩm -->
 		<div class="filter-sort__title" >Chọn theo danh mục</div>
 		<div class="filter-wrapper" style="display:flex;">
@@ -315,151 +276,8 @@
 						@yield('content')
 					</div>
 
-					<div class="section-content relative" >
-						<div class="row row-large" id="row-1482279903" >
-							<div id="col-319689862" class="col-md-4">
-								<div class="col-inner">
-									<div class="icon-box featured-box icon-box-center text-center">
-										<div class="icon-box-img" style="width: 50px">
-											<div class="icon">
-												<div class="icon-inner">
-													<img style="width: 50px;
-													height: 53px;
-													margin-left: 155px;"
-														src="https://quangphuong.vn/wp-content/uploads/2023/03/customer-service-5.png"
-														class="attachment-medium size-medium" alt="" decoding="async"
-														loading="lazy"
-														srcset="https://quangphuong.vn/wp-content/uploads/2023/03/customer-service-5.png 120w, https://julyscent.com/wp-content/uploads/2023/07/customer-service-line-100x100.png 100w"
-														sizes="(max-width: 120px) 100vw, 120px">
-												</div>
-											</div>
-										</div>
-										<div class="icon-box-text last-reset">
-			
-											<div id="text-2452321903" class="text">
-			
-												<h2 style="margin-top: 0;"><span
-														style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
-													font-size: 20px;
-													font-weight: 700;
-													color: #000000;">Hỗ
-														trợ 24/7</span></h2>
-												<p><span style="color: #000000;">Tư vấn và hỗ trợ giải đáp nhanh chóng, chính xác với đầy đủ các dòng xe hiện đại.</span></p>
-			
-												<style>
-													#text-2452321903 {
-														color: rgb(0, 0, 0);
-													}
-			
-													#text-2452321903>* {
-														color: rgb(0, 0, 0);
-													}
-												</style>
-											</div>
-			
-										</div>
-									</div>
-			
-			
-								</div>
-							</div>
-			
-			
-			
-							<div id="col-125498996" class="col-md-4">
-								<div class="col-inner">
-									<div class="icon-box featured-box icon-box-center text-center">
-										<div class="icon-box-img" style="width: 50px">
-											<div class="icon">
-												<div class="icon-inner">
-													<img style="width: 50px;
-													height: 53px;
-													margin-left: 155px;"
-														src="{{asset('public/frontend/images/shipping2.png')}}"
-														class="attachment-medium size-medium" alt="" decoding="async"
-														loading="lazy"
-														srcset="{{asset('public/frontend/images/shipping2.png')}} 120w, https://julyscent.com/wp-content/uploads/2023/07/archive-line-2-100x100.png 100w"
-														sizes="(max-width: 120px) 100vw, 120px">
-												</div>
-											</div>
-										</div>
-										<div class="icon-box-text last-reset">
-											<div id="text-2973815044" class="text">
-												<h2 style="margin-top: 0;"><span
-														style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
-												font-size: 20px;
-												font-weight: 700;
-												color: #000000;">Vận
-														Chuyển</span></h2>
-												<p>Miễn phí giao hàng tận nơi hoặc nhận trực tiếp cửa hàng</p>
-			
-												<style>
-													#text-2973815044 {
-														color: rgb(0, 0, 0);
-													}
-			
-													#text-2973815044>* {
-														color: rgb(0, 0, 0);
-													}
-												</style>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-			
-			
-							<div id="col-1248956169" class="col-md-4">
-								<div class="col-inner">
-									<div class="icon-box featured-box icon-box-center text-center">
-										<div class="icon-box-img" style="width: 50px">
-											<div class="icon">
-												<div class="icon-inner">
-													<img style="width: 50px;
-													height: 53px;
-													margin-left: 155px;"
-														src="//theme.hstatic.net/200000281285/1000677821/14/policy_icon2.png?v=798"
-														class="attachment-medium size-medium" alt="" decoding="async"
-														loading="lazy"
-														srcset="//theme.hstatic.net/200000281285/1000677821/14/policy_icon2.png?v=798 120w, https://julyscent.com/wp-content/uploads/2023/07/arrow-go-back-line-100x100.png 100w"
-														sizes="(max-width: 120px) 100vw, 120px">
-												</div>
-											</div>
-										</div>
-										<div class="icon-box-text last-reset">
-			
-											<div id="text-3652484110" class="text">
-			
-												<h2 style="margin-top: 0;"><span
-														style="color: #000000;font-family: -apple-system, system-ui, BlinkMacSystemFont;
-												font-size: 20px;
-												font-weight: 700;
-												color: #000000;">Thanh Toán</span></h2>
-												<p>Chấp nhận thanh toán bằng thẻ, tiền mặt hoặc hỗ trợ trả góp các hình thức khác</p>
-			
-												<style>
-													#text-3652484110 {
-														color: rgb(0, 0, 0);
-													}
-			
-													#text-3652484110>* {
-														color: rgb(0, 0, 0);
-													}
-												</style>
-											</div>
-			
-										</div>
-									</div>
-								</div>
-							</div>
 
-
-
-
-
-
-				</div>
-				
+					@yield('footer')
 				
 
 				
@@ -569,7 +387,7 @@
 		<div class="footer-bottom">
 			<div class="container">
 				<div class="row">
-					<p class="pull">Copyright © 2023 - Hoai An Store</p>
+					<p class="pull"> Copyright © 2023 - Hoai An Store</p>
 				</div>
 			</div>
 		</div>

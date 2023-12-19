@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-<title> Sign Up | Hoai An Motor </title>
+<title> Sign Up | Hoài An Store </title>
 <!-- Meta tag Keywords -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -31,8 +31,8 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="wthree-pro">
 				<h2>Đăng ký tài khoản mới</h2>
 			</div>
-			<form action="{{URL::to('/admin-dashboard')}}" method="post">
-				{{ csrf_field() }}
+				<form role="form" action="{{URL::to('/register-customer')}}" method="POST">
+					{{ csrf_field() }}
                 <div class="pom-agile">
 					<input  placeholder="Tên người dùng" name="customer_name" class="pass" type="text" required="">
 				</div>
@@ -43,13 +43,13 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 					<input  placeholder="Nhập số điện thoại" name="customer_phone" class="pass" type="tel" required="">
 				</div>
 				<div class="pom-agile">
-					<input  placeholder="Nhập Password" name="customer_email" class="pass" type="password" required="">
+					<input  placeholder="Nhập Password" name="customer_password" class="pass" type="password" required="">
 				</div>
                 <div class="pom-agile">
-					<input  placeholder="Nhập lại Password" name="customer_email" class="pass" type="password" required="">
+					<input  placeholder="Địa chỉ" name="customer_address" class="pass" type="text" required="">
 				</div>
 				<div class="sub-w3l">
-					<h6><a href="{{URL::to('login')}}">Đã có tài khoản</a></h6>
+					<h6><a href="{{URL::to('/login')}}">Đã có tài khoản</a></h6>
 					<div class="right-w3l">
 						<input type="submit" value="Đăng ký">
 					</div>
@@ -60,7 +60,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--//main-->
 	<!--footer-->
 	<div class="footer">
-		<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Motor</a></p>
+		<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Store</a></p>
 	</div>
 	<!--//footer-->
 </div>

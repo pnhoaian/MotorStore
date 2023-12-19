@@ -11,7 +11,7 @@
 							{{-- <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_id)}}"> --}}
 								<a href="{{ URL::to('/chi-tiet-san-pham/' . $product->product_id) }}">
 
-									<div class="col-sm-3" >
+									<div class="col-sm-2" style="width: 20%;padding-right: 0">
 										<div class="product-image-wrapper">
 											<div class="single-products">
 													<div class="productinfo text-center">
@@ -83,7 +83,6 @@
 											<div class="choose">
 												<ul class="nav nav-pills nav-justified">
 													<li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
-													<li><a href="#"><i class="fa fa-plus-square"></i>So Sánh Sản Phẩm</a></li>
 												</ul>
 											</div>
 										</div>

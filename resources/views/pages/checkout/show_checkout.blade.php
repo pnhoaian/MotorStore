@@ -18,10 +18,10 @@
                     {{ session()->get('error') }}
                 </div>
                 @endif
-        <div class="table-responsive cart_info">
+        <div class="table-responsive cart_info" style="margin-bottom:10px">
             <form action="{{URL::to('/update-cart')}}" method="POST">
                 @csrf
-            <table class="table table-condensed">
+            <table class="table table-condensed" style="margin-bottom:2px">
                 <thead>
                     <tr class="cart_menu">
                         <td class="image">Hình ảnh sản phẩm</td>
@@ -138,18 +138,9 @@
                         </li>
                         </td>
                     </tr>
-                    <tr >
-                        <td colspan="5" style="text-align: right">
-                            @if (Session::get('customer_id'))
-                            <a class="btn btn-default check_out " href="{{ url('/checkout') }}">Thanh Toán</a>
-                            @else
-                            <a class="btn btn-default check_out " href="{{ url('/login') }}">Thanh Toán</a>
-                            @endif
-                        </td>
-                    </tr>
                     @else
                         <tr>
-                            <td colspan="5" style="text-align: center">
+                            <td colspan="5" style="text-align: center"></td>
                                 @php
                                     echo'Không có sản phẩm trong giỏ hàng';
                                 @endphp
@@ -165,16 +156,87 @@
                     <td>
                         <form method="POST" action="{{URL::to('/check-coupon')}}">
                             @csrf
-                            <input type="text" class="form-control" name="coupon" placeholder="Nhập mã khuyến mãi">
-                            <br>
+                            <div style="display: flex">
+                                <input style="width:200px;margin-right:20px" type="text" class="form-control" name="coupon" placeholder="Nhập mã khuyến mãi">
                             <input type="submit" class="btn btn-default check_coupon" value="Áp dụng Coupon" name="check_coupon">
+                            </div>
                         </form>
                     </td>
                 </tr>
             @endif
             </table>
         </div>
+
+
+
+        @if(Session::get('cart'))
+    <div class="shopper-informations">
+        <div class="row" style="border: 1px solid #ccc;
+        padding: 10px 10px; margin-right:0px; margin-left:0px">
+            <div class="col-sm-7 clearfix">
+                <div class="bill-to">
+
+                    <div class="form-one">
+                        <form>
+                            <p>Thông tin nhận hàng</p>
+                            <div>
+                                <li class="lithongtin">Tên khách hàng</li>
+                                <input value="{{ Session::get('customer_name') }}" type="text" class="textboxthongtin">
+                            </div>
+
+                            <div>
+                                <li class="lithongtin">Email</li>
+                                <input value="{{ Session::get('customer_email') }}" type="text" class="textboxthongtin">
+                            </div>
+
+                            <div> 
+                                <li class="lithongtin">Số điện thoại</li>
+                                <input value="{{ Session::get('customer_phone') }}" type="text" class="textboxthongtin">
+                            </div>
+
+                            <div>
+                                <li class="lithongtin">Địa chỉ</li>
+                                <input value="{{ Session::get('customer_address') }}" type="text" class="textboxthongtin">
+                            </div>
+                        </form>
+                    </div>
+                    <div class="form-two">
+                        <form style="margin-top: 38px;">
+                            <p></p>
+                            <li class="lithongtin">Phương thức nhận hàng</li>
+                            <select>
+                                <option>Nhận tại cửa hàng</option>
+                                <option>Giao hàng tận nơi</option>
+                            </select>
+                            <li class="lithongtin">Phương thức thanh toán</li>
+                            <select>
+                                <option>Tiền mặt</option>
+                                <option>Chuyển khoản</option>
+                            </select>
+                        </form>
+                    </div>
+                    
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <div class="order-message">
+                    <p>Ghi chú đơn hàng</p>
+                    <textarea name="message" rows="16"></textarea>
+                </div>	
+            </div>				
+            <td colspan="5" style="text-align: right">
+                <a class="btn btn-default check_out " href="">Xác nhận đặt hàng</a>
+            </td>	
+        </div>
     </div>
+    @else
+    @endif
+
+
+    </div>
+
+    
+    
 </section> <!--/#cart_items-->
 
 @endsection

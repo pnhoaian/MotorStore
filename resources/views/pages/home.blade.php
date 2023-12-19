@@ -1,11 +1,20 @@
 @extends('welcome')
+
+@section('slider')
+	@include("pages.include.slider");
+@endsection()
+
+@section('footer')
+	@include("pages.include.footer");
+@endsection()
+
 @section('content')
 
-<div class="features_items">
+ 
                         <!--       features_items            -->
 						<h2 class="title text-center">Sản phẩm mới</h2>
 						@foreach ($all_product as $key => $product)		
-							<div class="col-sm-3" >
+							<div class="col-sm-2" style="padding-right: 0px;width:20%">
 								<div class="product-image-wrapper">
 									<div class="single-products">
 											<div class="productinfo text-center">

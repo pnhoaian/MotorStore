@@ -14,6 +14,8 @@ use App\Http\Controllers\IntroController;
 use App\Http\Controllers\CustomerController; 
 use App\Http\Controllers\CategoryPost;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CheckoutController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -31,11 +33,17 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 
-Route::get('/login', [CustomerController::class, 'login']);
-Route::get('/register', [CustomerController::class, 'register']);
-Route::post('/dashboard', [CustomerController::class, 'show_dashboard']);
-Route::get('/user-logout', [CustomerController::class, 'user_logout']);
+// *************************** Login
+Route::get('/login',[CheckoutController::class, 'login']);
+Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
+Route::get('/register', [CheckoutController::class, 'register']);
+Route::post('/register-customer', [CheckoutController::class, 'register_customer']);
+//Route::post('/dashboard', [CustomerController::class, 'show_dashboard']);
 
+Route::get('/logout-customer', [CheckoutController::class, 'logout_customer']);
+
+
+Route::get('/checkout', [CheckoutController::class, 'checkout']);
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);
 //// BE: Page Liên hệ
