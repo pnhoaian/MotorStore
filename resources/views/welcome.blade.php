@@ -16,6 +16,8 @@
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
 	
+	<!--CSS Toast thông báo-->
+	<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
 	<!--fontawesome bản mới-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
@@ -73,10 +75,10 @@
                                     <ul class="dropdown-menu extended logout"
                                         style="width: 165px;
                                     left: -10px;">
-                                        <li><a href="{{ URL::to('/my-page') }}"></i>
-											<i class="fa fa-cogs" aria-hidden="true"></i>    Chỉnh sửa thông tin</a></li>
+                                        <li><a href="{{ URL::to('/my-information') }}"></i>
+											<i class="fa fa-cogs" aria-hidden="true" style="margin-right: 10px;margin-left: -10px"></i>Chỉnh sửa thông tin</a></li>
                                         <li><a href="{{ URL::to('/logout-customer') }}">
-											<i class="fa fa-sign-in" aria-hidden="true"></i>    Đăng xuất</a></li>
+											<i class="fa fa-outdent" aria-hidden="true" style="margin-right: 10px;margin-left: -10px"></i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
 
@@ -181,10 +183,7 @@
 
 
 
-					<div class="col-sm-4" style="margin-right: 15px;
-					margin-top: -6px;
-					width: 22%;
-				">
+					<div class="col-sm-4" style="margin-right: 15px;margin-top: -6px;width: 22%;">
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								{{-- <li><a href="#"><i class="fa fa-user"></i> Tài Khoản</a></li> --}}
@@ -419,7 +418,7 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-  
+   
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 	<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
@@ -428,9 +427,11 @@
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
 	<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
 
-	
+	 <!--TV s/d Toast-->
+	<script src="{{asset('public/frontend/js/toastr.min.js')}}"></script> 
 
-    
+    <!--Hiện thị thông báo-->
+	{!! Toastr::message() !!}
 
     
 	

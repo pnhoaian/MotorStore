@@ -37,18 +37,22 @@ class AdminController extends Controller
         if ($result) {
 			Session::put('admin_name',$result->admin_user);
 			Session::put('admin_id',$result->admin_id);
+            Toastr::success('Đăng nhập thành công.','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+			
 			return Redirect::to('/dashboard');
 		}else{
-			Session::put('message','Tài khoản hoặc mật khẩu không chính xác !');
+            Toastr::error('Tài khoản hoặc mật khẩu không chính xác','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
 			return Redirect::to('/admin');
 		}
     }
 
     public function logout(){
-        $this->AuthLogin();
-        Session::put('admin_name',null);
-        Session::put('admin_id',null);
+        // $this->AuthLogin();
+        // Session::put('admin_name',null);
+        // Session::put('admin_id',null);
+
+        Session::flush();
         // return Redirect::to('admin.dashboard');
-        return redirect('admin');
+        return Redirect::to('/admin');
     }
 }

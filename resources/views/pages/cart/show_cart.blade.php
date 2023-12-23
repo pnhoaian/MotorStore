@@ -1,6 +1,10 @@
 @extends('welcome')
 @section('content')
 
+@section('footer')
+	@include("pages.include.footer");
+@endsection()
+
 <section id="cart_items">
     <div class="container">
         <div class="breadcrumbs">

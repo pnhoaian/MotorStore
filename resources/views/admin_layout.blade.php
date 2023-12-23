@@ -84,7 +84,7 @@
             <ul class="dropdown-menu extended logout">
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Chỉnh sửa thông tin</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Cài Đặt</a></li>
-                <li><a href="{{ URL::to('/logout-customer') }}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
+                <li><a href="{{ URL::to('/logout') }}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
             </ul>
         </li>
         <!-- user login dropdown end -->

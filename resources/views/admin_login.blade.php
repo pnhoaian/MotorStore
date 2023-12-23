@@ -33,15 +33,19 @@
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
-	<h2>Đăng Nhập Admin</h2>
+ <h2>Đăng Nhập Admin</h2> 
+
 	
-	<?php 
-	$message = Session::get('message');
+	{{--
+		php
+		$message = Session::get('message');
 	if($message){
 		echo '<span class="text-alert">'.$message.'</span>';
 		Session::put('message', null);
-	}
-	?>
+	} 
+	php--}}
+	
+
 		<form action="{{URL::to('/admin-dashboard')}}" method="post">
 			{{ csrf_field() }}
 			<input type="text" class="ggg" name="admin_user" placeholder="Nhập Username" required="">

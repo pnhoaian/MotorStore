@@ -33,16 +33,25 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 
-// *************************** Login
+// *************************** Login + Cart
 Route::get('/login',[CheckoutController::class, 'login']);
 Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
 Route::get('/register', [CheckoutController::class, 'register']);
 Route::post('/register-customer', [CheckoutController::class, 'register_customer']);
 //Route::post('/dashboard', [CustomerController::class, 'show_dashboard']);
 
+Route::get('/my-information', [CheckoutController::class, 'my_information']);
+Route::post('/update-information/{customers_id}', [CheckoutController::class, 'update_information']);
+
 Route::get('/logout-customer', [CheckoutController::class, 'logout_customer']);
 
+// Gửi thông tin đặt hàng -> DB
+Route::post('/save-checkout-customer', [CheckoutController::class, 'save_checkout_customer']);
 
+//Kiem tra thong tin giao hang
+Route::get('/payment', [CheckoutController::class, 'payment']);
+
+//Kiem tra thong tin giao hang
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);

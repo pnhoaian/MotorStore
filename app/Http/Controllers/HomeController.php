@@ -23,7 +23,10 @@ class HomeController extends Controller
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
-        $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(8)->get();
+        
+        $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
+        $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
+        $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
         // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         // ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         // ->orderby('tbl_product.product_id','desc')->get();
@@ -35,7 +38,9 @@ class HomeController extends Controller
         ->with('all_product',$all_product)
         ->with('slider',$slider)
         ->with('slidermini',$slidermini)
-        ->with('category_post',$category_post);
+        ->with('category_post',$category_post)
+        ->with('all_sdp',$all_sdp)
+        ->with('all_ds',$all_ds);
     }
     
     public function search(Request $request){

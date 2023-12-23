@@ -141,6 +141,10 @@ class ProductController extends Controller
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
+        $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
+
+        $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
+        $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
         //test
         $sdp =DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
@@ -169,6 +173,9 @@ class ProductController extends Controller
         ->with('slider',$slider)
         ->with('category_post',$category_post)
         ->with('slidermini',$slidermini)
-        ->with('sdp',$sdp);
+        ->with('sdp',$sdp)
+        ->with('all_product',$all_product)
+        ->with('all_sdp',$all_sdp)
+        ->with('all_ds',$all_ds);
     }
 }

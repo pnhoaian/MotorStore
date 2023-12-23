@@ -1,5 +1,8 @@
 @extends('welcome')
 @section('content')
+@section('footer')
+	@include("pages.include.footer");
+@endsection()
 
 <section id="cart_items">
     <div class="container">
@@ -9,6 +12,7 @@
               <li class="active">Giỏ hàng</li>
             </ol>
         </div>
+        
             @if(session()->has('message'))
                 <div class="alert alert-success">
                     {{ session()->get('message') }}
@@ -173,60 +177,56 @@
     <div class="shopper-informations">
         <div class="row" style="border: 1px solid #ccc;
         padding: 10px 10px; margin-right:0px; margin-left:0px">
-            <div class="col-sm-7 clearfix">
+            <div class="col-sm-12 clearfix">
                 <div class="bill-to">
 
-                    <div class="form-one">
-                        <form>
+                    <div>
+                        <form action="{{ URL::to('/save-checkout-customer') }}" method="POST">
+                            {{ csrf_field() }}
                             <p>Thông tin nhận hàng</p>
+                            <p style="color: #D0021B;     font-style: italic;
+                            font-size: 15px;">* Khách hàng vui lòng kiểm tra lại thông tin chi tiết giao hàng</p>
                             <div>
                                 <li class="lithongtin">Tên khách hàng</li>
-                                <input value="{{ Session::get('customer_name') }}" type="text" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_name') }}" type="text" name="shipping_name" class="textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Email</li>
-                                <input value="{{ Session::get('customer_email') }}" type="text" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_email') }}" type="text" name="shipping_email" class="textboxthongtin">
                             </div>
 
                             <div> 
                                 <li class="lithongtin">Số điện thoại</li>
-                                <input value="{{ Session::get('customer_phone') }}" type="text" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_phone') }}" type="text" name="shipping_phone" class="textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Địa chỉ</li>
-                                <input value="{{ Session::get('customer_address') }}" type="text" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_address') }}" type="text" name="shipping_address" class="textboxthongtin">
                             </div>
-                        </form>
-                    </div>
-                    <div class="form-two">
-                        <form style="margin-top: 38px;">
-                            <p></p>
+
                             <li class="lithongtin">Phương thức nhận hàng</li>
-                            <select>
-                                <option>Nhận tại cửa hàng</option>
-                                <option>Giao hàng tận nơi</option>
+                            <select name="shipping_method_receive">
+                                <option value="0">Nhận tại cửa hàng</option>
+                                <option value="1">Giao hàng tận nơi</option>
                             </select>
-                            <li class="lithongtin">Phương thức thanh toán</li>
-                            <select>
-                                <option>Tiền mặt</option>
-                                <option>Chuyển khoản</option>
+                            <li class="lithongtin" >Phương thức thanh toán</li>
+                            <select name="shipping_method_pay">
+                                <option value="0">Tiền mặt</option>
+                                <option value="1">Chuyển khoản</option>
                             </select>
+
+                            <p>Ghi chú đơn hàng</p>
+                            <textarea name="shipping_note" rows="8"></textarea>
+                            <input type="submit" name="send_order" class="btn btn-primary btn-sm" value="Xác nhận" style="float: right;">
+
                         </form>
                     </div>
-                    
+                
                 </div>
             </div>
-            <div class="col-sm-5">
-                <div class="order-message">
-                    <p>Ghi chú đơn hàng</p>
-                    <textarea name="message" rows="16"></textarea>
-                </div>	
-            </div>				
-            <td colspan="5" style="text-align: right">
-                <a class="btn btn-default check_out " href="">Xác nhận đặt hàng</a>
-            </td>	
+	
         </div>
     </div>
     @else

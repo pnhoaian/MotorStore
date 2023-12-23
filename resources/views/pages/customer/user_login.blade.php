@@ -105,7 +105,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 						<a href="{{URL::to('register')}}">Đăng ký tài khoản</a>
 					</h6>
 					<div class="right-w3l">
-						<input type="submit" value="Login" >Đăng nhập
+						<input type="submit" value="Login">
 					</div>
 				</div>
 			</form>
