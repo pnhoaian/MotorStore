@@ -89,7 +89,6 @@
                             <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
                             <li>Phí vận chuyển: <span>Free Ship</span></li>
-                            <li>Thuế VAT: <span> +10%</span></li>
                                 @if (Session::get('coupon'))
                                 @foreach (Session::get('coupon') as $key => $cou)
                                             @if ($cou['coupon_condition'] == 1)

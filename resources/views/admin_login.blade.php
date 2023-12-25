@@ -50,14 +50,12 @@
 			{{ csrf_field() }}
 			<input type="text" class="ggg" name="admin_user" placeholder="Nhập Username" required="">
 			<input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required="">
-			<span><input type="checkbox" />Remember Me</span>
-				<div class="clearfix"></div>
 				<input type="submit" value="Sign In" name="login">
 		</form>
 </div>
 </div>
 <div style="text-align: center ;color:white">
-	<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Motor</a></p>
+	<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Store</a></p>
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.dcjqaccordion.2.7.js')}}"></script>

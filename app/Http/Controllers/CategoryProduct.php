@@ -10,6 +10,7 @@ use App\Models\Slider;
 use Toastr;
 
 use App\Models\CatePost;
+use App\Models\Product;
 session_start();
 
 class CategoryProduct extends Controller
@@ -94,8 +95,39 @@ class CategoryProduct extends Controller
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
         
-       
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
+
+        $min_price = Product::min('product_price');
+        $max_price = Product::max('product_price');
+        $max_price_range = $max_price + 500000;
+
+    //     if(isset($_GET['sort_by'])){
+    //         $sort_by = $_GET['sort_by'];
+
+    //         if($sort_by =='giam_dan'){
+    //             $category_by_id = Product::with('category')->where('category_id',$category_id)->orderBy('product_price','desc')
+    //             ->paginate(6)->appends(request()->querry());
+    //         }elseif($sort_by =='tang_dan'){
+    //             $category_by_id = Product::with('category')->where('category_id',$category_id)->orderBy('product_price','asc')
+    //             ->paginate(6)->appends(request()->querry());
+    //         }elseif($sort_by =='kytu_az'){
+    //             $category_by_id = Product::with('category')->where('category_id',$category_id)->orderBy('product_name','desc')
+    //             ->paginate(6)->appends(request()->querry());
+    //         }elseif($sort_by =='kytu_za'){
+    //             $category_by_id = Product::with('category')->where('category_id',$category_id)->orderBy('product_name','asc')
+    //             ->paginate(6)->appends(request()->querry());
+    //         }
+
+    //     }elseif(isset($_GET['start_price']) && $_GET['end_price']){
+    //             $min_price = $_GET['start_price'];    
+    //             $max_price = $_GET['end_price'];
+    //             $category_by_id = Product::with('category')->whereBetween('product_price',[$min_price,$max_price])->orderBy('product_id','asc')
+    //                         ->paginate(6);
+    // }else{
+    //     $category_by_id = Product::with('category')->where('category_id',$category_id)->orderBy('product_id','desc')
+    //             ->paginate(6);
+    // }
+
         
         $category_by_id = DB::table('tbl_product')->join('tbl_category_product','tbl_product.category_id','=','tbl_category_product.category_id')
         ->where('tbl_product.category_id',$category_id)->get();
@@ -109,9 +141,10 @@ class CategoryProduct extends Controller
         ->with('category_name',$category_name)
         ->with('category_post',$category_post)
         ->with('slider',$slider)
-        ->with('slidermini',$slidermini);
-    
+        ->with('slidermini',$slidermini)
+        ->with('min_price',$min_price)
+        ->with('max_price',$max_price)
+        ->with('max_price_range',$max_price_range);
     }
 
 }
-

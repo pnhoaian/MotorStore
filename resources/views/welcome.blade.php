@@ -15,7 +15,8 @@
 	<link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
-	
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+
 	<!--CSS Toast thông báo-->
 	<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
 	<!--fontawesome bản mới-->
@@ -418,7 +419,42 @@
         }(document, 'script', 'facebook-jssdk'));
     </script>
 
-   
+   {{-- Lọc giá --}}
+   <script type="text/javascript">
+	$(document).ready(function(){
+		
+		$( "#slider-range" ).slider({
+		orientation: "horizontal",
+		range: true,
+		min:{{ $min_price }},
+		max:{{ $max_price_range }},
+		step: 10000,
+		values: [ {{ $min_price }}, {{ $max_price }} ],
+		slide: function( event, ui ) {
+			$( "#amount" ).val(  ui.values[ 0 ] + " VNĐ"  + ui.values[ 1 ] + " VNĐ");
+			$( "#start_price" ).val(ui.values[0]);
+			$( "#end_price" ).val(ui.values[1]);
+			}
+		});
+		$( "#amount" ).val( "VND" + $( "#slider-range" ).slider( "values", 0 ) +
+		" - VND" + $( "#slider-range" ).slider( "values", 1 ) );
+	});
+</script>
+	{{-- lọc Sp --}}
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#sort').on('change',function(){
+				var url = $(this).val();
+				if(url){
+					window.location = url;
+				}
+				return false;
+			});
+		});
+	</script>
+
+	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script> --}}
+	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 	<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>

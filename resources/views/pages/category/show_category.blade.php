@@ -7,6 +7,35 @@
 						<h2 class="title text-center">{{ $cate_name->category_name }} </h2>
 						@endforeach
 
+					<div class="row" style="margin-bottom: 10px">
+						<div class="col-md-4">
+							<label for="amout">Sắp xếp theo</label>
+							<form>
+								@csrf
+								<select name="sort" id="sort" class="form-control">
+									<option value="{{ Request::url() }}?sort_by=none">--------- Lọc sản phẩm ---------</option>
+									<option value="{{ Request::url() }}?sort_by=tang_dan">------- Giá tăng dần -------</option>
+									<option value="{{ Request::url() }}?sort_by= giam_dan">------- Giá giảm dần -------</option>
+									<option value="{{ Request::url() }}?sort_by=kytu_az">------ Lọc theo tên sản phẩm A đến Z -----</option>
+									<option value="{{ Request::url() }}?sort_by=kytu_za">------ Lọc theo tên sản phẩm Z đến A -----</option>	
+								</select>
+							</form>
+						</div>
+
+						<div class="col-md-4">
+							<label for="amount">Phân khúc</label>
+							<form>
+								<div id="slider-range"></div>
+								<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+								<input type="hidden" id="start_price" name="start_price">
+								<input type="hidden" id="end_price" name="end_price">
+
+								<br>
+								<input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default"> 
+							</form>
+						</div>
+					</div>
+
 						@foreach ($category_by_id as $key => $product)		
 							{{-- <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_id)}}"> --}}
 								<a href="{{ URL::to('/chi-tiet-san-pham/' . $product->product_id) }}">

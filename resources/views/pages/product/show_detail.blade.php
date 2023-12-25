@@ -123,7 +123,7 @@
 
             <div class="GiaoHang">
                 <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ ATM miễn phí tại cửa hàng<span style="color: rgb(238, 236, 225);"></span></i>
-                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Thanh toán thẻ MASTER, VISA +<strong>1.5%</strong></span></i> 
+                <i class="fa fa-check" aria-hidden="true" style="margin-bottom: 10px; font-size: 15px;"> Giao hàng nhanh chóng tiện lợi</span></i> 
             </div>
         </div>
 
@@ -141,29 +141,22 @@
             <div class="pr-content">
                 <div class="pr-item">
             <div>
-                <ul>
-                    <li></li>
-                        
-                    </li>
-                </ul>
-                <p>Nhập mã UUDAI50k giảm ngay 50K cho đơn hàng khi mua sắm online</a></p>
-                            
+                <p>Nhập mã UUDAI50k giảm ngay 50K cho đơn hàng khi mua sắm online </a></p>
+                <div class="pr-item text">
+                    <p><span class="note">(*)</span> Khuyến mãi áp dụng cho đơn hàng giá trị trên 500,000đ</p>
+                </div>     
                 
             </div>
             <div class="divb t5" data-promotion="2039089" data-group="WebNote" data-discount="0" data-productcode="" data-tovalue="20">
-                <span class="nb">2</span>
+                {{-- <span class="nb">2</span> --}}
                 <div class="divb-right">
-                            <p>Hoàn 200,000đ cho chủ thẻ tín dụng HOME CREDIT khi thanh toán đơn hàng từ 5,000,000đ <a href="https://www.thegioididong.com/tin-tuc/hoan-tien-den-200K-khi-thanh-toan-qua-homecredit-1553498" target="_blank">(Xem chi tiết tại đây)</a></p>
+                            <p>Nhập mã UUDAI100k giảm ngay 100K cho đơn hàng khi mua sắm online <a href="#" target="_blank">(Xem chi tiết tại đây)</a></p>
                 </div>
             </div>
                 </div>
-
-                
-
-
                 
             <div class="pr-item text">
-                <p><span class="note">(*)</span> Giá hoặc khuyến mãi không áp dụng trả góp lãi suất đặc biệt (0%, 0.5%, 1%, 1.5%, 2%)</p>
+                <p><span class="note">(*)</span> Khi mua hàng với đơn hàng giá trị trên 1,500,000đ</p>
             </div>
  
             </div>

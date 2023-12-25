@@ -40,6 +40,16 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày bắt đầu</label>
+                            <input type="text" name="" class="form-control" id="name">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Ngày kết thúc</label>
+                            <input type="text" name="" class="form-control" id="name">
+                        </div>
+
+                        <div class="form-group">
                             <label for="exampleInputPassword1">Số lượng Coupon</label>
                             <input type="text" name="coupon_times" class="form-control" id="name">
 

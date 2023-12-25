@@ -100,9 +100,11 @@ class CheckoutController extends Controller
     public function payment(){
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
+        $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         
         return view('pages.checkout.show_checkout')
         ->with('category', $cate_product)
+        ->with('category_post',$category_post)
         ->with('brand', $brand_product);
     }
 

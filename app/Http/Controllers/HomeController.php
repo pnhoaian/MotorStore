@@ -18,7 +18,6 @@ class HomeController extends Controller
         //slide
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',0)->take(4)->get();
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
-
         //post
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
