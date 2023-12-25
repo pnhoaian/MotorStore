@@ -84,7 +84,11 @@ Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
-//// *** Bài viết
+//Thống kê
+Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);
+
+ 
+//// **************************** Bài viết  ***********************************
 Route::get('/danh-muc-bai-viet/{post_slug}', [PostController::class, 'danh_muc_bai_viet']);
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 

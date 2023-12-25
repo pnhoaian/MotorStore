@@ -26,6 +26,7 @@
 <link rel="stylesheet" href="{{asset('public/backend/css/font.css')}}" type="text/css')}}"/>
 <link href="{{asset('public/backend/css/font-awesome.css')}}" rel="stylesheet"> 
 <link rel="stylesheet" href="{{asset('public/backend/css/morris.css')}}" type="text/css"/>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- calendar -->
 
 <link rel="stylesheet" href="{{asset('public/backend/css/monthly.css')}}">
@@ -37,6 +38,7 @@
 <script src="{{asset('public/backend/js/morris.js')}}"></script>
 <!-- //thư viện Phân trang -->
 <script src="{{asset('public/backend/js/jquery.dataTables.min.js')}}"></script>
+
 
 <!-- //favicon -->
 <link rel="shortcut icon" href="{{asset('public/backend/images/favicon.png')}}">
@@ -261,11 +263,79 @@
 <script src="{{asset('public/backend/js/jquery.slimscroll.js')}}"></script>
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <script src="{{asset('public/backend/ckeditor/ckeditor.js')}}"></script>
+
+<!-- //thư viện datepicker -->
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
  <!--TV s/d Toast-->
 <script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 
 <!--Hiện thị thông báo-->
 {!! Toastr::message() !!}
+
+<script type="text/javascript">
+    $( function() {
+      $( "#datepicker" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"yy-mm-dd",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+
+      $( "#datepicker2" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"yy-mm-dd",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+    } );
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function){
+        chart30daysorder(){
+            var chart = new Morris.Bar({
+                element: 'myFirstchart',
+                lineColors:['#819C79','#fc8710','#FF6541','#A4ADD3','#'],
+                pointFillColors: ['black'],
+                fillOpacity:0.6,
+                hideHover:'auto',
+                parseTime: false,
+                xkey: 'period',
+                ykeys:['order','sales','profit','quantity'],
+                behaveLikeLine: true,
+                labels: ['đơn hàng','doanh số','lợi nhuận','số lượng']
+            });
+            function chart30daysorder(){
+
+            }
+
+
+            $('.dashboard-filter').change(function(){
+
+            });
+
+            $('#btn-dashboard-filter').click(function(){
+                var _token = $('input[name="_token"]').val();
+                var from_date = $('#datepicker').val();
+                var to_date = $('#datepicker2').val();
+                
+                $.ajax({
+                    url:"{{ url('/filter-by-date') }}",
+                    method:"POST",
+                    dateType:"JSON",
+                    data:{form_date:form_date,to_date:to_date,_token:_token},
+                    success:function(data)
+                    {
+                        chart.setData(data);
+                    }
+                });
+            });
+        }
+    }
+</script>
+
 <!--TV s/d Ckeditor-->
 <script>
     CKEDITOR.replace('ckeditor');

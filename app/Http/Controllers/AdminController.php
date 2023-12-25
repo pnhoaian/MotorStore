@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
+use App\Statistic;
 use Toastr;
 session_start();
 
@@ -54,5 +55,30 @@ class AdminController extends Controller
         Session::flush();
         // return Redirect::to('admin.dashboard');
         return Redirect::to('/admin');
+    }
+
+    public function filter_by_date(Request $request){
+        $data = $request->all();
+        $from_date = $data['form_date'];
+        $to_date = $data['to_date'];
+
+        $get = Statistic::whereBetween('order_date',[$from_date,$to_date])->orderBy('order_date','asc')->get();
+
+        foreach($get as $key =>$val){
+            $chart_data[]= array(
+                'period' => $val->order_date,
+                'order' => $val->total_order,
+                'sales' => $val->sales,
+                'profit' => $val->profit,
+                'quantity' => $val->quantity
+            );
+        }
+        echo $data = json_encode($chart_data);
+    }
+
+    public function order_date(Request $request){
+        $order_date = $_GET['date'];
+        $order = Order::where('order_date',$order_date)->orderBy('create_at','desc')->get();
+        return view('admin.order_date')->with(compact('order'));
     }
 }
