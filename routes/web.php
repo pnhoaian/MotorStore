@@ -15,6 +15,7 @@ use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\CategoryPost;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,7 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 
-// *************************** Login + Cart
+// **************************************************** Login + Cart Checkout  ******************-----**********************
 Route::get('/login',[CheckoutController::class, 'login']);
 Route::post('/login-customer', [CheckoutController::class, 'login_customer']);
 Route::get('/register', [CheckoutController::class, 'register']);
@@ -50,16 +51,16 @@ Route::post('/save-checkout-customer', [CheckoutController::class, 'save_checkou
 
 //Btn xác nhận thanh toán cart FE
 Route::post('/confirm-order', [CheckoutController::class, 'confirm_order']);
-
-//------------------------------------------------------  Order ---------------------------------------------------------- 
-Route::get('/manage-order', [CheckoutController::class, 'manage_order']);
-Route::get('/view-order/{orderId}', [CheckoutController::class, 'view_order']);
-
 //Kiem tra thong tin giao hang
 Route::get('/payment', [CheckoutController::class, 'payment']);
 
 //Kiem tra thong tin giao hang
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
+
+//--*********************----------**---------*****************  Order ******************-----**********************
+Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
+Route::get('/manage-order', [OrderController::class, 'manage_order']);
+
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);
 //// BE: Page Liên hệ
