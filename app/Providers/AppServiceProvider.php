@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Models\Product;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,34 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        view()->composer('*',function($view){
+            $min_price = Product::min('product_price');
+            $max_price = Product::max('product_price');
+            $max_price_range = $max_price + 500000;
+
+        //     $productt = Product::all()->count();
+        // $postt = Post::all()->count();
+        // $orderr = Order::all()->count();
+        // $customerr = Customer::all()->count();
+        // $adminn = Admin::all()->count();
+        // $thongtinlienhe = Contact::where('info_id',1)->get();
+        // $productbanchay = Product::orderBy('product_sold','DESC')->take(10)->get();
+        // $productkhongbanduoc = Product::orderBy('product_sold','ASC')->take(10)->get();
+        // $customerrrr = Customer::find(Session::get('customer_id'));
+
+            $view->with('min_price',$min_price)
+            ->with('max_price',$max_price)
+            ->with('max_price_range',$max_price_range);
+            // ->with('productt',$productt)
+            // ->with('postt',$postt)
+            // ->with('orderr',$orderr)
+            // ->with('customerr',$customerr)
+            // ->with('adminn',$adminn)
+            // ->with('thongtinlienhe',$thongtinlienhe)
+            // ->with('productbanchay',$productbanchay)
+            // ->with('productkhongbanduoc',$productkhongbanduoc)
+            // ->with('customerrrr',$customerrrr);
+
+        });
     }
 }

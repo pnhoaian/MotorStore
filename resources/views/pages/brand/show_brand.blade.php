@@ -1,5 +1,8 @@
 @extends('welcome')
 @section('content')
+@section('slider')
+	@include("pages.include.slider")
+@endsection()
 													<!--Lọc sản phẩm -->
 													<div class="filter-sort__title" >Chọn theo danh mục</div>
 													<div class="filter-wrapper" style="display:flex;">
@@ -8,7 +11,8 @@
 															{{ $cate->category_name }}
 														@endforeach
 														</button>
-													</div>
+													</div>											
+													
 <div class="features_items">
                         <!--       features_items            -->
                         @foreach ($brand_name as $key => $bra_name)

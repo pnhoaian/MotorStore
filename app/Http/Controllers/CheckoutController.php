@@ -10,7 +10,11 @@ use App\Models\Brand;
 use App\Models\Slider;
 use App\Models\CatePost;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\OrderDetails;
+use App\Models\Shipping;
 use Toastr;
+use Carbon\Carbon;
 
 class CheckoutController extends Controller
 {
@@ -74,7 +78,7 @@ class CheckoutController extends Controller
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
-        Toastr::info(' Vui lòng kiểm tra thông tin nhận hàng','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        // Toastr::info(' Vui lòng kiểm tra thông tin nhận hàng','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
 
         return view('pages.checkout.show_checkout')
         ->with('category', $cate_product)
@@ -87,14 +91,90 @@ class CheckoutController extends Controller
     $data['shipping_name'] = $request->shipping_name;
     $data['shipping_phone'] = $request->shipping_phone;
     $data['shipping_email'] = $request->shipping_email;
-    $data['shipping_note'] = $request->shipping_note;
     $data['shipping_address'] = $request->shipping_address;
+    $data['shipping_note'] = $request->shipping_note;
+    
     $data['shipping_method_receive'] = $request->shipping_method_receive;
     $data['shipping_method_pay'] = $request->shipping_method_pay;
     $shipping_id = DB::table('tbl_shipping')->insertGetId($data);
 
     Session::put('shipping_id',$shipping_id);
     return Redirect('/payment');
+    }
+
+    public function confirm_order(Request $request){
+        // $data = $request->validate(
+        //     [
+        //         'shipping_name' => 'required|max:150',   
+        //         'shipping_phone' => 'required|numeric|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
+        //         'shipping_address' => 'required',          
+        //     ],
+        //     [
+        //         'shipping_name.required' => 'Yêu cầu nhập tên người nhận hàng ',
+        //         'shipping_phone.required' => 'Yêu cầu nhập số điện thoại nhận hàng',
+        //         'shipping_phone.numeric' => 'Số điện thoại phải là dạng số ',
+        //         'shipping_address.required' => 'Yêu cầu nhập địa chỉ nhận hàng',
+        //     ]
+        //     );        
+        
+         $data = $request->all();
+
+
+        $shipping = new Shipping();
+         $shipping->shipping_name = $data['shipping_name'];
+         $shipping->shipping_email = $data['shipping_email'];
+         $shipping->shipping_phone = $data['shipping_phone'];
+         $shipping->shipping_address = $data['shipping_address'];
+         
+         $shipping->shipping_note = $data['shipping_note'];
+         $shipping->shipping_method_pay = $data['shipping_method_pay'];
+         $shipping->shipping_method_receive = $data['shipping_method_receive'];
+         $shipping->save();
+         $shipping_id = $shipping->shipping_id;
+
+         $checkout_code = substr(md5(microtime()),rand(0,26),5);
+
+  
+         $order = new Order;
+         $order->customer_id = Session::get('customer_id');
+         $order->shipping_id = $shipping_id;
+         $order->order_status = 1;
+
+         $order->order_code = $checkout_code;
+
+         date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+
+        $order_date = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d');
+
+         $order->create_at = now();
+         $order->order_date = $order_date;
+         $order->save();
+
+
+         if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart){
+                $order_details = new OrderDetails;
+                $order_details->Order_code = $checkout_code;
+                $order_details->Product_id  = $cart['product_id'];
+                $order_details->Product_name = $cart['product_name'];
+                $order_details->Product_price = $cart['product_price'];
+
+                $order_details->Product_sales_quantity = $cart['product_qty'];
+                $order_details->Product_coupon =  $data['order_coupon'];
+                // $order_details->Product_feeship = $priceship;
+                $order_details->save();
+            }
+         }
+        
+        
+        if($shipping->shipping_method_pay ==0){
+            Toastr::success('Đặt hàng thành công, đơn hàng đang được kiểm tra.','Thông báo !');
+        }
+        Session::forget('coupon');
+            Session::forget('fee');
+            Session::forget('cart');
     }
 
     public function payment(){
@@ -134,4 +214,25 @@ class CheckoutController extends Controller
         return Redirect('/my-information');
     }
 
+    public function manage_order(){
+        $all_order = DB::table('tbl_order')
+        ->join('tbl_customer','tbl_order.customer_id','=','tbl_customer.customer_id')
+        ->select('tbl_order.*','tbl_customer.customer_name')
+        ->orderby('tbl_order.order_id','desc')->get();
+
+        $manager_order = view ('admin.order.manage_order')->with('all_order', $all_order);
+        return view('admin_layout')->with('admin.order.manage_order', $manager_order);
+
+    }
+    public function view_order($orderId){
+        $order_by_id = DB::table('tbl_order')
+        ->join('tbl_customer','tbl_order.customer_id','=','tbl_customer.customer_id')
+        ->join('tbl_shipping','tbl_order.shipping_id','=','tbl_shipping.shipping_id')
+        ->join('tbl_order_details','tbl_order.order_code','=','tbl_order_details.order_code')
+        ->select('tbl_order.*','tbl_customer.*','tbl_shipping.*','tbl_order_details.*')->first();
+
+        $manager_order_by_id = view ('admin.order.view_order')->with('order_by_id', $order_by_id);
+        return view('admin_layout')->with('admin.order.view_order', $manager_order_by_id);
+    }
+    
 }

@@ -15,7 +15,8 @@
 	<link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+	<link href="{{asset('public/frontend/css/jquery-ui.min.css')}}" rel="stylesheet">
+
 
 	<!--CSS Toast thông báo-->
 	<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
@@ -82,16 +83,6 @@
 											<i class="fa fa-outdent" aria-hidden="true" style="margin-right: 10px;margin-left: -10px"></i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
-
-
-
-
-
-
-
-
-
-
                                 {{-- <li><a href="{{ URL::to('/logout-checkout') }}"><i class="fas fa-user"></i>Đăng
                                         xuất</a></li> --}}
 
@@ -163,15 +154,14 @@
 							<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
 							<li><a href="{{URL::to('lien-he')}}">Liên Hệ</a></li>
 							<li class="test-s" style="
-							margin-top: -6px;>
+							margin-top: -6px;">
 								<form action="{{URL::to('/tim-kiem')}}" method="POST">
 									{{ csrf_field() }}
 									<div class="search_box pull-right">
 										<div style="display: flex">
 											<input type="text" name="keywords_submit" id="keywords"
 												placeholder="Tìm kiếm sản phẩm..." />
-											<button class="button-timkiem" name="search_item"><i class="fa fa-search"
-													style="color: #fff"></i></button>
+											<input type="submit"  value="Tìm" style="color: #FFF;    font-family: -apple-system, system-ui, BlinkMacSystemFont;    font-weight: 600;" class="button-timkiem" name="search_item"/>
 		
 										</div>
 									</div>
@@ -421,40 +411,48 @@
 
    {{-- Lọc giá --}}
    <script type="text/javascript">
-	$(document).ready(function(){
-		
-		$( "#slider-range" ).slider({
-		orientation: "horizontal",
-		range: true,
-		min:{{ $min_price }},
-		max:{{ $max_price_range }},
-		step: 10000,
-		values: [ {{ $min_price }}, {{ $max_price }} ],
-		slide: function( event, ui ) {
-			$( "#amount" ).val(  ui.values[ 0 ] + " VNĐ"  + ui.values[ 1 ] + " VNĐ");
-			$( "#start_price" ).val(ui.values[0]);
-			$( "#end_price" ).val(ui.values[1]);
+	$(document).ready(function() {
+
+		$("#slider-range").slider({
+			orientation: "horizontal",
+			range: true,
+			min: {{ $min_price }},
+			max: {{ $max_price }},
+			step: 100000,
+			values: [{{ $min_price }}, {{ $max_price }}],
+
+			slide: function(event, ui) {
+				$("#amount_start").val(ui.values[0]).simpleMoneyFormat();
+				$("#amount_end").val(ui.values[1]).simpleMoneyFormat();
+
+				$("#start_price").val(ui.values[0]);
+				$("#end_price").val(ui.values[1]);
+
 			}
 		});
-		$( "#amount" ).val( "VND" + $( "#slider-range" ).slider( "values", 0 ) +
-		" - VND" + $( "#slider-range" ).slider( "values", 1 ) );
+		$("#amount_start").val($("#slider-range").slider("values", 0)).simpleMoneyFormat();
+		$("#amount_end").val($("#slider-range").slider("values", 1)).simpleMoneyFormat();
+
 	});
 </script>
 	{{-- lọc Sp --}}
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('#sort').on('change',function(){
-				var url = $(this).val();
-				if(url){
-					window.location = url;
-				}
-				return false;
-			});
-		});
-	</script>
+        $(document).ready(function() {
+            $('#sort').on('change', function() {
+                var url = $(this).val();
+                // alert(url);
+                if (url) {
+                    window.location = url;
+                }
+                return false;
+            });
+        });
+    </script>
+
 
 	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script> --}}
-	<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+	{{-- <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script> --}}
+	<script src="{{asset('public/frontend/js/jquery-ui.min.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.js')}}"></script>
 	<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
 	<script src="{{asset('public/frontend/js/jquery.scrollUp.min.js')}}"></script>
@@ -479,13 +477,14 @@
                 var cart_product_name = $('.cart_product_name_' + id).val();
                 var cart_product_image = $('.cart_product_image_' + id).val();
                 var cart_product_price = $('.cart_product_price_' + id).val();
+				var cart_product_price_sale = $('.cart_product_price_sale_' + id).val();
                 var cart_product_qty = $('.cart_product_qty_' + id).val();
                 var _token = $('input[name="_token"]').val();
 
 			$.ajax({
                 	url: '{{url('/add-cart-ajax')}}',
                     method: 'POST',
-					data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_qty:cart_product_qty,_token:_token},
+					data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_price_sale:cart_product_price_sale,cart_product_qty:cart_product_qty,_token:_token},
 					success:function(data){
 						swal({
 							title: "Đã thêm sản phẩm vào giỏ hàng",
@@ -504,6 +503,70 @@
 		});
 		});
 	</script>
+
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('.send_order').click(function() {
+			var shipping_email = $('.shipping_email').val();
+			var shipping_name = $('.shipping_name').val();
+			var shipping_address = $('.shipping_address').val();
+			var shipping_phone = $('.shipping_phone').val();
+			var shipping_note = $('.shipping_note').val();
+			var shipping_method_pay = $('.shipping_method_pay').val();
+			var shipping_method_receive = $('.shipping_method_receive').val();
+			// var order_fee = $('.order_fee').val();
+			var order_coupon = $('.order_coupon').val();
+			var _token = $('input[name="_token"]').val();
+
+
+			// if (shipping_name == '' || shipping_phone == '' || shipping_address == '') {
+			//     alert('Chưa nhập thông tin yêu cầu');
+			// }
+
+			$.ajax({
+				url: '{{ url('/confirm-order') }}',
+				method: 'POST',
+				data: {
+					shipping_email: shipping_email,
+					shipping_name: shipping_name,
+					shipping_phone: shipping_phone,
+					shipping_address: shipping_address,
+					shipping_note: shipping_note,
+					_token: _token,
+					order_coupon: order_coupon,
+					shipping_method_pay: shipping_method_pay,
+					shipping_method_receive: shipping_method_receive
+				},
+				success: function() {
+					if (shipping_method_pay == 0) {
+						window.location.href =
+							"{{ url('/checkout') }}";
+					} else {
+						window.location.href =
+							"{{ url('/gioi-thieu') }}";
+					}
+
+				},
+				error: function(error) {
+					var formErr = error.responseJSON.errors;
+					var str = ' <ul>';
+					for (var err in formErr) {
+						str += '<li> ' + formErr[err][0] +
+							'</li>';
+					}
+					str += '</ul>';
+					$('#form-errors').html(str);
+				}
+			});
+
+		});
+
+
+	});
+</script>
+
+
+
 
 </body>
 </html>

@@ -42,36 +42,36 @@
                         $total = 0;
                     @endphp
                     @foreach (Session::get('cart') as $key => $cart)
-                        @php
- 
-                            $subtotal = $cart['product_price']*$cart['product_qty'];
-                            $total += $subtotal;
-                        @endphp
-                        <tr>
-                            <td class="cart_product" style="width:250px;padding-left:15px">
-                                <img src="{{asset('public/upload/product/'.$cart['product_image'])}}" width="150px" height="110px" alt="{{$cart['product_image']}}">
+                    @php
 
-                            </td>
-                            <td class="cart_description">
-                                <h4 style="margin-bottom: 20px; text-align:center"><a>{{ $cart['product_name']}}</a></h4>
-                            </td>
-                            <td class="cart_price">
-                                <p>{{ number_format($cart['product_price'],0,',','.' )}} VNĐ</p>
-                            </td>
-                            <td class="cart_quantity">
-                                <div class="cart_quantity_button">
-                                        <input style="margin-bottom: 12px; width:70px" class="cart_quantity" type="number" name="cart_qty[{{ $cart['session_id'] }}]" min="1" value="{{ $cart['product_qty'] }}">
-                                </div>
-                            </td>
-                            <td class="cart_total">
-                                <p class="cart_total_price">{{ number_format($subtotal,0,',','.' )}} VNĐ</p>
-                            </td>
-                            <td class="cart_delete">
-                                <a class="cart_quantity_delete" href="{{URL::to('/del-product/'.$cart['session_id'])}}"><i class="fa fa-trash-o"></i></a>
-                            </td>
-                        </tr>        
+                        $subtotal = $cart['product_price_sale']*$cart['product_qty'];
+                        $total += $subtotal;
+                    @endphp
+                    <tr>
+                        <td class="cart_product" style="width:250px;padding-left:15px">
+                            <img src="{{asset('public/upload/product/'.$cart['product_image'])}}" width="150px" height="110px" alt="{{$cart['product_image']}}">
 
-                    @endforeach
+                        </td>
+                        <td class="cart_description">
+                            <h4 style="margin-bottom: 20px; text-align:center"><a>{{ $cart['product_name']}}</a></h4>
+                        </td>
+                        <td class="cart_price">
+                            <p>{{ number_format($cart['product_price_sale'],0,',','.' )}} VNĐ</p>
+                        </td>
+                        <td class="cart_quantity">
+                            <div class="cart_quantity_button">
+                                    <input style="margin-bottom: 12px; width:70px" class="cart_quantity" type="number" name="cart_qty[{{ $cart['session_id'] }}]" min="1" value="{{ $cart['product_qty'] }}">
+                            </div>
+                        </td>
+                        <td class="cart_total">
+                            <p class="cart_total_price">{{ number_format($subtotal,0,',','.' )}} VNĐ</p>
+                        </td>
+                        <td class="cart_delete">
+                            <a class="cart_quantity_delete" href="{{URL::to('/del-product/'.$cart['session_id'])}}"><i class="fa fa-trash-o"></i></a>
+                        </td>
+                    </tr>        
+
+                @endforeach
                     <tr>
 
                         <td><input type="submit" value="Cập Nhật giỏ hàng" name="update-qty" class="check_out btn btn-default btn-sm"></td>
@@ -88,8 +88,27 @@
                         <td class="bill" style="width:350px;padding-left:60px">
                             <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
-                            <li>Phí vận chuyển: <span>Free Ship</span></li>
-                            <li>Thuế VAT: <span> +10%</span></li>
+
+
+                            @php
+                                if ( Session::get('coupon')) {
+                                    $total_after = $total_after_coupon;
+                                    $total_after = $total_after + Session::get('fee');
+                                } elseif ( !Session::get('coupon')) {
+                                    $total_after = $total;
+                                }
+                                
+                            @endphp
+
+
+                            <li>Phí vận chuyển: 
+                                @if ( $total_after > 490.000 )
+                                    0đ
+                                @else
+                                     25.000 VNĐ
+                                @endif
+                            </li>
+                            
                                 @if (Session::get('coupon'))
                                 @foreach (Session::get('coupon') as $key => $cou)
                                             @if ($cou['coupon_condition'] == 1)
@@ -148,6 +167,7 @@
                                 @php
                                     echo'Không có sản phẩm trong giỏ hàng';
                                 @endphp
+
                             </td>
                         </tr>
                     @endif
@@ -165,11 +185,22 @@
                             <input type="submit" class="btn btn-default check_coupon" value="Áp dụng Coupon" name="check_coupon">
                             </div>
                         </form>
+
+                        
                     </td>
                 </tr>
             @endif
             </table>
         </div>
+        @if (Session::get('coupon'))
+                                                @foreach (Session::get('coupon') as $key => $cou)
+                                                    <input type="hidden" name="order_coupon" class="order_coupon"
+                                                        value="{{ $cou['coupon_code'] }}">
+                                                @endforeach
+                                            @else
+                                                <input type="hidden" name="order_coupon" class="order_coupon"
+                                                    value="no">
+                                            @endif
 
 
 
@@ -188,38 +219,38 @@
                             font-size: 15px;">* Khách hàng vui lòng kiểm tra lại thông tin chi tiết giao hàng</p>
                             <div>
                                 <li class="lithongtin">Tên khách hàng</li>
-                                <input value="{{ Session::get('customer_name') }}" type="text" name="shipping_name" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_name') }}" type="text" name="shipping_name" class="shipping_name textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Email</li>
-                                <input value="{{ Session::get('customer_email') }}" type="text" name="shipping_email" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_email') }}" type="text" name="shipping_email" class="shipping_email textboxthongtin">
                             </div>
 
                             <div> 
                                 <li class="lithongtin">Số điện thoại</li>
-                                <input value="{{ Session::get('customer_phone') }}" type="text" name="shipping_phone" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_phone') }}" type="text" name="shipping_phone" class="shipping_phone textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Địa chỉ</li>
-                                <input value="{{ Session::get('customer_address') }}" type="text" name="shipping_address" class="textboxthongtin">
+                                <input value="{{ Session::get('customer_address') }}" type="text" name="shipping_address" class="shipping_address textboxthongtin">
                             </div>
 
                             <li class="lithongtin">Phương thức nhận hàng</li>
-                            <select name="shipping_method_receive">
+                            <select name="shipping_method_receive" class="shipping_method_receive">
                                 <option value="0">Nhận tại cửa hàng</option>
                                 <option value="1">Giao hàng tận nơi</option>
                             </select>
                             <li class="lithongtin" >Phương thức thanh toán</li>
-                            <select name="shipping_method_pay">
+                            <select name="shipping_method_pay" class="shipping_method_pay">
                                 <option value="0">Tiền mặt</option>
                                 <option value="1">Chuyển khoản</option>
                             </select>
 
                             <p>Ghi chú đơn hàng</p>
-                            <textarea name="shipping_note" rows="8"></textarea>
-                            <input type="submit" name="send_order" class="btn btn-primary btn-sm" value="Xác nhận" style="float: right;">
+                            <textarea name="shipping_note" class="shipping_note" rows="8"></textarea>
+                            <button type="button" name="send_order" class="btn btn-primary send_order"  style="float: right;">xx</button>
 
                         </form>
                     </div>

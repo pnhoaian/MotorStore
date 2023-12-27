@@ -263,7 +263,7 @@ a#scrollUp i{
   
 }
 
-.search_box input {
+/* .search_box input {
   background: #F0F0E9;
   border: medium none;
   color: #B2B2B2;
@@ -277,7 +277,7 @@ a#scrollUp i{
   background-image: url(../images/home/searchicon.png);
   background-repeat: no-repeat;
   background-position: 130px;
-}
+} */
 
 
 /*  Dropdown menu*/
@@ -947,7 +947,6 @@ list-style-type: none;
   transition: height 500ms ease 0s;
   width: 100%;
   display: block;
-  opacity:;
 }
 
 .single-products:hover .product-overlay {

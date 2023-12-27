@@ -159,7 +159,7 @@
                         <span>Đơn Hàng</span>
                     </a>
                     <ul class="sub">
-						<li><a href="{{URL::to('/all-product')}}">Quản Lý Đơn Hàng</a></li>
+						<li><a href="{{URL::to('/manage-order')}}">Quản Lý Đơn Hàng</a></li>
                     </ul>
                 </li>
 

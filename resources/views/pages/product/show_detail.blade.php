@@ -63,8 +63,11 @@
                         {{-- <input type="hidden" value="{{ $value->product_qty }}"
                             class="cart_product_qty_{{ $value->product_id }}"> --}}
 
-                        <input type="hidden" value="{{ $value->product_price }}"
-                            class="cart_product_price_{{ $value->product_id }}">
+                        {{-- <input type="hidden" value="{{ $value->product_price }}"
+                            class="cart_product_price_{{ $value->product_id }}"> --}}
+
+
+
 
             </form>
             <p><b>Mã sản phẩm:</b> {{ $value->product_id }}</p>
@@ -82,7 +85,7 @@
                 font-weight: bold;
                 font-style: normal;
                 text-decoration: none;
-                color: #f00;">{{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</span>
+                color: #f00;">{{number_format( $value->product_price_sale, 0, ',', '.') . ' ' . 'đ̲' }}</span>
                 
 
             <!--price_update_43154--></p>

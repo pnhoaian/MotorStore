@@ -1,39 +1,72 @@
 @extends('welcome')
 @section('content')
-
+@section('slider')
+	@include("pages.include.slider")
+@endsection()
 <div class="features_items">
                         <!--       features_items            -->
 						@foreach ($category_name as $key => $cate_name)
 						<h2 class="title text-center">{{ $cate_name->category_name }} </h2>
 						@endforeach
 
-					<div class="row" style="margin-bottom: 10px">
-						<div class="col-md-4">
-							<label for="amout">Sắp xếp theo</label>
-							<form>
-								@csrf
-								<select name="sort" id="sort" class="form-control">
-									<option value="{{ Request::url() }}?sort_by=none">--------- Lọc sản phẩm ---------</option>
-									<option value="{{ Request::url() }}?sort_by=tang_dan">------- Giá tăng dần -------</option>
-									<option value="{{ Request::url() }}?sort_by= giam_dan">------- Giá giảm dần -------</option>
-									<option value="{{ Request::url() }}?sort_by=kytu_az">------ Lọc theo tên sản phẩm A đến Z -----</option>
-									<option value="{{ Request::url() }}?sort_by=kytu_za">------ Lọc theo tên sản phẩm Z đến A -----</option>	
-								</select>
+						<div class="row" style="margin-bottom:10px">
+							{{-- ***************** Bộ lọc ***************** --}}
+							<div class="col-md-4">
+								<label for="amount" style="margin-left:5px">Sắp xếp theo:</label>
+								<form>
+									@csrf
+									<select name="sort" id="sort" class="form-control"
+										style="font-family: -apple-system, system-ui, BlinkMacSystemFont;
+													border-radius: 0px;
+													margin-left: 5px;
+													color: #000;
+													width: 222px;
+													border: 2px solid #dddddd;">
+										<option value="{{ Request::url() }}?sort_by=none">--Chọn--</option>
+										<option value="{{ Request::url() }}?sort_by=tang_dan">--Giá tăng dần--</option>
+										<option value="{{ Request::url() }}?sort_by=giam_dan">--Giá giảm dần--</option>
+										<option value="{{ Request::url() }}?sort_by=kytu_az">--Lọc theo tên từ A đến Z--</option>
+										<option value="{{ Request::url() }}?sort_by=kytu_za">--Lọc theo tên từ Z đến A--</option>
+									</select>
+								</form>
+							</div>
+				{{-- ***************** End Bộ lọc ***************** --}}
+							<div class="col-md-4" style="margin-left:-70px;margin-top: 1px;">
+								<label for="amount">Lọc giá:</label>
+								<form>
+									<div id="slider-range"></div>
+				
+									<style type="text/css">
+										.style-range p {
+											float: left;
+										}
+									</style>
+				
+									<div class="style-range">
+										<div style="display:flex">
+											<p><input type="text" id="amount_start" readonly
+													style="border:0; width:85px;color:#000000; font-weight:bold;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
+											</p>
+											<p>-</p>
+											<p style="margin-left:30px"><input type="text" id="amount_end" readonly
+													style="border:0; color:#000000; font-weight:bold;width:105px;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
+											</p>
+										</div>
+									</div>
+							</div>
+							<input type="hidden" name="start_price" id="start_price">
+				
+							<input type="hidden" name="end_price" id="end_price">
+				
+				
+							<br>
+							<input type="submit" name="filter_price" style="border:1px solid #2366b5;border-radius:0px;height:34px"
+								value="Xem kết quả" class="btn btn-sm btn-default">
 							</form>
 						</div>
-
-						<div class="col-md-4">
-							<label for="amount">Phân khúc</label>
-							<form>
-								<div id="slider-range"></div>
-								<input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
-								<input type="hidden" id="start_price" name="start_price">
-								<input type="hidden" id="end_price" name="end_price">
-
-								<br>
-								<input type="submit" name="filter_price" value="Lọc giá" class="btn btn-sm btn-default"> 
-							</form>
-						</div>
+				
+				
+				
 					</div>
 
 						@foreach ($category_by_id as $key => $product)		

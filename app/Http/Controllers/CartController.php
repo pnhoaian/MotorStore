@@ -85,6 +85,7 @@ class CartController extends Controller
                     'product_image' => $val['product_image'],
                     'product_qty' => $val['product_qty']+ $data['cart_product_qty'],
                     'product_price' => $val['product_price'],
+                    'product_price_sale' => $val['product_price_sale']
                     );
                     Session::put('cart',$cart);
                 }
@@ -98,6 +99,7 @@ class CartController extends Controller
                     'product_image' => $data['cart_product_image'],
                     'product_qty' => $data['cart_product_qty'],
                     'product_price' => $data['cart_product_price'],
+                    'product_price_sale' => $data['cart_product_price_sale']
                 );
                 Session::put('cart',$cart);
             }
@@ -109,6 +111,7 @@ class CartController extends Controller
                 'product_image' => $data['cart_product_image'],
                 'product_qty' => $data['cart_product_qty'],
                 'product_price' => $data['cart_product_price'],
+                'product_price_sale' => $data['cart_product_price_sale']
             );
             Session::put('cart',$cart);
         }

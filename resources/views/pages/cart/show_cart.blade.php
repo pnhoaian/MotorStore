@@ -44,7 +44,7 @@
                     @foreach (Session::get('cart') as $key => $cart)
                         @php
  
-                            $subtotal = $cart['product_price']*$cart['product_qty'];
+                            $subtotal = $cart['product_price_sale']*$cart['product_qty'];
                             $total += $subtotal;
                         @endphp
                         <tr>
@@ -56,7 +56,7 @@
                                 <h4 style="margin-bottom: 20px; text-align:center"><a>{{ $cart['product_name']}}</a></h4>
                             </td>
                             <td class="cart_price">
-                                <p>{{ number_format($cart['product_price'],0,',','.' )}} VNĐ</p>
+                                <p>{{ number_format($cart['product_price_sale'],0,',','.' )}} VNĐ</p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
@@ -88,7 +88,25 @@
                         <td class="bill" style="width:350px;padding-left:60px">
                             <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
-                            <li>Phí vận chuyển: <span>Free Ship</span></li>
+                            @php
+                                if ( Session::get('coupon')) {
+                                    $total_after = $total_after_coupon;
+                                    $total_after = $total_after + Session::get('fee');
+                                } elseif ( !Session::get('coupon')) {
+                                    $total_after = $total;
+                                }
+                            @endphp
+
+
+                            <li>Phí vận chuyển: 
+                                @if ( $total_after > 490.000 )
+                                    0đ
+                                @else
+                                     25.000 VNĐ
+                                @endif
+                            </li>
+
+                            
                                 @if (Session::get('coupon'))
                                 @foreach (Session::get('coupon') as $key => $cou)
                                             @if ($cou['coupon_condition'] == 1)

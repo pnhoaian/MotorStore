@@ -48,6 +48,13 @@ Route::get('/logout-customer', [CheckoutController::class, 'logout_customer']);
 // Gửi thông tin đặt hàng -> DB
 Route::post('/save-checkout-customer', [CheckoutController::class, 'save_checkout_customer']);
 
+//Btn xác nhận thanh toán cart FE
+Route::post('/confirm-order', [CheckoutController::class, 'confirm_order']);
+
+//------------------------------------------------------  Order ---------------------------------------------------------- 
+Route::get('/manage-order', [CheckoutController::class, 'manage_order']);
+Route::get('/view-order/{orderId}', [CheckoutController::class, 'view_order']);
+
 //Kiem tra thong tin giao hang
 Route::get('/payment', [CheckoutController::class, 'payment']);
 
@@ -78,7 +85,7 @@ Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_h
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
-//*********************************************************** Admin *************************************************************
+//******************************************************************* Admin ***************************************************************
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
@@ -88,12 +95,12 @@ Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);
 
  
-//// **************************** Bài viết  ***********************************
+//// ************************************************** Bài viết  *******************************************************
 Route::get('/danh-muc-bai-viet/{post_slug}', [PostController::class, 'danh_muc_bai_viet']);
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);
 
 
-//************* Category Product *************
+//****************************************************** Category Product **********************************************
 Route::get('/add-category-product', [CategoryProduct::class, 'add_category_product']);
 Route::get('/all-category-product', [CategoryProduct::class, 'all_category_product']);
 Route::post('/save-category-product', [CategoryProduct::class, 'save_category_product']);
@@ -107,7 +114,7 @@ Route::get('/active-category-product/{category_product_id}', [CategoryProduct::c
 Route::get('/inactive-category-product/{category_product_id}', [CategoryProduct::class, 'inactive_category_product']);
 
 
-//************* Brand Product *************
+//******************************************************** Brand Product *************************************************************
 Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
 Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product']);
 Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
@@ -166,6 +173,7 @@ Route::get('/delete-to-cart', [CartController::class, 'delete_to_cart']);
 
 Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
 Route::get('/del-all-product',[CartController::class, 'del_all_product']);
+
 
 //-----------------------------------------------------  Coupon -------------------------------------------------------- 
 //User
