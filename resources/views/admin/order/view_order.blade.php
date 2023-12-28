@@ -143,9 +143,9 @@
                     @php
                     //Phần trăm sau giảm
                         $total_after_coupon = ($total * $coupon_number)/100;
-
-                    //Tổng tiền thanh toán
+                        //Tổng tiền thanh toán
                         $total_coupon = $total - $total_after_coupon + $details->product_feeship;
+                        
                     @endphp                       
                     @else
                         @php
@@ -153,27 +153,68 @@
                         @endphp
                     @endif 
 
-                    <td>Mã khuyến mãi:     
-                        @if ($details->product_coupon!='no')
-                            {{ number_format($details->product_coupon, 0, ',', '.') . ' ' . '₫' }} 
-                        @else
-                            Không có mã giảm giá
-                        @endif                                          
-                    </td>
+                    <td>     
+                        @php
+                                    if ($coupon_condition == 1) {
+                                        $coupon_echo = $coupon_number . '%';
+                                    } elseif ($coupon_condition == 2) {
+                                        $coupon_echo = number_format($coupon_number, 0, ',', '.') . 'đ';
+                                    }
+                                @endphp
+
+                                Tổng tiền hàng: {{ number_format($total, 0, ',', '.') }}đ <br>
+                                 @if ($details->product_coupon != 'no')
+                                    {{ $details->product_coupon }}  Giá trị giảm: {{ $coupon_echo }} </p>
+                                @else
+                                    Không có -
+                                @endif
+                                @php
+                                    $total_coupon = 0;
+                                @endphp
+                                @if ($coupon_condition == 1)
+                                    @php
+                                        
+                                        $total_after_coupon = ($total * $coupon_number) / 100;
+                                        echo 'Tổng giảm: ' . number_format($total_after_coupon, 0, ',', '.') . 'đ' . '</br>';
+                                        $total_coupon = $total + $details->product_feeship - $total_after_coupon;
+                                    @endphp
+                                @else
+                                    @php
+                                        echo 'Tổng giảm: ' . number_format($coupon_number, 0, ',', '.') . 'đ' . '</br>';
+                                        $total_coupon = $total + $details->product_feeship - $coupon_number;
+                                        
+                                    @endphp
+                                @endif                            
+                            </td>
 
                     <td>
-                        Phí ship: {{  number_format($details->Product_feeship, 0, ',', '.') . ' ' . '₫' }}
+                        Phí ship: 
+
+                        @if ( $total > 500000 )
+                        0đ
+                        @php                          
+                            $fee = 0;                                                   
+                        @endphp
+                    @else
+                        20.000 VNĐ
+                        @php
+                            $fee = 20000;                     
+                        @endphp
+                    @endif
+
+
+
                     </td>
 
                     <td>                        
                         Tổng thanh toán:                   
-                        {{ number_format($total_coupon, 0, ',', '.') . ' ' . '₫' }} 
+                        {{ number_format($total_coupon + $fee, 0, ',', '.') . ' ' . '₫' }} 
                     </td>
                 </tr>
                 </tbody>
             </table>
 
-            <a href="{{ '/print-order/'.$details->Order_code}}">IN ĐƠN HÀNG</a>
+            <a target="_blank" href="{{url('/print-order/' . $details->Order_code)}}">IN ĐƠN HÀNG</a>
         </div>
     </div>
 </div>

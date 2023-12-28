@@ -56,27 +56,38 @@ class OrderController extends Controller
         $customer = Customer::where('customer_id',$customer_id)->first();
         $shipping = Shipping::where('shipping_id',$shipping_id)->first();
         $order_details_product = OrderDetails::with('product')->where('order_code', $order_code)->get();
+        
 
         foreach($order_details as $key =>$order_d){
             //bảng or_detail
-            $product_coupon = $order_d->product_coupon;
+            $product_coupon = $order_d->Product_coupon;
         }
-        if($product_coupon!='no'){
-            $coupon = Coupon::where('coupon_code',$product_coupon)->first();
-            $coupon_condition = $coupon->coupon_condition;
-            $coupon_number = $coupon->coupon_number;
-        }else{
-            $coupon_condition = 1;
-            $coupon_number = 0;
-        }
+        if($product_coupon != 'no'){
+			$coupon = Coupon::where('coupon_code',$product_coupon)->first();
+            // Lấy giá trị bảng order_detail đối chiếu để lấy số tiền giảm bảng Coupon
+			$coupon_condition = $coupon->coupon_condition;
+			$coupon_number = $coupon->coupon_number;
+
+			if($coupon_condition==0){
+				$coupon_echo = $coupon_number.'%';
+			}elseif($coupon_condition==1){
+				$coupon_echo = number_format($coupon_number,0,',','.').'đ';
+			}
+		}else{
+			$coupon_condition = 2;
+			$coupon_number = 0;
+
+			$coupon_echo = '0';
+		
+		}
         
-        // $coupon = Coupon::where('coupon_code',$product_coupon)->first();
+         
         // if($coupon->coupon_code!='no')
         // {
-
+            $coupon = Coupon::where('coupon_code',$product_coupon)->first();
         // }
         // $coupon_condition = $coupon->coupon_condition;
-        // $coupon_number = $coupon->coupon_number;
+
 
         return view('admin.order.view_order')->with(compact('order_details','customer','shipping','order','order_details_product','coupon','coupon_condition','coupon_number'));
     }
@@ -84,10 +95,168 @@ class OrderController extends Controller
                                 //IN ĐƠN HÀNG
     public function print_order($checkout_code){
         $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($this->print_order_convert($checkout_code));
-        return $pdf->stream();
+		$pdf->loadHTML($this->print_order_convert($checkout_code));	
+		return $pdf->stream();
     }
+
     public function print_order_convert($checkout_code){
-        return $checkout_code;
+        $order_details = OrderDetails::with('product')->where('order_code',$checkout_code)->get();
+        $order = Order::where('order_code',$checkout_code)->get();
+        foreach($order as $key => $ord){
+            $customer_id = $ord->customer_id;
+            $shipping_id = $ord->shipping_id;
+            $order_status = $ord->order_status;
+        }
+        $customer = Customer::where('customer_id',$customer_id)->first();
+        $shipping = Shipping::where('shipping_id',$shipping_id)->first();
+        $order_details_product = OrderDetails::with('product')->where('order_code', $checkout_code)->get();
+
+        foreach($order_details as $key =>$order_d){
+            //bảng or_detail
+            $product_coupon = $order_d->Product_coupon;
+        }
+        if($product_coupon != 'no'){
+			$coupon = Coupon::where('coupon_code',$product_coupon)->first();
+            // Lấy giá trị bảng order_detail đối chiếu để lấy số tiền giảm bảng Coupon
+			$coupon_condition = $coupon->coupon_condition;
+			$coupon_number = $coupon->coupon_number;
+
+			if($coupon_condition==0){
+				$coupon_echo = $coupon_number.'%';
+			}elseif($coupon_condition==1){
+				$coupon_echo = number_format($coupon_number,0,',','.').'đ';
+			}
+		}else{
+			$coupon_condition = 2;
+			$coupon_number = 0;
+
+			$coupon_echo = '0';
+		
+        }
+        $output = '';
+
+        $output.='<style>body{
+			font-family: DejaVu Sans;
+		}
+		.table-styling{
+			border:1px solid #000;
+		}
+		.table-styling tbody tr td{
+			border:1px solid #000;
+		}
+
+        </style> 
+        <p>Công ty TNHH MTV Hoài An Store</p>
+        <p>Địa chỉ: 180 Cao lỗ, Phường 4, Quận 8, Tp HCM</p>
+        <p>Hotline: 093 9999 999</p>
+        <h1><center>PHIẾU MUA HÀNG</center></h1>
+
+            <table>
+                <thead>
+                <h4>Thông tin người nhận: </h4>
+                    <p> Tên người nhận: '.$customer->customer_name.'</p>
+                    <p> Số điện thoại: '.$customer->customer_phone.'</p>
+                    <p> Địa chỉ: '.$customer->customer_address.'</p>
+                    <p> Ghi chú: '.$customer->shipping_note.'</p>
+                </thead>
+
+                <tbody>';
+                
+                
+                
+                $output.=' 
+                </tbody>
+
+            </table>
+            <h4>Thông tin đơn hàng </h4>
+            <table class="table-styling">
+
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Tên sản phẩm</th>
+                        <th>Số lượng</th>
+                        <th>Giá</th>
+                        <th>Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody>';
+                $i=0;
+                $total = 0;
+                foreach($order_details_product as $key => $product){
+                    $i++;
+                $subtotal = $product->Product_price * $product->Product_sales_quantity;
+                $total +=$subtotal;
+                    if($product->Product_coupon !='no'){
+                        $Product_coupon = $product->Product_coupon;
+                    }else{
+                        $Product_coupon = 'Không có mã khuyến mãi';
+                    }
+
+                $output.='
+                    <tr >
+                        <td style="text-align: center;">'.$i.'</td>
+                        <td>'.$product->Product_name.'</td>
+                        <td style="text-align: center;">'.$product->Product_sales_quantity.'</td>
+                        <td style="text-align: center;">'.number_format($product->Product_price, 0, ',', '.') . ' '  .'</td>
+                        <td style="text-align: center;">'.number_format($subtotal, 0, ',', '.') . ' '  .'</td>
+
+                    </tr>';
+                }
+                if($coupon_condition == 2){
+                    //Phần trăm sau giảm
+                    $total_after_coupon = ($total * $coupon_number)/100;
+                    //Tổng tiền thanh toán
+                    $total_coupon = $total - $total_after_coupon;
+                }else{
+                    $total_coupon = $total - $coupon_number;
+                }
+
+                //Phí ship
+                if($total > 500000){
+                    //Tổng tiền thanh toán
+                    $fee = 0;
+                }else{
+                    $fee = 20000;
+                }
+
+                $output.=' 
+                    <tr >
+                        <td colspan="5">
+                            <p style="margin-left:480px">Phí Ship: '. number_format($fee, 0, ',', '.') . ' ' . '₫' .'</p>
+                            <p style="margin-left:480px">Khuyến mãi: '. number_format($fee, 0, ',', '.') . ' ' . '₫' .'</p>
+                            <p style="margin-left:480px">Số tiền thu: '.number_format($total +  $fee, 0, ',', '.') . ' ' . '₫'.'</p>
+                        </td>
+                    </tr>
+                ';
+
+                $output.=' 
+
+                </tbody>
+            </table>
+            <h4>Chữ ký xác nhận: </h4>
+            <table>
+
+                <thead>
+                    <tr>
+                        <th width=250px>Chữ ký người nhận</th>
+                        <th width=600px>Chữ ký nhân viên</th>
+                    </tr>
+                </thead>
+
+                <tbody>';
+                
+                
+                $output.=' 
+                </tbody>
+
+            </table>
+
+        
+        ';
+
+
+
+        return $output;
     }
 }

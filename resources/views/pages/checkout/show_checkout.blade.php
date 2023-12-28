@@ -90,29 +90,12 @@
                             {{-- <li>Thuế: <span></span></li> --}}
 
 
-                            @php
-                                if ( Session::get('coupon')) {
-                                    $total_after = $total_after_coupon;
-                                    $total_after = $total_after + Session::get('fee');
-                                } elseif ( !Session::get('coupon')) {
-                                    $total_after = $total;
-                                }
-                                
-                            @endphp
-
-
-                            <li>Phí vận chuyển: 
-                                @if ( $total_after > 490.000 )
-                                    0đ
-                                @else
-                                     25.000 VNĐ
-                                @endif
-                            </li>
+                           
                             
                                 @if (Session::get('coupon'))
                                 @foreach (Session::get('coupon') as $key => $cou)
                                             @if ($cou['coupon_condition'] == 1)
-                                            <li>Mã giảm giá : - {{ $cou['coupon_number'] }}%
+                                            <li>Mã giảm giá : {{ $cou['coupon_number'] }}%
                                                 @php
                                                     $total_coupon = ($total * $cou['coupon_number']) / 100;
                                                 @endphp
@@ -121,7 +104,7 @@
                                                 @php
                                                     $total_after_coupon = $total - $total_coupon;
                                                 @endphp
-                                                Tổng giảm: -{{ number_format($total_coupon, 0, ',', '.') }} VNĐ
+                                                Tổng giảm: {{ number_format($total_coupon, 0, ',', '.') }} VNĐ
                                             </li>
                                                 
                                             
@@ -146,17 +129,42 @@
                                 </li>
                         
                         @endif
+
+                        @php
+                        if ( Session::get('coupon')) {
+                            $total_after = $total_after_coupon;
+                            $total_after = $total_after + Session::get('fee');
+                        } elseif ( !Session::get('coupon')) {
+                            $total_after = $total;
+                        }
+                        
+                    @endphp
+
+                        <li>Phí vận chuyển: 
+                            @if ( $total_after > 500000 )
+                                0đ
+                                @php                          
+                                    $fee = 0;                                                   
+                                @endphp
+                            @else
+                                20.000 VNĐ
+                                @php
+                                    $fee = 20000;                     
+                                @endphp
+                            @endif
+                        </li>
+
                         <li style="color: #D0021B;">Tổng thanh toán:
                             @php
                                 if ( Session::get('coupon')) {
                                     $total_after = $total_after_coupon;
-                                    $total_after = $total_after + Session::get('fee');
+                                    $total_after = $total_after + $fee;
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 } elseif ( !Session::get('coupon')) {
                                     $total_after = $total;
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 }
-                                
+
                             @endphp
                         </li>
                         </td>

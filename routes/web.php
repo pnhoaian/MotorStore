@@ -62,6 +62,7 @@ Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
 Route::get('/manage-order', [OrderController::class, 'manage_order']);
 
+
 Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order']);
 
 
