@@ -85,7 +85,8 @@
                 font-weight: bold;
                 font-style: normal;
                 text-decoration: none;
-                color: #f00;">{{number_format( $value->product_price_sale, 0, ',', '.') . ' ' . 'đ̲' }}</span>
+                color: #f00;" class="cart_product_price_sale_">
+                {{number_format( $value->product_price_sale, 0, ',', '.') . ' ' . 'đ̲' }}</span>
                 
 
             <!--price_update_43154--></p>
@@ -103,8 +104,7 @@
                 <button type="button"
                         class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
                         name="add-to-cart" style="
-                        margin-bottom: 8px;
-                        margin-left: 10px;><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                        margin-bottom: 8px;margin-left: 10px;"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
                 </button>
             </span>
             <p><b>Tags sản phẩm: </b> </p>
@@ -188,7 +188,7 @@
                     <div class="single-products">
                         <div class="productinfo text-center">
                             <img src="images/home/gallery1.jpg" alt="" />
-                            <h2>{{number_format( $value->product_price, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
+                            <h2>{{number_format( $value->product_price_sale, 0, ',', '.') . ' ' . 'đ̲' }}</h2>
                             <p>{{ $value->product_name }}</p>
                             <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
                         </div>

@@ -136,12 +136,44 @@
                 </tr>
                 @endforeach
                 <tr>
+                    @php
+                        $total_coupon = 0;
+                    @endphp
+                    @if ($coupon_condition==0)
+                    @php
+                    //Phần trăm sau giảm
+                        $total_after_coupon = ($total * $coupon_number)/100;
+
+                    //Tổng tiền thanh toán
+                        $total_coupon = $total - $total_after_coupon + $details->product_feeship;
+                    @endphp                       
+                    @else
+                        @php
+                            $total_coupon = $total - $coupon_number + $details->product_feeship;
+                        @endphp
+                    @endif 
+
+                    <td>Mã khuyến mãi:     
+                        @if ($details->product_coupon!='no')
+                            {{ number_format($details->product_coupon, 0, ',', '.') . ' ' . '₫' }} 
+                        @else
+                            Không có mã giảm giá
+                        @endif                                          
+                    </td>
+
                     <td>
-                        Tổng thanh toán: {{ number_format($total, 0, ',', '.') . ' ' . '₫' }} 
+                        Phí ship: {{  number_format($details->Product_feeship, 0, ',', '.') . ' ' . '₫' }}
+                    </td>
+
+                    <td>                        
+                        Tổng thanh toán:                   
+                        {{ number_format($total_coupon, 0, ',', '.') . ' ' . '₫' }} 
                     </td>
                 </tr>
                 </tbody>
             </table>
+
+            <a href="{{ '/print-order/'.$details->Order_code}}">IN ĐƠN HÀNG</a>
         </div>
     </div>
 </div>

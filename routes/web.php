@@ -57,10 +57,15 @@ Route::get('/payment', [CheckoutController::class, 'payment']);
 //Kiem tra thong tin giao hang
 Route::get('/checkout', [CheckoutController::class, 'checkout']);
 
-//--*********************----------**---------*****************  Order ******************-----**********************
+
+//--**************************************************************  Order ****************************************************
 Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
 Route::get('/manage-order', [OrderController::class, 'manage_order']);
 
+Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order']);
+
+
+//--**************************************************************  Intro **********************************************************
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);
 //// BE: Page Liên hệ
