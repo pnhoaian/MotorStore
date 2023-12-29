@@ -2,7 +2,7 @@
 @section('content')
 
 @section('footer')
-	@include("pages.include.footer");
+	@include("pages.include.footer")
 @endsection()
 
 <section id="cart_items">
@@ -29,11 +29,11 @@
                 <thead>
                     <tr class="cart_menu">
                         <td class="image">Hình ảnh sản phẩm</td>
-                        <td class="description" style="padding-left: 45px">Tên Sản phẩm</td>
-                        <td class="price" style="width:200px;padding-left: 45px">Giá tiền</td>
-                        <td class="quantity" style="width:80px;">Số lượng</td>
-                        <td class="total" style="padding-left: 45px">Thành tiền</td>
-                        <td class="tools" style="padding-right: 30px">Tác vụ</td>
+                        <td class="description" style="padding-left: 100px;width:750px">Tên Sản phẩm</td>
+                        <td class="price" style="width:250px; padding-left: 30px">Giá tiền</td>
+                        <td class="quantity" style="width:80px;padding-left: 35px">Số lượng</td>
+                        <td class="total" style="width:200px;padding-left: 30px">Thành tiền</td>
+                        <td class="tools" style="width:100px;padding-right: 10px">Tác vụ</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,21 +53,22 @@
 
                             </td>
                             <td class="cart_description">
-                                <h4 style="margin-bottom: 20px; text-align:center"><a>{{ $cart['product_name']}}</a></h4>
+                                <h4 style=" text-align:center"><a>{{ $cart['product_name']}}</a></h4>
                             </td>
                             <td class="cart_price">
                                 <p>{{ number_format($cart['product_price_sale'],0,',','.' )}} VNĐ</p>
                             </td>
                             <td class="cart_quantity">
                                 <div class="cart_quantity_button">
-                                        <input style="margin-bottom: 12px; width:70px" class="cart_quantity" type="number" name="cart_qty[{{ $cart['session_id'] }}]" min="1" value="{{ $cart['product_qty'] }}">
+                                        <input style="margin-bottom: 12px; width:60px;margin-left: 35px" class="cart_quantity" type="number" name="cart_qty[{{ $cart['session_id'] }}]" min="1" value="{{ $cart['product_qty'] }}">
                                 </div>
                             </td>
                             <td class="cart_total">
-                                <p class="cart_total_price">{{ number_format($subtotal,0,',','.' )}} VNĐ</p>
+                                <p class="cart_total_price" style="width:160px">{{ number_format($subtotal,0,',','.' )}} VNĐ</p>
                             </td>
                             <td class="cart_delete">
-                                <a class="cart_quantity_delete" href="{{URL::to('/del-product/'.$cart['session_id'])}}"><i class="fa fa-trash-o"></i></a>
+                                <a class="cart_quantity_delete" href="{{URL::to('/del-product/'.$cart['session_id'])}}" style="background: #0213B0;">
+                                    Xóa</a>
                             </td>
                         </tr>        
 
