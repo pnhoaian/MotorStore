@@ -68,6 +68,11 @@ Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order
 Route::get('/history', [OrderController::class, 'history']);
 
 Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history_order']);
+//update tình trạng đơn hàng
+Route::post('/update-order/{order_code}', [OrderController::class, 'update_order']);
+
+
+
 
 
 //--**************************************************************  Intro **********************************************************

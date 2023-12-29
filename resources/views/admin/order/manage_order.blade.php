@@ -37,25 +37,32 @@
               
               <td><span class="text-ellipsis">
                 <?php
-                if($ord->order_status == 0){
-                ?>
-                   <a href="{{URL::to('/active-category-product/'.$ord->order_id)}}">
-                    <button style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #ffffff;background: #00000026;border-radius:5px;background: 	#33CC33 !important;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                    class="button-chuyen" role="button">Đã xử lý</button>
-                  </a>
-                   {{-- echo'Ẩn'; --}}
+                  if($ord->order_status == 0){
+                ?>               
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                     >Đã xử lý</span></a>
+
                 <?php
-                }else{
-            ?>
-                  <a href="{{URL::to('/inactive-category-product/'.$ord->order_id)}}">
-                    {{-- <span class="fa-thump-styling fa fa-thumbs-up"></span> --}}
-                    <button style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #ffffff;background: #00000026;border-radius:5px;background:#CC0033 !important;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                    class="button-chuyen" role="button">Chưa xử lý</button>
-                  </a>
-                  {{--  echo'Hiện Thị'; --}}
+                }
+                  elseif($ord->order_status == 1){
+                ?>
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                     >Chưa xử lý</span></a>                 
                 <?php 
+
+                }else{
+                ?>
+                  
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #999999;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                     >Khách đã hủy đơn</span>
+                  </a>
+                 
+                <?php 
+
                 }
                 ?>
+
+
               </span></td>
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
@@ -65,6 +72,7 @@
                 <a onclick="return confirm('Xác nhận xóa Đơn Hàng này?')" href="{{URL::to('/delete-order/'.$ord->order_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
+              
             </tr>
 
             @endforeach

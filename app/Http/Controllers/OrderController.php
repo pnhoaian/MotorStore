@@ -203,6 +203,19 @@ class OrderController extends Controller
         return view('admin.order.view_order')->with(compact('order_details','customer','shipping','order','order_details_product','coupon','coupon_condition','coupon_number'));
     }
 
+
+//update tình trạng đơn hàng
+    public function update_order(Request $request, $order_code){
+        $this->AuthLogin();
+        $data = array();
+        $data['order_status']= $request ->order_status;
+
+        DB::table('tbl_order')->where('order_code',$order_code)->update($data);
+        Toastr::success('Đã cập nhật tình trạng đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('manage-order');
+    }
+
+
                                 //IN ĐƠN HÀNG
     public function print_order($checkout_code){
         $pdf = \App::make('dompdf.wrapper');

@@ -25,7 +25,7 @@
                                     TIN TÀI KHOẢN
                                 </h2>
                                 <div class="form-one" style="width:90%">
-
+                                    
                                     <form id="validation"
                                         action="{{ URL::to('/update-information/' . Session::get('customer_id')) }}"
                                         method="POST">
@@ -34,12 +34,12 @@
                                             <div class="form-group col-md-6" style="padding-left: 0">
                                                 <label>Tên khách hàng</label>
                                                 <input style="border-radius: 0;border:1px solid #ddd" type="text"
-                                                    name="customer_name" value="{{ Session::get('customer_name') }}"
+                                                    name="customer_name" value="{{ $customer1->customer_name}}"
                                                     class="shipping_name form-control">
 
                                                     <label>Email</label>
                                                     <input style="border-radius: 0;border:1px solid #ddd" type="text"
-                                                        name="customer_email" value="{{ Session::get('customer_email') }}"
+                                                        name="customer_email" value="{{ $customer1->customer_email }}"
                                                         class="shipping_email form-control">
                                                         
                                             </div>
@@ -48,13 +48,13 @@
                                             <div class="form-group col-md-6" style="padding-left: 0">
                                                 <label>Số điện thoại</label>
                                                 <input style="border-radius: 0;border:1px solid #ddd" type="text"
-                                                    name="customer_phone" value="{{ Session::get('customer_phone') }}"
+                                                    name="customer_phone" value="{{ $customer1->customer_phone }}"
                                                     class="shipping_phone form-control">
 
                                                     <label>Địa chỉ nhận hàng</label>
                                                     <input style="border-radius: 0;border:1px solid #ddd" type="text"
                                                         name="customer_address" class="shipping_address form-control"
-                                                        value="{{ Session::get('customer_address') }}">
+                                                        value="{{ $customer1->customer_address }}">
                                                 </div>
 
                                             </div>

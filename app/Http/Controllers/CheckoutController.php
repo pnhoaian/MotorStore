@@ -195,6 +195,7 @@ class CheckoutController extends Controller
     $cate_product = DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
     $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
 
+    // dd($customer);
     return view('pages.customer.info')
     ->with('category',$cate_product)
     ->with('brand',$brand_product)
@@ -212,6 +213,7 @@ class CheckoutController extends Controller
         $customer->save();
         Toastr::success('Cập nhật thông tin thành công.','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect('/my-information');
+        
     }
 
 

@@ -66,6 +66,9 @@
                         {{-- <input type="hidden" value="{{ $value->product_price }}"
                             class="cart_product_price_{{ $value->product_id }}"> --}}
 
+                         <input type="hidden" value="{{ $value->product_price }}"
+                            class="cart_product_price_sale_{{ $value->product_id }}">
+
 
 
 
@@ -295,6 +298,7 @@
                                         <input type="hidden" value="{{$SPLQ->product_name}}" class="cart_product_name_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_image}}" class="cart_product_image_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_price}}" class="cart_product_price_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="{{$SPLQ->product_price_sale }}"class="cart_product_price_sale_{{$SPLQ->product_id }}">
                                         <input type="hidden" value="1" class="cart_product_qty_{{$SPLQ->product_id}}">
 
                                         <a href="{{URL::to('/chi-tiet-san-pham/'.$SPLQ->product_id)}}">

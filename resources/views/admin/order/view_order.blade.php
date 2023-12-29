@@ -213,8 +213,48 @@
                 </tr>
                 </tbody>
             </table>
+            @foreach ($order as $detail)  
+            <form role="form" action="{{URL::to('/update-order/'.$detail->order_code)}}" method="POST" >
+                   {{ csrf_field() }}
+                <div class="form-group">
 
-            <a target="_blank" href="{{url('/print-order/' . $details->Order_code)}}">IN ĐƠN HÀNG</a>
+                    <label for="exampleInputPassword1">Tình trạng đơn hàng</label>
+                   
+                        @if ($detail->order_status ==1)
+                            <select name="order_status" class="form-control m-bot15">
+                                <option  value="1" selected disabled>Chưa xử lý</option>
+                                <option  value="0" >Đã xử lý</option>
+                                <option  value="2" >Khách đã hủy đơn</option>
+                            </select>
+                            @elseif($detail->order_status ==0)
+                            <select name="order_status" class="form-control m-bot15">
+                                <option  value="1" disabled>Chưa xử lý</option>
+                                <option  value="0" selected disabled>Đã xử lý</option>
+                                <option  value="2">Khách đã hủy đơn</option>
+                            </select>
+                            @else
+                            <span name="order_status" class="form-control m-bot15">
+
+                                Khách đã hủy đơn
+                            </span>
+                    
+                        @endif
+                    </select>
+                    
+                </div>
+                @if ($detail->order_status !=2)
+                    <div class="form-group">
+                    <button type="submit" name="edit" class="btn btn-info">Cập nhật</button>
+                @endif
+
+                    
+                @if ($detail->order_status ==0)
+                    <br>
+                    <a target="_blank" href="{{url('/print-order/' . $details->Order_code)}}">IN ĐƠN HÀNG</a>
+                @endif
+            </form>
+            @endforeach
+           
         </div>
     </div>
 </div>

@@ -51,9 +51,6 @@
 						</div>
 					</div>
 
-
-
-
 <?php 
 									$customer_id = Session::get('customer_id');
 									if($customer_id!=NULL){
@@ -68,7 +65,7 @@
                                     <a style="display: inline-flex;" data-toggle="dropdown" class="dropdown-toggle"
                                         href="#">
                                         <span class="username" style="font-weight: 600;font-size: 15px;color: #FFF;"> Xin chào, 
-                                            {{ Session::get('customer_name') }}
+                                            {{ $customer1->customer_name }}
                                         </span>
                                         <b style="margin-top: 9px;
                                         margin-left: 3px;"
@@ -92,8 +89,6 @@
 											</i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
-                                {{-- <li><a href="{{ URL::to('/logout-checkout') }}"><i class="fas fa-user"></i>Đăng
-                                        xuất</a></li> --}}
 
                                 <?php 
 
@@ -106,9 +101,6 @@
 									}
 								?>
 				</ul>
-
-
-
 				</div>
 			</div>
 		</div>
@@ -518,6 +510,7 @@
 				success:function(data){
 					if(data =='done'){
 						alert("Bạn đã đánh giá "+index+" trên 5 sao");
+						location.reload();
 					}else{
 						alert("Lỗi đánh giá");
 					}

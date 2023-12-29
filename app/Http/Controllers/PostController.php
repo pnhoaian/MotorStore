@@ -43,6 +43,27 @@ class PostController extends Controller
     public function save_post(Request $request){
         $this->AuthLogin();
         $data = $request->all();
+
+        $data = $request->validate(
+            [
+                'post_title' => 'required|unique:tbl_posts',   
+                'post_desc' => 'required',
+                'post_content' => 'required',
+                'post_image' => 'required|image',
+                
+            ],
+            [
+                'post_title.required' => 'Yêu cầu nhập tên bài viết',
+                'post_title.unique' => 'Tên bài viết đã tồn tại trên hệ thống',
+                'post_desc.required' => 'Yêu cầu nhập mô tả ngắn bài viết ',
+                'post_image.required' => 'Thêm hình ảnh cho bài viết ',
+                'post_content.required' => 'Yêu cầu nhập mô tả cho bài viết ',
+                'post_image.image' => 'Không phải định dạng hình ảnh ',
+
+            ]
+            );
+
+
         $post = new Post();
         $post ->post_title = $data['post_title'];
         $post ->post_desc = $data['post_desc'];

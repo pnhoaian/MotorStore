@@ -194,6 +194,7 @@ class ProductController extends Controller
         ;
     }
 
+
     public function insert_rating(Request $request){
         $data = $request->all();
         $rating = new Rating();

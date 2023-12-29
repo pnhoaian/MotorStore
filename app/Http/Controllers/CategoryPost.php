@@ -38,6 +38,21 @@ class CategoryPost extends Controller
     public function save_category_post(Request $request){
         $this->AuthLogin();
         $data = $request->all();
+//Kiểm tra DL đầu vào
+//* required bắt buộc
+//* unique đã có rồi
+        $data = $request->validate(
+            [
+                'cate_post_name' => 'required|unique:tbl_category_post',   
+                'cate_post_desc' => 'required',
+            ],
+            [
+                'cate_post_name.required' => 'Yêu cầu nhập tên danh mục bài viết',
+                'cate_post_name.unique' => 'Tên danh mục bài viết đã tồn tại trên hệ thống',
+                'cate_post_desc.required' => 'Yêu cầu nhập mô tả danh mục bài viết ',
+            ]
+            );
+            
         $cate_post = new CatePost();
         $cate_post ->cate_post_name = $data['cate_post_name'];
         $cate_post ->cate_post_desc = $data['cate_post_desc'];

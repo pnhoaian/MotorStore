@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
+use App\Models\Customer;
+use Session;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         view()->composer('*',function($view){
+            $customer1 = Customer::find(Session::get('customer_id'));
             $min_price = Product::min('product_price');
             $max_price = Product::max('product_price');
             $max_price_range = $max_price + 500000;
@@ -37,7 +40,8 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('min_price',$min_price)
             ->with('max_price',$max_price)
-            ->with('max_price_range',$max_price_range);
+            ->with('max_price_range',$max_price_range)
+            ->with('customer1',$customer1);
             // ->with('productt',$productt)
             // ->with('postt',$postt)
             // ->with('orderr',$orderr)

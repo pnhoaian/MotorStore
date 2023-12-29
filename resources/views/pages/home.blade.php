@@ -10,7 +10,7 @@
 
 @section('content')
 
- 					<div style="margin-top: 30px">
+ 					<div style="margin-top: 30px"> </div>
                         <!--       features_items            -->
 
 						<h2 class="title text-center">Sản phẩm mới</h2>
@@ -74,12 +74,12 @@
 								</div>
 							</div>
 						@endforeach
-						</div>
-						</div>
-						</div>
+					</div>
+
+				</div>
 					<!--features_items-->
 
-					
+					<div style="margin-top: 30px">
 					<h2 class="title text-center">Dây sạc / Cáp chuyển đổi</h2>
 					@foreach ($all_ds as $key => $productdp)		
 						<div class="col-sm-2" style="padding-right: 0px;width:20%">
@@ -88,13 +88,13 @@
 										<div class="productinfo text-center">
 											<form style="height: 386px;">
 												@csrf
-												<input type="hidden" value="{{$productdp->product_id}}" class="cart_product_id_{{$product->product_id}}">
-												<input type="hidden" value="{{$productdp->product_name}}" class="cart_product_name_{{$product->product_id}}">
-												<input type="hidden" value="{{$productdp->product_image}}" class="cart_product_image_{{$product->product_id}}">
-												<input type="hidden" value="{{$productdp->product_price}}" class="cart_product_price_{{$product->product_id}}">
-												<input type="hidden" value="{{$productdp->product_price_sale}}" class="cart_product_price_sale_{{$product->product_id}}">
+												<input type="hidden" value="{{$productdp->product_id}}" class="cart_product_id_{{$productdp->product_id}}">
+												<input type="hidden" value="{{$productdp->product_name}}" class="cart_product_name_{{$productdp->product_id}}">
+												<input type="hidden" value="{{$productdp->product_image}}" class="cart_product_image_{{$productdp->product_id}}">
+												<input type="hidden" value="{{$productdp->product_price}}" class="cart_product_price_{{$productdp->product_id}}">
+												<input type="hidden" value="{{$productdp->product_price_sale}}" class="cart_product_price_sale_{{$productdp->product_id}}">
 												
-												<input type="hidden" value="1" class="cart_product_qty_{{$product->product_id}}">
+												<input type="hidden" value="1" class="cart_product_qty_{{$productdp->product_id}}">
 
 												<a href="{{URL::to('/chi-tiet-san-pham/'.$productdp->product_id)}}">
 													@if ($productdp->product_price_sale != '0')
@@ -159,6 +159,6 @@
 							</div>
 						</div>
 					@endforeach
-					</div>
+				</div>
 
 @endsection
