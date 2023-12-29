@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\Product;
+use App\Models\Brand;
 use App\Models\CatePost;
 use App\Models\Order;
 use App\Models\OrderDetails;
@@ -30,15 +31,125 @@ class OrderController extends Controller
         }
     }
 
+    public function history(){
+        if(!Session::get('customer_id')){
+            return redirect('login');
+        }else{
+            $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',0)->take(4)->get();
+            $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
+            //post
+            $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
+            $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
+            $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
+            
+            $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
+            $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
+            $min_price = Product::min('product_price');
+            $max_price = Product::max('product_price');
+            $max_price_range = $max_price + 500000;
+
+            $getorder = Order::where('customer_id',Session::get('customer_id'))->orderBy('order_date','desc')->get();
+            // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
+            // ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
+            // ->orderby('tbl_product.product_id','desc')->get();
+            // return view('admin.all_product')->with('all_product', $all_product);
+            
+            return view('pages.history.history')
+            ->with('category', $cate_product)
+            ->with('brand', $brand_product)
+            ->with('slider',$slider)
+            ->with('slidermini',$slidermini)
+            ->with('category_post',$category_post)
+            ->with('all_sdp',$all_sdp)
+            ->with('all_ds',$all_ds)
+            ->with('min_price',$min_price)
+            ->with('max_price',$max_price)
+            ->with('max_price_range',$max_price_range)
+            ->with('getorder',$getorder)
+            ;
+        }
+    }
+
+    public function view_history_order($order_code){
+        if(!Session::get('customer_id')){
+            return redirect('login');
+        }else{
+            $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',0)->take(4)->get();
+            $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
+            //post
+            $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
+            $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
+            $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
+            
+            $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
+            $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
+            $min_price = Product::min('product_price');
+            $max_price = Product::max('product_price');
+            $max_price_range = $max_price + 500000;
+
+            //Xem lịch sử ĐH           
+            $order_details = OrderDetails::with('product')->where('order_code',$order_code)->get();
+            $getorder = Order::where('order_code',$order_code)->first();
+
+                $customer_id = $getorder->customer_id;
+                $shipping_id = $getorder->shipping_id;
+                $order_status = $getorder->order_status;
+
+            $order = Order::where('order_code',$order_code)->first();
+            $customer = Customer::where('customer_id',$customer_id)->first();
+            $shipping = Shipping::where('shipping_id',$shipping_id)->first();
+
+            $order_details_product = OrderDetails::with('product')->where('order_code', $order_code)->get();
+            
+                foreach($order_details as $key =>$order_d){
+                    //bảng or_detail
+                    $product_coupon = $order_d->Product_coupon;
+                }
+                if($product_coupon != 'no'){
+                    $coupon = Coupon::where('coupon_code',$product_coupon)->first();
+                    // Lấy giá trị bảng order_detail đối chiếu để lấy số tiền giảm bảng Coupon
+                    $coupon_condition = $coupon->coupon_condition;
+                    $coupon_number = $coupon->coupon_number;
+        
+                    if($coupon_condition==0){
+                        $coupon_echo = $coupon_number.'%';
+                    }elseif($coupon_condition==1){
+                        $coupon_echo = number_format($coupon_number,0,',','.').'đ';
+                    }
+                }else{
+                    $coupon_condition = 2;
+                    $coupon_number = 0;
+    
+                    $coupon_echo = '0';
+                
+                }
+
+            return view('pages.history.view_history')
+            ->with('category', $cate_product)
+            ->with('brand', $brand_product)
+            ->with('slider',$slider)
+            ->with('slidermini',$slidermini)
+            ->with('category_post',$category_post)
+            ->with('all_sdp',$all_sdp)
+            ->with('all_ds',$all_ds)
+            ->with('min_price',$min_price)
+            ->with('max_price',$max_price)
+            ->with('max_price_range',$max_price_range)
+            ->with('getorder',$getorder)
+            ->with('order_details',$order_details)
+            ->with('customer',$customer)
+            ->with('shipping',$shipping)
+            ->with('order_details_product',$order_details_product)
+            ->with('order',$order)
+            ->with('order_code',$order_code)
+            ->with('coupon_condition',$coupon_condition)
+            ->with('coupon_number',$coupon_number)
+            ;
+        }
+    }
+
     public function manage_order(){
         $this->AuthLogin();
-        // $all_order = DB::table('tbl_order')
-        // ->join('tbl_customer','tbl_order.customer_id','=','tbl_customer.customer_id')
-        // ->select('tbl_order.*','tbl_customer.customer_name')
-        // ->orderby('tbl_order.order_id','desc')->get();
-
-        // $manager_order = view ('admin.order.manage_order')->with('all_order', $all_order);
-        // return view('admin_layout')->with('admin.order.manage_order', $manager_order);
         $order = Order::orderBy('create_at','desc')->get();
         return view('admin.order.manage_order')->with(compact('order'));
 

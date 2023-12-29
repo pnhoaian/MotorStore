@@ -62,8 +62,12 @@ Route::get('/checkout', [CheckoutController::class, 'checkout']);
 Route::get('/view-order/{order_code}', [OrderController::class, 'view_order']);
 Route::get('/manage-order', [OrderController::class, 'manage_order']);
 
-
+//in đơn hàng
 Route::get('/print-order/{checkout_code}', [OrderController::class, 'print_order']);
+// Lịch sử đơn hàng
+Route::get('/history', [OrderController::class, 'history']);
+
+Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history_order']);
 
 
 //--**************************************************************  Intro **********************************************************

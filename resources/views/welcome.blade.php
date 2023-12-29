@@ -77,10 +77,19 @@
                                     <ul class="dropdown-menu extended logout"
                                         style="width: 165px;
                                     left: -10px;">
-                                        <li><a href="{{ URL::to('/my-information') }}"></i>
-											<i class="fa fa-cogs" aria-hidden="true" style="margin-right: 10px;margin-left: -10px"></i>Chỉnh sửa thông tin</a></li>
-                                        <li><a href="{{ URL::to('/logout-customer') }}">
-											<i class="fa fa-outdent" aria-hidden="true" style="margin-right: 10px;margin-left: -10px"></i>Đăng xuất</a></li>
+											<li><a href="{{ URL::to('/my-information') }}"></i>
+												<i class="fa fa-cogs" aria-hidden="true" style="margin-right: 10px;margin-left: -10px">
+												</i>Chỉnh sửa thông tin</a>
+											</li>
+											
+											<li><a href="{{ URL::to('/history') }}"></i>
+												<i class="fa fa-history" aria-hidden="true" style="margin-right: 10px;margin-left: -10px">
+												</i>Lịch sử đơn hàng</a>
+											</li>
+
+											<li><a href="{{ URL::to('/logout-customer') }}">
+											<i class="fa fa-outdent" aria-hidden="true" style="margin-right: 10px;margin-left: -10px">
+											</i>Đăng xuất</a></li>
                                     </ul>
                                 </li>
                                 {{-- <li><a href="{{ URL::to('/logout-checkout') }}"><i class="fas fa-user"></i>Đăng
