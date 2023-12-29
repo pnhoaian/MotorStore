@@ -16,10 +16,10 @@
 						<h2 class="title text-center">Sản phẩm mới</h2>
 						@foreach ($all_product as $key => $product)		
 							<div class="col-sm-2" style="padding-right: 0px;width:20%">
-								<div class="product-image-wrapper">
+								<div class="product-image-wrapper" style="height: 430px;min-height: 430px;max-height: 430px;">
 									<div class="single-products">
 											<div class="productinfo text-center">
-												<form style="height: 370px;">
+												<form style="height: 386px;">
 													@csrf
 													<input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
 													<input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
@@ -69,7 +69,6 @@
 									<div class="choose">
 										<ul class="nav nav-pills nav-justified">
 											<li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
-											{{-- <li><a href="#"><i class="fa fa-plus-square"></i>So Sánh Sản Phẩm</a></li> --}}
 										</ul>
 									</div>
 								</div>
@@ -87,7 +86,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 										<div class="productinfo text-center">
-											<form style="height: 370px;">
+											<form style="height: 386px;">
 												@csrf
 												<input type="hidden" value="{{$productdp->product_id}}" class="cart_product_id_{{$product->product_id}}">
 												<input type="hidden" value="{{$productdp->product_name}}" class="cart_product_name_{{$product->product_id}}">

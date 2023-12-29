@@ -14,7 +14,7 @@
 							<div class="product-image-wrapper">
 								<div class="single-products">
 									<div class="productinfo text-center">
-										<form style="height: 370px;">
+										<form style="height: 386px;">
 											@csrf
 											<input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
 											<input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
