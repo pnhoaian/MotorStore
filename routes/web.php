@@ -173,6 +173,9 @@ Route::get('/edit-product/{product_id}', [ProductController::class, 'edit_produc
 Route::get('/delete-product/{product_id}', [ProductController::class, 'delete_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
 
+//Rating
+Route::post('/insert-rating', [ProductController::class, 'insert_rating']);
+
 //------------------------------------------------------  Cart ---------------------------------------------------------- 
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::post('/save-cart', [CartController::class, 'save_cart']);

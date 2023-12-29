@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\CatePost;
+use App\Models\Gallery;
+use App\Models\Rating;
+use App\Models\Customer;
 use Toastr;
 session_start();
 
@@ -160,10 +163,19 @@ class ProductController extends Controller
         foreach($detail_product as $key =>$value)
         {$category_id = $value->category_id;}
 
+        //gallery
+        // $gallery = Gallery::where('product_id',$product_id)->get();
+
         $related_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->take(5)->get();
+
+
+        //Đánh giá sp
+        $rating = Rating::where('product_id',$product_id)->avg('rating');
+        $rating = round($rating);
+        // $customer_name = DB::table('tbl_customer')->where('customer_name',$customer_name)->get(1);
 
         return view('pages.product.show_detail')
         ->with('category', $cate_product)
@@ -176,6 +188,18 @@ class ProductController extends Controller
         ->with('sdp',$sdp)
         ->with('all_product',$all_product)
         ->with('all_sdp',$all_sdp)
-        ->with('all_ds',$all_ds);
+        ->with('all_ds',$all_ds)
+        ->with('rating',$rating)
+        // ->with('customer_name',$customer_name)
+        ;
+    }
+
+    public function insert_rating(Request $request){
+        $data = $request->all();
+        $rating = new Rating();
+        $rating->product_id = $data['product_id'];
+        $rating->rating = $data['index'];
+        $rating->save();
+        echo 'done';
     }
 }

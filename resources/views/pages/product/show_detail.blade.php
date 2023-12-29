@@ -73,10 +73,28 @@
             <p><b>Mã sản phẩm:</b> {{ $value->product_id }}</p>
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
-            <p><b>Số lượng tồn kho: </b> </p>
-            <p><b>Tình trạng:</b> Còn hàng</p>
-            <p><b>Đánh giá: </b> </p>
-
+            <p><b>Số lượng tồn kho: </b> {{ $value->product_quantity }} </p>
+            <p><b>Tình trạng:</b> 
+                @if ($value->product_quantity >= 1)
+                    Còn hàng
+                @else
+                    Tạm hết hàng
+                @endif
+            </p>
+            <p><b>Đánh giá:</b>
+                <ul class="list-inline rating" title="Average Rating">
+                    @for ($count = 1; $count <= 5; $count++)
+                        @php
+                            if ($count <= $rating) {
+                                $color = 'color:#ffcc00;';
+                            } else {
+                                $color = 'color:#ccc;';
+                            }
+                        @endphp
+                        <li title="star_rating" style="cursor: default; {{ $color }} font-size:22px;">
+                            &#9733;
+                        </li>
+                    @endfor </p></ul>
 
 
             <div>
@@ -172,14 +190,13 @@
     <div class="col-sm-12">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#details" data-toggle="tab">Chi tiết</a></li>
-            <li><a href="#companyprofile" data-toggle="tab">Sản phẩm liên quan</a></li>
+
             <li><a href="#reviews" data-toggle="tab">Đánh giá</a></li>
         </ul>
     </div>
     <div class="tab-content">
         <div class="tab-pane fade active in" id="details" >
             <p>{!!$value->product_desc!!}</p>
-                
         </div>
         
         <div class="tab-pane fade" id="companyprofile" >
@@ -199,30 +216,67 @@
         
         <div class="tab-pane fade" id="reviews" >
             <div class="col-sm-12">
-                <ul>
-                    <li><a href=""><i class="fa fa-user"></i>EUGEN</a></li>
-                    <li><a href=""><i class="fa fa-clock-o"></i>12:41 PM</a></li>
-                    <li><a href=""><i class="fa fa-calendar-o"></i>31 DEC 2014</a></li>
+                <form>
+                    @csrf
+                    <input type="hidden" name="comment_product_id" class="comment_product_id"
+                        value="{{ $value->product_id }}">
+                    <div id="comment_show">
+                    </div>
+                </form>
+
+                    <?php 
+                        $customer_id = Session::get('customer_id');
+                        if($customer_id!=NULL){
+                    ?>
+                <p style="margin-top: 20px;margin-left:24px"><b>Viết đánh giá:</b></p>
+                <ul style="margin-left:24px" class="list-inline rating" title="Average Rating">
+                    @for ($count = 1; $count <= 5; $count++)
+                        @php
+                            if ($count <= $rating) {
+                                $color = 'color:#ffcc00;';
+                            } else {
+                                $color = 'color:#ccc;';
+                            }
+                        @endphp
+
+                        <li title="star_rating" id="{{ $value->product_id }}-{{ $count }}"
+                            data-index="{{ $count }}" data-product_id="{{ $value->product_id }}"
+                            data-rating="{{ $rating }}" class="rating"
+                            style="cursor: pointer; {{ $color }} font-size:30px;">&#9733;
+                        </li>
+                    @endfor
                 </ul>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
-                <p><b>Đánh giá sản phẩm</b></p>
-                
                 <form action="#">
                     <span>
-                        <input type="text" placeholder="Your Name"/>
-                        <input type="email" placeholder="Email Address"/>
+                        <input
+                            style="background: #f0f0f5;width: 60%;margin-left: 24px;color: #000;"
+                            type="text" class="comment_name" placeholder="Tên hiển thị"/>
                     </span>
-                    <textarea name="" ></textarea>
-                    <b>Rating: </b> <img src="images/product-details/rating.png" alt="" />
-                    <button type="button" class="btn btn-default pull-right">
-                        Submit
+                    <textarea name="comment" style="    width: 93%;background: #f0f0f5;margin-left: 24px;color: #000;"
+                        class="comment_content" placeholder="Nội dung"></textarea>
+                    <div id="notify_comment"></div>
+
+                    <button type="button" class="button-them pull-right send-comment">
+                        Gửi
                     </button>
+
                 </form>
+                <?php 
+                            } else{
+                        ?>
+                        <p>Vui lòng đăng nhập để đánh giá sản phẩm</p>
+                <a class="btn btn-primary check_out"style="color: #fff;margin-left: 26px;height: 34px;}"
+                    href="{{ URL::to('/login') }}">Đăng nhập ngay</a>
+                <?php
+                            }
+                ?>
+
             </div>
         </div>
-        
+
     </div>
-</div><!--/category-tab-->
+</div>
+<!--/category-tab-->
 @endforeach
 <div class="recommended_items"><!--recommended_items-->
     <h2 class="title text-center">Sản phẩm liên quan</h2>
