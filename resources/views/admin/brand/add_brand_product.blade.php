@@ -24,14 +24,26 @@
                 <header class="panel-heading">
                     Thêm Hãng - Thương hiệu
                 </header>
-                <div class="panel-body">
 
+                    {{-- //thông báo lỗi đầu vào ở header --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    {{-- End --}}
+
+                <div class="panel-body">
                     <div class="position-center">
                         <form role="form" action="{{URL::to('/save-brand-product')}}" method="POST" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên Hãng - Thương hiệu</label>
-                            <input type="text" name="brand_product_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Hãng - Thương hiệu">
+                            <input type="text" name="brand_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Hãng - Thương hiệu">
                         </div>
 
                         <div class="form-group">
@@ -41,12 +53,12 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả Hãng - Thương hiệu</label>
-                            <textarea style="resize:none" rows="6" name="brand_product_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="brand_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hiện thị</label>
-                            <select name="brand_product_status" class="form-control input-sm m-bot15">
+                            <select name="brand_status" class="form-control input-sm m-bot15">
                                 <option value="0">Ẩn Hãng - Thương hiệu</option>
                                 <option selected value="1">Hiện thị Hãng - Thương hiệu</option>
                             </select>

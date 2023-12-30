@@ -38,6 +38,27 @@ class CouponController extends Controller
         $this->AuthLogin();
         $data = $request->all();
 
+        $data = $request->validate(
+            [
+                'coupon_name' => 'required|unique:tbl_coupon',   
+                'coupon_code' => 'required',
+                'coupon_times' => 'required|numeric',
+                'coupon_number' => 'required|numeric',
+
+                // thiếu ngày bắt đầu - kết thúc    
+            ],
+            [
+                'coupon_name.required' => 'Yêu cầu nhập tên chương trình khuyến mãi',
+                'coupon_name.unique' => 'Đã có chương trình khuyến mãi trong hệ thống',
+                'coupon_code.required' => 'Yêu cầu nhập mã khuyến mãi ',
+                'coupon_times.required' => 'Yêu cầu nhập số lượng Coupon khuyến mãi ',
+                'coupon_times.numeric' => 'Không phải định dạng số ',
+                'coupon_number.required' => 'Yêu cầu nhập "SỐ TIỀN" hoặc "PHẦN TRĂM KHUYẾN MÃI" ',
+                'coupon_number.numeric' => 'Không phải định dạng số ',
+            ]
+            );
+
+        
         $coupon = new Coupon;
         $coupon->coupon_name = $data['coupon_name'];
         $coupon->coupon_number = $data['coupon_number'];

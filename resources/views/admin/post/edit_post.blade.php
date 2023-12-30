@@ -24,6 +24,17 @@
                 <header class="panel-heading">
                     Chỉnh sửa bài viết
                 </header>
+                                {{-- //thông báo lỗi đầu vào ở header --}}
+                                @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+                                {{-- End --}}
                 <div class="panel-body">
 
                     <div class="position-center">
@@ -45,12 +56,12 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả ngắn</label>
-                            <textarea style="resize:none"  rows="5" name="post_desc" class="form-control" placeholder="Thêm mô tả">{{ $post->post_desc }}"</textarea>
+                            <textarea style="resize:none"  rows="5" name="post_desc" class="form-control" placeholder="Thêm mô tả">{{ $post->post_desc }}</textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nội bài viết</label>
-                            <textarea style="resize:none" rows="8"  name="post_content" class="form-control" id="ckeditor" placeholder="Thêm mô tả">{{ $post->post_content }}"</textarea>
+                            <textarea style="resize:none" rows="8"  name="post_content" class="form-control" id="ckeditor" placeholder="Thêm mô tả">{{ $post->post_content }}</textarea>
                         </div>
 
                         <div class="form-group">

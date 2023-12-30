@@ -16,6 +16,7 @@ use App\Http\Controllers\CategoryPost;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\MailController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,10 @@ use App\Http\Controllers\OrderController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
+
+//--------------------------------------------------- Mail -----------------------------------------------------
+//Send Mail
+Route::get('/send-mail', [MailController::class, 'send_mail']);
 
 // **************************************************** Login + Cart Checkout  ******************-----**********************
 Route::get('/login',[CheckoutController::class, 'login']);
@@ -74,7 +79,6 @@ Route::post('/update-order/{order_code}', [OrderController::class, 'update_order
 
 
 
-
 //--**************************************************************  Intro **********************************************************
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);
@@ -101,7 +105,7 @@ Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_h
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
-//******************************************************************* Admin ***************************************************************
+//***************************************************************** Admin ***************************************************************
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
@@ -123,7 +127,7 @@ Route::post('/save-category-product', [CategoryProduct::class, 'save_category_pr
 
 Route::get('/edit-category-product/{category_product_id}', [CategoryProduct::class, 'edit_category_product']);
 Route::get('/delete-category-product/{category_product_id}', [CategoryProduct::class, 'delete_category_product']);
-Route::post('/update-category-product/{category_product_id}', [CategoryProduct::class, 'update_category_product']);
+Route::post('/update-category-product/{category_id}', [CategoryProduct::class, 'update_category_product']);
 
 //- Update Category Product
 Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
@@ -137,7 +141,7 @@ Route::post('/save-brand-product', [BrandProduct::class, 'save_brand_product']);
 
 Route::get('/edit-brand-product/{brand_product_id}', [BrandProduct::class, 'edit_brand_product']);
 Route::get('/delete-brand-product/{brand_product_id}', [BrandProduct::class, 'delete_brand_product']);
-Route::post('/update-brand-product/{brand_product_id}', [BrandProduct::class, 'update_brand_product']);
+Route::post('/update-brand-product/{brand_id}', [BrandProduct::class, 'update_brand_product']);
 
 //- Update Brand Product Status
 Route::get('/active-brand-product/{brand_product_id}', [BrandProduct::class, 'active_brand_product']);
@@ -223,4 +227,5 @@ Route::get('/edit-slider/{slider_id}', [SliderController::class, 'edit_slider'])
 Route::get('/delete-slider/{slider_id}', [SliderController::class, 'delete_slider']);
 Route::get('/active-slider/{slider_id}', [SliderController::class, 'active_slider']);
 Route::get('/inactive-slider/{slider_id}', [SliderController::class, 'inactive_slider']);
+
 

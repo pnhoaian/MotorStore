@@ -22,6 +22,21 @@
                 <header class="panel-heading">
                     Thêm Danh Mục
                 </header>
+
+
+                {{-- //thông báo lỗi đầu vào ở header --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                    {{-- End --}}
+
+
                 <div class="panel-body">
                     
                     <div class="position-center">
@@ -29,17 +44,17 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
-                            <input type="text" name="category_product_name" class="form-control" id="name" placeholder="Nhập tên danh mục">
+                            <input type="text" name="category_name" class="form-control" id="name" placeholder="Nhập tên danh mục">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả danh mục</label>
-                            <textarea style="resize:none" rows="6" name="category_product_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="category_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hiện thị</label>
-                            <select name="category_product_status" class="form-control input-sm m-bot15">
+                            <select name="category_status" class="form-control input-sm m-bot15">
                                 <option value="0">Ẩn Danh Mục</option>
                                 <option selected value="1">Hiện thị Danh Mục</option>
                             </select>

@@ -7,6 +7,19 @@
                 <header class="panel-heading">
                     Thêm Thông Tin Website
                 </header>
+
+                                    {{-- //thông báo lỗi đầu vào ở header --}}
+                                    @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    @endif
+                                    {{-- End --}}
+
                 <div class="panel-body">
                     <?php 
                     $message = Session::get('message');

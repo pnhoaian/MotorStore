@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
 use App\Models\Customer;
 use Session;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,7 @@ class AppServiceProvider extends ServiceProvider
             $min_price = Product::min('product_price');
             $max_price = Product::max('product_price');
             $max_price_range = $max_price + 500000;
+            $cate_product1 =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
 
         //     $productt = Product::all()->count();
         // $postt = Post::all()->count();
@@ -41,7 +43,8 @@ class AppServiceProvider extends ServiceProvider
             $view->with('min_price',$min_price)
             ->with('max_price',$max_price)
             ->with('max_price_range',$max_price_range)
-            ->with('customer1',$customer1);
+            ->with('customer1',$customer1)
+            ->with('cate_product1',$cate_product1);
             // ->with('productt',$productt)
             // ->with('postt',$postt)
             // ->with('orderr',$orderr)

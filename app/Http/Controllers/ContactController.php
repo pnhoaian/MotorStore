@@ -49,6 +49,26 @@ class ContactController extends Controller
 
     public function update_info(Request $request, $info_id){
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'info_address' => 'required:tbl_information',   
+                'info_number' => 'required|numeric',
+                'info_email' => 'required|email',
+                'info_map' => 'required',
+                'info_fanpage' => 'required',
+                
+            ],
+            [
+                'info_address.required' => 'Yêu cầu nhập địa chỉ',
+                'info_number.required' => 'Yêu cầu thêm số điện thoại ',
+                'info_number.numeric' => 'Không phải định dạng số điện thoại ',
+                'info_email.required' => 'Thêm địa chỉ email ',
+                'info_email.email' => 'Không phải định dạng email ',
+                'info_map.email' => 'Yêu cầu thêm địa chỉ cửa hàng ',
+                'info_fanpage.required' => 'Yêu cầu thêm trang Fanpage ',
+            ]
+            );
+
         $contact = Contact::find($info_id);
         $contact->info_address = $data['info_address'];
         $contact->info_number = $data['info_number'];
@@ -61,6 +81,25 @@ class ContactController extends Controller
 
     public function save_information(Request $request){
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'info_address' => 'required:tbl_information',   
+                'info_number' => 'required|numeric',
+                'info_email' => 'required|email',
+                'info_map' => 'required',
+                'info_fanpage' => 'required',
+                
+            ],
+            [
+                'info_address.required' => 'Yêu cầu nhập địa chỉ',
+                'info_number.required' => 'Yêu cầu thêm số điện thoại ',
+                'info_number.numeric' => 'Không phải định dạng số điện thoại ',
+                'info_email.required' => 'Thêm địa chỉ email ',
+                'info_email.email' => 'Không phải định dạng email ',
+                'info_map.email' => 'Yêu cầu thêm địa chỉ cửa hàng ',
+                'info_fanpage.required' => 'Yêu cầu thêm trang Fanpage ',
+            ]
+            );
         $contact = new Contact();
         $contact->info_address = $data['info_address'];
         $contact->info_number = $data['info_number'];

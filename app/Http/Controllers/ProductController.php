@@ -11,6 +11,7 @@ use App\Models\CatePost;
 use App\Models\Gallery;
 use App\Models\Rating;
 use App\Models\Customer;
+use App\Models\Product;
 use Toastr;
 session_start();
 
@@ -45,32 +46,71 @@ class ProductController extends Controller
 
     public function save_product(Request $request){
         $this->AuthLogin();
-        $data = array();
-        $data['product_name'] = $request ->product_name;
-        $data['category_id']= $request->product_cate;
-        $data['brand_id']= $request->product_brand;
-        $data['product_desc']= $request ->product_desc;
-        $data['product_image']= $request ->product_image;
-        $data['product_price']= $request ->product_price;
-        $data['product_price_sale']= $request ->product_price_sale;
-        $data['product_quantity']= $request ->product_quantity;
-        $data['product_status']= $request ->product_status;
+        $data = $request->all();
+        $data = $request->validate(
+            [
+                'product_name' => 'required|unique:tbl_product',   
+                'product_desc' => 'required',
+                'product_image' => 'required|image',
+                'product_price' => 'required|numeric',
+                'product_price_sale' => 'required|numeric',
+                'product_quantity' => 'required|numeric',
+                'category_id' => 'required',
+                'brand_id' => 'required',
+                'product_status' => 'required',
+
+                //    
+            ],
+            [
+                'product_name.required' => 'Yêu cầu nhập tên sản phẩm',
+                'product_name.unique' => 'Đã có sản phẩm trong hệ thống',
+
+                'category_id.required' => 'Yêu cầu thêm danh mục sản phẩm ',
+                'brand_id.required' => 'Yêu cầu thêm thương hiệu sản phẩm ',
+
+                'product_desc.required' => 'Yêu cầu nhập mô tả sản phẩm ',
+
+                'product_image.required' => 'Yêu cầu thêm hình ảnh cho sản phẩm ',
+                'product_image.image' => 'Không phải định dạng file ảnh ',
+                
+                'product_price.numeric' => '"Giá sản phẩm" không phải định dạng số ',
+                'product_price.required' => 'Yêu cầu nhập "GIÁ GỐC" cho sản phẩm ',
+
+                'product_price_sale.required' => 'Yêu cầu nhập "GIÁ KHUYẾN MÃI" cho sản phẩm ',
+                'product_price_sale.numeric' => '"Giá Khuyến mãi sản phẩm" không phải định dạng số ',
+
+                'product_quantity.required' => 'Yêu cầu nhập số lượng sản phẩm ' ,
+                'product_quantity.numeric' => '"Số lượng sản phẩm" không phải định dạng số ',
+
+                'product_status.required' => 'Yêu cầu thêm trạng thái hiện thị sản phẩm ',
+            ]
+            );
+
+        $product = new Product();
+        $product->product_name = $data['product_name'];
+        $product->category_id = $data['category_id'];
+        $product->brand_id = $data['brand_id'];
+        $product->product_desc = $data['product_desc'];
+        $product->product_price = $data['product_price'];
+        $product->product_price_sale = $data['product_price_sale'];
+        $product->product_quantity = $data['product_quantity'];
+        $product->product_status = $data['product_status'];
         $get_image = $request->file('product_image');
         
-        if($get_image){
-            //lấy tên file hình ảnh
+        if ($get_image){
             $get_name_image = $get_image->getClientOriginalName();
-            $name_image = current(explode('.',$get_name_image));
+            $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
             $get_image->move('public/upload/product',$new_image);
-            $data['product_image']=$new_image;
-            DB::table('tbl_product')->insert($data);
+            $data['product_image'] = $new_image;
+            $product->product_image = $new_image;
+        
             Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-product');
         }
         //insert du lieu va tbl-product
-        $data['product_image']='';
-        DB::table('tbl_product')->insert($data);
+
+        $product->save();
         Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
         //return view('admin.save_product');
@@ -109,28 +149,64 @@ class ProductController extends Controller
 
     public function update_product(Request $request, $product_id){
         $this->AuthLogin();
-        $data = array();
-        $data['product_name'] = $request ->product_name;
-        $data['category_id']= $request->product_cate;
-        $data['brand_id']= $request->product_brand;
-        $data['product_desc']= $request ->product_desc;
-        // $data['product_image']= $request ->product_image;
-        $data['product_price']= $request ->product_price;
-        $data['product_price_sale']= $request ->product_price_sale;
-        $data['product_quantity']= $request ->product_quantity;
-        $data['product_status']= $request ->product_status;
         
-        $get_image = $request->file('product_image');
-        if($get_image){
-            //lấy tên file hình ảnh
-            $get_name_image = $get_image->getClientOriginalName();
-            $name_image = current(explode('.',$get_name_image));
-            $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/upload/product',$new_image);
-            $data['product_image']=$new_image;
-            
-        }
-        DB::table('tbl_product')->where('product_id',$product_id)->update($data);
+        $data = $request->validate(
+            [
+                'product_name' => 'required',   
+                'product_desc' => 'required',
+                'product_image' => 'image',
+                'product_price' => 'required|numeric',
+                'product_price_sale' => 'required|numeric',
+                'product_quantity' => 'required|numeric',
+                'category_id' => 'required',
+                'brand_id' => 'required',
+                'product_status' => 'required',
+
+                //    
+            ],
+            [
+                'product_name.required' => 'Yêu cầu nhập tên sản phẩm',
+
+                'category_id.required' => 'Yêu cầu thêm danh mục sản phẩm ',
+                'brand_id.required' => 'Yêu cầu thêm thương hiệu sản phẩm ',
+
+                'product_desc.required' => 'Yêu cầu nhập mô tả sản phẩm ',
+
+                'product_image.image' => 'Không phải định dạng file ảnh ',
+                
+                'product_price.numeric' => '"Giá sản phẩm" không phải định dạng số ',
+                'product_price.required' => 'Yêu cầu nhập "GIÁ GỐC" cho sản phẩm ',
+
+                'product_price_sale.required' => 'Yêu cầu nhập "GIÁ KHUYẾN MÃI" cho sản phẩm ',
+                'product_price_sale.numeric' => '"Giá Khuyến mãi sản phẩm" không phải định dạng số ',
+
+                'product_quantity.required' => 'Yêu cầu nhập số lượng sản phẩm ' ,
+                'product_quantity.numeric' => '"Số lượng sản phẩm" không phải định dạng số ',
+
+                'product_status.required' => 'Yêu cầu thêm trạng thái hiện thị sản phẩm ',
+            ]
+            );
+
+            $data = $request->all();
+            $product = Product::find($product_id);
+            $product->product_name = $data['product_name'];
+            $product->category_id = $data['category_id'];
+            $product->brand_id = $data['brand_id'];
+            $product->product_desc = $data['product_desc'];
+            $product->product_price = $data['product_price'];
+            $product->product_price_sale = $data['product_price_sale'];
+            $product->product_quantity = $data['product_quantity'];
+            $product->product_status = $data['product_status'];
+            $get_image = $request->file('product_image');
+            if ($get_image){
+                $get_name_image = $get_image->getClientOriginalName();
+                $name_image = current(explode('.', $get_name_image));
+                $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
+                $get_image->move('public/upload/product',$new_image);
+                $data['product_image'] = $new_image;
+                $product->product_image = $new_image;
+            }
+        $product->save();
         Toastr::success('Đã cập nhật sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-product');
     }

@@ -41,39 +41,30 @@ class BrandProduct extends Controller
     }
 
     public function save_brand_product(Request $request){
-        // $this->AuthLogin();
-        // $data = $request->all();
-        // $brand = new Brand();
-        // $brand->brand_name = $data['brand_product_name'];
-        // $brand->brand_desc = $data['brand_product_desc'];
-        // $brand->brand_status = $data['brand_product_status'];
-        // $brand->brand_image = $data['brand_image'];
-        // $get_image = $request->file('brand_image');
-        // $brand->save();
-
-        // if($get_image){
-        //     //lấy tên file hình ảnh
-        //     $get_name_image = $get_image->getClientOriginalName();
-        //     $name_image = current(explode('.',$get_name_image));
-        //     $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-        //     $get_image->move('public/upload/brand',$new_image);
-        //     $data['brand_image']=$new_image;
-        //     DB::table('tbl_brand')->insert($data);
-        //     $request->session()->put('message', 'Thêm Hãng - thương hiệu thành công!');
-        //     return Redirect::to('all-brand-product');
-        // }
-        // //insert du lieu va tbl-product
-        // $data['brand_image']='';
-        // DB::table('tbl_brand')->insert($data);
-        // $request->session()->put('message', 'Thêm Hãng - thương hiệu thành công!');
-        // return Redirect::to('all-brand-product');
-
         $this->AuthLogin();
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'brand_name' => 'required|unique:tbl_brand',   
+                'brand_desc' => 'required',
+                'brand_image' => 'required|image',
+                'brand_status' => 'required',
+                
+            ],
+            [
+                'brand_name.required' => 'Yêu cầu nhập tên thương hiệu',
+                'brand_name.unique' => 'Đã có thương hiệu trong hệ thống',
+                'brand_desc.required' => 'Yêu cầu nhập mô tả thương hiệu ',
+                'brand_image.required' => 'Thêm hình ảnh cho thương hiệu sản phẩm ',
+                'brand_image.image' => 'Không phải định dạng hình ảnh ',
+                'brand_status.required' => 'Yêu cầu thêm trạng thái thương hiệu sản phẩm ',
+            ]
+            );
+
         $brand = new Brand();
-        $brand->brand_name = $data['brand_product_name'];
-        $brand->brand_desc = $data['brand_product_desc'];
-        $brand->brand_status = $data['brand_product_status'];
+        $brand->brand_name = $data['brand_name'];
+        $brand->brand_desc = $data['brand_desc'];
+        $brand->brand_status = $data['brand_status'];
         $get_image = $request->file('brand_image');
         if ($get_image){
             $get_name_image = $get_image->getClientOriginalName();
@@ -83,7 +74,7 @@ class BrandProduct extends Controller
             $data['brand_image'] = $new_image;
             $brand->brand_image = $new_image;
         }
-        $thuonghieu = Brand::where('brand_name','=',$data['brand_product_name'])->get();
+        $thuonghieu = Brand::where('brand_name','=',$data['brand_name'])->get();
         if($thuonghieu){
             $count_thuonghieu = $thuonghieu->count();
             if($count_thuonghieu==0){
@@ -96,8 +87,6 @@ class BrandProduct extends Controller
                 return Redirect::to('all-brand-product');
             }
         }
-
-        
         Toastr::success('Thêm thương hiệu sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');
 
@@ -119,6 +108,8 @@ class BrandProduct extends Controller
 
     public function edit_brand_product($brand_product_id){
         $this->AuthLogin();
+
+
         //C1: DB
         // $all_brand_product = DB::table('tbl_brand')->where('brand_id',$brand_product_id)->get();
         
@@ -137,41 +128,26 @@ class BrandProduct extends Controller
         return Redirect::to('all-brand-product');
     }
 
-    public function update_brand_product(Request $request, $brand_product_id){
+    public function update_brand_product(Request $request, $brand_id){
         // $this->AuthLogin();
-        // $data = $request->all();
-        // $brand =Brand::find($brand_product_id);
-        // $brand->brand_name = $data['brand_product_name'];
-        // $brand->brand_desc = $data['brand_product_desc'];
-
-        // $get_image = $request->file('brand_image');
-        // if ($get_image){
-        //     $get_name_image = $get_image->getClientOriginalName();
-        //     $name_image = current(explode('.', $get_name_image));
-        //     $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-        //     $get_image->move('public/upload/brand',$new_image);
-        //     $data['brand_image'] = $new_image;
-        //     $brand->brand_image = $new_image;
-        // }
-        // $thuonghieu = Brand::where('brand_name','=',$data['brand_product_name'])->get();
-        // if($thuonghieu){
-        //     $count_thuonghieu = $thuonghieu->count();
-        //     if($count_thuonghieu==0){
-        //         $brand->save();
+        $data = $request->validate(
+            [
+                'brand_name' => 'required',   
+                'brand_desc' => 'required',
+                'brand_image' => 'image',
                 
-        //          return Redirect::to('all-brand-product');
-        //     }
-        //     else{
-               
-        //         return Redirect::to('all-brand-product');
-        //     }
-        // }
-
-
+            ],
+            [
+                'brand_name.required' => 'Yêu cầu nhập tên thương hiệu',
+                'brand_name.unique' => 'Đã có thương hiệu trong hệ thống',
+                'brand_desc.required' => 'Yêu cầu nhập mô tả thương hiệu ',
+                'brand_image.image' => 'Không phải định dạng hình ảnh ',
+            ]
+            );
         $data = $request->all();
-        $brand = Brand::find($brand_product_id);
-        $brand->brand_name = $data['brand_product_name'];
-        $brand->brand_desc = $data['brand_product_desc'];
+        $brand = Brand::find($brand_id);
+        $brand->brand_name = $data['brand_name'];
+        $brand->brand_desc = $data['brand_desc'];
 
         $get_image = $request->file('brand_image');
         if ($get_image){
@@ -182,8 +158,6 @@ class BrandProduct extends Controller
             $data['brand_image'] = $new_image;
             $brand->brand_image = $new_image;
         }
-
-
         $brand->save();
         Toastr::success('Đã cập nhật thương hiệu sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-brand-product');

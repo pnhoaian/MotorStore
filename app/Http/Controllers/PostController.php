@@ -50,6 +50,8 @@ class PostController extends Controller
                 'post_desc' => 'required',
                 'post_content' => 'required',
                 'post_image' => 'required|image',
+                'cate_post_id' => 'required',
+                'post_status' => 'required',
                 
             ],
             [
@@ -59,6 +61,8 @@ class PostController extends Controller
                 'post_image.required' => 'Thêm hình ảnh cho bài viết ',
                 'post_content.required' => 'Yêu cầu nhập mô tả cho bài viết ',
                 'post_image.image' => 'Không phải định dạng hình ảnh ',
+                'cate_post_id.required' => 'Thêm danh mục cho bài viết ',
+                'post_status.required' => 'Yêu cầu thêm trạng thái bài viết ',
 
             ]
             );
@@ -115,6 +119,26 @@ class PostController extends Controller
     public function update_post(Request $request, $post_id){
         $this->AuthLogin();
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'post_title' => 'required',   
+                'post_desc' => 'required',
+                'post_content' => 'required',
+                'post_image' => 'image',
+                'cate_post_id' => 'required',
+                'post_status' => 'required',
+                
+            ],
+            [
+                'post_title.required' => 'Yêu cầu nhập tên bài viết',
+                'post_desc.required' => 'Yêu cầu nhập mô tả ngắn bài viết ',
+                'post_content.required' => 'Yêu cầu nhập mô tả cho bài viết ',
+                'post_image.image' => 'Không phải định dạng hình ảnh ',
+                'cate_post_id.required' => 'Thêm danh mục cho bài viết ',
+                'post_status.required' => 'Yêu cầu thêm trạng thái bài viết ',
+
+            ]
+            );
         $post = Post::find($post_id);
         $post ->post_title = $data['post_title'];
         $post ->post_desc = $data['post_desc'];

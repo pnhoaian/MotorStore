@@ -77,13 +77,14 @@
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
             <p><b>Số lượng tồn kho: </b> {{ $value->product_quantity }} </p>
-            <p><b>Tình trạng:</b> 
+            {{-- <p><b>Tình trạng:</b> 
                 @if ($value->product_quantity >= 1)
                     Còn hàng
+                    
                 @else
                     Tạm hết hàng
                 @endif
-            </p>
+            </p> --}}
             <p><b>Đánh giá:</b>
                 <ul class="list-inline rating" title="Average Rating">
                     @for ($count = 1; $count <= 5; $count++)
@@ -113,20 +114,25 @@
             <!--price_update_43154--></p>
 
             </div>
+
             <span style="margin-top: -10px;">
-                <label>Số Lượng:</label>
-                <input name="product_qty" type="number" min="1"
-                            class="cart_product_qty_{{ $value->product_id }}" value="1" />
-                <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
                 {{-- <button type="submit" class="btn btn-fefault cart">
                     <i class="fa fa-shopping-cart" name="add-to-cart"></i>
                     Thêm vào giỏ hàng
                 </button> --}}
-                <button type="button"
-                        class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}"
-                        name="add-to-cart" style="
-                        margin-bottom: 8px;margin-left: 10px;"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
-                </button>
+                @if ($value->product_quantity >= 1)
+                    <label>Số Lượng:</label>
+                    <input name="product_qty" type="number" min="1"
+                                class="cart_product_qty_{{ $value->product_id }}" value="1" />
+                    <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
+
+                    <button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}" name="add-to-cart" 
+                        style="margin-bottom: 8px;margin-left: 10px;"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                    </button>
+                @else
+                    <span>TẠM HẾT HÀNG</span>
+                @endif
+
             </span>
             <p><b>Tags sản phẩm: </b> </p>
             {{-- <p><b>Đã bán:</b> {{ $value->category_name }}</p>

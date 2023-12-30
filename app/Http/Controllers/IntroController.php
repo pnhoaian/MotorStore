@@ -48,6 +48,15 @@ class introController extends Controller
 
     public function save_intro(Request $request){
         $data = $request->all();
+
+        $data = $request->validate(
+            [
+                'intro_desc' => 'required:tbl_intro', 
+            ],
+            [
+                'intro_desc.required' => 'Yêu cầu nhập mô tả giới thiệu Website',
+            ]
+            );
         $intr = new Intro();
         $intr->intro_desc = $data['intro_desc'];
         $intr->save();

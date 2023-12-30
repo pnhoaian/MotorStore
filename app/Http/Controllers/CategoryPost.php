@@ -109,6 +109,17 @@ class CategoryPost extends Controller
 
         $this->AuthLogin();
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'cate_post_name' => 'required|unique:tbl_category_post',   
+                'cate_post_desc' => 'required',
+            ],
+            [
+                'cate_post_name.required' => 'Yêu cầu nhập tên danh mục bài viết',
+                'cate_post_name.unique' => 'Tên danh mục bài viết đã tồn tại trên hệ thống',
+                'cate_post_desc.required' => 'Yêu cầu nhập mô tả danh mục bài viết ',
+            ]
+            );
         $cate_post = CatePost::find($cate_id);
         $cate_post ->cate_post_name = $data['cate_post_name'];
         $cate_post ->cate_post_desc = $data['cate_post_desc'];

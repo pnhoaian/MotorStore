@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Session;
+use Mail;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use App\Models\Product;
 use App\Models\CatePost;
+
 use Toastr;
 session_start();
 
@@ -27,6 +29,7 @@ class HomeController extends Controller
         $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
         $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
         $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
+        
         $min_price = Product::min('product_price');
         $max_price = Product::max('product_price');
         $max_price_range = $max_price + 500000;
@@ -69,4 +72,6 @@ class HomeController extends Controller
         ->with('search_product',$search_product)
         ->with('search_product_count',$search_product_count);
     }
+
+
 }

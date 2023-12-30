@@ -24,6 +24,19 @@
                 <header class="panel-heading">
                     Cập Nhật Sản phẩm
                 </header>
+
+                    {{-- //thông báo lỗi đầu vào ở header --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    {{-- End --}}
+
                                     <div class="position-center">
                                         @foreach ($edit_product as $key => $pro)
                                         
@@ -37,7 +50,7 @@
                 
                                         <div class="form-group">
                                             <label for="">Danh mục sản phẩm</label>
-                                            <select name="product_cate" class="form-control input-sm m-bot15">
+                                            <select name="category_id" class="form-control input-sm m-bot15">
                                                 @foreach ($cate_product as $key => $cate)
                                                     <option {{ $cate->category_id == $pro->category_id ? 'selected' : ' ' }}
                                                         value="{{ $cate->category_id }}">
@@ -50,7 +63,7 @@
                 
                                         <div class="form-group">
                                             <label for="exampleInputPassword1">Hãng - Thương hiệu</label>
-                                            <select name="product_brand" class="form-control m-bot15">
+                                            <select name="brand_id" class="form-control m-bot15">
                                                 @foreach ($brand_product as $key => $brand)
                                             @if ($brand->brand_id == $pro->brand_id)
                                                 <option selected value="{{ $brand->brand_id }}">{{ $brand->brand_name }}

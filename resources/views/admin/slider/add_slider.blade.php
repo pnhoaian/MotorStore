@@ -24,6 +24,19 @@
                 <header class="panel-heading">
                     Thêm Slide - Banner
                 </header>
+
+                {{-- //thông báo lỗi đầu vào ở header --}}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                    {{-- End --}}
+
                 <div class="panel-body">
 
                     <div class="position-center">

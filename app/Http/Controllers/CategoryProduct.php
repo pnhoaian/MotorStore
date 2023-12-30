@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Slider;
 use Toastr;
-
+use App\Models\CateProduct;
 use App\Models\CatePost;
 use App\Models\Product;
 session_start();
@@ -38,16 +38,29 @@ class CategoryProduct extends Controller
 
     public function save_category_product(Request $request){
         $this->AuthLogin();
-        $data = array();
-        $data['category_name'] = $request ->category_product_name;
-        $data['category_desc']= $request ->category_product_desc;
-        $data['category_status']= $request ->category_product_status;
+        $data = $request->all();
+        $data = $request->validate(
+            [
+                'category_name' => 'required|unique:tbl_category_product',   
+                'category_desc' => 'required',
+                'category_status' => 'required',
+            ],
+            [
+                'category_name.required' => 'Yêu cầu nhập tên danh mục sản phẩm',
+                'category_name.unique' => 'Tên danh mục sản phẩm đã tồn tại trên hệ thống',
+                'category_desc.required' => 'Yêu cầu nhập mô tả danh mục sản phẩm ',
+                'category_status.required' => 'Yêu cầu nhập tình trạng hiển thị danh mục sản phẩm ',
+            ]
+            );
+        $cate_p = new CateProduct();
+        $cate_p->category_name = $data['category_name'];
+        $cate_p->category_desc = $data['category_desc'];
+        
+        $cate_p->category_status = $data['category_status'];
 
-        //insert du lieu va tbl-category-product
-        DB::table('tbl_category_product')->insert($data);
-        Toastr::success('Thêm danh mục sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-        return Redirect::to('all-category-product');
-        //return view('admin.save_category_product');
+        $cate_p->save();
+       Toastr::success('Thêm danh mục sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+       return Redirect::to('all-category-product');
     }
 
     public function active_category_product($category_product_id){
@@ -78,12 +91,26 @@ class CategoryProduct extends Controller
         return Redirect::to('all-category-product');
     }
 
-    public function update_category_product(Request $request, $category_product_id){
+    public function update_category_product(Request $request, $category_id){
         $this->AuthLogin();
-        $data = array();
-        $data['category_name'] = $request ->category_product_name;
-        $data['category_desc']= $request ->category_product_desc;
-        DB::table('tbl_category_product')->where('category_id',$category_product_id)->update($data);
+        $data = $request->all();
+        $data = $request->validate(
+            [
+                'category_name' => 'required',   
+                'category_desc' => 'required',
+            ],
+            [
+                'category_name.required' => 'Yêu cầu nhập tên danh mục sản phẩm',
+                'category_name.unique' => 'Tên danh mục sản phẩm đã tồn tại trên hệ thống',
+                'category_desc.required' => 'Yêu cầu nhập mô tả danh mục sản phẩm ',
+            ]
+            );
+        $cate_p = CateProduct::find($category_id);
+        $cate_p->category_name = $data['category_name'];
+        $cate_p->category_desc = $data['category_desc'];
+        
+
+        $cate_p->save();
         Toastr::success('Đã cập nhật danh mục sản phẩm','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-category-product');
     }
@@ -105,13 +132,13 @@ class CategoryProduct extends Controller
             $sort_by = $_GET['sort_by'];
 
             if($sort_by=='giam_dan'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_price','DESC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_price','DESC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='tang_dan'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_price','ASC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_price','ASC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='kytu_za'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_name','DESC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_name','DESC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='kytu_az'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_name','ASC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_name','ASC')->paginate(10)->appends(request()->query());
             }
         }elseif(isset($_GET['start_price']) && $_GET['end_price']){
             $min_price = $_GET['start_price'];

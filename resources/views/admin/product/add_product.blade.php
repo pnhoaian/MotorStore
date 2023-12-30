@@ -24,6 +24,19 @@
                 <header class="panel-heading">
                     Sản phẩm
                 </header>
+
+                    {{-- //thông báo lỗi đầu vào ở header --}}
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    {{-- End --}}
+
                 <div class="panel-body">
 
                     <div class="position-center">
@@ -37,7 +50,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Danh Mục Sản Phẩm</label>
-                            <select name="product_cate" class="form-control m-bot15">
+                            <select name="category_id" class="form-control m-bot15">
                                 @foreach ($cate_product as $key =>$cate) 
                                  <option value="{{ $cate->category_id}}">{{ $cate->category_name}}</option>
                                 @endforeach
@@ -46,7 +59,7 @@
 
                         <div class="form-group"></div>
                             <label for="exampleInputPassword1">Hãng - Thương hiệu</label>
-                            <select name="product_brand" class="form-control m-bot15">
+                            <select name="brand_id" class="form-control m-bot15">
                                 @foreach ($brand_product as $key =>$brand) 
                                  <option value="{{ $brand->brand_id}}">{{ $brand->brand_name }}</option>
                                 @endforeach   
@@ -55,12 +68,12 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả Sản phẩm</label>
-                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="ckeditor"></textarea>
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Hình ảnh Sản phẩm</label>
-                            <input type="file" name="product_image" class="form-control" id="exampleInputEmail1" placeholder="">
+                            <input type="file" name="product_image" class="form-control" id="exampleInputEmail1">
                         </div>
 
                         <div class="form-group">
