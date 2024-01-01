@@ -15,7 +15,9 @@ use App\Models\OrderDetails;
 use App\Models\Shipping;
 use App\Models\Customer;
 use App\Models\Coupon;
+use Carbon\Carbon;
 use PDF;
+use Mail;
 use Toastr;
 session_start();
 
@@ -203,16 +205,121 @@ class OrderController extends Controller
         return view('admin.order.view_order')->with(compact('order_details','customer','shipping','order','order_details_product','coupon','coupon_condition','coupon_number'));
     }
 
+    public function update_qty(Request $request){
+		$data = $request->all();
+		$order_details = OrderDetails::where('product_id',$data['order_product_id'])->where('order_code',$data['order_code'])->first();
+		$order_details->product_sales_quantity = $data['order_qty'];
+		$order_details->save();
+	
+	}
+
 
 //update tình trạng đơn hàng
-    public function update_order(Request $request, $order_code){
-        $this->AuthLogin();
-        $data = array();
+    public function update_order_qty(Request $request){
+        $data = $request->all();
+        
+        //lấy thông tin order
+        $order = Order::find($data['order_id']);
+        $order->order_status = $data['order_status'];
+		$order->save();
+
         $data['order_status']= $request ->order_status;
 
-        DB::table('tbl_order')->where('order_code',$order_code)->update($data);
+        //Send mail confirm
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        // $title_mail = "Hoài An Store | Xác nhận đơn đặt hàng ngày ".' '.$now;
+        $title_mail = "Hoài An Store | Đơn hàng đã được xác nhận đặt hàng và tiến hành đóng gói";
+
+        $customer = Customer::where('customer_id',$order->customer_id)->first();
+
+        $data['email'][] = $customer->customer_email;
+
+
+		   foreach($data['order_product_id'] as $key => $product){
+			$product_mail = Product::find($product);
+			   foreach($data['quantity'] as $key2 => $qty){
+				if($key ==$key2){
+				   $cart_array[] = array(
+                    'product_name' => $product_mail['product_name'],
+                    'product_price' => $product_mail['product_price'],
+                    'product_qty' => $qty,
+                    
+				   );
+			   }
+		   }
+		}
+
+
+        $details = OrderDetails::where('order_code',$order->order_code)->first();
+		$fee_ship = $details->product_feeship;
+		$coupon_mail = $details->product_coupon;
+
+
+        //lấy thông tin voucher
+        if(Session::get('coupon')!=NULL){
+            $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
+           
+            $coupon_mail = $coupon->coupon_code;
+            $coupon_mail_method = $coupon->coupon_condition;
+            $coupon_mail_number = $coupon->coupon_number;
+            $coupon->save();
+            }else{
+                $coupon_mail = 'không có';
+                $coupon_mail_method ='';
+                $coupon_mail_number = '';
+            }
+
+    
+        $shipping = Shipping::where('shipping_id',$order->shipping_id)->first();
+        //
+        $shipping_array = array(
+           'customer_name' =>$customer->customer_name,
+           'shipping_name' =>$shipping->shipping_name,
+           'shipping_email' =>$shipping->shipping_email,
+           'shipping_phone' =>$shipping->shipping_phone,
+           'shipping_address' =>$shipping->shipping_address,
+           'shipping_note' =>$shipping->shipping_note,
+           'shipping_method_receive' =>$shipping->shipping_method_receive,
+           'shipping_method_pay' =>$shipping->shipping_method_pay,
+        );
+
+        // $ordercode_mail = array(
+        //    'coupon_code' =>$coupon_mail,
+        //    'order_code' =>$checkout_code
+        // );
+        
+        $ordercode_mail = array(
+            'coupon_code' =>$coupon_mail,
+            'order_code' =>$details->order_code
+         );
+       
+      
+
+
+       Mail::send('pages.mail.confirm_order',
+        ['cart_array'=>$cart_array,
+        'shipping_array'=>$shipping_array,
+        'code'=>$ordercode_mail],
+        function($message) use ($title_mail,$data){
+            $message->to($data['email'])->subject($title_mail);
+            $message->from($data['email'],$title_mail);
+            
+        });
+
+
+        // DB::table('tbl_order')->where('order_code',$order_code)->update($data);
         Toastr::success('Đã cập nhật tình trạng đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-order');
+    }
+
+    public function delete_order($order_code){
+        $this->AuthLogin();
+        $order_details = OrderDetails::find($order_code);
+        $order_details->delete();
+        $coupon->delete();
+
+        Toastr::warning('Xóa đơn hàng thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('/manage-order');
     }
 
 

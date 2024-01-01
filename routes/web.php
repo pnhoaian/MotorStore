@@ -74,10 +74,11 @@ Route::get('/history', [OrderController::class, 'history']);
 
 Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history_order']);
 //update tình trạng đơn hàng
-Route::post('/update-order/{order_code}', [OrderController::class, 'update_order']);
-
-
-
+Route::post('/update-order-qty', [OrderController::class, 'update_order_qty']);
+//xóa đơn
+Route::get('/delete-order/{order_code}', [OrderController::class, 'delete_order']);
+//cập nhật số lượng sản phẩm view đơn hàng
+Route::post('/update-qty', [OrderController::class, 'update_qty']);
 
 //--**************************************************************  Intro **********************************************************
 //// ***FE: Page Liên hệ

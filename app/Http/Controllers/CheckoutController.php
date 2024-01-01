@@ -13,7 +13,9 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderDetails;
 use App\Models\Shipping;
+use App\Models\Coupon;
 use Toastr;
+use Mail;
 use Carbon\Carbon;
 
 class CheckoutController extends Controller
@@ -55,6 +57,19 @@ class CheckoutController extends Controller
 
     public function register_customer(Request $request){
         $data = $request->all();
+        $data = $request->validate(
+            [
+                'customer_email' => 'unique:tbl_customer',   
+                'customer_phone' => 'numeric',
+                'customer_address' => 'required',
+                
+            ],
+            [
+                'customer_email.unique' => 'Email đã được sử dụng đăng ký',
+                'customer_phone.numeric' => 'Số điện thoại phải định dạng bằng ký tự số',
+                'customer_address.required' => 'Yêu cầu thêm địa chỉ ',
+            ]
+            );
         $customer = new Customer();
         $customer ->customer_name = $data['customer_name'];
         $customer ->customer_email = $data['customer_email'];
@@ -119,6 +134,21 @@ class CheckoutController extends Controller
         
          $data = $request->all();
 
+         if(Session::get('coupon')!=NULL){
+            $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
+            // $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            // $coupon->coupon_time = $coupon->coupon_time-1;
+           
+            $coupon_mail = $coupon->coupon_code;
+            $coupon_mail_method = $coupon->coupon_condition;
+            $coupon_mail_number = $coupon->coupon_number;
+            $coupon->save();
+            }else{
+                $coupon_mail = 'không có';
+                $coupon_mail_method ='';
+                $coupon_mail_number = '';
+            }
+
 
         $shipping = new Shipping();
          $shipping->shipping_name = $data['shipping_name'];
@@ -160,21 +190,68 @@ class CheckoutController extends Controller
                 $order_details->Product_id  = $cart['product_id'];
                 $order_details->Product_name = $cart['product_name'];
                 $order_details->Product_price = $cart['product_price'];
-
                 $order_details->Product_sales_quantity = $cart['product_qty'];
                 $order_details->Product_coupon =  $data['order_coupon'];
                 // $order_details->Product_feeship = $priceship;
                 $order_details->save();
             }
          }
+
+
+
+
+         //Send mail
+         $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+         $title_mail = "Hoài An Store | Xác nhận đơn đặt hàng ngày ".' '.$now;
+
+
+         $customer = Customer::find(Session::get('customer_id'));
+         
+        $data['email'][] = $customer->customer_email;
+        if(Session::get('cart')==true){
+            foreach(Session::get('cart') as $key => $cart_mail){
+                $cart_array[] = array(
+                    'product_name' => $cart_mail['product_name'],
+                    'product_price' => $cart_mail['product_price'],
+                    'product_qty' => $cart_mail['product_qty'],
+                );
+            }
+        }
         
+         $shipping_array = array(
+            'customer_name' =>$customer->customer_name,
+            'shipping_name' =>$data['shipping_name'],
+            'shipping_email' =>$data['shipping_email'],
+            'shipping_phone' =>$data['shipping_phone'],
+            'shipping_address' =>$data['shipping_address'],
+            'shipping_note' =>$data['shipping_note'],
+            'shipping_method_receive' =>$data['shipping_method_receive'],
+            'shipping_method_pay' =>$data['shipping_method_pay']
+         );
+
+         $ordercode_mail = array(
+            'coupon_code' =>$coupon_mail,
+            'order_code' =>$checkout_code
+         );
         
+        Mail::send('pages.mail.mail_order',
+        ['cart_array'=>$cart_array,
+        'shipping_array'=>$shipping_array,
+        'code'=>$ordercode_mail],
+        function($message) use ($title_mail,$data){
+            $message->to($data['email'])->subject($title_mail);
+            $message->from($data['email'],$title_mail);
+            
+        });
+
+
         if($shipping->shipping_method_pay ==0){
-            Toastr::success('Đặt hàng thành công, đơn hàng đang được kiểm tra.','Thông báo !');
+            Toastr::success('Đặt hàng thành công, đơn hàng đang được xử lý.','Thông báo !');
         }
         Session::forget('coupon');
             Session::forget('fee');
             Session::forget('cart');
+        
     }
 
     public function payment(){

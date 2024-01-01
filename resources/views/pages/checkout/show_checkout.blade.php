@@ -1,7 +1,7 @@
 @extends('welcome')
 @section('content')
 @section('footer')
-	@include("pages.include.footer");
+	@include("pages.include.footer")
 @endsection()
 
 <section id="cart_items">
@@ -22,6 +22,10 @@
                     {{ session()->get('error') }}
                 </div>
                 @endif
+                
+                
+
+
         <div class="table-responsive cart_info" style="margin-bottom:10px">
             <form action="{{URL::to('/update-cart')}}" method="POST">
                 @csrf
@@ -90,8 +94,6 @@
                             <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
 
-
-                           
                             
                                 @if (Session::get('coupon'))
                                 @foreach (Session::get('coupon') as $key => $cou)
@@ -170,18 +172,19 @@
                         </li>
                         </td>
                     </tr>
-                    @else
-                        <tr>
-                            <td colspan="5" style="text-align: center"></td>
-                                @php
-                                    echo'Không có sản phẩm trong giỏ hàng';
-                                @endphp
-
-                            </td>
-                        </tr>
-                    @endif
+                   
                 </tbody>
             </form>
+            @else
+            <tr>
+                <td colspan="5" style="text-align: center"></td>
+                    @php
+                        echo'Không có sản phẩm trong giỏ hàng';
+                    @endphp
+
+                </td>
+            </tr>
+        @endif
                 {{-- Kiểm tra tồn tại sản phẩm trong giỏ hàng mới xuất hiện khung giảm giá --}}
                 @if (Session::get('cart') && Session::get('coupon'))
                 @elseif(Session::get('cart'))

@@ -42,6 +42,8 @@ class CustomerController extends Controller
     }
 
     public function dashboard(Request $request){
+        
+
         $customer_email = $request->customer_email;
         $customer_password = md5($request->admin_password);
         

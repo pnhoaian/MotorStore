@@ -211,6 +211,40 @@
             </tr>
             </tbody>
         </table>
+
+        {{-- @foreach ($order as $detail)  
+            <form role="form" action="{{URL::to('/update-order/'.$detail->order_code)}}" method="POST" >
+                   {{ csrf_field() }}
+                <div class="form-group">
+
+                    <label for="exampleInputPassword1">Tình trạng đơn hàng</label>
+                   
+                        @if ($detail->order_status ==1)
+                            <select name="order_status" class="form-control m-bot15">
+                                <option  value="1" selected disabled>Chưa xử lý</option>
+                                <option  value="0" >Đã xử lý</option>
+                                <option  value="2" >Khách đã hủy đơn</option>
+                            </select>
+                            @elseif($detail->order_status ==0)
+                            <select name="order_status" class="form-control m-bot15">
+                                <option  value="1" disabled>Chưa xử lý</option>
+                                <option  value="0" selected disabled>Đã xử lý</option>
+                                <option  value="2">Khách đã hủy đơn</option>
+                            </select>
+                            @else
+                            <span name="order_status" class="form-control m-bot15">
+
+                                Khách đã hủy đơn
+                            </span>
+                    
+                        @endif
+                    </select>
+                    
+                </div>
+                @if ($detail->order_status !=2)
+                    <div class="form-group">
+                    <button type="submit" name="edit" class="btn btn-info">Hủy đơn</button>
+                @endif --}}
     </div>
 </div>
 </div>

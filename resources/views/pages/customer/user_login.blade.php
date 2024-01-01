@@ -88,6 +88,18 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 		<div class="sub-main-w3">	
 			<div class="wthree-pro">
 				<h2>Đăng nhập tài khoản</h2>
+								                    {{-- //thông báo lỗi đầu vào ở header --}}
+									{{-- @if ($errors->any())
+									<div class="alert alert-danger">
+										<ul>
+											@foreach ($errors->all() as $error)
+												<li class="fa fa-exclamation-circle" aria-hidden="true" style="color: #FFF;font-size: 22px;background: firebrick;border-radius: 10px;width: 450px;
+												height: 35px;padding-top: 10px;"> {{ $error }}</li>
+											@endforeach
+										</ul>
+									</div>
+									@endif --}}
+									{{-- End --}}
 			</div>
 			<form action="{{URL::to('/login-customer')}}" method="post">
 				{{ csrf_field() }}

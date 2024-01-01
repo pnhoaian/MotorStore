@@ -23,13 +23,26 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <div class="center-container">
 	<!--header-->
 	<div class="header-w3l">
-		{{-- <h1>Online Login Form</h1> --}}
+		<h1>Đăng ký tài khoản mới</h1>
 	</div>
 	<!--//header-->
 	<div class="main-content-agile">
 		<div class="sub-main-w3">	
 			<div class="wthree-pro">
-				<h2>Đăng ký tài khoản mới</h2>
+				                    {{-- //thông báo lỗi đầu vào ở header --}}
+
+									{{-- @if ($errors->any())
+									<div class="alert alert-danger">
+										<ul>
+											@foreach ($errors->all() as $error)
+												<li class="fa fa-exclamation-circle" aria-hidden="true" style="color: #FFF;font-size: 22px;background: firebrick;border-radius: 10px;width: 450px;
+												height: 35px;padding-top: 10px;"> {{ $error }}</li>
+											@endforeach
+										</ul>
+									</div>
+									@endif --}}
+
+									{{-- End --}}
 			</div>
 				<form role="form" action="{{URL::to('/register-customer')}}" method="POST">
 					{{ csrf_field() }}
@@ -60,7 +73,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<!--//main-->
 	<!--footer-->
 	<div class="footer">
-		<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Store</a></p>
+		<p>&copy; 2023 All rights reserved | Design by <a href="https://www.facebook.com/hoaianstorevn">Hoài An Store</a></p>
 	</div>
 	<!--//footer-->
 </div>
