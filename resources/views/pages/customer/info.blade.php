@@ -12,7 +12,18 @@
                     <li style="color:#ccc">/</li>
                     <li class="breadcrumb-item active" style="color: #000">Thông tin tài khoản</li>
                 </ol>
-
+								                    {{-- //thông báo lỗi đầu vào ở header --}}
+									@if ($errors->any())
+									<div class="alert alert-danger">
+										<ul>
+											@foreach ($errors->all() as $error)
+												<li class="fa fa-exclamation-circle" aria-hidden="true" style="color: #FFF;font-size: 18px;background: firebrick;border-radius: 10px;width: 420px;
+												height: 35px;padding-top: 10px;margin:10px 10px"> {{ $error }}</li>
+											@endforeach
+										</ul>
+									</div>
+									@endif
+									{{-- End --}}
             </div>
             <div class="table-responsive cart_info col-sm-9" style="width:100% ;padding-bottom:20px;margin-top: 20px">
                 <div class="shopper-informations ">

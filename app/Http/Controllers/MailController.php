@@ -12,11 +12,14 @@ use App\Models\Intro;
 use App\Models\Slider;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
+use App\Models\Customer;
 use Toastr;
 session_start();
 
 class MailController extends Controller
 {
+
+    //Test mail
     public function send_mail(){
         //send mail
         
@@ -36,23 +39,27 @@ class MailController extends Controller
    // return redirect('/trang-chu')->with('message','');
    }
 
-    public function search1(Request $request){
-        $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
-        $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
-        $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
-        $keyword = $request->keywords_submit;
-        $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
-        $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->get();
-        
-        $search_product_count = $search_product->count();
-        return view('pages.product.search')
-        ->with('category', $cate_product)
-        ->with('brand', $brand_product)
-        ->with('slider',$slider)
-        ->with('slidermini',$slidermini)
-        ->with('category_post',$category_post)
-        ->with('search_product',$search_product)
-        ->with('search_product_count',$search_product_count);
+
+   public function send_coupon(){
+        $customer_vip = Customer::where('customer_vip',1)->get();
+        //Send mail
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->format('Y-m-d H:i:s');
+        $title_mail = "Hoài An Store | Mã khuyến mãi hấp dẫn mới nhất ngày ".' '.$now;
+
+        $data = [];
+        foreach($customer_vip as $vip){
+            $data['email'][] = $vip->customer_email;
+        }
+        // dd($data);
+        Mail::send('pages.mail.send_coupon',$data, function($message) use ($title_mail,$data){
+            $message->to($data['email'])->subject($title_mail);
+            $message->from($data['email'],$title_mail);
+        });
+        Toastr::success('Đã gửi thành công mã khuyến mãi!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "1500","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('list-coupon');
+    }
+
+    public function demo_sendcoupon(){
+        return view('pages.mail.send_coupon');
     }
 }

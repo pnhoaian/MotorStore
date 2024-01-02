@@ -306,7 +306,6 @@ class OrderController extends Controller
             
         });
 
-
         // DB::table('tbl_order')->where('order_code',$order_code)->update($data);
         Toastr::success('Đã cập nhật tình trạng đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-order');

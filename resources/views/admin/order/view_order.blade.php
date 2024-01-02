@@ -125,14 +125,6 @@
                             $total+=$subtotal;
                         @endphp
 
-
-                    
-
-
-
-
-
-
                 <tr>
                     <td>{{ $i }}</td>
                     <td>{{ $details->Product_name }}</td>
@@ -156,8 +148,7 @@
                     <td>{{ number_format($details->Product_price, 0, ',', '.') . ' ' . '₫'  }}</td> 
                    <td>{{  number_format($subtotal, 0, ',', '.') . ' ' . '₫' }} </td>   
                    
-                   
-
+                
                 </tr>
                 @endforeach
                 <tr>

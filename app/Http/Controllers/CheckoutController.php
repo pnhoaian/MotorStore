@@ -42,6 +42,9 @@ class CheckoutController extends Controller
         $email = $request->email_account;
         $password = md5($request->password_account);
         $result = DB::table('tbl_customer')->where('customer_email',$email)->where('customer_password',$password)->first();
+        if(Session::get('coupon')==true){
+            Session::forget('coupon');
+        }
 
     if($result){
         Session::put('customer_id',$result->customer_id);
@@ -49,9 +52,11 @@ class CheckoutController extends Controller
         Session::put('customer_email',$result->customer_email);
         Session::put('customer_phone',$result->customer_phone);
         Session::put('customer_address',$result->customer_address);
-        Toastr::success('Đăng nhập thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-      
+        Toastr::success('Đăng nhập thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "680","progressBar"=> true,"closeButton"=> true]);
         return redirect::to('/trang-chu');
+    }else{
+        Toastr::error('Thông tin tài khoản hoặc mật khẩu không đúng!','Đăng nhập thất bại !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return redirect::to('/login');
     }
     }
 
@@ -59,17 +64,28 @@ class CheckoutController extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'customer_email' => 'unique:tbl_customer',   
-                'customer_phone' => 'numeric',
+                'customer_email' => 'required|unique:tbl_customer',  
+                'customer_name' => 'required',
+                'customer_password' => 'required',
+                'customer_phone' => 'numeric|unique:tbl_customer',
                 'customer_address' => 'required',
                 
             ],
             [
+                'customer_email.required' => 'Yêu cầu thêm địa chỉ email ',
                 'customer_email.unique' => 'Email đã được sử dụng đăng ký',
+
+                'customer_name.required' => 'Chưa nhập tên người dùng',
+
                 'customer_phone.numeric' => 'Số điện thoại phải định dạng bằng ký tự số',
+                'customer_phone.unique' => 'Số điện thoại đã được sử dụng đăng ký',
+
                 'customer_address.required' => 'Yêu cầu thêm địa chỉ ',
+
+                'customer_password.required' => 'Chưa điền Password ',
             ]
             );
+        
         $customer = new Customer();
         $customer ->customer_name = $data['customer_name'];
         $customer ->customer_email = $data['customer_email'];
@@ -133,12 +149,14 @@ class CheckoutController extends Controller
         //     );        
         
          $data = $request->all();
-
          if(Session::get('coupon')!=NULL){
             $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
-            // $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
-            // $coupon->coupon_time = $coupon->coupon_time-1;
-           
+            //Thêm customer_id vào cột coupon_used
+            $coupon->coupon_used = $coupon->coupon_used.','.Session::get('customer_id');
+            //trừ sl coupon sau khi đặt hàng
+            $coupon->coupon_times = $coupon->coupon_times-1;
+            
+
             $coupon_mail = $coupon->coupon_code;
             $coupon_mail_method = $coupon->coupon_condition;
             $coupon_mail_number = $coupon->coupon_number;
@@ -149,7 +167,7 @@ class CheckoutController extends Controller
                 $coupon_mail_number = '';
             }
 
-
+        // Get Shipping
         $shipping = new Shipping();
          $shipping->shipping_name = $data['shipping_name'];
          $shipping->shipping_email = $data['shipping_email'];
@@ -282,6 +300,24 @@ class CheckoutController extends Controller
 
     public function update_information(Request $request, $customer_id){
         $data = $request->all();
+
+                $data = $request->validate(
+            [
+                'customer_name' => 'required',   
+                'customer_email' => 'required|email',   
+                'customer_phone' => 'numeric|required',
+                'customer_address' => 'required',
+            ],
+            [
+                'customer_name.required' => 'Tên người nhận hàng không được để trống',
+                'customer_email.required' => 'Email không được để trống',
+                'customer_email.email' => 'Không phải định dạng "@email.com"',
+                'customer_phone.required' => 'SĐT người nhận hàng không được để trống',
+                'customer_phone.numeric' => 'SĐT định dạng bằng ký tự số',
+                'customer_address.required' => 'Địa chỉ nhận hàng không được để trống',
+            ]
+            );
+
         $customer = Customer::find($customer_id);
         $customer->customer_name= $data['customer_name'];
         $customer->customer_email = $data['customer_email'];

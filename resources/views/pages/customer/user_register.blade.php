@@ -31,7 +31,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 			<div class="wthree-pro">
 				                    {{-- //thông báo lỗi đầu vào ở header --}}
 
-									{{-- @if ($errors->any())
+									@if ($errors->any())
 									<div class="alert alert-danger">
 										<ul>
 											@foreach ($errors->all() as $error)
@@ -40,7 +40,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 											@endforeach
 										</ul>
 									</div>
-									@endif --}}
+									@endif
 
 									{{-- End --}}
 			</div>

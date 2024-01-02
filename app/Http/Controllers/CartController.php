@@ -13,6 +13,7 @@ use Session;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\CatePost;
 use Cart;
+
 use Toastr;
 session_start();
 
@@ -20,7 +21,49 @@ class CartController extends Controller
 {
     public function check_coupon(Request $request){
         $data = $request->all();
-        $coupon = Coupon::where('coupon_code',$data['coupon'])->first();
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
+        if(Session::get('customer_id')){
+            $coupon = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('coupon_date_end','>=',$today)
+            ->where('coupon_used','LIKE','%'.Session::get('customer_id').'%')->first();
+            if($coupon){
+                return redirect()->back()->with('error','Khách hàng đã sử dụng mã giảm giá này rồi, vui lòng nhập mã khuyến mãi khác');
+        }else{
+            //Test mã đã sử dụng
+            // return redirect()->back()->with('message','Khách hàng chưa sử dụng giảm giá này');
+
+            $coupon_login = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('coupon_date_end','>=',$today)->first();
+            if($coupon_login==true){
+                $count_coupon = $coupon_login->count();
+                if($count_coupon>0){
+                    $coupon_session = Session::get('coupon');
+                    if($coupon_session==true){
+                        $is_avaiable = 0;
+                        if($is_avaiable==0){
+                            $cou[] = array(
+                                'coupon_code'=>$coupon_login->coupon_code,
+                                'coupon_condition'=>$coupon_login->coupon_condition,
+                                'coupon_number'=>$coupon_login->coupon_number
+                            );
+                            Session::put('coupon',$cou);
+                        }
+                    }else{
+                        $cou[] = array(
+                            'coupon_code'=>$coupon_login->coupon_code,
+                            'coupon_condition'=>$coupon_login->coupon_condition,
+                            'coupon_number'=>$coupon_login->coupon_number
+                        );
+                        Session::put('coupon',$cou);
+                    }
+                    Session::save();
+                    return redirect()->back()->with('message','Coupon khuyến mãi đã được áp dụng');
+                }
+            }else{
+                return redirect()->back()->with('error','Coupon khuyến mãi không đúng hoặc đã hết hạn');
+            }
+        }
+        // Nếu chưa đăng nhập
+    }else{
+        $coupon = Coupon::where('coupon_code',$data['coupon'])->where('coupon_status',1)->where('coupon_date_end','>=',$today)->first();
         if($coupon==true){
             $count_coupon = $coupon->count();
             if($count_coupon>0){
@@ -47,8 +90,10 @@ class CartController extends Controller
                 return redirect()->back()->with('message','Coupon khuyến mãi đã được áp dụng');
             }
         }else{
-            return redirect()->back()->with('error','Coupon khuyến mãi đã không đúng hoặc hết hạn');
+            return redirect()->back()->with('error','Coupon khuyến mãi không đúng hoặc đã hết hạn');
         }
+    //Đóng mới thêm s/d
+    }
     }
     //gio-hang
     public function show_cart(Request $request){

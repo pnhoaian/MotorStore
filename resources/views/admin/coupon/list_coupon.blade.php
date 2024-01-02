@@ -26,16 +26,24 @@
         Danh Sách Coupon - Mã giảm giá
       </div>
 
+      <div>
+        <p><a href="{{URL::to('/send-coupon')}}" class="btn btn-default" style="margin: 10px 10px;">Gửi mã khuyến mãi cho khách VIP</a></p>
+      </div>
+
       <div class="table-responsive">
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
               <th></th>
               <th>Tên chương trình</th>
+              <th>Ngày bắt đầu</th>
+              <th>Ngày kết thúc</th>
               <th>Mã giảm giá</th>
               <th>Số lượng</th>
               <th>Loại khuyến mãi</th>
               <th>Giảm</th>
+              <th>Trạng thái</th>
+              <th>Tình trạng</th>
               <th>Tác vụ</th>
             </tr>
           </thead>
@@ -45,9 +53,11 @@
             <tr>
               <td></td>
                 <td>{{ $cou->coupon_name }}</td>
+                <td>{{ $cou->coupon_date_start }}</td>
+                <td>{{ $cou->coupon_date_end }}</td>
                 <td>{{ $cou->coupon_code }}</td>
                 <td>{{ $cou->coupon_times }}</td>
-              {{-- status  --}}
+              
               <td><span class="text-ellipsis">
                 <?php
                 if($cou->coupon_condition == 1){
@@ -63,9 +73,10 @@
               </span>
             </td>
 
-            <td><span class="text-ellipsis">
+            <td>
+              <span class="text-ellipsis">
                 <?php
-                if($cou->coupon_condition == 1){
+                  if($cou->coupon_condition == 1){
                 ?>
                     {{ $cou->coupon_number }} %
                 <?php
@@ -76,6 +87,34 @@
                 }
                 ?>
               </span>
+            </td>
+
+            <td>
+              <span class="text-ellipsis">
+                <?php
+                  if($cou->coupon_status == 1){
+                ?>
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                    >Hoạt động</span></a>
+                <?php
+                }else{
+                ?>
+                  <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                  >Đã khóa</span></a>
+                <?php 
+                }
+                ?>
+              </span>
+            </td>
+
+            <td>
+                  @if($cou->coupon_date_end>= $today)
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                      >Còn hạn sử dụng</span></a>
+                  @else
+                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                  >Coupon đã hết hạn</span></a>
+                  @endif
             </td>
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}

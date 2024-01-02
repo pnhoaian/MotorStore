@@ -366,10 +366,28 @@
     });
 </script>
 
+<!-- Datepicker Coupon -->
+<script type="text/javascript">
+    $( function() {
+      $( "#datepicker_coupon" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
 
+      $( "#datepicker_coupon2" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+    } );
+</script>
 
-
-
+<!-- Datepicker Thống kê -->
 <script type="text/javascript">
     $( function() {
       $( "#datepicker" ).datepicker({

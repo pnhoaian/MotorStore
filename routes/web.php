@@ -38,6 +38,10 @@ Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 //--------------------------------------------------- Mail -----------------------------------------------------
 //Send Mail
 Route::get('/send-mail', [MailController::class, 'send_mail']);
+//send Coupon
+Route::get('/send-coupon', [MailController::class, 'send_coupon']);
+// Xem demo send Coupon
+Route::get('/demo-sendcoupon', [MailController::class, 'demo_sendcoupon']);
 
 // **************************************************** Login + Cart Checkout  ******************-----**********************
 Route::get('/login',[CheckoutController::class, 'login']);
