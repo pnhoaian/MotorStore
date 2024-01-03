@@ -22,7 +22,7 @@
                 </div>
 
                 <div class="col-md-6 logo" style="color: #FFF">
-                    <p>Chào bạn, <strong style="color: #FFF;text-decoration: underline">{{ $shipping_array['customer_name'] }}</strong></p>, chúng tôi đã xác nhận đơn đặt hàng và tiến hành đóng gói sản phẩm để giao đến bạn trong thời gian sớm nhất.
+                    <p>Chào bạn, <strong style="color: #FFF;text-decoration: underline">{{ $shipping_array['customer_name'] }}</strong></p>Chúng tôi đã xác nhận đơn đặt hàng và tiến hành đóng gói sản phẩm để giao đến bạn trong thời gian sớm nhất.
                 </div>
 
                 <div class="col-md-12">
@@ -75,7 +75,7 @@
                             @else
 
                             <strong style="color: #FFF;text-decoration: text-transform: uppercase;">
-                                SHIP COD: Thanh toán nhận hàng
+                                SHIP COD - Thanh toán nhận hàng
                             @endif
                         </strong>
                     </p>

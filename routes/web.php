@@ -40,6 +40,13 @@ Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
 Route::get('/send-mail', [MailController::class, 'send_mail']);
 //send Coupon
 Route::get('/send-coupon', [MailController::class, 'send_coupon']);
+
+// Xem demo send đặt hàng
+Route::get('/demo-xacnhandh', [MailController::class, 'demo_xacnhandh']);
+
+// Xem demo send đang xử lý đơn hàng
+Route::get('/demo-dangxuly', [OrderController::class, 'demo_dangxuly']);
+
 // Xem demo send Coupon
 Route::get('/demo-sendcoupon', [MailController::class, 'demo_sendcoupon']);
 

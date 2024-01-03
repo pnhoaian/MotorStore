@@ -86,8 +86,12 @@
 														
 														</a>
 														
+														@if ($product->product_quantity >= 1)
 														<button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product->product_id}}" name="add-to-cart" >
 															Thêm vào giỏ hàng</button>
+													@else
+														<span style="color: #d70018;font-weight: 700;">TẠM HẾT HÀNG</span>
+													@endif
 													</form>
 												</div>
 										</div>

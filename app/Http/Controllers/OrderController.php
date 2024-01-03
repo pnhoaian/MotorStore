@@ -249,7 +249,6 @@ class OrderController extends Controller
 		   }
 		}
 
-
         $details = OrderDetails::where('order_code',$order->order_code)->first();
 		$fee_ship = $details->product_feeship;
 		$coupon_mail = $details->product_coupon;
@@ -292,9 +291,6 @@ class OrderController extends Controller
             'coupon_code' =>$coupon_mail,
             'order_code' =>$details->order_code
          );
-       
-      
-
 
        Mail::send('pages.mail.confirm_order',
         ['cart_array'=>$cart_array,
@@ -310,6 +306,11 @@ class OrderController extends Controller
         Toastr::success('Đã cập nhật tình trạng đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-order');
     }
+
+    // public function demo_dangxuly(){
+    //     return view('pages.mail.confirm_order');
+    // }
+
 
     public function delete_order($order_code){
         $this->AuthLogin();

@@ -96,7 +96,6 @@ class CheckoutController extends Controller
 
         Toastr::success('Vui lòng đăng nhập tài khoản','Đăng ký thành công! !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('/login');
-
     }
 
 
