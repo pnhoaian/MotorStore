@@ -105,11 +105,9 @@ class ProductController extends Controller
             $data['product_image'] = $new_image;
             $product->product_image = $new_image;
         
-            Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-            return Redirect::to('all-product');
         }
-        //insert du lieu va tbl-product
-
+        //insert du lieu va tbl-products
+       
         $product->save();
         Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');

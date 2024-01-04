@@ -127,7 +127,7 @@
                     </a>
                     <ul class="sub">
 						<li><a href="{{URL::to('/add-category-product')}}">Thêm Danh Mục Sản Phẩm</a></li>
-						<li><a href="{{URL::to('/all-category-product')}}">Danh Sách Danh Mục</a></li>
+						<li><a href="{{URL::to('/all-category-product')}}">Tất cả Danh Mục </a></li>
                     </ul>
                 </li>
 
@@ -309,6 +309,37 @@
     });
 </script>
 
+
+<!--TV s/d phân trang-->
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<!-- Datepicker Coupon -->
+<script type="text/javascript">
+    $( function() {
+      $( "#datepickerkm" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+
+      $( "#datepickerkm2" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+    } );
+</script>
+
+
+
 <script type="text/javascript">
     $(document).ready(function(){
     var donut =   Morris.Donut({
@@ -325,10 +356,10 @@
         '#FF7F50', 
     ],
     data: [
-      {label: "SAN PHAM", value: <?php echo $product ?>},
-      {label: "BAI VIET", value: <?php echo $post ?>},
-      {label: "DON HANG", value: <?php echo $order ?>},
-      {label: "KHACH HANG", value: <?php echo $customer ?>}
+      {label: "SAN PHAM", value: <?php echo $productt ?>},
+      {label: "BAI VIET", value: <?php echo $postt ?>},
+      {label: "DON HANG", value: <?php echo $orderr ?>},
+      {label: "KHACH HANG", value: <?php echo $customerr ?>}
     ]
   });
 });
@@ -389,26 +420,7 @@
     });
 </script>
 
-<!-- Datepicker Coupon -->
-<script type="text/javascript">
-    $( function() {
-      $( "#datepicker_coupon" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"dd/mm/yy",
-        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
-        duration:"slow"
-      });
 
-      $( "#datepicker_coupon2" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"dd/mm/yy",
-        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
-        duration:"slow"
-      });
-    } );
-</script>
 
 <!-- Datepicker Thống kê -->
 <script type="text/javascript">
@@ -483,12 +495,7 @@
     CKEDITOR.replace('ckeditor3');
 </script>
 
-<!--TV s/d phân trang-->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-</script>
+
 
 
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="js/flot-chart/excanvas.min.js"></script><![endif]-->

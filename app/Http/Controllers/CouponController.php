@@ -38,7 +38,7 @@ class CouponController extends Controller
     public function insert_coupon_code(Request $request){
         $this->AuthLogin();
         $data = $request->all();
-
+        $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
         $data = $request->validate(
             [
                 'coupon_name' => 'required|unique:tbl_coupon',
@@ -54,8 +54,8 @@ class CouponController extends Controller
             [
                 'coupon_name.required' => 'Yêu cầu nhập tên chương trình khuyến mãi',
                 'coupon_name.unique' => 'Đã có chương trình khuyến mãi trong hệ thống',
-                'coupon_date_start.required' => 'Yêu cầu nhập mã khuyến mãi ',
-                'coupon_date_end.required' => 'Yêu cầu nhập mã khuyến mãi ',
+                'coupon_date_start.required' => 'Yêu cầu thêm NGÀY BẮT ĐẦU khuyến mãi ',
+                'coupon_date_end.required' => 'Yêu cầu thêm NGÀY KẾT THÚC khuyến mãi ',
                 'coupon_code.required' => 'Yêu cầu nhập mã khuyến mãi ',
                 'coupon_times.required' => 'Yêu cầu nhập số lượng Coupon khuyến mãi ',
                 'coupon_times.numeric' => 'Không phải định dạng số ',
@@ -71,6 +71,12 @@ class CouponController extends Controller
         $coupon->coupon_number = $data['coupon_number'];
         $coupon->coupon_code = $data['coupon_code'];
         $coupon->coupon_times = $data['coupon_times'];
+        if(($coupon->coupon_date_end = $data['coupon_date_end']) >= $today){
+            
+            $coupon->coupon_status = 1;
+        }else{
+            $coupon->coupon_status = 0;
+        }
         $coupon->coupon_condition = $data['coupon_condition'];
         $coupon->save();
 

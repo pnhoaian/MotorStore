@@ -45,11 +45,13 @@ class CategoryPost extends Controller
             [
                 'cate_post_name' => 'required|unique:tbl_category_post',   
                 'cate_post_desc' => 'required',
+                'cate_post_status' => 'required'
             ],
             [
                 'cate_post_name.required' => 'Yêu cầu nhập tên danh mục bài viết',
                 'cate_post_name.unique' => 'Tên danh mục bài viết đã tồn tại trên hệ thống',
                 'cate_post_desc.required' => 'Yêu cầu nhập mô tả danh mục bài viết ',
+                'cate_post_status.required' => 'Yêu cầu thêm trạng thái danh mục bài viết ',
             ]
             );
             
@@ -111,19 +113,21 @@ class CategoryPost extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'cate_post_name' => 'required|unique:tbl_category_post',   
+                'cate_post_name' => 'required',   
                 'cate_post_desc' => 'required',
+                'cate_post_status' => 'required'
             ],
             [
                 'cate_post_name.required' => 'Yêu cầu nhập tên danh mục bài viết',
-                'cate_post_name.unique' => 'Tên danh mục bài viết đã tồn tại trên hệ thống',
                 'cate_post_desc.required' => 'Yêu cầu nhập mô tả danh mục bài viết ',
+                'cate_post_status.required' => 'Yêu cầu thêm trạng thái danh mục bài viết ',
+                
             ]
             );
         $cate_post = CatePost::find($cate_id);
-        $cate_post ->cate_post_name = $data['cate_post_name'];
-        $cate_post ->cate_post_desc = $data['cate_post_desc'];
-        $cate_post ->cate_post_status = $data['cate_post_status'];
+        $cate_post->cate_post_name = $data['cate_post_name'];
+        $cate_post->cate_post_desc = $data['cate_post_desc'];
+        $cate_post->cate_post_status = $data['cate_post_status'];
         $cate_post->save();
         //insert du lieu va tbl-category-post
         // DB::table('tbl_category_post')->insert($data);

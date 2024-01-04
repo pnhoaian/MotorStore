@@ -16,6 +16,17 @@ session_start();
 
 class introController extends Controller
 {
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id)
+        {
+            return redirect('dashboard');
+        }else{
+            return redirect('admin')->send();
+        }
+    }
+
+
     public function gioi_thieu(Request $request){
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
         //slide
@@ -42,6 +53,7 @@ class introController extends Controller
         ->with('intr',$intr);
     }
     public function introduce(){
+        $this->AuthLogin();
         $intr = Intro::where('intro_id',1)->get();
         return view('admin.intro.add_intro')->with(compact('intr'));
     }
@@ -70,7 +82,8 @@ class introController extends Controller
         $intr->intro_desc = $data['intro_desc'];
         $intr->save();
         //  return view('admin.intro.add_intro')->with('Cập nhật thông tin thành công!');
-         return redirect::to('introduce');
+        Toastr::success('Cập nhật thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+         return redirect::to('dashboard');
         }
 
 }

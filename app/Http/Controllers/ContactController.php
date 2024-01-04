@@ -16,6 +16,16 @@ session_start();
 
 class ContactController extends Controller
 {
+    public function AuthLogin(){
+        $admin_id = Session::get('admin_id');
+        if($admin_id)
+        {
+            return redirect('dashboard');
+        }else{
+            return redirect('admin')->send();
+        }
+    }
+
     public function lien_he(Request $request){
         //slide
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
@@ -43,16 +53,18 @@ class ContactController extends Controller
         
     }
     public function information(){
+        $this->AuthLogin();
         $contact = Contact::where('info_id',1)->get();
         return view('admin.information.add_information')->with(compact('contact'));
     }
 
     public function update_info(Request $request, $info_id){
+        
         $data = $request->all();
         $data = $request->validate(
             [
                 'info_address' => 'required:tbl_information',   
-                'info_number' => 'required|numeric',
+                'info_number' => 'required|numeric|digits:10',
                 'info_email' => 'required|email',
                 'info_map' => 'required',
                 'info_fanpage' => 'required',
@@ -62,6 +74,8 @@ class ContactController extends Controller
                 'info_address.required' => 'Yêu cầu nhập địa chỉ',
                 'info_number.required' => 'Yêu cầu thêm số điện thoại ',
                 'info_number.numeric' => 'Không phải định dạng số điện thoại ',
+                
+                'info_number.digits' => 'Số điện thoại liên hệ chưa gồm 10 con số',
                 'info_email.required' => 'Thêm địa chỉ email ',
                 'info_email.email' => 'Không phải định dạng email ',
                 'info_map.email' => 'Yêu cầu thêm địa chỉ cửa hàng ',
@@ -76,7 +90,9 @@ class ContactController extends Controller
         $contact->info_fanpage = $data['info_fanpage'];
         $contact->info_map = $data['info_map'];
         $contact->save();
-        return redirect()->back()->with('Cập nhật thông tin thành công!');
+
+        Toastr::success('Cập nhật thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return redirect::to('dashboard');
     }
 
     public function save_information(Request $request){
@@ -107,6 +123,7 @@ class ContactController extends Controller
         $contact->info_fanpage = $data['info_fanpage'];
         $contact->info_map = $data['info_map'];
         $contact->save();
+
         return redirect()->back()->with('Thêm thông tin thành công!');
     }
 

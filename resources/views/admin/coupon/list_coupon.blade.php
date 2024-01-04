@@ -42,8 +42,8 @@
               <th>Số lượng</th>
               <th>Loại khuyến mãi</th>
               <th>Giảm</th>
-              <th>Trạng thái</th>
               <th>Tình trạng</th>
+              <th>Trạng thái</th>
               <th>Tác vụ</th>
             </tr>
           </thead>
@@ -89,32 +89,34 @@
               </span>
             </td>
 
+            
+
+            <td>
+                  @if( $cou->coupon_status ==1 )
+                    <span style="width: 110px;text-align: center;float: inherit;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                      >Còn hạn</span></a>
+                  @else
+                    <span style="width: 110px;text-align: center;float: inherit;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                  >Hết hạn</span></a>
+                  @endif
+            </td>
+
             <td>
               <span class="text-ellipsis">
                 <?php
                   if($cou->coupon_status == 1){
                 ?>
-                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                    <span style="width: 110px;text-align: center;float: inherit;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
                     >Hoạt động</span></a>
                 <?php
                 }else{
                 ?>
-                  <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                  >Đã khóa</span></a>
+                  <span style="width: 110px;text-align: center;float: inherit;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
+                  >Không hoạt động</span></a>
                 <?php 
                 }
                 ?>
               </span>
-            </td>
-
-            <td>
-                  @if($cou->coupon_date_end>= $today)
-                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #33CC33;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                      >Còn hạn sử dụng</span></a>
-                  @else
-                    <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #CC0033;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                  >Coupon đã hết hạn</span></a>
-                  @endif
             </td>
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}

@@ -31,7 +31,7 @@ class CategoryProduct extends Controller
 
     public function all_category_product(){
         $this->AuthLogin();
-        $all_category_product = DB::table('tbl_category_product')->get(); 
+        $all_category_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get(); 
         return view('admin.categoryproduct.all_category_product')->with('all_category_product', $all_category_product);
         //return view('admin.all_category_product');
     }

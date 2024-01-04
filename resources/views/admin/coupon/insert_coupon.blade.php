@@ -49,12 +49,15 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ngày bắt đầu chương trình Giảm Giá</label>
-                            <input type="text" id="datepicker_coupon" name="coupon_date_start" class="form-control" id="name">
+                            <input type="text" id="datepickerkm" name="coupon_date_start" class="form-control" id="name">
                         </div>
+
+                            <input type="hidden"  name="coupon_status" class="form-control" id="name">
+                       
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Ngày kết thúc chương trình Giảm Giá</label>
-                            <input type="text" id="datepicker_coupon2" name="coupon_date_end" class="form-control" id="name">
+                            <input type="text" id="datepickerkm2" name="coupon_date_end" class="form-control" id="name">
                         </div>
 
                         <div class="form-group">

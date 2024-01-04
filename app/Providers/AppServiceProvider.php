@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Models\Product;
+use App\Models\Post;
+use App\Models\Order;
 use App\Models\Customer;
 use Session;
 use DB;
@@ -30,6 +32,14 @@ class AppServiceProvider extends ServiceProvider
             $max_price_range = $max_price + 500000;
             $cate_product1 =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();
 
+
+            $productt = Product::all()->count();
+            $product_vieww = Product::orderBy('product_view','desc')->take(20)->get();
+            $postt = Post::all()->count();
+            $post_vieww = Post::orderBy('post_view','desc')->take(20)->get();
+            $orderr = Order::all()->count();
+            $customerr = Customer::all()->count();
+
         //     $productt = Product::all()->count();
         // $postt = Post::all()->count();
         // $orderr = Order::all()->count();
@@ -44,7 +54,17 @@ class AppServiceProvider extends ServiceProvider
             ->with('max_price',$max_price)
             ->with('max_price_range',$max_price_range)
             ->with('customer1',$customer1)
-            ->with('cate_product1',$cate_product1);
+            ->with('cate_product1',$cate_product1)
+            
+            ->with('productt',$productt)
+            ->with('product_vieww',$product_vieww)
+            ->with('postt',$postt)
+            ->with('post_vieww',$post_vieww)
+            ->with('orderr',$orderr)
+            ->with('customerr',$customerr)
+            ;
+
+
             // ->with('productt',$productt)
             // ->with('postt',$postt)
             // ->with('orderr',$orderr)

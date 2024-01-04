@@ -80,7 +80,7 @@
     <div class="col-md-4 col-xs-12">
         <h3 style="text-align: center">THỐNG KÊ BÀI VIẾT</h3>
             <ol>
-                @foreach ($post_view as $key=>$post)
+                @foreach ($post_vieww as $key=>$post)
                     <li>
                         <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: white;">{{ $post->post_title }} | <span style="color: black">{{ $post->post_view }}</span></a>
                     </li>
@@ -90,7 +90,7 @@
 
     <div class="col-md-4 col-xs-12">
         <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM</h3>
-        @foreach ($product_view as $key=>$pro)
+        @foreach ($product_vieww as $key=>$pro)
         <li>
             <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: white;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>
         </li>

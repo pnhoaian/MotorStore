@@ -31,7 +31,7 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
-              <th></th>
+              <th style="width: 0px"></th>
               <th style="width:200px">Tên Danh Mục</th>
               <th>Trạng thái</th>
               <th>Tác vụ</th>

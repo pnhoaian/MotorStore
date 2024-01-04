@@ -46,7 +46,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Hotline tư vấn</label>
-                            <textarea style="resize:none" rows="6" name="info_number" class="form-control" id="exampleInputPassword1" placeholder="Thêm số điện thoại">{{ $val->info_number }}</textarea>
+                            <input type="text" name="info_number"  class="form-control"  placeholder="Thêm số điện thoại" value="{{ $val->info_number }}">
                         </div>
 
                         <div class="form-group">

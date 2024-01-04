@@ -33,18 +33,20 @@ class SliderController extends Controller
 
     public function insert_slider(Request $request){
         $this->AuthLogin();
-        $data = $request->all();
+       
         $data = $request->validate(
             [
                 'slider_name' => 'required:tbl_slider',   
                 'slider_image' => 'required|image',
-                'slider_desc' => 'required',
+                 'slider_status' => 'required',
+                 'slider_type' => 'required',
             ],
             [
                 'slider_name.required' => 'Yêu cầu nhập tên Banner',
                 'slider_image.required' => 'Yêu cầu thêm Banner ',
                 'slider_image.image' => 'Không đúng định dạng hình ảnh ',
-                'slider_desc.required' => 'Yêu cầu nhập mô tả Banner ',
+                'slider_status.required' => 'Yêu cầu nhập mô tả Banner ',
+                'slider_type.required' => 'Yêu cầu nhập mô tả Banner ',
             ]
             );
 
@@ -61,7 +63,7 @@ class SliderController extends Controller
             $slider = new Slider();
             $slider -> slider_name = $data['slider_name'];
             $slider -> slider_image = $new_image;
-            $slider -> slider_desc = $data['slider_desc'];
+            // $slider -> slider_desc = $data['slider_desc'];
             $slider -> slider_status = $data['slider_status'];
             $slider -> slider_type = $data['slider_type'];
             $slider->save();

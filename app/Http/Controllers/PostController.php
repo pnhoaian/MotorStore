@@ -33,7 +33,7 @@ class PostController extends Controller
     public function all_post(){
         $this->AuthLogin();
         // $all_post = DB::table('tbl_post')->get(); 
-        $all_post = Post::with('cate_post')->OrderBy('post_id')->get();
+        $all_post = Post::with('cate_post')->OrderBy('post_id','desc')->get();
         
         return view('admin.post.all_post')->with(compact('all_post'));
         //return view('admin.all_post');

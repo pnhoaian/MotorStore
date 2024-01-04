@@ -29,7 +29,7 @@
         <table class="table table-striped b-t b-light" id="myTable">
           <thead>
             <tr>
-              <th></th>
+              {{-- <th></th> --}}
               <th>Hình ảnh</th>
               <th>Tên Sản phẩm</th>
               <th>Giá gốc</th>
@@ -46,7 +46,7 @@
             @foreach ($all_product as $key => $pro)
               
             <tr>
-              <td></td>
+              {{-- <td></td> --}}
               <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
               <td>{{ $pro->product_name }}</td>
               <td>{{ $pro->product_price }}</td>
