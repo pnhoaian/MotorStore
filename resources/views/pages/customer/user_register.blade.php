@@ -13,35 +13,31 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="{{asset('public/frontend/css/font-awesome1.css')}}" rel="stylesheet"> <!-- Font-Awesome-Icons-CSS -->
 <!-- //css files -->
 <link rel="shortcut icon" href="{{asset('public/frontend/images/favicon.png')}}">
+
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
 <!-- //online-fonts -->
 </head>
 <body>
+	
 <!-- main -->
 <div class="center-container">
+	<script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
+	<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
+	{!! Toastr::message() !!}
 	<!--header-->
 	<div class="header-w3l">
 		<h1>Đăng ký tài khoản mới</h1>
 	</div>
 	<!--//header-->
+	{!! Toastr::message() !!}
 	<div class="main-content-agile">
 		<div class="sub-main-w3">	
 			<div class="wthree-pro">
 				                    {{-- //thông báo lỗi đầu vào ở header --}}
 
-									@if ($errors->any())
-									<div class="alert alert-danger">
-										<ul>
-											@foreach ($errors->all() as $error)
-												<li class="fa fa-exclamation-circle" aria-hidden="true" style="color: #FFF;font-size: 22px;background: firebrick;border-radius: 10px;width: 450px;
-												height: 35px;padding-top: 10px;"> {{ $error }}</li>
-											@endforeach
-										</ul>
-									</div>
-									@endif
-
+									
 									{{-- End --}}
 			</div>
 				<form role="form" action="{{URL::to('/register-customer')}}" method="POST">

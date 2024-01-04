@@ -8,29 +8,25 @@
 						@foreach ($category_name as $key => $cate_name)
 						<h2 class="title text-center">{{ $cate_name->category_name }} </h2>
 						@endforeach
-
 						<div class="row" style="margin-bottom:10px">
+							
 							{{-- ***************** Bộ lọc ***************** --}}
 							<div class="col-md-4">
 								<label for="amount" style="margin-left:5px">Sắp xếp theo:</label>
 								<form>
 									@csrf
 									<select name="sort" id="sort" class="form-control"
-										style="font-family: -apple-system, system-ui, BlinkMacSystemFont;
-													border-radius: 0px;
-													margin-left: 5px;
-													color: #000;
-													width: 222px;
-													border: 2px solid #dddddd;">
-										<option value="{{ Request::url() }}?sort_by=none">--Chọn--</option>
-										<option value="{{ Request::url() }}?sort_by=tang_dan">--Giá tăng dần--</option>
-										<option value="{{ Request::url() }}?sort_by=giam_dan">--Giá giảm dần--</option>
-										<option value="{{ Request::url() }}?sort_by=kytu_az">--Lọc theo tên từ A đến Z--</option>
-										<option value="{{ Request::url() }}?sort_by=kytu_za">--Lọc theo tên từ Z đến A--</option>
+										style="font-family: -apple-system, system-ui, BlinkMacSystemFont;border-radius: 0px;margin-left: 5px;color: #000;width: 222px;border: 2px solid #dddddd;">
+										<option value="{{ Request::url() }}?sort_by=none">---- Chọn ----</option>
+										<option value="{{ Request::url() }}?sort_by=tang_dan">--- Giá tăng dần ---</option>
+										<option value="{{ Request::url() }}?sort_by=giam_dan">--- Giá giảm dần ---</option>
+										<option value="{{ Request::url() }}?sort_by=kytu_az">-- Lọc theo tên từ A đến Z --</option>
+										<option value="{{ Request::url() }}?sort_by=kytu_za">-- Lọc theo tên từ Z đến A --</option>
 									</select>
 								</form>
 							</div>
 				{{-- ***************** End Bộ lọc ***************** --}}
+
 							<div class="col-md-4" style="margin-left:-70px;margin-top: 1px;">
 								<label for="amount">Lọc giá:</label>
 								<form>

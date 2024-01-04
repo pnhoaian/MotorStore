@@ -62,29 +62,7 @@ class CheckoutController extends Controller
 
     public function register_customer(Request $request){
         $data = $request->all();
-        $data = $request->validate(
-            [
-                'customer_email' => 'required|unique:tbl_customer',  
-                'customer_name' => 'required',
-                'customer_password' => 'required',
-                'customer_phone' => 'numeric|unique:tbl_customer',
-                'customer_address' => 'required',
-                
-            ],
-            [
-                'customer_email.required' => 'Yêu cầu thêm địa chỉ email ',
-                'customer_email.unique' => 'Email đã được sử dụng đăng ký',
-
-                'customer_name.required' => 'Chưa nhập tên người dùng',
-
-                'customer_phone.numeric' => 'Số điện thoại phải định dạng bằng ký tự số',
-                'customer_phone.unique' => 'Số điện thoại đã được sử dụng đăng ký',
-
-                'customer_address.required' => 'Yêu cầu thêm địa chỉ ',
-
-                'customer_password.required' => 'Chưa điền Password ',
-            ]
-            );
+    
         
         $customer = new Customer();
         $customer ->customer_name = $data['customer_name'];

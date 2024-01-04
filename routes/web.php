@@ -34,6 +34,9 @@ use App\Http\Controllers\MailController;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/trang-chu','App\Http\Controllers\HomeController@index');
 Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
+Route::post('/tim-kiem','App\Http\Controllers\HomeController@search');
+Route::post('/autocomplete-ajax', [HomeController::class, 'autocomplete_ajax']);
+
 
 //--------------------------------------------------- Mail -----------------------------------------------------
 //Send Mail
@@ -145,7 +148,7 @@ Route::post('/update-category-product/{category_id}', [CategoryProduct::class, '
 Route::get('/active-category-product/{category_product_id}', [CategoryProduct::class, 'active_category_product']);
 Route::get('/inactive-category-product/{category_product_id}', [CategoryProduct::class, 'inactive_category_product']);
 
-
+Route::post('/arrange-category', [CategoryProduct::class, 'arrange_category']);
 //******************************************************** Brand Product *************************************************************
 Route::get('/add-brand-product', [BrandProduct::class, 'add_brand_product']);
 Route::get('/all-brand-product', [BrandProduct::class, 'all_brand_product']);
@@ -172,6 +175,7 @@ Route::get('/danh-muc-bai-viet/{cate_post_slug}', [CategoryPost::class, 'danh_mu
 
 Route::get('/active-category-post/{cate_post_id}', [CategoryPost::class, 'active_cate_post']);
 Route::get('/inactive-category-post/{cate_post_id}', [CategoryPost::class, 'inactive_cate_post']);
+
 
 //----------------------------------------------------  Post ---------------------------------------------------------- 
 Route::get('/add-post', [PostController::class, 'add_post']);

@@ -2,7 +2,7 @@
 @section('admin_content')
 
     <div class="row">
-        <h3 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">Thống Kê Doanh Số - Đơn Hàng</h3>
+        <h2 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">THỐNG KÊ DOANH SỐ BÁN HÀNG</h2>
         <form autocomplete="off">
             @csrf
             <div class="col-md-2" style="margin-left: 30px">
@@ -25,24 +25,80 @@
                     </select>
                 </p>
         </form>
+</div>
+
         <div class="col-md-12">
-            <div id="myfirstchart" style="height: 300px;">
-
-            </div>
+            <div id="myfirstchart" style="height: 300px;"></div>
         </div>
+    
+    {{--  ************* Thống kê truy cập Admin ************--}}
+<div class="row" >
+    {{-- style="padding: 10px;
+            margin-top: 15px;
+            background: #fff;"> --}}
+                <div class="col-md-6 ">
+                    <style type="text/css">
+                        table.table.table-bordered.table-dark {
+                            background: #f4f0ff;
+                        }
+    
+                        table.table.table-bordered.table-dark tr th {
+                            color: #fff;
+                        }
+                    </style>
+                    <h3 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">THỐNG KÊ ADMIN TRUY CẬP</h3>
+                    <table class="table table-bordered table-dark">
+                        <thead>
+                            <tr>
+                                <th scope="col">Đang online</th>
+                                <th scope="col">Tổng tháng trước</th>
+                                <th scope="col">Tổng tháng này</th>
+                                <th scope="col">Tổng một năm</th>
+                                <th scope="col">Tổng truy cập</th>
+                            </tr>
+                        </thead>
+    
+                        <tbody>
+                            <tr>
+                                <td>{{ $visitor_count }}</td>
+                                <td>{{ $visitor_last_month_count }}</td>
+                                <td>{{ $visitor_this_month_count }}</td>
+                                <td>{{ $visitor_year_count }}</td>
+                                <td>{{ $visitors_total }}</td>
+                            </tr>                    
+                        </tbody>
+                    </table>
+                </div>
+</div>
 
+<div style="margin-top: 20px">
+    <div class="col-md-4 col-xs-12">
+        <h3 style="text-align: center">THỐNG KÊ TỔNG QUÁT</h3>
+        <div id="donut"></div>
     </div>
-{{--  ************* End Thống kê phần đầu ************--}}
 
-    <div>
-
-
-
+    <div class="col-md-4 col-xs-12">
+        <h3 style="text-align: center">THỐNG KÊ BÀI VIẾT</h3>
+            <ol>
+                @foreach ($post_view as $key=>$post)
+                    <li>
+                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: white;">{{ $post->post_title }} | <span style="color: black">{{ $post->post_view }}</span></a>
+                    </li>
+                @endforeach
+            </ol>
     </div>
 
-
-
-<div>
+    <div class="col-md-4 col-xs-12">
+        <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM</h3>
+        @foreach ($product_view as $key=>$pro)
+        <li>
+            <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: white;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>
+        </li>
+    @endforeach
+    </div>
 
 </div>
+
+
+
 @endsection

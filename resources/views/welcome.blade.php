@@ -7,10 +7,11 @@
     <meta name="description" content="">
     <meta name="author" content="An Hoài">
     <title>Hoài An Store | Cáp, Sạc chính hãng</title>
+	<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/font-awesome.min.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/prettyPhoto.css')}}" rel="stylesheet">
-    <link href="{{asset('public/frontend/css/price-range.css')}}" rel="stylesheet">
+	<link href="{{asset('public/frontend/css/price-range.css')}}" rel="stylesheet">
     <link href="{{asset('public/frontend/css/animate.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/main.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/responsive.css')}}" rel="stylesheet">
@@ -19,7 +20,7 @@
 
 
 	<!--CSS Toast thông báo-->
-	<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
+	
 	<!--fontawesome bản mới-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
@@ -34,7 +35,8 @@
     <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
 
 </head><!--/head-->
-
+<!--Hiện thị thông báo-->
+{!! Toastr::message() !!}
 <body><!--header-->
 	<header id="header">
 
@@ -154,17 +156,20 @@
 
 							<li><a href="{{URL::to('gioi-thieu')}}">Giới thiệu</a></li>
 							<li><a href="{{URL::to('lien-he')}}">Liên Hệ</a></li>
-							<li class="test-s" style="
-							margin-top: -6px;">
-								<form action="{{URL::to('/tim-kiem')}}" method="POST">
+							<li class="test-s" style= "margin-top: -6px;    margin-left: 505px;
+    display: inline;
+    margin-top: -38px;">
+								<form action="{{URL::to('/tim-kiem')}}" autocomplete="off" method="POST">
 									{{ csrf_field() }}
 									<div class="search_box pull-right">
 										<div style="display: flex">
 											<input type="text" name="keywords_submit" id="keywords"
 												placeholder="Tìm kiếm sản phẩm..." />
-											<input type="submit"  value="Tìm" style="color: #FFF;    font-family: -apple-system, system-ui, BlinkMacSystemFont;    font-weight: 600;" class="button-timkiem" name="search_item"/>
+											<button class="button-timkiem" name="search_item"><i class="fas fa-search"
+													style="color: #fff"></i></button>
 		
 										</div>
+										<div id="search_ajax"></div>
 									</div>
 								</form>
 							</li>
@@ -386,68 +391,9 @@
 	<!-- Messenger Plugin chat Code -->
     
 
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0"
-        nonce="ObII9EbG">
-	</script>
 	
-	<script>
-        window.fbAsyncInit = function() {
-            FB.init({
-                xfbml: true,
-                version: 'v17.0'
-            });
-        };
-
-        (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-    </script>
-
-   {{-- Lọc giá --}}
-   <script type="text/javascript">
-	$(document).ready(function() {
-
-		$("#slider-range").slider({
-			orientation: "horizontal",
-			range: true,
-			min: {{ $min_price }},
-			max: {{ $max_price }},
-			step: 100000,
-			values: [{{ $min_price }}, {{ $max_price }}],
-
-			slide: function(event, ui) {
-				$("#amount_start").val(ui.values[0]).simpleMoneyFormat();
-				$("#amount_end").val(ui.values[1]).simpleMoneyFormat();
-
-				$("#start_price").val(ui.values[0]);
-				$("#end_price").val(ui.values[1]);
-
-			}
-		});
-		$("#amount_start").val($("#slider-range").slider("values", 0)).simpleMoneyFormat();
-		$("#amount_end").val($("#slider-range").slider("values", 1)).simpleMoneyFormat();
-
-	});
-</script>
-	{{-- lọc Sp --}}
-	<script type="text/javascript">
-        $(document).ready(function() {
-            $('#sort').on('change', function() {
-                var url = $(this).val();
-                // alert(url);
-                if (url) {
-                    window.location = url;
-                }
-                return false;
-            });
-        });
-    </script>
+	
+	
 
 
 	{{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script> --}}
@@ -459,13 +405,20 @@
 	<script src="{{asset('public/frontend/js/price-range.js')}}"></script>
     <script src="{{asset('public/frontend/js/jquery.prettyPhoto.js')}}"></script>
     <script src="{{asset('public/frontend/js/main.js')}}"></script>
+	<script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 	<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
+	<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
+	{!! Toastr::message() !!}
+
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0"
+        nonce="ObII9EbG">
+	</script>
 
 	 <!--TV s/d Toast-->
 	<script src="{{asset('public/frontend/js/toastr.min.js')}}"></script> 
 
-    <!--Hiện thị thông báo-->
-	{!! Toastr::message() !!}
+    
 
 	<script type="text/javascript">
 		function remove_background(product_id){
@@ -520,22 +473,144 @@
 
 
 	</script>
+
+<script>
+	window.fbAsyncInit = function() {
+		FB.init({
+			xfbml: true,
+			version: 'v17.0'
+		});
+	};
+
+	(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s);
+		js.id = id;
+		js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+
+	{{-- Lọc giá --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $("#slider-range").slider({
+                orientation: "horizontal",
+                range: true,
+                min: {{ $min_price }},
+                max: {{ $max_price }},
+                step: 100000,
+                values: [{{ $min_price }}, {{ $max_price }}],
+
+                slide: function(event, ui) {
+                    $("#amount_start").val(ui.values[0]).simpleMoneyFormat();
+                    $("#amount_end").val(ui.values[1]).simpleMoneyFormat();
+
+                    $("#start_price").val(ui.values[0]);
+                    $("#end_price").val(ui.values[1]);
+
+                }
+            });
+            $("#amount_start").val($("#slider-range").slider("values", 0)).simpleMoneyFormat();
+            $("#amount_end").val($("#slider-range").slider("values", 1)).simpleMoneyFormat();
+
+        });
+    </script>
+	{{-- lọc Sp theo --}}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#sort').on('change', function() {
+                var url = $(this).val();
+                // alert(url);
+                if (url) {
+                    window.location = url;
+                }
+                return false;
+            });
+        });
+    </script>
+
+	{{-- lọc Sp theo danh mục --}}
+	<script type="text/javascript">
+		$(document).ready(function(){
+
+			$('.$tabs_pro').click(function(){
+
+				var cate_id = $(this).data('id');
+				// alert(cate_id);
+				var _token = $('input[name="_token"]').val();
+				$.ajax({
+					url:'{{ url('/product-tabs') }}',
+					method:"POST",
+					data:{cate_id:cate_id,_token:_token},
+					success:function(data){
+						$('#tabs_product').html(data);
+					}
+				})
+			});
+		});
+	</script>
+
+	{{-- AUTO TÌM KIẾM  --}}
+	<script type="text/javascript">
+        $('#keywords').keyup(function() {
+            var query = $(this).val();
+
+            if (query != '') {
+                var _token = $('input[name="_token"]').val();
+
+                $.ajax({
+                    url: '{{ url('/autocomplete-ajax') }}',
+                    method: 'POST',
+                    data: {
+                        query: query,
+                        _token: _token
+                    },
+                    success: function(data) {
+                        $('#search_ajax').fadeIn();
+                        $('#search_ajax').html(data);
+                    }
+                });
+            } else {
+                $('#seach_ajax').fadeOut();
+            }
+        });
+        $(document).on('click', '.li_search_ajax', function() {
+            $('#keywords').val($(this).text());
+            $('#search_ajax').fadeOut();
+        });
+        $(document).on('click', function() {
+            $('#search_ajax').fadeOut();
+        });
+    </script>
+
+
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('.add-to-cart').click(function(){
                 var id = $(this).data('id_product');
                 var cart_product_id = $('.cart_product_id_' + id).val();
                 var cart_product_name = $('.cart_product_name_' + id).val();
+				//thêm
+				var cart_product_quantity = $('.cart_product_quantity_' + id).val();
+				//
                 var cart_product_image = $('.cart_product_image_' + id).val();
                 var cart_product_price = $('.cart_product_price_' + id).val();
 				var cart_product_price_sale = $('.cart_product_price_sale_' + id).val();
                 var cart_product_qty = $('.cart_product_qty_' + id).val();
                 var _token = $('input[name="_token"]').val();
 
+				//them
+				if(parseInt(cart_product_qty) >parseInt(cart_product_quantity)){
+					alert('Số lượng sản phẩm trong kho không đủ, vui lòng đặt ít hơn ' + cart_product_quantity +' sản phẩm');
+				}else{
+				
 			$.ajax({
                 	url: '{{url('/add-cart-ajax')}}',
                     method: 'POST',
-					data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_price_sale:cart_product_price_sale,cart_product_qty:cart_product_qty,_token:_token},
+					data:{cart_product_id:cart_product_id,cart_product_name:cart_product_name,cart_product_image:cart_product_image,cart_product_price:cart_product_price,cart_product_price_sale:cart_product_price_sale,cart_product_qty:cart_product_qty,_token:_token,cart_product_quantity:cart_product_quantity},
 					success:function(data){
 						swal({
 							title: "Đã thêm sản phẩm vào giỏ hàng",
@@ -551,6 +626,9 @@
 		}
 
 					});
+					//them
+				}
+				//
 		});
 		});
 	</script>

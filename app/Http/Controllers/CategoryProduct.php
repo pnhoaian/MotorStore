@@ -126,19 +126,18 @@ class CategoryProduct extends Controller
 
         $min_price = Product::min('product_price');
         $max_price = Product::max('product_price');
-        $max_price_range = $max_price + 500000;
 
         if(isset($_GET['sort_by'])){
             $sort_by = $_GET['sort_by'];
 
             if($sort_by=='giam_dan'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_price','DESC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_price','DESC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='tang_dan'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_price','ASC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_price','ASC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='kytu_za'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_name','DESC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_name','DESC')->paginate(10)->appends(request()->query());
             }elseif($sort_by=='kytu_az'){
-                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',1)->orderBy('product_name','ASC')->paginate(10)->appends(request()->query());
+                $category_by_id = Product::with('category')->where('category_id',$category_id)->where('product_status',0)->orderBy('product_name','ASC')->paginate(10)->appends(request()->query());
             }
         }elseif(isset($_GET['start_price']) && $_GET['end_price']){
             $min_price = $_GET['start_price'];
@@ -166,7 +165,8 @@ class CategoryProduct extends Controller
         ->with('slidermini',$slidermini)
         ->with('min_price',$min_price)
         ->with('max_price',$max_price)
-        ->with('max_price_range',$max_price_range);
+        // ->with('max_price_range',$max_price_range)
+        ;
     }
 
 }

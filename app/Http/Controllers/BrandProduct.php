@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
 use App\Models\Brand;
 use App\Models\Slider;
+use App\Models\CateProduct;
+use App\Models\Product;
 use App\Models\CatePost;
 use Toastr;
 session_start();
@@ -202,6 +204,7 @@ class BrandProduct extends Controller
         ->where('tbl_brand.brand_id',$brand_id)->limit(1)->get();
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
 
+        // $cate_pro_tabs = CateProduct::where('category_parent','<>',0)->orderBy('category_order','asc')->get();
 
         return view('pages.brand.show_brand')
         ->with('category', $cate_product)
@@ -210,7 +213,8 @@ class BrandProduct extends Controller
         ->with('brand_name',$brand_name)
         ->with('category_post',$category_post)
         ->with('slider',$slider)
-        ->with('slidermini',$slidermini);
-        
+        ->with('slidermini',$slidermini)
+        // ->with('cate_pro_tabs',$cate_pro_tabs);
+        ;
     }
 }

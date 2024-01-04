@@ -72,6 +72,20 @@ class HomeController extends Controller
         ->with('search_product',$search_product)
         ->with('search_product_count',$search_product_count);
     }
+    public function autocomplete_ajax(Request $request){
+        $data = $request->all();
 
+        if($data['query']){
+            $product = Product::where('product_status',1)->where('product_name','LIKE','%'.$data['query'].'%')->get();
+            $output ='<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach($product as $key =>$val){
+                $output.='
+                <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>';
+            }
+            $output .='</ul>';
+            echo $output;
+        }
+    }
+    
 
 }

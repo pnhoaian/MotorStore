@@ -303,13 +303,36 @@
 
                 location.reload();
 
-
-
-
             }
         });
 
     });
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    var donut =   Morris.Donut({
+        element:'donut',
+        resize:true,
+        colors:[
+        //SP
+        '#B0C4DE',
+        //BV
+        '#9ACD32', 
+        //DH
+        '#FFB6C1', 
+        //KH
+        '#FF7F50', 
+    ],
+    data: [
+      {label: "SAN PHAM", value: <?php echo $product ?>},
+      {label: "BAI VIET", value: <?php echo $post ?>},
+      {label: "DON HANG", value: <?php echo $order ?>},
+      {label: "KHACH HANG", value: <?php echo $customer ?>}
+    ]
+  });
+});
+  
 </script>
 
 <script type="text/javascript">

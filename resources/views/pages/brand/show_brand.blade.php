@@ -3,12 +3,13 @@
 @section('slider')
 	@include("pages.include.slider")
 @endsection()
-													<!--Lọc sản phẩm -->
-													<div class="filter-sort__title" >Chọn theo danh mục</div>
+												<!--Lọc sản phẩm -->
+													<div class="filter-sort__title" >Chọn theo tab danh mục sản phẩm</div>
 													<div class="filter-wrapper" style="display:flex;">
 														@foreach ($category as $key =>$cate )
-														<button class="btn-filter button__filter-parent">
-															{{ $cate->category_name }}
+														<button style="align-items: center;background: #f3f4f6;border: 1px solid #e5e7eb;border-radius: 10px;color: #444;cursor: pointer;display: flex;font-size: 12px;height: 34px;margin: 0 10px 10px 0;padding: 5px 10px;white-space: nowrap;"
+															class="tabs_pro" data-id="{{ $cate->category_id }}">
+																{{ $cate->category_name }}
 														@endforeach
 														</button>
 													</div>											

@@ -6,8 +6,14 @@ use Illuminate\Http\Request;
 use Session;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\DB;
-use App\Statistic;
+use App\Models\Statistic;
+use App\Models\Visitors;
+use App\Models\Product;
+use App\Models\Post;
+use App\Models\Customer;
+use App\Models\Order;
 use Toastr;
+use Carbon\Carbon;
 session_start();
 
 class AdminController extends Controller
@@ -25,9 +31,61 @@ class AdminController extends Controller
         return view('admin_login');
     }
 
-    public function show_dashboard(){
+    public function show_dashboard(Request $request){
         $this->AuthLogin();
-        return view('admin.dashboard');
+
+        // $user_ip_address = $request->ip;
+        $user_ip_address = '150.13.005.189';
+
+        $early_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->startOfMonth()->toDateString();
+        $end_of_last_month = Carbon::now('Asia/Ho_Chi_Minh')->subMonth()->endOfMonth()->toDateString();
+        $early_this_month = Carbon::now('Asia/Ho_Chi_Minh')->startOfMonth()->toDateString();
+        $oneyears = Carbon::now('Asia/Ho_Chi_Minh')->subdays(365)->toDateString();
+        $now = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+
+        //total last month
+        $visitor_of_lastmonth = Visitors::whereBetween('date_visitor',[$early_last_month,$end_of_last_month])->get();
+        $visitor_last_month_count = $visitor_of_lastmonth->count();
+
+        //total this month
+        $visitor_of_thismonth = Visitors::whereBetween('date_visitor',[$early_this_month,$now])->get();
+        $visitor_this_month_count = $visitor_of_thismonth->count();
+
+        //total in 1 year
+        $visitor_of_year = Visitors::whereBetween('date_visitor',[ $oneyears,$now])->get();
+        $visitor_year_count = $visitor_of_year->count();
+
+        // Hiện tại
+        $visitor_current = Visitors::where('ip_address',$user_ip_address)->get();
+        $visitor_count = $visitor_current->count();
+
+        if($visitor_count<1){
+            $visitor = New Visitors();
+            $visitor->ip_address = $user_ip_address;
+            $visitor->date_visitor = Carbon::now('Asia/Ho_Chi_Minh')->toDateString();
+            $visitor->save();
+        }
+
+        //total visitor
+        $visitor = Visitors::all();
+        $visitors_total = $visitor->count();
+
+        //total Biểu đồ
+
+        $product = Product::all()->count();
+        $product_view = Product::orderBy('product_view','desc')->take(20)->get();
+        $post = Post::all()->count();
+        $post_view = Post::orderBy('post_view','desc')->take(20)->get();
+        $order = Order::all()->count();
+        $customer = Customer::all()->count();
+
+        return view('admin.dashboard')->with(compact('visitors_total',
+        'visitor_count','visitor_last_month_count',
+        'visitor_this_month_count','visitor_year_count',
+        'product','post','order','customer',
+        'product_view','post_view',
+
+    ));
     }
 
     public function dashboard(Request $request){

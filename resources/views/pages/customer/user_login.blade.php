@@ -70,6 +70,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <link href="{{asset('public/frontend/css/style.css')}}" rel='stylesheet' type='text/css' media="all" /><!-- Style-CSS --> 
 <link href="{{asset('public/frontend/css/font-awesome1.css')}}" rel="stylesheet"> <!-- Font-Awesome-Icons-CSS -->
 <!-- //css files -->
+
 <link rel="shortcut icon" href="{{asset('public/frontend/images/favicon.png')}}">
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
@@ -78,6 +79,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 </head>
 <body>
 <!-- main -->
+<script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
+	<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
+	{!! Toastr::message() !!}
 <div class="center-container">
 	<!--header-->
 	<div class="header-w3l">

@@ -60,8 +60,8 @@
                         <input type="hidden" value="{{ $value->product_image }}"
                             class="cart_product_image_{{ $value->product_id }}">
 
-                        {{-- <input type="hidden" value="{{ $value->product_qty }}"
-                            class="cart_product_qty_{{ $value->product_id }}"> --}}
+                        <input type="hidden" value="{{ $value->product_quantity }}"
+                            class="cart_product_quantity_{{ $value->product_id }}">
 
                         {{-- <input type="hidden" value="{{ $value->product_price }}"
                             class="cart_product_price_{{ $value->product_id }}"> --}}
