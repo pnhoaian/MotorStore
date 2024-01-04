@@ -32,18 +32,23 @@
         </div>
     
     {{--  ************* Thống kê truy cập Admin ************--}}
-<div class="row" >
+<div class="row">
     {{-- style="padding: 10px;
             margin-top: 15px;
             background: #fff;"> --}}
-                <div class="col-md-6 ">
+                <div class="col-md-12 ">
                     <style type="text/css">
                         table.table.table-bordered.table-dark {
-                            background: #f4f0ff;
+                            background: #FF4040;
                         }
     
                         table.table.table-bordered.table-dark tr th {
                             color: #fff;
+                            text-align: center;
+                        }
+                        table.table.table-bordered.table-dark td {
+                            color: #fff;
+                            text-align: center;
                         }
                     </style>
                     <h3 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">THỐNG KÊ ADMIN TRUY CẬP</h3>
@@ -79,6 +84,7 @@
 
     <div class="col-md-4 col-xs-12">
         <h3 style="text-align: center">THỐNG KÊ BÀI VIẾT</h3>
+        <p style="text-align: center">Tên bài viết | Số lượt xem</p>
             <ol>
                 @foreach ($post_vieww as $key=>$post)
                     <li>
@@ -90,6 +96,7 @@
 
     <div class="col-md-4 col-xs-12">
         <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM</h3>
+        <p style="text-align: center">Tên sản phẩm | Số lượt xem</p>
         @foreach ($product_vieww as $key=>$pro)
         <li>
             <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: white;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>

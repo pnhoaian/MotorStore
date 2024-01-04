@@ -73,7 +73,9 @@ class AdminController extends Controller
         //total Biểu đồ
 
         $product = Product::all()->count();
-        $product_view = Product::orderBy('product_view','desc')->take(20)->get();
+        $product_view = Product::orderby('product_view','desc')->take(20)->get();
+        // $product_view = Product::orderBy('product_view','desc')->get(20);
+        
         $post = Post::all()->count();
         $post_view = Post::orderBy('post_view','desc')->take(20)->get();
         $order = Order::all()->count();

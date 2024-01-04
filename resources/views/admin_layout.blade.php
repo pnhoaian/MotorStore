@@ -105,7 +105,7 @@
             <ul class="sidebar-menu" id="nav-accordion">
                 <li>
                     <a class="active" href="{{URL::to('/dashboard')}}">
-                        <i class="fa fa-dashboard"></i>
+                        <i class="fa fa-bar-chart-o"></i>
                         <span>Dashboard</span>
                     </a>
                 </li>
@@ -206,7 +206,7 @@
                         <li><a href="mail_compose.html">Compose Mail</a></li>
                     </ul>
                 </li>
-                <li class="sub-menu">
+                {{-- <li class="sub-menu">
                     <a href="javascript:">
                         <i class=" fa fa-bar-chart-o"></i>
                         <span>Thống Kê</span>
@@ -215,7 +215,7 @@
                         <li><a href="chartjs.html">Chart js</a></li>
                         <li><a href="flot_chart.html">Flot Charts</a></li>
                     </ul>
-                </li>
+                </li> --}}
 
                 <li>
                     <a href="{{URL::to('/introduce')}}">
@@ -351,7 +351,7 @@
         //BV
         '#9ACD32', 
         //DH
-        '#FFB6C1', 
+        '#DCD800', 
         //KH
         '#FF7F50', 
     ],

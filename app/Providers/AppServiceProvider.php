@@ -34,7 +34,7 @@ class AppServiceProvider extends ServiceProvider
 
 
             $productt = Product::all()->count();
-            $product_vieww = Product::orderBy('product_view','desc')->take(20)->get();
+            $product_vieww = Product::orderby('product_view','desc')->take(20)->get();
             $postt = Post::all()->count();
             $post_vieww = Post::orderBy('post_view','desc')->take(20)->get();
             $orderr = Order::all()->count();
