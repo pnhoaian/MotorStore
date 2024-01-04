@@ -86,6 +86,7 @@
                 @endif
             </p> --}}
             <p><b>Đánh giá:</b>
+                
                 <ul class="list-inline rating" title="Average Rating">
                     @for ($count = 1; $count <= 5; $count++)
                         @php
@@ -100,7 +101,7 @@
                         </li>
                     @endfor </p></ul>
 
-
+            {{-- <p><b>Số lượt xem: </b> {{ $value->product_view }} </p> --}}
             <div>
                 <p style="margin-top: -20px;"><b>Giá bán:</b><span style="    font-family: Tahoma, Geneva, sans-serif;
                 font-size: 20px;
@@ -305,7 +306,14 @@
                                         <input type="hidden" value="{{$SPLQ->product_image}}" class="cart_product_image_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_price}}" class="cart_product_price_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_price_sale }}"class="cart_product_price_sale_{{$SPLQ->product_id }}">
+                                        <input type="hidden" value="{{ $SPLQ->product_quantity }}"class="cart_product_quantity_{{ $SPLQ->product_id }}">
                                         <input type="hidden" value="1" class="cart_product_qty_{{$SPLQ->product_id}}">
+
+                                        
+            
+                                    {{-- <input type="hidden" value="{{ $value->product_price }}"
+                                        class="cart_product_price_{{ $value->product_id }}"> --}}
+                            
 
                                         <a href="{{URL::to('/chi-tiet-san-pham/'.$SPLQ->product_id)}}">
                                             @if ($SPLQ->product_price_sale != '0')
@@ -359,8 +367,14 @@
                                         
                                         </a>
                                         
-                                        <button type="button" class="btn btn-default add-to-cart" data-id_product="{{$SPLQ->product_id}}" name="add-to-cart" >
-                                            Thêm vào giỏ hàng</button>
+                                        @if ($SPLQ->product_quantity >= 1)
+                                            <button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}" name="add-to-cart" 
+                                                style="margin-bottom: 8px;margin-left: 10px;"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
+                                            </button>
+                                        @else
+                                            <span style="color: #d70018;
+                                            font-weight: 700;">TẠM HẾT HÀNG</span>
+                                        @endif
                                     </form>
                                 </div>
                         </div>
