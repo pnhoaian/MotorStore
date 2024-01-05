@@ -32,6 +32,7 @@
               {{-- <th></th> --}}
               <th>Hình ảnh</th>
               <th>Tên Sản phẩm</th>
+              <th style="width: 90px;">Thư viện ảnh</th>
               <th>Giá gốc</th>
               <th style="width: 115px;">Giá khuyến mãi</th>
               <th style="width: 80px;">Số lượng</th>
@@ -49,6 +50,7 @@
               {{-- <td></td> --}}
               <td><img src=" public/upload/product/{{ $pro->product_image }}" height="100px" width="100px"></td>
               <td>{{ $pro->product_name }}</td>
+              <th style="width: 100px;"><a href="{{URL::to('/add-gallery/'.$pro->product_id)}}">Thêm hình ảnh</a></th>
               <td>{{ $pro->product_price }}</td>
               <td> <?php
                 if($pro->product_price_sale == 0){

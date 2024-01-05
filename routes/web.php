@@ -17,6 +17,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -126,6 +127,14 @@ Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
 
+//Authentication roles
+
+//view đăng ký account admin
+Route::get('/register-admin', [AdminController::class, 'register_admin']);
+//đăng ký tài khoản admin
+Route::post('/register-admin-account', [AdminController::class, 'register_admin_account']);
+
+
 //Thống kê
 Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);
 
@@ -201,6 +210,17 @@ Route::post('/update-product/{product_id}', [ProductController::class, 'update_p
 //Rating
 Route::post('/insert-rating', [ProductController::class, 'insert_rating']);
 
+//----------------------------------************ Gallery Product ************------------------------------------------ 
+Route::get('/add-gallery/{product_id}', [GalleryController::class, 'add_gallery']);
+Route::post('/select-gallery', [GalleryController::class, 'select_gallery']);
+Route::post('/insert-gallery/{pro_id}', [GalleryController::class, 'insert_gallery']);
+Route::post('/update-gallery-name', [GalleryController::class, 'update_gallery_name']);
+
+
+Route::post('/delete-gallery',[GalleryController::class, 'delete_gallery']);
+Route::post('/update-gallery',[GalleryController::class, 'update_gallery']);
+
+
 //------------------------------------------------------  Cart ---------------------------------------------------------- 
 Route::post('/update-cart-quantity', [CartController::class, 'update_cart_quantity']);
 Route::post('/save-cart', [CartController::class, 'save_cart']);
@@ -212,6 +232,7 @@ Route::get('/delete-to-cart', [CartController::class, 'delete_to_cart']);
 
 Route::get('/del-product/{session_id}',[CartController::class, 'delete_product']);
 Route::get('/del-all-product',[CartController::class, 'del_all_product']);
+
 
 
 //-----------------------------------------------------  Coupon -------------------------------------------------------- 

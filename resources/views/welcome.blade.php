@@ -18,9 +18,12 @@
 	<link href="{{asset('public/frontend/css/sweetalert.css')}}" rel="stylesheet">
 	<link href="{{asset('public/frontend/css/jquery-ui.min.css')}}" rel="stylesheet">
 
+	<link href="{{ asset('public/frontend/css/lightslider.css') }}" rel="stylesheet">
+	<link href="{{ asset('public/frontend/css/prettify.css') }}" rel="stylesheet">
+	<link href="{{ asset('public/frontend/css/lightgallery.min.css') }}" rel="stylesheet">
 
 	<!--CSS Toast thông báo-->
-	
+	<link href="{{ asset('public/frontend/css/toastr.min.css') }}" rel="stylesheet">
 	<!--fontawesome bản mới-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
 
@@ -408,6 +411,11 @@
 	<script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 	<script src="{{asset('public/frontend/js/sweetalert.js')}}"></script>
 	<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
+
+	{{-- <script src="{{ asset('public/frontend/js/lightslider.min.js') }}"></script> --}}
+    <script src="{{ asset('public/frontend/js/lightslider.js') }}"></script>
+    <script src="{{ asset('public/frontend/js/prettify.js') }}"></script>
+	<script src="{{ asset('public/frontend/js/lightgallery-all.min.js') }}"></script>
 	{!! Toastr::message() !!}
 
     <div id="fb-root"></div>
@@ -490,6 +498,26 @@
 		js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
+</script>
+
+{{-- Gallery hình ảnh --}}
+<script type="text/javascript">
+	$(document).ready(function() {
+    $('#imageGallery').lightSlider({
+        gallery:true,
+        item:1,
+        loop:true,
+        thumbItem:3,
+        slideMargin:0,
+        enableDrag: false,
+        currentPagerPosition:'left',
+        onSliderLoad: function(el) {
+            el.lightGallery({
+                selector: '#imageGallery .lslide'
+            });
+        }   
+    });  
+  });
 </script>
 
 	{{-- Lọc giá --}}

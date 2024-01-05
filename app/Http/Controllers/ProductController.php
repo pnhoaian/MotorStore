@@ -12,7 +12,9 @@ use App\Models\Gallery;
 use App\Models\Rating;
 use App\Models\Customer;
 use App\Models\Product;
+use File;
 use Toastr;
+
 session_start();
 
 class ProductController extends Controller
@@ -96,22 +98,34 @@ class ProductController extends Controller
         $product->product_quantity = $data['product_quantity'];
         $product->product_status = $data['product_status'];
         $get_image = $request->file('product_image');
-        
+        // đường dẫn lưu hình ảnh đầu tiên vô mục gallery
+        $path = 'public/upload/product/';
+        $path_gallery = 'public/upload/gallery/';
+
         if ($get_image){
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image.rand(0,99).'.'.$get_image->getClientOriginalExtension();
-            $get_image->move('public/upload/product',$new_image);
+            $get_image->move($path,$new_image);
+            File::copy($path.$new_image,$path_gallery.$new_image);
             $data['product_image'] = $new_image;
             $product->product_image = $new_image;
         
         }
         //insert du lieu va tbl-products
        
-        $product->save();
+        $pro_id = DB::table('tbl_product')->insertGetId($data);
+
+        $gallery = new Gallery();
+        $gallery->gallery_image = $new_image;
+        $gallery->gallery_name = $new_image;
+        $gallery->product_id =  $pro_id;
+        $gallery->save();
+        
+       $producttt->save();
         Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
-        //return view('admin.save_product');
+       
     }
 
     public function active_product($product_id){
@@ -218,6 +232,9 @@ class ProductController extends Controller
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
+        //gallery
+
+
         $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
 
         $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
@@ -234,18 +251,23 @@ class ProductController extends Controller
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_product.product_id',$product_id)->get();
 
-        foreach($detail_product as $key =>$value)
-        {$category_id = $value->category_id;}
+        foreach($detail_product as $key =>$value){
 
+            $category_id = $value->category_id;
+            $product_id = $value->product_id;
+            }
+            $producttt = Product::where('product_id',$product_id)->first();
+        $producttt->product_view = $producttt->product_view + 1;
+        $producttt->Save();
         //gallery
-        // $gallery = Gallery::where('product_id',$product_id)->get();
+        $gallery = Gallery::where('product_id',$product_id)->get();
 
         $related_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
         ->where('tbl_category_product.category_id',$category_id)->take(5)->get();
 
-
+        
         //Đánh giá sp
         $rating = Rating::where('product_id',$product_id)->avg('rating');
         $rating = round($rating);
@@ -264,6 +286,8 @@ class ProductController extends Controller
         ->with('all_sdp',$all_sdp)
         ->with('all_ds',$all_ds)
         ->with('rating',$rating)
+        ->with('gallery',$gallery)
+        
         // ->with('customer_name',$customer_name)
         ;
     }

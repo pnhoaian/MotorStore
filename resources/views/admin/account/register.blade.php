@@ -15,6 +15,9 @@
 <link href="{{asset('public/backend/css/style.css')}}" rel='stylesheet' type='text/css' />
 <link href="{{asset('public/backend/css/style-responsive.css')}}" rel="stylesheet"/>
 
+<!--CSS Toast thông báo-->
+<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
+
 <!-- font CSS -->
 <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
 
@@ -33,32 +36,34 @@
 <body>
 <div class="log-w3">
 <div class="w3layouts-main">
- <h2>Đăng Nhập Admin</h2> 
+ <h2>Đăng ký Quản trị viên</h2> 
 
 	
-	{{--
-		php
-		$message = Session::get('message');
-	if($message){
-		echo '<span class="text-alert">'.$message.'</span>';
-		Session::put('message', null);
-	} 
-	php--}}
+                    {{-- //thông báo lỗi đầu vào ở header --}}
+                    {{-- @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif --}}
+                    {{-- End --}}
 	
 
-		<form action="{{URL::to('/admin-dashboard')}}" method="post">
+		<form action="{{URL::to('/register-admin-account')}}" method="post">
 			{{ csrf_field() }}
-			<input type="text" class="ggg" name="admin_user" placeholder="Nhập Username" required="">
-			<input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required="">
-
-			<div class="sub-w3l">
-				<h6>
-					<a href="{{URL::to('/register-admin')}}">Đăng ký tài khoản QTV</a>
-				</h6>
-			</div>
-				<input type="submit" value="Sign In" name="login">
+			<input type="text" class="ggg" name="admin_user" value="{{ old('admin_user') }}" placeholder="Nhập Username đăng ký" required="">
+			<input type="password" class="ggg" name="admin_password" value="{{ old('admin_password') }}" placeholder="Nhập Password" required="">
+			<input type="text" class="ggg" name="admin_name" value="{{ old('admin_name') }}" placeholder="Nhập Họ và Tên" required="">
+				<div>
+					<h6 >
+						<a href="{{URL::to('/admin')}}">Đã có tài khoản QTV</a>
+					</h6>
+				</div>
+			<input type="submit" value="Đăng ký"  name="Đăng ký">
 		</form>
-		
 </div>
 </div>
 <div style="text-align: center ;color:white">
@@ -71,5 +76,11 @@
 <script src="{{asset('public/backend/js/jquery.nicescroll.js')}}"></script>
 <!--[if lte IE 8]><script language="javascript" type="text/javascript" src="{{asset('public/backend/js/flot-chart/excanvas.min.js')}}"></script><![endif]-->
 <script src="{{asset('public/backend/js/jquery.scrollTo.js')}}"></script>
+
+ <!--TV s/d Toast-->
+ <script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
+
+ <!--Hiện thị thông báo-->
+ {!! Toastr::message() !!}
 </body>
 </html>

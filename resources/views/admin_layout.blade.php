@@ -9,6 +9,9 @@
 <link rel="stylesheet" href="{{asset('public/backend/css/bootstrap.min.css')}}" >
 <!-- //bootstrap-css -->
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
+
+
 <!-- Custom CSS -->
 <link href="{{asset('public/backend/css/style.css')}}" rel='stylesheet' type='text/css' />
 <link href="{{asset('public/backend/css/style-responsive.css')}}" rel="stylesheet"/>
@@ -27,6 +30,9 @@
 <link href="{{asset('public/backend/css/font-awesome.css')}}" rel="stylesheet"> 
 <link rel="stylesheet" href="{{asset('public/backend/css/morris.css')}}" type="text/css"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+{{-- new --}}
+<link rel="stylesheet" href="{{ asset('public/backend/css/jquery-ui.css') }}" type="text/css" />
+
 <!-- calendar -->
 
 <link rel="stylesheet" href="{{asset('public/backend/css/monthly.css')}}">
@@ -196,7 +202,7 @@
                     </ul>
                 </li>
 
-                <li class="sub-menu">
+                {{-- <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-envelope"></i>
                         <span>Mail </span>
@@ -205,16 +211,24 @@
                         <li><a href="mail.html">Inbox</a></li>
                         <li><a href="mail_compose.html">Compose Mail</a></li>
                     </ul>
-                </li>
-                {{-- <li class="sub-menu">
+                </li> --}}
+
+                <li class="sub-menu">
                     <a href="javascript:">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>Thống Kê</span>
+                        <i class="fa fa-user-secret"></i>
+                        <span>Tài khoản quản trị</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="chartjs.html">Chart js</a></li>
-                        <li><a href="flot_chart.html">Flot Charts</a></li>
+                        <li><a href="#">Thêm tài khoản mới</a></li>
+                        <li><a href="#">Danh sách tài khoản</a></li>
                     </ul>
+                </li>
+
+                {{-- <li>
+                    <a href="{{URL::to('/introduce')}}">
+                        <i class="fa fa-user-secret"></i>
+                        <span>Tài khoản quản trị</span>
+                    </a>
                 </li> --}}
 
                 <li>
@@ -269,6 +283,10 @@
  <!--TV s/d Toast-->
 <script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 
+<script src="{{ asset('public/backend/js/jquery-ui.min.js') }}"></script>
+<script src="{{ asset('public/backend/js/morris.min.js') }}"></script>
+<script src="{{ asset('public/backend/js/raphael-min.js') }}"></script>
+
 <!--Hiện thị thông báo-->
 {!! Toastr::message() !!}
 
@@ -308,6 +326,14 @@
 
     });
 </script>
+
+
+
+
+
+
+
+
 
 
 <!--TV s/d phân trang-->
@@ -365,6 +391,8 @@
 });
   
 </script>
+
+
 
 <script type="text/javascript">
     $('.order_details').change(function() {

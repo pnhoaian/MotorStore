@@ -219,6 +219,9 @@ class PostController extends Controller
             $meta_title = $p->post_title;
             $cate_post_id = $p->cate_post_id;
         }
+        $posttt = Post::where('post_id',$post_id)->first();
+        $posttt->post_view = $posttt->post_view + 1;
+        $posttt->Save();
 
         $related = Post::with('cate_post')
         ->where('post_status',1)

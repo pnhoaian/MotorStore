@@ -5,8 +5,16 @@
 <div class="product-details"><!--product-details-->
     <div class="col-sm-4">
         <div class="view-product">
+            <ul id="imageGallery">
+                @foreach ($gallery as $key => $gal )
+                    
+                    <li data-thumb="{{URL::to('/public/upload/gallery/'.$gal->gallery_image)}}" data-src="{{URL::to('/public/upload/product/'.$value->product_image)}}">
+                        <img src="{{URL::to('/public/upload/gallery/'.$gal->gallery_image)}}" />
+                    </li>
 
-            <img src="{{URL::to('/public/upload/product/'.$value->product_image)}}" alt="" />
+                @endforeach
+            </ul>
+            {{-- <img src="{{URL::to('/public/upload/product/'.$value->product_image)}}" alt="" /> --}}
         </div>
         {{-- <div id="similar-product" class="carousel slide" data-ride="carousel">
             
@@ -101,7 +109,7 @@
                         </li>
                     @endfor </p></ul>
 
-            {{-- <p><b>Số lượt xem: </b> {{ $value->product_view }} </p> --}}
+            <p><b>Số lượt xem: </b> {{ $value->product_view }} </p>
             <div>
                 <p style="margin-top: -20px;"><b>Giá bán:</b><span style="    font-family: Tahoma, Geneva, sans-serif;
                 font-size: 20px;

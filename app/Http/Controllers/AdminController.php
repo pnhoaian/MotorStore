@@ -12,6 +12,7 @@ use App\Models\Product;
 use App\Models\Post;
 use App\Models\Customer;
 use App\Models\Order;
+use App\Models\Admin;
 use Toastr;
 use Carbon\Carbon;
 session_start();
@@ -141,4 +142,36 @@ class AdminController extends Controller
         $order = Order::where('order_date',$order_date)->orderBy('create_at','desc')->get();
         return view('admin.order_date')->with(compact('order'));
     }
+
+    public function register_admin(){
+        return view('admin.account.register');
+    }
+
+    public function register_admin_account(Request $request){
+        $data = $request->all();
+        // $data = $request->validate(
+        //     [
+        //         'admin_user' => 'required|unique::tbl_admin',   
+        //         'admin_password' => 'required',
+        //         'admin_name' => 'required',
+                
+        //     ],
+        //     [
+        //         'admin_user.unique' => 'Đã tồn tại account name trong hệ thống',
+        //         'admin_user.required' => 'Yêu cầu nhập account name',
+        //         'admin_password.required' => 'Yêu cầu nhập Password ',
+        //         'admin_name.required' => 'Yêu cầu nhập Họ Tên Admin',
+        //     ]
+        //     );
+
+        $admin = new Admin();
+        $admin->admin_user = $data['admin_user'];
+        $admin->admin_name = $data['admin_name'];
+        $admin->admin_password = md5($data['admin_password']);
+        $admin->save();
+        Toastr::success('Đăng ký thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "1000","progressBar"=> true,"closeButton"=> true]);
+        return redirect('admin');
+    }
+    
+
 }

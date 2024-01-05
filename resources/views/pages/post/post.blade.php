@@ -11,8 +11,11 @@
                     style="text-align:left;margin-top:40px; font-size: 22px;margin-left:70px;">
                     {{ $meta_title }}</h2>
 
+
                 <div class="product-image-wrapper" style="height:auto;max-height:none;border:none ">
                     @foreach ($post as $key => $p)
+                    <p style="text-align: right"><b>Số lượt xem: </b> {{ $p->post_view }} </p>
+
                         <div class="single-products" style="margin-top:-5px">
                             {!! $p->post_content !!}
                         </div>
