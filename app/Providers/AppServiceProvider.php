@@ -35,6 +35,8 @@ class AppServiceProvider extends ServiceProvider
 
             $productt = Product::all()->count();
             $product_vieww = Product::orderby('product_view','desc')->take(20)->get();
+            $product_soldd = Product::orderby('product_sold','desc')->take(20)->get();
+            
             $postt = Post::all()->count();
             $post_vieww = Post::orderBy('post_view','desc')->take(20)->get();
             $orderr = Order::all()->count();
@@ -62,6 +64,7 @@ class AppServiceProvider extends ServiceProvider
             ->with('post_vieww',$post_vieww)
             ->with('orderr',$orderr)
             ->with('customerr',$customerr)
+            ->with('product_soldd',$product_soldd)
             ;
 
 

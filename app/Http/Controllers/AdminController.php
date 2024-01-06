@@ -75,10 +75,16 @@ class AdminController extends Controller
 
         $product = Product::all()->count();
         $product_view = Product::orderby('product_view','desc')->take(20)->get();
+
+        // $product_s = Product::where('product_sold')->count();
+
+        $product_sold = Product::orderby('product_sold','desc')->take(20)->get();
         // $product_view = Product::orderBy('product_view','desc')->get(20);
         
         $post = Post::all()->count();
         $post_view = Post::orderBy('post_view','desc')->take(20)->get();
+
+
         $order = Order::all()->count();
         $customer = Customer::all()->count();
 
@@ -86,7 +92,7 @@ class AdminController extends Controller
         'visitor_count','visitor_last_month_count',
         'visitor_this_month_count','visitor_year_count',
         'product','post','order','customer',
-        'product_view','post_view',
+        'product_view','post_view','product_sold',
 
     ));
     }
