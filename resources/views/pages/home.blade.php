@@ -4,9 +4,9 @@
 	@include("pages.include.slider")
 @endsection()
 
-@section('footer')
+{{-- @section('footer')
 	@include("pages.include.footer")
-@endsection()
+@endsection() --}}
 
 @section('content')
 
@@ -81,6 +81,8 @@
 							</div>
 						@endforeach
 					</div>
+				</div>
+			</div>
 					
 
 																	<!----- End Sản phẩm mới ----->
@@ -134,7 +136,7 @@
 													</a>
 													
 													@if ($product_x->product_quantity >= 1)
-													<button type="button" class="btn btn-default add-to-cart" data-id_product="{{$product_x->product_id}}" name="add-to-cart" >
+													<button type="button" class="btn btn-default add-to-cartt" data-id_product="{{$product_x->product_id}}" name="add-to-cartă" >
 														Thêm vào giỏ hàng</button>
 												@else
 													<span style="color: #d70018;font-weight: 700;">TẠM HẾT HÀNG</span>
@@ -153,8 +155,10 @@
 							</div>
 						@endforeach
 					</div>
+				</div>
 																			<!----- End Sản phẩm xem nhiều ----->
 					
+																			
 
 					
 					

@@ -30,6 +30,9 @@ class HomeController extends Controller
 
         $product_xem = DB::table('tbl_product')->where('product_status','1')->orderby('product_view','desc')->limit(5)->get();
         
+        $product_ban = DB::table('tbl_product')->where('product_status','1')->orderby('product_sold','desc')->limit(5)->get();
+        
+
         $min_price = Product::min('product_price');
         $max_price = Product::max('product_price');
         $max_price_range = $max_price + 500000;
@@ -46,6 +49,7 @@ class HomeController extends Controller
         ->with('slidermini',$slidermini)
         ->with('category_post',$category_post)
         ->with('product_xem',$product_xem)
+        ->with('product_ban',$product_ban)
         
         ->with('min_price',$min_price)
         ->with('max_price',$max_price)

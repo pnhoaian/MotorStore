@@ -302,6 +302,28 @@ class OrderController extends Controller
             
         });
 
+
+        if($order->order_status==0){
+			foreach($data['order_product_id'] as $key => $product_id){
+				
+				$product = Product::find($product_id);
+				$product_quantity = $product->product_quantity;
+				$product_sold = $product->product_sold;
+
+				foreach($data['quantity'] as $key2 => $qty){
+					if($key==$key2){
+							$pro_remain = $product_quantity - $qty;
+							$product->product_quantity = $pro_remain;
+							$product->product_sold = $product_sold + $qty;
+							$product->save();
+					}
+			}
+		}
+    }
+
+
+
+
         // DB::table('tbl_order')->where('order_code',$order_code)->update($data);
         Toastr::success('Đã cập nhật tình trạng đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('manage-order');

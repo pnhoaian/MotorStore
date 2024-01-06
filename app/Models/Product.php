@@ -9,7 +9,7 @@ class Product extends Model
 {
     public $timestamps = false; //set time la false
     protected $fillable = ['product_name', 'category_id','brand_id','product_desc','product_price',
-    'product_price_sale','product_quantity','product_image','product_status','product_view'];
+    'product_price_sale','product_quantity','product_image','product_status','product_view','product_sold'];
     protected $primaryKey = 'product_id';
     protected $table = 'tbl_product';
 
@@ -18,6 +18,6 @@ class Product extends Model
     }
 
     public function category(){
-        return $this->belongsTo('App\Models\CategoryProduct','category_id');
+        return $this->belongsTo('App\Models\CateProduct','category_id');
     }
 }

@@ -71,8 +71,8 @@
                         <input type="hidden" value="{{ $value->product_quantity }}"
                             class="cart_product_quantity_{{ $value->product_id }}">
 
-                        {{-- <input type="hidden" value="{{ $value->product_price }}"
-                            class="cart_product_price_{{ $value->product_id }}"> --}}
+                        <input type="hidden" value="{{ $value->product_price }}"
+                            class="cart_product_price_{{ $value->product_id }}">
 
                          <input type="hidden" value="{{ $value->product_price }}"
                             class="cart_product_price_sale_{{ $value->product_id }}">
@@ -313,8 +313,8 @@
                                         <input type="hidden" value="{{$SPLQ->product_name}}" class="cart_product_name_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_image}}" class="cart_product_image_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="{{$SPLQ->product_price}}" class="cart_product_price_{{$SPLQ->product_id}}">
-                                        <input type="hidden" value="{{$SPLQ->product_price_sale }}"class="cart_product_price_sale_{{$SPLQ->product_id }}">
-                                        <input type="hidden" value="{{ $SPLQ->product_quantity }}"class="cart_product_quantity_{{ $SPLQ->product_id }}">
+                                        <input type="hidden" value="{{$SPLQ->product_price_sale}}" class="cart_product_price_sale_{{$SPLQ->product_id}}">
+                                        <input type="hidden" value="{{$SPLQ->product_quantity}}" class="cart_product_quantity_{{$SPLQ->product_id}}">
                                         <input type="hidden" value="1" class="cart_product_qty_{{$SPLQ->product_id}}">
 
                                         
@@ -376,7 +376,7 @@
                                         </a>
                                         
                                         @if ($SPLQ->product_quantity >= 1)
-                                            <button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}" name="add-to-cart" 
+                                            <button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{ $SPLQ->product_id }}" name="add-to-cart" 
                                                 style="margin-bottom: 8px;margin-left: 10px;"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng
                                             </button>
                                         @else
