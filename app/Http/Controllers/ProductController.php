@@ -122,7 +122,7 @@ class ProductController extends Controller
         $gallery->product_id =  $pro_id;
         $gallery->save();
         
-       $producttt->save();
+    //    $producttt->save();
         Toastr::success('Thêm sản phẩm thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('all-product');
        
@@ -252,11 +252,10 @@ class ProductController extends Controller
         ->where('tbl_product.product_id',$product_id)->get();
 
         foreach($detail_product as $key =>$value){
-
-            $category_id = $value->category_id;
-            $product_id = $value->product_id;
+                $category_id = $value->category_id;
+                $product_id = $value->product_id;
             }
-            $producttt = Product::where('product_id',$product_id)->first();
+        $producttt = Product::where('product_id',$product_id)->first();
         $producttt->product_view = $producttt->product_view + 1;
         $producttt->Save();
         //gallery

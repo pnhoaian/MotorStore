@@ -27,8 +27,8 @@ class HomeController extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
         
         $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
-        $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
-        $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
+
+        $product_xem = DB::table('tbl_product')->where('product_status','1')->orderby('product_view','desc')->limit(5)->get();
         
         $min_price = Product::min('product_price');
         $max_price = Product::max('product_price');
@@ -45,8 +45,8 @@ class HomeController extends Controller
         ->with('slider',$slider)
         ->with('slidermini',$slidermini)
         ->with('category_post',$category_post)
-        ->with('all_sdp',$all_sdp)
-        ->with('all_ds',$all_ds)
+        ->with('product_xem',$product_xem)
+        
         ->with('min_price',$min_price)
         ->with('max_price',$max_price)
         ->with('max_price_range',$max_price_range)
