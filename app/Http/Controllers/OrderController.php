@@ -50,7 +50,7 @@ class OrderController extends Controller
             $max_price = Product::max('product_price');
             $max_price_range = $max_price + 500000;
 
-            $getorder = Order::where('customer_id',Session::get('customer_id'))->orderBy('order_date','desc')->get();
+            $getorder = Order::where('customer_id',Session::get('customer_id'))->orderBy('order_id','desc')->get();
             // ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
             // ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
             // ->orderby('tbl_product.product_id','desc')->get();
@@ -91,7 +91,7 @@ class OrderController extends Controller
 
             //Xem lịch sử ĐH           
             $order_details = OrderDetails::with('product')->where('order_code',$order_code)->get();
-            $getorder = Order::where('order_code',$order_code)->first();
+            $getorder = Order::where('order_code',$order_code)->orderby('order_id','desc')->first();
 
                 $customer_id = $getorder->customer_id;
                 $shipping_id = $getorder->shipping_id;
@@ -189,7 +189,6 @@ class OrderController extends Controller
 		}else{
 			$coupon_condition = 2;
 			$coupon_number = 0;
-
 			$coupon_echo = '0';
 		
 		}
@@ -213,11 +212,19 @@ class OrderController extends Controller
 	
 	}
 
+    public function huy_don_hang(Request $request){
+        $data = $request->all();
+        $order = Order::where('order_code',$data['order_code'])->first();
+        $order->order_destroy = $data['lydo'];
+        $order->order_status = 2;
+        $order->save();
+    }
+
 
 //update tình trạng đơn hàng
     public function update_order_qty(Request $request){
         $data = $request->all();
-        
+
         //lấy thông tin order
         $order = Order::find($data['order_id']);
         $order->order_status = $data['order_status'];
@@ -241,7 +248,7 @@ class OrderController extends Controller
 				if($key ==$key2){
 				   $cart_array[] = array(
                     'product_name' => $product_mail['product_name'],
-                    'product_price' => $product_mail['product_price'],
+                    'product_price_sale' => $product_mail['product_price_sale'],
                     'product_qty' => $qty,
                     
 				   );
@@ -251,22 +258,21 @@ class OrderController extends Controller
 
         $details = OrderDetails::where('order_code',$order->order_code)->first();
 		$fee_ship = $details->product_feeship;
-		$coupon_mail = $details->product_coupon;
+		$coupon_mail = $details->Product_coupon;
 
 
-        //lấy thông tin voucher
-        if(Session::get('coupon')!=NULL){
-            $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
-           
-            $coupon_mail = $coupon->coupon_code;
-            $coupon_mail_method = $coupon->coupon_condition;
-            $coupon_mail_number = $coupon->coupon_number;
-            $coupon->save();
-            }else{
-                $coupon_mail = 'không có';
-                $coupon_mail_method ='';
-                $coupon_mail_number = '';
-            }
+		if(($coupon_mail)!='no'){
+			$coupon = Coupon::where('coupon_code',$coupon_mail)->first();
+			$coupon_mail_method = $coupon->coupon_condition;
+			$coupon_mail_number = $coupon->coupon_number; }
+			else{
+				$coupon_mail = 'không sử dụng';
+			    $coupon_mail_method ='';
+			    $coupon_mail_number = '0';
+			}
+
+
+
 
     
         $shipping = Shipping::where('shipping_id',$order->shipping_id)->first();
@@ -289,7 +295,9 @@ class OrderController extends Controller
         
         $ordercode_mail = array(
             'coupon_code' =>$coupon_mail,
-            'order_code' =>$details->order_code
+            'order_code' =>$details->order_code,
+            'coupon_number' => $coupon_mail_number,
+            'coupon_condition' =>$coupon_mail_method,
          );
 
        Mail::send('pages.mail.confirm_order',
@@ -410,9 +418,9 @@ class OrderController extends Controller
                     <p> Tên người nhận: '.$customer->customer_name.'</p>
                     <p> Số điện thoại: '.$customer->customer_phone.'</p>
                     <p> Địa chỉ: '.$customer->customer_address.'</p>
-                    <p> Ghi chú: '.$customer->shipping_note.'</p>
+                    <p> Ghi chú: '.$shipping->shipping_note.'</p>
+                    
                 </thead>
-
                 <tbody>';
                 
                 
@@ -436,6 +444,7 @@ class OrderController extends Controller
                 <tbody>';
                 $i=0;
                 $total = 0;
+                $total_after_coupon = 0;
                 foreach($order_details_product as $key => $product){
                     $i++;
                 $subtotal = $product->Product_price * $product->Product_sales_quantity;
@@ -456,7 +465,7 @@ class OrderController extends Controller
 
                     </tr>';
                 }
-                if($coupon_condition == 2){
+                if($coupon_condition == 1){
                     //Phần trăm sau giảm
                     $total_after_coupon = ($total * $coupon_number)/100;
                     //Tổng tiền thanh toán
@@ -477,8 +486,8 @@ class OrderController extends Controller
                     <tr >
                         <td colspan="5">
                             <p style="margin-left:480px">Phí Ship: '. number_format($fee, 0, ',', '.') . ' ' . '₫' .'</p>
-                            <p style="margin-left:480px">Khuyến mãi: '. number_format($fee, 0, ',', '.') . ' ' . '₫' .'</p>
-                            <p style="margin-left:480px">Số tiền thu: '.number_format($total +  $fee, 0, ',', '.') . ' ' . '₫'.'</p>
+                            <p style="margin-left:480px">Khuyến mãi: '. number_format($total_after_coupon, 0, ',', '.') . ' ' . '₫' .'</p>
+                            <p style="margin-left:480px">Số tiền thu: '.number_format($total +  $fee - $total_after_coupon, 0, ',', '.') . ' ' . '₫'.'</p>
                         </td>
                     </tr>
                 ';

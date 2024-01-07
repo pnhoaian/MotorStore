@@ -154,6 +154,8 @@
                 <tr>
                     @php
                         $total_all = 0;
+
+                            $total_after_coupon = 0;
                     @endphp
                     @if ($coupon_condition==0)
                     @php
@@ -224,7 +226,7 @@
 
                     <td>                        
                         Tổng thanh toán:                   
-                        {{ number_format($total_all + $fee, 0, ',', '.') . ' ' . '₫' }} 
+                        {{ number_format($total + $fee - $total_after_coupon, 0, ',', '.') . ' ' . '₫' }} 
                     </td>
                 </tr>
                 </tbody>
@@ -241,18 +243,18 @@
                             <select name="order_status" class="form-control m-bot15 order_details">
                                 <option id="{{ $or->order_id }}" value="1" selected disabled>Chưa xử lý</option>
                                 <option id="{{ $or->order_id }}" value="0" >Đã xử lý</option>
-                                <option id="{{ $or->order_id }}" value="2" >Khách đã hủy đơn</option>
+                                <option id="{{ $or->order_id }}" value="2" >Hủy đơn hàng</option>
                             </select>
                             @elseif($detail->order_status ==0)
                             <select name="order_status" class="form-control m-bot15 order_details">
                                 <option id="{{ $or->order_id }}" value="1" disabled>Chưa xử lý</option>
                                 <option id="{{ $or->order_id }}" value="0" selected disabled>Đã xử lý</option>
-                                <option id="{{ $or->order_id }}" value="2">Khách đã hủy đơn</option>
+                                <option id="{{ $or->order_id }}" value="2" >Hủy đơn hàng</option>
                             </select>
                             @else
                             <span name="order_status" class="form-control m-bot15">
 
-                                Khách đã hủy đơn
+                                Đơn hàng đã bị hủy
                             </span>
                     
                         @endif

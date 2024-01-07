@@ -51,11 +51,11 @@
 			<input type="text" class="ggg" name="admin_user" placeholder="Nhập Username" required="">
 			<input type="password" class="ggg" name="admin_password" placeholder="Nhập Password" required="">
 
-			<div class="sub-w3l">
+			{{-- <div class="sub-w3l">
 				<h6>
 					<a href="{{URL::to('/register-admin')}}">Đăng ký tài khoản QTV</a>
 				</h6>
-			</div>
+			</div> --}}
 				<input type="submit" value="Sign In" name="login">
 		</form>
 		

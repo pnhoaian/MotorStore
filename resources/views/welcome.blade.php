@@ -427,6 +427,33 @@
 	<script src="{{asset('public/frontend/js/toastr.min.js')}}"></script> 
 
     
+	<script type="text/javascript">
+		function huydonhang(id){
+			var order_code = id;
+			var lydo = $('.lydohuydon').val();
+			// var order_status =2;
+
+			// alert(id);
+			// alert(lydo);
+			// alert(order_status);
+			var _token = $('input[name="_token"]').val();
+
+			$.ajax({
+					url:'{{ url('/huy-don-hang') }}',
+					method:"POST",
+
+					data:{order_code:id, lydo:lydo, _token:_token},
+
+					success:function(data){
+						// $('#tabs_product').html(data);
+						alert('Hủy đơn hàng thành công!');
+						location.reload();
+					}
+				});
+
+
+		}
+	</script>
 
 	<script type="text/javascript">
 		function remove_background(product_id){
@@ -735,7 +762,7 @@
 					success:function(data){
 						$('#tabs_product').html(data);
 					}
-				})
+				});
 			});
 		});
 	</script>

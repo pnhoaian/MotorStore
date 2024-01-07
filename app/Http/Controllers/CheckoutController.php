@@ -123,9 +123,25 @@ class CheckoutController extends Controller
         //         'shipping_phone.numeric' => 'Số điện thoại phải là dạng số ',
         //         'shipping_address.required' => 'Yêu cầu nhập địa chỉ nhận hàng',
         //     ]
-        //     );        
+        //     );     
+        
+        $data = $request->validate(
+            [
+                'shipping_name' => 'required|max:150',   
+                'shipping_phone' => 'required|numeric|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
+                'shipping_address' => 'required',          
+            ],
+            [
+                'shipping_name.required' => 'Yêu cầu nhập tên người nhận hàng ',
+                'shipping_phone.required' => 'Yêu cầu nhập số điện thoại nhận hàng',
+                'shipping_phone.numeric' => 'Số điện thoại phải là dạng số ',
+                'shipping_phone.regex' => 'Số điện thoại không đúng định dạng ',
+                'shipping_address.required' => 'Yêu cầu nhập địa chỉ nhận hàng',
+            ]
+            ); 
         
          $data = $request->all();
+
          if(Session::get('coupon')!=NULL){
             $coupon = Coupon::where('coupon_code',$data['order_coupon'])->first();
             //Thêm customer_id vào cột coupon_used
@@ -134,14 +150,17 @@ class CheckoutController extends Controller
             $coupon->coupon_times = $coupon->coupon_times-1;
             
 
+            //xuất hiện trong Mail
             $coupon_mail = $coupon->coupon_code;
             $coupon_mail_method = $coupon->coupon_condition;
             $coupon_mail_number = $coupon->coupon_number;
+
             $coupon->save();
-            }else{
-                $coupon_mail = 'không có';
+            }
+            else{
+                $coupon_mail = 'không áp dụng';
                 $coupon_mail_method ='';
-                $coupon_mail_number = '';
+                $coupon_mail_number = '0';
             }
 
         // Get Shipping
@@ -184,7 +203,7 @@ class CheckoutController extends Controller
                 $order_details->Order_code = $checkout_code;
                 $order_details->Product_id  = $cart['product_id'];
                 $order_details->Product_name = $cart['product_name'];
-                $order_details->Product_price = $cart['product_price'];
+                $order_details->Product_price = $cart['product_price_sale'];
                 $order_details->Product_sales_quantity = $cart['product_qty'];
                 $order_details->Product_coupon =  $data['order_coupon'];
                 // $order_details->Product_feeship = $priceship;
@@ -207,7 +226,7 @@ class CheckoutController extends Controller
             foreach(Session::get('cart') as $key => $cart_mail){
                 $cart_array[] = array(
                     'product_name' => $cart_mail['product_name'],
-                    'product_price' => $cart_mail['product_price'],
+                    'product_price_sale' => $cart_mail['product_price_sale'],
                     'product_qty' => $cart_mail['product_qty'],
                 );
             }
@@ -226,7 +245,22 @@ class CheckoutController extends Controller
 
          $ordercode_mail = array(
             'coupon_code' =>$coupon_mail,
-            'order_code' =>$checkout_code
+            //$coupon_mail = $coupon->coupon_code;
+
+            'order_code' =>$checkout_code,
+
+            'coupon_number' => $coupon_mail_number,
+            'coupon_condition' =>$coupon_mail_method,
+
+
+            //$coupon_mail_method = $coupon->coupon_condition;
+            //$coupon_mail_number = $coupon->coupon_number;
+
+
+
+
+            
+            
          );
         
         Mail::send('pages.mail.mail_order',

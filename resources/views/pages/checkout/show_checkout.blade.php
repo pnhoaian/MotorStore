@@ -217,6 +217,10 @@
 
 
         @if(Session::get('cart'))
+
+        <div id="form-errors" class="text-danger"></div>
+
+
     <div class="shopper-informations">
         <div class="row" style="border: 1px solid #ccc;
         padding: 10px 10px; margin-right:0px; margin-left:0px">

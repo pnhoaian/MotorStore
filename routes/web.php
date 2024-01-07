@@ -95,6 +95,9 @@ Route::get('/delete-order/{order_code}', [OrderController::class, 'delete_order'
 //cập nhật số lượng sản phẩm view đơn hàng
 Route::post('/update-qty', [OrderController::class, 'update_qty']);
 
+//hủy đơn hàng
+Route::post('/huy-don-hang', [OrderController::class, 'huy_don_hang']);
+
 //--**************************************************************  Intro **********************************************************
 //// ***FE: Page Liên hệ
 Route::get('/lien-he',[ContactController::class, 'lien_he']);

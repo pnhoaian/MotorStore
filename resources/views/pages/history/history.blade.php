@@ -5,6 +5,11 @@
 	@include("pages.include.footer")
 @endsection()
 
+<script>
+
+
+</script>
+
 <div class="table-agile-info">
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -58,7 +63,7 @@
                 ?>
                   
                     <span style="width: 110px;padding: 0.5em 1em;text-align: center;float: inherit;margin: 0em auto;color: #999999;margin-bottom: 10px;font-family: -apple-system, system-ui, BlinkMacSystemFont;font-weight: 700;" 
-                     >Khách đã hủy đơn</span>
+                     >Đơn hàng đã hủy</span>
                   </a>
                  
                 <?php 
@@ -69,9 +74,37 @@
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td style="margin-left: 70px">
-                <a href="{{URL::to('/view-history-order/'.$ord->order_code)}}" class="active styling" ui-toggle-class="">
+                @if($ord->order_status != 2)
+                                    <!-- Trigger the modal with a button -->
+                   <p><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon">Hủy đơn hàng</button></p>
+                  @endif
+                   <!-- Modal -->
+                    <div id="huydon" class="modal fade" role="dialog">
+                      <div class="modal-dialog">
+                        <form>
+                          @csrf
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Lý do hủy đơn</h4>
+                          </div>
+                          <div class="modal-body">
+                            <p><textarea class="lydohuydon" required placeholder="Lý do hủy đơn.... (bắt buộc)" rows="5"></textarea></p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
+                            <button type="button" id="{{ $ord->order_code }}" onclick="huydonhang(this.id)" class="btn btn-success" >Gửi</button>
+                          </div>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+
+
+                <p><a href="{{URL::to('/view-history-order/'.$ord->order_code)}}" class="active styling" ui-toggle-class="">Xem đơn hàng</a></p>
                   
-                    <i class="fa fa-eye text-success text-active" style="margin-left: 10px;" ></i>
+                    {{-- <i class="fa fa-eye text-success text-active" style="margin-left: 10px;" ></i> --}}
               </td>
             </tr>
 

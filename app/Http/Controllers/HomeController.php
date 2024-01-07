@@ -64,9 +64,11 @@ class HomeController extends Controller
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         $keyword = $request->keywords_submit;
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
-        $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->get();
+
+        $search_product = DB::table('tbl_product')->where('product_name','like','%'.$keyword.'%')->where('product_status','1')->get();
         
         $search_product_count = $search_product->count();
+
         return view('pages.product.search')
         ->with('category', $cate_product)
         ->with('brand', $brand_product)

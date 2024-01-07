@@ -426,7 +426,7 @@
             }
         }
         if (j == 0) {
-            if (confirm('Đã đóng gói và xác nhận thay đổi trạng thái đơn hàng?')) {
+            if (confirm('Xác nhận thay đổi trạng thái đơn hàng?')) {
             $.ajax({
                 url: '{{ url('/update-order-qty') }}',
                 method: 'POST',

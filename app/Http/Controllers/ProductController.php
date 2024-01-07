@@ -31,8 +31,8 @@ class ProductController extends Controller
 
     public function add_product(){
         $this->AuthLogin();
-        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->get();
-        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->get();
+        $cate_product = DB::table('tbl_category_product')->orderby('category_id','desc')->where('category_status','1')->get();
+        $brand_product = DB::table('tbl_brand')->orderby('brand_id','desc')->where('brand_status','1')->get();
         return view('admin.product.add_product')->with('cate_product', $cate_product)->with('brand_product', $brand_product);
     }
 
@@ -242,6 +242,7 @@ class ProductController extends Controller
 
         $all_sdp = DB::table('tbl_product')->where('product_status','1')->where('category_id','9')->orderby('product_id','desc')->limit(5)->get();
         $all_ds = DB::table('tbl_product')->where('product_status','1')->where('category_id','8')->orderby('product_id','desc')->limit(5)->get();
+        
         //test
         $sdp =DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
@@ -252,7 +253,9 @@ class ProductController extends Controller
         $detail_product = DB::table('tbl_product')
         ->join('tbl_category_product','tbl_category_product.category_id','=','tbl_product.category_id')
         ->join('tbl_brand','tbl_brand.brand_id','=','tbl_product.brand_id')
-        ->where('tbl_product.product_id',$product_id)->get();
+        ->where('tbl_product.product_id',$product_id)
+        ->where('product_status','1')
+        ->get();
 
         foreach($detail_product as $key =>$value){
                 $category_id = $value->category_id;

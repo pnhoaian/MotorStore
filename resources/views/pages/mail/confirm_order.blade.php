@@ -95,16 +95,17 @@
                             @php
                             $sub_total =0;
                             $total = 0;
+                            $total_after_coupon = 0;
                             @endphp
                                 @foreach ($cart_array as $cart)
                                     @php
-                                        $sub_total = $cart['product_qty']*$cart['product_price'];
+                                        $sub_total = $cart['product_qty']*$cart['product_price_sale'];
                                         $total+=$sub_total;
 
                                     @endphp
                                     <tr>
                                         <td>{{ $cart['product_name'] }}</td>
-                                        <td>{{ number_format($cart['product_price'],0,',','.') }} VNĐ</td>
+                                        <td>{{ number_format($cart['product_price_sale'],0,',','.') }} VNĐ</td>
                                         <td>{{ $cart['product_qty'] }}</td>
                                         <td>{{ number_format($sub_total,0,',','.') }} VNĐ</td>
                                     </tr>
@@ -118,7 +119,26 @@
 
                         <p>Mã khuyến mãi: <strong style="color: #FFF;text-decoration: text-transform: uppercase;">{{ $code['coupon_code'] }}</strong>
                         </p>
-
+                        
+                        <p>
+                            @if (Session::get('coupon') != 'no')
+                            @if ($code['coupon_condition'] == 1)
+                                @php
+                                    $total_after_coupon = ($total * $code['coupon_number']) / 100;
+                                    echo '<p style="color:#fff">Tiết kiệm được: ' . number_format($total_after_coupon, 0, ',', '.') . 'đ' . '</br>';
+                                    // $total_coupon = $total + $details->product_feeship - $total_after_coupon;
+                                @endphp
+                            @else
+                                @php
+                                    $total_after_coupon = $code['coupon_number'];
+                                    echo '<p style="color:#fff">Tiết kiệm được: ' . number_format($total_after_coupon, 0, ',', '.') . 'đ' . '</>';
+                                    // $total_coupon = $total + $details->product_feeship - $coupon_number;
+                                @endphp
+                            @endif
+                        @endif
+                        </p>
+                        
+                        
                         <p>Phí vận chuyển:  
                             @if ( $total > 500000 )
                             0 VNĐ
@@ -131,8 +151,12 @@
                                 $fee = 20000;                     
                             @endphp
                         @endif
-                        <p style="color: #FFF"> Tổng thanh toán khi chưa áp dụng khuyến mãi:
-                            {{ number_format($total + $fee, 0, ',', '.') }}đ</td>
+                        </p>
+                        <p style="color: #FFF">
+                            
+                            
+                            Tổng thanh toán:
+                            {{ number_format($total + $fee - $total_after_coupon, 0, ',', '.') }}đ</td>
                         </p>
                        
                     </div>
