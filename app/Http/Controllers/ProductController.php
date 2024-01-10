@@ -12,6 +12,7 @@ use App\Models\Gallery;
 use App\Models\Rating;
 use App\Models\Customer;
 use App\Models\Product;
+use App\Models\Comment;
 use File;
 use Toastr;
 
@@ -305,5 +306,43 @@ class ProductController extends Controller
         $rating->rating = $data['index'];
         $rating->save();
         echo 'done';
+    }
+
+    public function load_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment = Comment::where('comment_product_id',$product_id)->where('comment_status',1)->get();
+        $output='';
+
+        foreach ($comment as $key => $comm){
+            $output .= '
+
+                <div class="row style_comment" >
+                    <div class="col-md-2">
+                        <img style="margin-top: 5px; width: 135px; height: 130px;" src="'.url('/public/frontend/images/khach.png').'">
+                    </div>
+
+                    <div class="col-md-10">
+                        <p style="color: blue">'.$comm->comment_date.'</p>
+                        <p style="color: #f00">@'.$comm->comment_name.'</p>
+                        <p>'.$comm->comment.'</p>
+                    </div>
+                </div>
+            <p></p>
+            ';
+        }
+        echo $output;
+    }
+
+
+    public function send_comment(Request $request){
+        $product_id = $request->product_id;
+        $comment_name = $request->comment_name;
+        $comment_content = $request->comment_content;
+        $comment = new Comment();
+        $comment->comment = $comment_content;
+        $comment->comment_name = $comment_name;
+        $comment->comment_product_id = $product_id;
+        $comment->comment_status = 0;
+        $comment->save();
     }
 }

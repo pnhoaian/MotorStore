@@ -336,9 +336,9 @@
 						<div class="single-widget">
 							<h2>Sản Phẩm & Dịch Vụ</h2>
 							<ul class="nav nav-pills nav-stacked"></ul>
-								<li class="ftsanpham"><a href="#">Apple</a></li>
-								<li class="ftsanpham"><a href="#">Samsung</a></li>
-								<li class="ftsanpham"><a href="#">Baseus</a></li>
+								<li class="ftsanpham"><a href="{{URL::to('thuong-hieu-san-pham/1')}}">Apple</a></li>
+								<li class="ftsanpham"><a href="{{URL::to('thuong-hieu-san-pham/2')}}">Samsung</a></li>
+								<li class="ftsanpham"><a href="{{URL::to('thuong-hieu-san-pham/13')}}">Hyper</a></li>
 
 							</ul>
 						</div>
@@ -347,8 +347,8 @@
 						<div class="single-widget">
 							<h2>Chính Sách</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="#">Thanh toán</a></li>
-								<li><a href="#">Bảo hành - Bảo trì</a></li>
+								<li><a href="{{URL::to('thanh-toan')}}">Thanh toán</a></li>
+								<li><a href="{{URL::to('bao-hanh')}}">Bảo hành - Bảo trì</a></li>
 							</ul>
 						</div>
 					</div>
@@ -543,9 +543,10 @@
 			var cart_product_qty = $('.cart_product_qty_' + id).val();
 			var _token = $('input[name="_token"]').val();
 
-			//them
-			if(parseInt(cart_product_qty) >parseInt(cart_product_quantity)){
+			//them parseInt(cart_product_qty) >
+			if(parseInt(cart_product_quantity <=0)){
 				alert('Số lượng sản phẩm trong kho không đủ, vui lòng đặt ít hơn ' + cart_product_quantity +' sản phẩm');
+				// alert('Vui lòng nhập so')
 			}else{
 			
 		$.ajax({
@@ -592,11 +593,16 @@
 			var cart_product_qty = $('.cart_product_qty_' + id).val();
 			var _token = $('input[name="_token"]').val();
 
-			//them
-			if(parseInt(cart_product_qty) >parseInt(cart_product_quantity)){
+			// if(parseInt(cart_product_qty) <0){
+			// 	alert('Yêu cầu thêm số lượng sản phẩm lớn hơn 0');
+			// }
+
+
+		
+			if(parseInt(cart_product_qty) > parseInt(cart_product_quantity)){
 				alert('Số lượng sản phẩm trong kho không đủ, vui lòng đặt ít hơn ' + cart_product_quantity +' sản phẩm');
-			}else{
-			
+			}
+			else{
 		$.ajax({
 				url: '{{url('/add-cart-ajax')}}',
 				method: 'POST',
@@ -612,13 +618,30 @@
 						closeOnConfirm: false
 					},
 				function() {
-					window.location.href = "{{url('/show-cart')}}"; });
-					}
+					window.location.href = "{{url('/show-cart')}}";
+				 });
+					},
+
+					//Nhập dưới 0
+				// 	error: function(error) {
+				// 	var formErr = error.responseJSON.errors;
+				// 	var str = ' <ul>';
+				// 	for (var err in formErr) {
+				// 		str += '<li> ' + formErr[err][0] +
+				// 			'</li>';
+				// 	}
+				// 	str += '</ul>';
+				// 	$('#form-errors').html(str);
+				// }
+					
 
 				});
-				//them
+
+
 				
-			}
+				
+			
+		}
 			//
 	});
 	});
@@ -685,6 +708,46 @@
 	});
 </script>
 
+{{-- Bình luận --}}
+<script type="text/javascript">
+	$(document).ready(function() {
+		load_comment();
+		// alert(product_id);
+
+		function load_comment(){
+			var product_id = $('.comment_product_id').val();
+			var _token = $('input[name="_token"]').val();
+			$.ajax({
+					url:'{{ url('/load-comment') }}',
+					method:"POST",
+					data:{product_id:product_id,_token:_token},
+					success:function(data){
+						$('#comment_show').html(data);
+					}
+				});
+		}
+
+		$('.send-comment').click(function(){
+			var product_id = $('.comment_product_id').val();
+			var comment_name = $('.comment_name').val();
+			var comment_content = $('.comment_content').val();
+			var _token = $('input[name="_token"]').val();
+
+			$.ajax({
+					url:'{{ url('/send-comment') }}',
+					method:"POST",
+					data:{product_id:product_id,comment_name:comment_name,comment_content:comment_content,_token:_token},
+					success:function(data){
+						$('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công và đang được kiểm duyệt </span>');
+						load_comment();
+						$('#notify_comment').fadeOut(4000);
+						$('.comment_content').val('');
+					}
+				});
+		})
+
+  	});
+</script>
 
 {{-- Gallery hình ảnh --}}
 <script type="text/javascript">

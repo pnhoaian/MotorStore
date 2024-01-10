@@ -210,6 +210,12 @@ Route::get('/edit-product/{product_id}', [ProductController::class, 'edit_produc
 Route::get('/delete-product/{product_id}', [ProductController::class, 'delete_product']);
 Route::post('/update-product/{product_id}', [ProductController::class, 'update_product']);
 
+//Comment
+Route::post('/load-comment', [ProductController::class, 'load_comment']);
+Route::post('/send-comment', [ProductController::class, 'send_comment']);
+
+
+
 //Rating
 Route::post('/insert-rating', [ProductController::class, 'insert_rating']);
 

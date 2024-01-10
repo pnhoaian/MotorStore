@@ -84,15 +84,8 @@
             <p><b>Mã sản phẩm:</b> {{ $value->product_id }}</p>
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
-            <p><b>Số lượng tồn kho: </b> {{ $value->product_quantity }} </p>
-            {{-- <p><b>Tình trạng:</b> 
-                @if ($value->product_quantity >= 1)
-                    Còn hàng
-                    
-                @else
-                    Tạm hết hàng
-                @endif
-            </p> --}}
+            {{-- //TK --}}
+
             <p><b>Đánh giá:</b>
                 
                 <ul class="list-inline rating" title="Average Rating">
@@ -109,7 +102,8 @@
                         </li>
                     @endfor </p></ul>
 
-            <p><b>Số lượt xem: </b> {{ $value->product_view }} </p>
+            {{-- //LX --}}
+
             <div>
                 <p style="margin-top: -20px;"><b>Giá bán:</b><span style="    font-family: Tahoma, Geneva, sans-serif;
                 font-size: 20px;
@@ -133,6 +127,7 @@
                     <label>Số Lượng:</label>
                     <input name="product_qty" type="number" min="1"
                                 class="cart_product_qty_{{ $value->product_id }}" value="1" />
+                                
                     <input name="productid_hidden" type="hidden" value="{{ $value->product_id }}" />
 
                     <button type="button" class="btn btn-fefault add-to-cart" data-id_product="{{ $value->product_id }}" name="add-to-cart" 
@@ -143,10 +138,7 @@
                 @endif
 
             </span>
-            <p><b>Tags sản phẩm: </b> </p>
-            {{-- <p><b>Đã bán:</b> {{ $value->category_name }}</p>
-            <p><b>Tồn kho:</b> {{ $value->category_name }} sản phẩm</p> --}}
-            {{-- <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a> --}}
+           
         </div><!--/product-information-->
     </div>
 
@@ -157,7 +149,7 @@
         clear: both;">
             <div class="phone" style="margin-bottom: 15px;">
                 <strong>
-                    <span data-redactor-tag="span" style="color: rgb(0, 0, 0); margin-left:350px; ">Hồ Chí Minh</span> : 0912 456 789</strong><br>
+                    <span  style="color: rgb(0, 0, 0);">Hồ Chí Minh</span> : 0999 1919 191</strong><br>
             </div>
 
             <div class="GiaoHang">
@@ -175,28 +167,26 @@
             margin-bottom: 10px;
             background-color: #f6f6f6;">
                 <h4 class="pr-txtb" style="margin-left: 5px; text-align: center"> Khuyến Mãi</h4>
-                <i class="pr-txt" style="margin-left: 5px;font-style: normal;"> Đặt ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn.</i>
+                <i class="pr-txt" style="margin-left: 5px;font-style: normal;"> Đặt hàng ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn.</i>
             </div>
             <div class="pr-content">
                 <div class="pr-item">
-            <div>
-                <p>Nhập mã UUDAI50k giảm ngay 50K cho đơn hàng khi mua sắm online </a></p>
+                    <div class="divb t5" data-promotion="2039089" data-group="WebNote" data-discount="0" data-productcode="" data-tovalue="20">
+                        <div class="divb-right">
+                            <p>Nhập mã UUDAI20K giảm ngay 20K cho đơn hàng khi mua sắm tại HAS </a></p>
+                        </div>
+                    </div>
+                </div>
+                    
                 <div class="pr-item text">
-                    <p><span class="note">(*)</span> Khuyến mãi áp dụng cho đơn hàng giá trị trên 500,000đ</p>
-                </div>     
-                
-            </div>
-            <div class="divb t5" data-promotion="2039089" data-group="WebNote" data-discount="0" data-productcode="" data-tovalue="20">
-                {{-- <span class="nb">2</span> --}}
-                <div class="divb-right">
-                            <p>Nhập mã UUDAI100k giảm ngay 100K cho đơn hàng khi mua sắm online <a href="#" target="_blank">(Xem chi tiết tại đây)</a></p>
+                    <p><span class="note">(*)</span> Lưu ý: </p>
+                    <ul>
+                        <li>- Mỗi coupon chỉ áp dụng một lần cho một khách hàng</li>
+                        <li>- Số lượng coupon có hạn, nhanh tay đặt hàng ngay</li>
+                    </ul>
+                    {{-- <p><span class="note">(*)</span>Lưu ý: </p>
+                    <p><span class="note">(*)</span>Lưu ý: </p> --}}
                 </div>
-            </div>
-                </div>
-                
-            <div class="pr-item text">
-                <p><span class="note">(*)</span> Khi mua hàng với đơn hàng giá trị trên 1,500,000đ</p>
-            </div>
  
             </div>
         </div>
@@ -232,8 +222,26 @@
             </div>
         </div>
         
-        <div class="tab-pane fade" id="reviews" >
+        <div class="tab-pane fade" id="reviews">
+            {{-- Bình luận sản phẩm --}}
             <div class="col-sm-12">
+                <style type="text/css">
+                    .style_comment{
+                        border: 1px solid #ddd;
+                         border-radius: 10px;
+                         background: #707070"
+                    }
+                </style>
+                    <form>
+                    @csrf
+                    <input type="hidden" name="comment_product_id" class="comment_product_id" value="{{ $value->product_id }}">
+                    <div id="comment_show"></div>
+                    
+
+                        
+                    </form>
+
+                {{-- Rating 5 Sao --}}
                 <form>
                     @csrf
                     <input type="hidden" name="comment_product_id" class="comment_product_id"
@@ -268,11 +276,11 @@
                     <span>
                         <input
                             style="background: #f0f0f5;width: 60%;margin-left: 24px;color: #000;"
-                            type="text" class="comment_name" placeholder="Tên hiển thị"/>
+                            type="text" class="comment_name" placeholder="Tên khách hàng"  value="{{ $customer1->customer_name }}" disabled/>
                     </span>
-                    <textarea name="comment" style="    width: 93%;background: #f0f0f5;margin-left: 24px;color: #000;"
+                    <textarea name="comment" style="width: 93%;background: #f0f0f5;margin-left: 24px;color: #000;"
                         class="comment_content" placeholder="Nội dung"></textarea>
-                    <div id="notify_comment"></div>
+                    <div id="notify_comment" style="color: #f00"></div>
 
                     <button type="button" class="button-them pull-right send-comment">
                         Gửi
