@@ -738,7 +738,7 @@
 					method:"POST",
 					data:{product_id:product_id,comment_name:comment_name,comment_content:comment_content,_token:_token},
 					success:function(data){
-						$('#notify_comment').html('<span class="text text-success">Thêm bình luận thành công và đang được kiểm duyệt </span>');
+						$('#notify_comment').html('<span class="text text-success">Gửi bình luận thành công và đang được chờ kiểm duyệt </span>');
 						load_comment();
 						$('#notify_comment').fadeOut(4000);
 						$('.comment_content').val('');
