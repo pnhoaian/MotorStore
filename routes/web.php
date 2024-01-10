@@ -19,6 +19,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\GalleryController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -213,7 +214,8 @@ Route::post('/update-product/{product_id}', [ProductController::class, 'update_p
 //Comment
 Route::post('/load-comment', [ProductController::class, 'load_comment']);
 Route::post('/send-comment', [ProductController::class, 'send_comment']);
-
+//BE list comment
+Route::get('/list-comment', [ProductController::class, 'list_comment']);
 
 
 //Rating

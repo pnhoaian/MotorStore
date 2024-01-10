@@ -345,4 +345,9 @@ class ProductController extends Controller
         $comment->comment_status = 0;
         $comment->save();
     }
+
+    public function list_comment(){
+        $comment = Comment::with('product')->orderBy('comment_status','desc')->get();
+        return view('admin.comment.list_comment')->with(compact('comment'));
+    }
 }

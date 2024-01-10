@@ -109,6 +109,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<!--/end header_top-->
 		
 		<div class="header-middle"><!--header-middle-->

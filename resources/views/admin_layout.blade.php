@@ -202,6 +202,17 @@
                     </ul>
                 </li>
 
+                <li class="sub-menu">
+                    <a href="javascript:">
+                        <i class="fa fa-commenting-o" aria-hidden="true"></i>
+                        <span>Bình luận</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{URL::to('/list-comment')}}">Liệt kê bình luận</a></li>
+						{{-- <li><a href="{{URL::to('/all-post')}}">Danh sách bài viết</a></li> --}}
+                    </ul>
+                </li>
+
                 {{-- <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-envelope"></i>
