@@ -44,12 +44,12 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên danh mục</label>
-                            <input type="text" name="category_name" class="form-control" id="name" placeholder="Nhập tên danh mục">
+                            <input type="text" name="category_name" value="{{ old('category_name') }}" class="form-control" id="name" placeholder="Nhập tên danh mục">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả danh mục</label>
-                            <textarea style="resize:none" rows="6" name="category_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="category_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả">{{ old('category_desc') }}</textarea>
                         </div>
 
                         <div class="form-group">

@@ -43,7 +43,7 @@
                             {{ csrf_field() }}
                             <div class="form-group">
                             <label for="exampleInputEmail1">Tên Hãng - Thương hiệu</label>
-                            <input type="text" name="brand_name" class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Hãng - Thương hiệu">
+                            <input type="text" name="brand_name" value="{{ old('brand_name') }}"  class="form-control" id="exampleInputEmail1" placeholder="Nhập tên Hãng - Thương hiệu">
                         </div>
 
                         <div class="form-group">
@@ -53,7 +53,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả Hãng - Thương hiệu</label>
-                            <textarea style="resize:none" rows="6" name="brand_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả"></textarea>
+                            <textarea style="resize:none" rows="6" name="brand_desc" class="form-control" id="ckeditor" placeholder="Thêm mô tả">{{ old('brand_desc') }}</textarea>
                         </div>
 
                         <div class="form-group">

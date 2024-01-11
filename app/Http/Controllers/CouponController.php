@@ -58,9 +58,9 @@ class CouponController extends Controller
                 'coupon_date_end.required' => 'Yêu cầu thêm NGÀY KẾT THÚC khuyến mãi ',
                 'coupon_code.required' => 'Yêu cầu nhập mã khuyến mãi ',
                 'coupon_times.required' => 'Yêu cầu nhập số lượng Coupon khuyến mãi ',
-                'coupon_times.numeric' => 'Không phải định dạng số ',
+                'coupon_times.numeric' => 'Số lượng coupon không phải định dạng số ',
                 'coupon_number.required' => 'Yêu cầu nhập "SỐ TIỀN" hoặc "PHẦN TRĂM KHUYẾN MÃI" ',
-                'coupon_number.numeric' => 'Không phải định dạng số ',
+                'coupon_number.numeric' => 'SỐ TIỀN hoặc PHẦN TRĂM KHUYẾN MÃI không phải định dạng số ',
                 'coupon_condition.required' => 'Yêu cầu thêm lựa chọn khuyến mãi ',
             ]
             );
@@ -71,13 +71,42 @@ class CouponController extends Controller
         $coupon->coupon_number = $data['coupon_number'];
         $coupon->coupon_code = $data['coupon_code'];
         $coupon->coupon_times = $data['coupon_times'];
-        if(($coupon->coupon_date_end = $data['coupon_date_end']) >= $today){
-            
+
+        if($coupon->coupon_date_end  >= $today){
             $coupon->coupon_status = 1;
         }else{
-            $coupon->coupon_status = 0;
+            // $coupon->coupon_status = 0;
+            Toastr::warning('Ngày kết thúc không được nhỏ hôm nay','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
         }
+
+        if($coupon->coupon_date_end < $coupon->coupon_date_start){
+            // $coupon->coupon_status = 0;
+            Toastr::warning('Ngày bắt đầu không được lớn ngày kết thúc','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
+        }else{
+            $coupon->coupon_status = 1;
+        }
+
+
+
+
+
         $coupon->coupon_condition = $data['coupon_condition'];
+        if($coupon->coupon_condition ==1 && $coupon->coupon_number > 100){
+            Toastr::warning('Phần trăm khuyến mãi không được lớn hơn 100%','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
+        }elseif($coupon->coupon_condition ==1 && $coupon->coupon_number < 0 ){
+            Toastr::warning('Phần trăm khuyến mãi không được lớn hơn 0%','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
+        }elseif($coupon->coupon_condition ==2 && $coupon->coupon_number < 0){
+            Toastr::warning('Số tiền khuyến mãi không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
+        }elseif($coupon->coupon_times < 0){
+            Toastr::warning('Số lượng mã khuyến mãi không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "3000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('insert-coupon');
+        }
+
         $coupon->save();
 
         Toastr::success('Thêm mã khuyến mãi thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);

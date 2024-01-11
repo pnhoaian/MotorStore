@@ -21,7 +21,7 @@
 
           <thead>
             <tr>
-              {{-- <th></th> --}}
+              <th></th>
               <th style="width: 120px;">Tên khách hàng</th>
               <th style="width: 110px;">Tên sản phẩm</th>
               <th style="width: 750px;">Bình luận</th>
@@ -35,7 +35,7 @@
             @foreach ($comment as $key => $comm)
               
             <tr>
-              {{-- <td></td> --}}
+              <td></td>
               <td>{{ $comm->comment_name }}</td>
               <td><a href="{{ url('/chi-tiet-san-pham/'.$comm->product->product_id) }}" target="_blank"></a>{{ $comm->product->product_name }}</td>
               <td>{{ $comm->comment }}

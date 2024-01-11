@@ -85,7 +85,7 @@
             <p><b>Thương Hiệu - Hãng:</b> {{ $value->brand_name }}</p>
             <p><b>Danh Mục:</b> {{ $value->category_name }}</p>
             {{-- //TK --}}
-
+            <p><b>Tồn kho: {{ $value->product_quantity }}</b></p>
             <p><b>Đánh giá:</b>
                 
                 <ul class="list-inline rating" title="Average Rating">
@@ -166,21 +166,42 @@
             border-radius: 4px;
             margin-bottom: 10px;
             background-color: #f6f6f6;">
-                <h4 class="pr-txtb" style="margin-left: 5px; text-align: center"> Khuyến Mãi</h4>
-                <i class="pr-txt" style="margin-left: 5px;font-style: normal;"> Đặt hàng ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn.</i>
+                {{-- <h4 class="pr-txtb" style="margin-left: 5px; text-align: center"> Khuyến Mãi</h4> --}}
+                <i class="pr-txt" style="margin-left: 5px;font-style: normal; font-style: italic"> Đặt hàng ngay và áp dụng khuyến mãi để được hưởng nhiều ưu đãi hấp dẫn.</i>
             </div>
             <div class="pr-content">
                 <div class="pr-item">
                     <div class="divb t5" data-promotion="2039089" data-group="WebNote" data-discount="0" data-productcode="" data-tovalue="20">
                         <div class="divb-right">
-                            <p>Nhập mã UUDAI20K giảm ngay 20K cho đơn hàng khi mua sắm tại HAS </a></p>
+                            {{-- <p>Nhập mã UUDAI20K giảm ngay 20K cho đơn hàng khi mua sắm tại HAS </a></p> --}}
+                            <p style="text-align: center"><span class="note"></span> Mã khuyến mãi có thể sử dụng </p>
+
+                            {{-- <ul>
+                                
+                                    <li>{{ $couponKM->coupon_name }} | {{ $couponKM->coupon_code }} | {{ $couponKM->coupon_times }}  </li>                             
+                                
+                            </ul> --}}
+                            <table>
+                                <tr>
+                                  <th width="100px">Tên CTKM</th>
+                                  <th>Code</th>
+                                  <th >Số lượng</th>
+                                </tr>
+                                @foreach ( $show_coupon as $key => $couponKM)
+                                    <tr>
+                                    <td>{{ $couponKM->coupon_name }}</td>
+                                    <td >{{ $couponKM->coupon_code }}</td>
+                                    <td style="text-align: center">{{ $couponKM->coupon_times }}</td>
+                                    </tr>
+                                @endforeach
+                              </table>               
                         </div>
                     </div>
                 </div>
-                    
-                <div class="pr-item text">
+                
+                <div class="pr-item text" style="margin-top: 10px">
                     <p><span class="note">(*)</span> Lưu ý: </p>
-                    <ul>
+                    <ul style="padding-left: 0px;">
                         <li>- Mỗi coupon chỉ áp dụng một lần cho một khách hàng</li>
                         <li>- Số lượng coupon có hạn, nhanh tay đặt hàng ngay</li>
                     </ul>
@@ -275,10 +296,10 @@
                 <form action="#">
                     <span>
                         <input
-                            style="background: #f0f0f5;width: 60%;margin-left: 24px;color: #000;"
+                            style="background: #a2c5de;width: 21%;margin-left: 24px;color: #000;"
                             type="text" class="comment_name" placeholder="Tên khách hàng"  value="{{ $customer1->customer_name }}" disabled/>
                     </span>
-                    <textarea name="comment" style="width: 93%;background: #f0f0f5;margin-left: 24px;color: #000;"
+                    <textarea name="comment" style="width: 93%;background: #a2c5de;margin-left: 24px;color: #000; font-size: 20px"
                         class="comment_content" placeholder="Nội dung"></textarea>
                     <div id="notify_comment" style="color: #f00"></div>
 
@@ -396,7 +417,7 @@
                         </div>
                         <div class="choose">
                             <ul class="nav nav-pills nav-justified">
-                                <li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
+                                <li><a href="#"><i class=""></i></a></li>
                             </ul>
                         </div>
                     </div>

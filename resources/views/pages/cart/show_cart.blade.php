@@ -87,7 +87,7 @@
                         </td>
 
                         <td class="bill" style="width:350px;padding-left:60px">
-                            <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
+                            <li>Tổng thành tiền: <span>{{ number_format($total ,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
                             
 
@@ -160,10 +160,13 @@
                                 if ( Session::get('coupon')) {
                                     $total_after = $total_after_coupon;
                                     $total_after = $total_after + $fee;
+                                    if($total_after < 0){
+                                        $total_after = 0;
+                                    }
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 } elseif ( !Session::get('coupon')) {
                                     $total_after = $total;
-                                    echo number_format($total_after, 0, ',', '.') . ' VNĐ';
+                                    echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
                                 }
 
                             @endphp

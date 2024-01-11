@@ -162,10 +162,13 @@
                                 if ( Session::get('coupon')) {
                                     $total_after = $total_after_coupon;
                                     $total_after = $total_after + $fee;
+                                    if($total_after < 0){
+                                        $total_after = 0;
+                                    }
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 } elseif ( !Session::get('coupon')) {
                                     $total_after = $total;
-                                    echo number_format($total_after, 0, ',', '.') . ' VNĐ';
+                                    echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
                                 }
 
                             @endphp

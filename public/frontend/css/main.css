@@ -1048,7 +1048,7 @@ list-style-type: none;
 }
 
 .category-tab ul {
-  background: #40403E;
+  /* background: #40403E; */
   border-bottom: 1px solid #EE3E38;
   list-style: none outside none;
   margin: 0 0 30px;
@@ -1057,9 +1057,10 @@ list-style-type: none;
 }
 
 .category-tab ul li a {
+  background: #EE3E38;
   border: 0 none;
   border-radius: 0;
-  color: #B3AFA8;
+  color: white;
   display: block;
   font-family: 'Roboto', sans-serif;
   font-size: 14px;
@@ -1076,7 +1077,8 @@ list-style-type: none;
   -moz-border-left-colors: none;
   -moz-border-right-colors: none;
   -moz-border-top-colors: none;
-  background-color: #EE3E38;
+  /* background-color: #EE3E38; */
+  background-color: #002795;
   border:0px;
   color: #FFFFFF;
   cursor: default;
@@ -1211,7 +1213,7 @@ list-style-type: none;
 }
 
 .product-details {
-  margin-bottom: 40px;
+  margin-bottom: 15px;
   overflow: hidden;
   margin-top: 10px;
 }
@@ -1363,7 +1365,7 @@ list-style-type: none;
 
 
 #reviews ul {
-  background: #FFFFFF;
+  /* background: #FFFFFF; */
   border: 0 none;
   list-style: none outside none;
   margin: 0 0 20px;

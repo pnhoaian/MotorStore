@@ -45,7 +45,7 @@
                             
                             <div class="form-group">
                                 <label for="exampleInputEmail1">Tên Sản phẩm</label>
-                                <input type="text" name="product_name" class="form-control" id="exampleInputEmail1">
+                                <input type="text" name="product_name" value="{{ old('product_name') }}" class="form-control" id="exampleInputEmail1">
                             </div>
 
                         <div class="form-group">
@@ -68,7 +68,7 @@
 
                         <div class="form-group">
                             <label for="exampleInputPassword1">Mô tả Sản phẩm</label>
-                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="ckeditor"></textarea>
+                            <textarea style="resize:none" rows="6" name="product_desc" class="form-control" id="ckeditor">{{ old('product_desc') }}</textarea>
                         </div>
 
                         <div class="form-group">
@@ -78,17 +78,17 @@
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá Gốc</label>
-                            <input type="text" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Sản phẩm">
+                            <input type="text" name="product_price" value="{{ old('product_price') }}" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Sản phẩm">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Giá Khuyến Mãi</label>
-                            <input type="text" name="product_price_sale" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
+                            <input type="text" name="product_price_sale" value="{{ old('product_price_sale') }}" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
                         </div>
 
                         <div class="form-group">
                             <label for="exampleInputEmail1">Số lượng sản phẩm</label>
-                            <input type="text" name="product_quantity" class="form-control" placeholder="Nhập số lượng">
+                            <input type="text" name="product_quantity" value="{{ old('product_quantity') }}" class="form-control" placeholder="Nhập số lượng">
                         </div>
 
                         <div class="form-group">

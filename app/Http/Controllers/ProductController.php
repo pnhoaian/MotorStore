@@ -13,6 +13,7 @@ use App\Models\Rating;
 use App\Models\Customer;
 use App\Models\Product;
 use App\Models\Comment;
+use App\Models\Coupon;
 use File;
 use Toastr;
 
@@ -100,6 +101,19 @@ class ProductController extends Controller
         $product->product_price = $data['product_price'];
         $product->product_price_sale = $data['product_price_sale'];
         $product->product_quantity = $data['product_quantity'];
+        if($product->product_price <= 0 ){
+            Toastr::warning('Số tiền gốc không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('add-product');
+        }elseif($product->product_price_sale <= 0 ){
+            Toastr::warning('Số tiền khuyến mãi không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('add-product');
+        }elseif($product->product_price_sale > $product->product_price){
+            Toastr::warning('Số tiền khuyến mãi không được lớn giá gốc','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('add-product');
+        }elseif($product->product_quantity <= 0 ){
+            Toastr::warning('Số lượng sản phẩm không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+            return Redirect::to('add-product');
+        }
         $product->product_status = $data['product_status'];
         $get_image = $request->file('product_image');
         // đường dẫn lưu hình ảnh đầu tiên vô mục gallery
@@ -236,6 +250,10 @@ class ProductController extends Controller
         $slidermini = Slider::orderby('slider_id','desc')->where('slider_status','1')->where('slider_type',1)->take(3)->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_id','desc')->get();
         
+        //coupon
+        $show_coupon = Coupon::orderby('coupon_id','desc')->where('coupon_status','1')->get();
+
+
         //gallery
 
 
@@ -293,7 +311,7 @@ class ProductController extends Controller
         ->with('all_ds',$all_ds)
         ->with('rating',$rating)
         ->with('gallery',$gallery)
-        
+        ->with('show_coupon',$show_coupon)
         // ->with('customer_name',$customer_name)
         ;
     }
@@ -347,7 +365,7 @@ class ProductController extends Controller
     }
 
     public function list_comment(){
-        $comment = Comment::with('product')->orderBy('comment_status','desc')->get();
+        $comment = Comment::with('product')->orderBy('comment_id','desc')->get();
         return view('admin.comment.list_comment')->with(compact('comment'));
     }
 }

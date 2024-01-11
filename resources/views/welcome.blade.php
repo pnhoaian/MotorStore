@@ -348,7 +348,7 @@
 						<div class="single-widget">
 							<h2>Chính Sách</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="{{URL::to('thanh-toan')}}">Thanh toán</a></li>
+								<li><a href="{{URL::to('bai-viet/22')}}">Thanh toán</a></li>
 								<li><a href="{{URL::to('bao-hanh')}}">Bảo hành - Bảo trì</a></li>
 							</ul>
 						</div>
@@ -545,9 +545,9 @@
 			var _token = $('input[name="_token"]').val();
 
 			//them parseInt(cart_product_qty) >
-			if(parseInt(cart_product_quantity <=0)){
-				alert('Số lượng sản phẩm trong kho không đủ, vui lòng đặt ít hơn ' + cart_product_quantity +' sản phẩm');
-				// alert('Vui lòng nhập so')
+
+				if((cart_product_qty <=0) || cart_product_qty > cart_product_quantity  ){
+				alert('Số lượng sản phẩm đặt hàng không phù hơn, vui lòng thay đổi số lượng ');
 			}else{
 			
 		$.ajax({

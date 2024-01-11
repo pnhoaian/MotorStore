@@ -99,7 +99,7 @@
 										</div>
 										<div class="choose">
 											<ul class="nav nav-pills nav-justified">
-												<li><a href="#"><i class="fa fa-heart"></i>Yêu thích</a></li>
+												<li><a href="#"><i class=""></i></a></li>
 											</ul>
 										</div>
 									</div>
