@@ -368,4 +368,40 @@ class ProductController extends Controller
         $comment = Comment::with('product')->orderBy('comment_id','desc')->get();
         return view('admin.comment.list_comment')->with(compact('comment'));
     }
+
+    public function active_comment($comment_id){
+        $this->AuthLogin();
+        DB::table('tbl_comment')->where('comment_id',$comment_id)->update(['comment_status' =>1]);
+        Toastr::success('Đã hiện thị bình luận','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('list-comment');
+    }
+
+    public function inactive_comment($comment_id){
+        $this->AuthLogin();
+        DB::table('tbl_comment')->where('comment_id',$comment_id)->update(['comment_status' =>0]);
+        Toastr::success('Đã từ chối bình luận','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('list-comment');
+    }
+
+    public function delete_comment($comment_id){
+        $this->AuthLogin();
+        DB::table('tbl_comment')->where('comment_id',$comment_id)->delete();
+        Toastr::success('Đã xóa bình luận!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        return Redirect::to('/list-comment');
+    }
+
+    public function reply_comment(Request $request){
+        $data = $request->all();
+        // $comment = Comment::find($data['comment_id']);
+
+        $comment = new Comment();
+        $comment->comment = $data['comment'];
+        $comment->comment_product_id = $data['comment_product_id'];
+        $comment->comment_parent_comment = $data['comment_id'];
+        $comment->comment_status = 1;
+        $comment->comment_name = 'Quản Trị Viên';
+        $comment->save();
+    }
+    
+
 }

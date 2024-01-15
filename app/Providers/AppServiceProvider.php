@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Post;
 use App\Models\Order;
 use App\Models\Customer;
+use App\Models\OrderDetails;
 use Session;
 use DB;
 
@@ -34,14 +35,20 @@ class AppServiceProvider extends ServiceProvider
 
 
             $productt = Product::all()->count();
-            $product_vieww = Product::orderby('product_view','desc')->take(20)->get();
-            $product_soldd = Product::orderby('product_sold','desc')->take(20)->get();
+            $product_vieww = Product::orderby('product_view','desc')->take(5)->get();
+            $product_soldd = Product::orderby('product_sold','desc')->take(5)->get();
             
             $postt = Post::all()->count();
-            $post_vieww = Post::orderBy('post_view','desc')->take(20)->get();
+            $post_vieww = Post::orderBy('post_view','desc')->take(5)->get();
+
             $orderr = Order::all()->count();
             $customerr = Customer::all()->count();
 
+            $sldonngay = DB::table('tbl_order')->where('order_date','like','2024-01-01')->get();
+            $demdon = $sldonngay->count();
+
+            $slbann = DB::table('tbl_order_details')->where('Order_code','c72b9')->get();
+            $dem = $slbann->count();
         //     $productt = Product::all()->count();
         // $postt = Post::all()->count();
         // $orderr = Order::all()->count();
@@ -65,6 +72,12 @@ class AppServiceProvider extends ServiceProvider
             ->with('orderr',$orderr)
             ->with('customerr',$customerr)
             ->with('product_soldd',$product_soldd)
+            ->with('slbann',$slbann)
+            ->with('sldonngay',$sldonngay)
+            ->with('dem',$dem)
+            ->with('demdon',$demdon)
+            
+            
             ;
 
 

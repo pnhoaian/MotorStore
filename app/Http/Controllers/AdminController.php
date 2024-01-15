@@ -13,6 +13,7 @@ use App\Models\Post;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Admin;
+use App\Models\OrderDetails;
 use Toastr;
 use Carbon\Carbon;
 session_start();
@@ -84,6 +85,10 @@ class AdminController extends Controller
         $post = Post::all()->count();
         $post_view = Post::orderBy('post_view','desc')->take(20)->get();
 
+        $ngayban = DB::table('tbl_order')->where('order_date','like','2024-01-01');
+
+        $slban = OrderDetails::where('Order_details_id','desc')->get();
+
 
         $order = Order::all()->count();
         $customer = Customer::all()->count();
@@ -93,6 +98,7 @@ class AdminController extends Controller
         'visitor_this_month_count','visitor_year_count',
         'product','post','order','customer',
         'product_view','post_view','product_sold',
+        'ngayban','slban'
 
     ));
     }

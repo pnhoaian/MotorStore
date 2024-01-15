@@ -2,7 +2,7 @@
 @section('admin_content')
 
     <div class="row">
-            <h2 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">THỐNG KÊ DOANH SỐ BÁN HÀNG</h2>
+            <h2 class="title_ThongKe" style="text-align: center; margin-bottom: 10px;color: #EE3E38;">THỐNG KÊ DOANH SỐ BÁN HÀNG</h2>
             <form autocomplete="off">
                 @csrf
                 <div class="col-md-2" style="margin-left: 30px">
@@ -26,6 +26,33 @@
                     </p>
             </form>
         </div>
+
+                {{-- 
+        <p style="text-align: center">Tên bài viết | Số lượt xem</p>
+            <ol>
+                
+                    <li>
+                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: #337ab7;white;"> | <span style="color: black"></span></a>
+                    </li>
+               
+            </ol> --}}
+    
+
+    <div class="col-md-4 col-xs-12">
+        
+        <p style="text-align: center"> Ngày bán</p>
+            @foreach ($sldonngay as $key => $ngayban)
+                <p>Ngày bán: {{ $ngayban->order_date }}</p>
+                <p>Mã đơn hàng: {{ $ngayban->order_code }}</p>
+                <p>Tổng số đơn: {{ $demdon }}</p>
+            @endforeach
+
+
+            <p style="text-align: center"> Số lượng bán được</p>
+            @foreach ($slbann as $key=> $sl)
+            <p>Số lượng bán được: {{ $dem }}</p>
+            @endforeach
+    </div>
         
 </div>
 
@@ -36,10 +63,15 @@
 
 <div style="margin-top: 20px ;">
     <div class="col-md-12 col-xs-12">
-        <h3 style="text-align: center">THỐNG KÊ TỔNG QUÁT</h3>
-        <div id="donut"></div>
+        <h3 style="text-align: center;color: #EE3E38;">THỐNG KÊ TỔNG QUÁT</h3>
+        <div id="donut" style="background:blanchedalmond;border-radius: 15px "></div>
     </div>
 </div>
+<div  style="background:#fff;display: table-row;
+z-index: 999;
+background: #fff;" >
+    <li class="a" style="list-style-type: none;width:100%">&nbsp</li> 
+ </div>
 
 
         
@@ -90,38 +122,143 @@
 
 
 
-<div style="margin-top: 20px ;">
-    <div class="col-md-4 col-xs-12">
-        <h3 style="text-align: center">THỐNG KÊ BÀI VIẾT</h3>
+<div style="margin-top: 10px ;">
+    <div class="col-md-12 col-xs-12" style="background: blanchedalmond;padding-top: 10px;padding-bottom: 10px;border-radius: 15px;">
+        <table class="table">
+            <h3 style="text-align: center;color: #EE3E38;">THỐNG KÊ BÀI VIẾT</h3>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên bài viết</th>
+                <th scope="col">Số lượt xem</th>
+              </tr>
+            </thead>
+            <tbody>
+                    @php
+                        $i=0;
+                    @endphp
+                @foreach ($post_vieww as $key=>$post)
+                    @php
+                        $i++;  
+                    @endphp
+                    <tr>
+                        <th scope="row">{{ $i }}</th>
+                        <td><a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: #337ab7;">{{ $post->post_title }}</a></td>
+                        <td style="text-align: center;">{{ $post->post_view }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+          </table>
+    </div>
+    <div  style="background:#fff;display: table-row;
+    z-index: 999;
+    background: #fff;" >
+        <li class="a" style="list-style-type: none;width:100%">&nbsp</li> 
+     </div>
+     
+
+
+<div style="margin-top: 10px;">
+    <div class="col-md-12 col-xs-12" style="background: blanchedalmond;padding-top: 10px;padding-bottom: 10px;border-radius: 15px;">
+        <table class="table">
+            <h3 style="text-align: center;color: #EE3E38;">THỐNG KÊ SẢN PHẨM</h3>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượt xem</th>
+              </tr>
+            </thead>
+            <tbody>
+                    @php
+                        $i=0;
+                    @endphp
+                @foreach ($product_vieww as $key=>$pro)
+                    @php
+                        $i++;  
+                    @endphp
+                    <tr>
+                        <th scope="row">{{ $i }}</th>
+                        <td><a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;white;">{{ $pro->product_name }}</a></td>
+                        <td>{{ $pro->product_view }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+          </table>
+</div>
+<div  style="background:#fff;display: table-row;
+z-index: 999;
+background: #fff;" >
+    <li class="a" style="list-style-type: none;width:100%">&nbsp</li> 
+ </div>
+
+
+
+<div style="margin-top: 10px;">
+    <div class="col-md-12 col-xs-12" style="background: blanchedalmond;padding-top: 10px;padding-bottom: 10px;border-radius: 15px;">
+        <table class="table">
+            <h3 style="text-align: center;color: #EE3E38;">THỐNG KÊ SẢN PHẨM BÁN CHẠY </h3>
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">STT</th>
+                <th scope="col">Tên sản phẩm</th>
+                <th scope="col">Số lượt bán</th>
+              </tr>
+            </thead>
+            <tbody>
+                    @php
+                        $i=0;
+                    @endphp
+                @foreach ($product_soldd as $key=>$pro)
+                    @php
+                        $i++;  
+                    @endphp
+                    <tr>
+                        <th scope="row">{{ $i }}</th>
+                        <td><a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;white;">{{ $pro->product_name }}</a></td>
+                        <td style="text-align: center;">{{ $pro->product_sold }}</td>
+                    </tr>
+                @endforeach
+            </tbody>
+          </table>
+        </div>
+    </div>
+<br>
+        {{-- 
         <p style="text-align: center">Tên bài viết | Số lượt xem</p>
             <ol>
-                @foreach ($post_vieww as $key=>$post)
+                
                     <li>
-                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: white;">{{ $post->post_title }} | <span style="color: black">{{ $post->post_view }}</span></a>
+                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: #337ab7;white;"> | <span style="color: black"></span></a>
                     </li>
-                @endforeach
-            </ol>
-    </div>
+               
+            </ol> --}}
+    
 
-    <div class="col-md-4 col-xs-12">
-        <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM</h3>
-        <p style="text-align: center">Tên sản phẩm | Số lượt xem</p>
-        @foreach ($product_vieww as $key=>$pro)
-        <li>
-            <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: white;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>
-        </li>
-    @endforeach
-    </div>
+    {{-- <div class="col-md-4 col-xs-12">
+        
+        <p style="text-align: center"> | Số lượt xem</p>
+        <ol>
+            @foreach ($product_vieww as $key=>$pro)
+                <li style="color: #337ab7;">
+                    <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>
+                </li>
+            @endforeach
+        </ol>
+    </div> --}}
 
-    <div class="col-md-4 col-xs-12">
+
+    {{-- <div class="col-md-4 col-xs-12">
         <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM BÁN CHẠY </h3>
         <p style="text-align: center">Tên sản phẩm | Số lượt bán</p>
-        @foreach ($product_soldd as $key=>$pro)
-        <li>
-            <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: white;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_sold }}</span></a>
-        </li>
-    @endforeach
-    </div>
+        <ol>
+            @foreach ($product_soldd as $key=>$pro)
+                <li style="color: #337ab7;">
+                    <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;;">  | <span style="color: black">{{ $pro->product_sold }}</span></a>
+                </li>
+            @endforeach
+        </ol>
+    </div> --}}
     
 
 </div>

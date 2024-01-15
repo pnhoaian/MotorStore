@@ -3,16 +3,21 @@
 @section('slider')
 	@include("pages.include.slider")
 @endsection()
-												<!--Lọc sản phẩm -->
-													<div class="filter-sort__title" >Chọn theo tab danh mục sản phẩm</div>
-													<div class="filter-wrapper" style="display:flex;">
-														@foreach ($category as $key =>$cate )
-														<button style="align-items: center;background: #f3f4f6;border: 1px solid #e5e7eb;border-radius: 10px;color: #444;cursor: pointer;display: flex;font-size: 12px;height: 34px;margin: 0 10px 10px 0;padding: 5px 10px;white-space: nowrap;"
-															class="tabs_pro" data-id="{{ $cate->category_id }}">
-																{{ $cate->category_name }}
-														@endforeach
-														</button>
-													</div>											
+
+
+<label for="amount" style="margin-left:20px; margin-top: 10px">Lọc theo danh mục sản phẩm:</label>
+<form>
+	@csrf
+	<select name="sortbrand" id="sortbrand" class="form-control"
+		style="font-family: -apple-system, system-ui, BlinkMacSystemFont;border-radius: 0px;margin-left: 20px;color: #000;width: 222px;border: 2px solid #dddddd;">
+		<option value="{{ Request::url() }}?sort_by=none">----- Chọn -----</option>
+		<option value="{{ Request::url() }}?sort_by=bo_cap_sac">----- Bộ cáp sạc -----</option>
+		<option value="{{ Request::url() }}?sort_by=sac_khong_day">----- Sạc không dây -----</option>
+		<option value="{{ Request::url() }}?sort_by=sac_du_phong">----- Sạc dự phòng -----</option>
+		<option value="{{ Request::url() }}?sort_by=cap_sac">----- Dây sạc | Cáp | Hub -----</option>
+		<option value="{{ Request::url() }}?sort_by=cu_sac">----- Adapter | Củ sạc -----</option>
+	</select>
+</form>									
 													
 <div class="features_items">
                         <!--       features_items            -->

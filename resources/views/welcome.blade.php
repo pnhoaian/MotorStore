@@ -56,7 +56,7 @@
 						</div>
 					</div>
 
-<?php 
+								<?php 
 									$customer_id = Session::get('customer_id');
 									if($customer_id!=NULL){
 
@@ -348,8 +348,8 @@
 						<div class="single-widget">
 							<h2>Chính Sách</h2>
 							<ul class="nav nav-pills nav-stacked">
-								<li><a href="{{URL::to('bai-viet/22')}}">Thanh toán</a></li>
-								<li><a href="{{URL::to('bao-hanh')}}">Bảo hành - Bảo trì</a></li>
+								<li><a href="{{URL::to('bai-viet/23')}}">Thanh toán</a></li>
+								<li><a href="{{URL::to('bai-viet/22')}}">Bảo hành - Bảo trì</a></li>
 							</ul>
 						</div>
 					</div>
@@ -423,6 +423,36 @@
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0"
         nonce="ObII9EbG">
 	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sort').on('change', function() {
+				var url = $(this).val();
+				// alert(url);
+				if (url) {
+					window.location = url;
+				}
+				return false;
+			});
+		});
+	</script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#sortbrand').on('change', function() {
+				var url = $(this).val();
+				// alert(url);
+				if (url) {
+					window.location = url;
+				}
+				return false;
+			});
+		});
+	</script>
+
+
+
+
 
 	 <!--TV s/d Toast-->
 	<script src="{{asset('public/frontend/js/toastr.min.js')}}"></script> 
@@ -546,7 +576,7 @@
 
 			//them parseInt(cart_product_qty) >
 
-				if((cart_product_qty <=0) || cart_product_qty > cart_product_quantity  ){
+				if((cart_product_qty <=0) || cart_product_qty > cart_product_quantity){
 				alert('Số lượng sản phẩm đặt hàng không phù hơn, vui lòng thay đổi số lượng ');
 			}else{
 			
@@ -771,7 +801,7 @@
 </script>
 
 	{{-- Lọc giá --}}
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
 
             $("#slider-range").slider({
@@ -795,20 +825,9 @@
             $("#amount_end").val($("#slider-range").slider("values", 1)).simpleMoneyFormat();
 
         });
-    </script>
+    </script> --}}
 	{{-- lọc Sp theo --}}
-    <script type="text/javascript">
-        $(document).ready(function() {
-            $('#sort').on('change', function() {
-                var url = $(this).val();
-                // alert(url);
-                if (url) {
-                    window.location = url;
-                }
-                return false;
-            });
-        });
-    </script>
+	
 
 	{{-- lọc Sp theo danh mục --}}
 	<script type="text/javascript">

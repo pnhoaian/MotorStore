@@ -521,4 +521,12 @@ class OrderController extends Controller
 
         return $output;
     }
+
+    // public function delete_order($order_code){
+    //     $this->AuthLogin();
+    //     DB::table('tbl_order')->where('order_code',$order_code)->delete();
+    //     Toastr::success('Đã xóa đơn hàng!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+    //     return Redirect::to('/manage-order');
+    // }
+    
 }

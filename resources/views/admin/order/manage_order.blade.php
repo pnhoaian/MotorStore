@@ -18,6 +18,7 @@
               <th>Mã đơn hàng</th>
               <th>Thời gian đặt</th>
               <th>Tình trạng đơn hàng</th>
+              <th>Lý do hủy đơn</th>
               <th>Tác vụ</th>
               {{-- <th>Ngày thêm</th> --}}
             </tr>
@@ -64,12 +65,15 @@
 
 
               </span></td>
+              <td>
+                {{ $ord->order_destroy }}
+              </td>
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td>
                 <a href="{{URL::to('/view-order/'.$ord->order_code)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-eye text-success text-active"></i>
 
-                {{-- <a onclick="return confirm('Xác nhận xóa Đơn Hàng này?')" href="{{URL::to('/delete-order/'.$ord->order_id)}}" class="active styling" ui-toggle-class=""> 
+                {{-- <a onclick="return confirm('Xác nhận xóa Đơn Hàng này?')" href="{{URL::to('/delete-order/'.$ord->order_code)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a> --}}
               </td>
               

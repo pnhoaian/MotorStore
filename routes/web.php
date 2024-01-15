@@ -91,13 +91,17 @@ Route::get('/history', [OrderController::class, 'history']);
 Route::get('/view-history-order/{order_code}', [OrderController::class, 'view_history_order']);
 //update tình trạng đơn hàng
 Route::post('/update-order-qty', [OrderController::class, 'update_order_qty']);
+
 //xóa đơn
 Route::get('/delete-order/{order_code}', [OrderController::class, 'delete_order']);
+
 //cập nhật số lượng sản phẩm view đơn hàng
 Route::post('/update-qty', [OrderController::class, 'update_qty']);
 
 //hủy đơn hàng
 Route::post('/huy-don-hang', [OrderController::class, 'huy_don_hang']);
+
+
 
 //--**************************************************************  Intro **********************************************************
 //// ***FE: Page Liên hệ
@@ -217,9 +221,16 @@ Route::post('/send-comment', [ProductController::class, 'send_comment']);
 //BE list comment
 Route::get('/list-comment', [ProductController::class, 'list_comment']);
 
+//- Update Comment status
+Route::get('/active-comment/{comment_id}', [ProductController::class, 'active_comment']);
+Route::get('/inactive-comment/{comment_id}', [ProductController::class, 'inactive_comment']);
+Route::get('/delete-comment/{comment_id}', [ProductController::class, 'delete_comment']);
 
 //Rating
 Route::post('/insert-rating', [ProductController::class, 'insert_rating']);
+Route::post('/reply-comment', [ProductController::class, 'reply_comment']);
+
+
 
 //----------------------------------************ Gallery Product ************------------------------------------------ 
 Route::get('/add-gallery/{product_id}', [GalleryController::class, 'add_gallery']);

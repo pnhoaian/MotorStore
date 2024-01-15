@@ -26,9 +26,9 @@ class HomeController extends Controller
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
         
-        $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(5)->get();
+        $all_product = DB::table('tbl_product')->where('product_status','1')->orderby('product_id','desc')->limit(10)->get();
 
-        $product_xem = DB::table('tbl_product')->where('product_status','1')->orderby('product_view','desc')->limit(5)->get();
+        $product_xem = DB::table('tbl_product')->where('product_status','1')->orderby('product_view','desc')->limit(10)->get();
         
         $product_ban = DB::table('tbl_product')->where('product_status','1')->orderby('product_sold','desc')->limit(5)->get();
         
@@ -78,6 +78,12 @@ class HomeController extends Controller
         ->with('search_product',$search_product)
         ->with('search_product_count',$search_product_count);
     }
+
+
+
+
+
+
     public function autocomplete_ajax(Request $request){
         $data = $request->all();
 

@@ -41,8 +41,9 @@
               <td>{{ $comm->comment }}
                 
 
-                <br><textarea class="form-control reply-comment" rows="4" style=""></textarea>
-                    <br><button class="btn btn-default btn-xs btn-reply">Trả lời bình luận</button>
+                <br><textarea row="5" class="form-control reply_comment_{{ $comm->comment_id }}"></textarea>
+                <br /><button class="btn-reply-comment" data-comment_id="{{ $comm->comment_id }}"
+                    data-product_id="{{ $comm->comment_product_id }}">Trả lời bình luận</button>
               </td>
               <td>{{ $comm->comment_date }}</td>
               {{---- status  ----}}
@@ -74,7 +75,7 @@
                 {{-- <a href="{{URL::to('/edit-comment/'.$comm->comment_id )}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i> --}}
                   
-                <a onclick="return confirm('Xác nhận xóa Bình luận này?')" href="{{URL::to('/delete-product/'.$comm->comment_id )}}" class="active styling" ui-toggle-class=""> 
+                <a onclick="return confirm('Xác nhận xóa Bình luận này?')" href="{{URL::to('/delete-comment/'.$comm->comment_id )}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

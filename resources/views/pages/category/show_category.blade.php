@@ -3,7 +3,10 @@
 @section('slider')
 	@include("pages.include.slider")
 @endsection()
+
+
 <div class="features_items">
+	
                         <!--       features_items            -->
 						@foreach ($category_name as $key => $cate_name)
 						<h2 class="title text-center">{{ $cate_name->category_name }} </h2>
@@ -27,43 +30,37 @@
 							</div>
 				{{-- ***************** End Bộ lọc ***************** --}}
 
-							<div class="col-md-4" style="margin-left:-70px;margin-top: 1px;">
-								<label for="amount">Lọc giá:</label>
-								<form>
-									<div id="slider-range"></div>
-				
-									<style type="text/css">
-										.style-range p {
-											float: left;
-										}
-									</style>
-				
-									<div class="style-range">
-										<div style="display:flex">
-											<p><input type="text" id="amount_start" readonly
-													style="border:0; width:85px;color:#000000; font-weight:bold;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
-											</p>
-											<p>-</p>
-											<p style="margin-left:30px"><input type="text" id="amount_end" readonly
-													style="border:0; color:#000000; font-weight:bold;width:105px;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
-											</p>
-										</div>
-									</div>
+				{{-- <div class="col-md-4" style="margin-left:-70px;margin-top: 1px;">
+					<label for="amount">Lọc giá:</label>
+					<form>
+						<div id="slider-range"></div>
+	
+	
+						<div class="style-range">
+							<div style="display:flex">
+								<p><input type="text" id="amount_start" readonly
+										style="border:0; width:85px;color:#000000; font-weight:bold;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
+								</p>
+								<p>-</p>
+								<p style="margin-left:30px"><input type="text" id="amount_end" readonly
+										style="border:0; color:#000000; font-weight:bold;width:105px;font-family: -apple-system, system-ui, BlinkMacSystemFont;">
+								</p>
 							</div>
-							<input type="hidden" name="start_price" id="start_price">
-				
-							<input type="hidden" name="end_price" id="end_price">
-				
-				
-							<br>
-							<input type="submit" name="filter_price" style="border:1px solid #2366b5;border-radius:0px;height:34px"
-								value="Xem kết quả" class="btn btn-sm btn-default">
-							</form>
 						</div>
-				
-				
-				
-					</div>
+				</div>
+
+				<input type="hidden" name="start_price" id="start_price">
+	
+				<input type="hidden" name="end_price" id="end_price">
+	
+	
+				<br>
+				<input type="submit" name="filter_price" style="border:1px solid #2366b5;border-radius:0px;height:34px"
+					value="Xem kết quả" class="btn btn-sm btn-default">
+				</form> --}}
+
+			</div>
+</div>
 
 						@foreach ($category_by_id as $key => $product)		
 							{{-- <a href="{{URL::to('/chi-tiet-san-pham/'.$product->product_id)}}"> --}}

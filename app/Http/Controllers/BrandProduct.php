@@ -197,14 +197,38 @@ class BrandProduct extends Controller
         $brand_product = DB::table('tbl_brand')
         ->where('brand_status','1')->orderby('brand_id','desc')->get();
         
-        $brand_by_id = DB::table('tbl_product')->join('tbl_brand','tbl_product.brand_id','=','tbl_brand.brand_id')
-        ->where('tbl_product.brand_id',$brand_id)->get();
+
 
         $brand_name = DB::table('tbl_brand')
         ->where('tbl_brand.brand_id',$brand_id)->limit(1)->get();
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->get();
 
         // $cate_pro_tabs = CateProduct::where('category_parent','<>',0)->orderBy('category_order','asc')->get();
+
+        $brand_by_id = Brand::where('brand_id',$brand_id)->get();
+        foreach ($brand_by_id as $key => $brand) {
+            $brand_id = $brand->brand_id;
+        }
+
+        if(isset($_GET['sort_by'])){
+            $sort_by = $_GET['sort_by'];
+
+            if($sort_by=='bo_cap_sac'){
+                $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->where('category_id',11)->orderBy('product_id','DESC')->paginate(10)->appends(request()->query());
+            }elseif($sort_by=='sac_khong_day'){
+                $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->where('category_id',10)->orderBy('product_id','desc')->paginate(10)->appends(request()->query());
+
+            }elseif($sort_by=='sac_du_phong'){
+                $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->where('category_id',9)->orderBy('product_id','DESC')->paginate(10)->appends(request()->query());
+            }elseif($sort_by=='cap_sac'){
+                $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->where('category_id',8)->orderBy('product_id','desc')->paginate(10)->appends(request()->query());
+            }elseif($sort_by=='cu_sac'){
+                $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->where('category_id',7)->orderBy('product_id','desc')->paginate(10)->appends(request()->query());
+            }
+        }else {
+            $brand_by_id = Product::with('brand')->where('brand_id',$brand_id)->where('product_status',1)->orderBy('product_id','DESC')->paginate(10);
+        }
+
 
         return view('pages.brand.show_brand')
         ->with('category', $cate_product)
@@ -214,6 +238,7 @@ class BrandProduct extends Controller
         ->with('category_post',$category_post)
         ->with('slider',$slider)
         ->with('slidermini',$slidermini)
+        
         // ->with('cate_pro_tabs',$cate_pro_tabs);
         ;
     }
