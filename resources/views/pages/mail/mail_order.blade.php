@@ -75,10 +75,24 @@
                             @else
 
                             <strong style="color: #FFF;text-decoration: text-transform: uppercase;">
-                                SHIP COD: Thanh toán nhận hàng
+                                Tiền mặt
                             @endif
                         </strong>
                     </p>
+
+                    {{-- // --}}
+                    <p>
+                        Hình thức nhận hàng:  <strong style="color: #FFF;text-decoration: text-transform: uppercase;">
+                            @if($shipping_array['shipping_method_receive']=='0')
+                               Nhận trực tiếp tại cửa hàng
+                            @else
+
+                            <strong style="color: #FFF;text-decoration: text-transform: uppercase;">
+                                Giao hàng tận nơi
+                            @endif
+                        </strong>
+                    </p>
+                    {{-- // --}}
                     <p style="color: #FFF">Nếu cần thay đổi thông tin nhận hàng, Quý khách vui lòng liên hệ với Hoài An Store để được đội ngũ nhân viên hỗ trợ tư vấn</p>
                     <h3 style="color: #000; text-transform: uppercase">CHI TIẾT ĐƠN HÀNG</h3>
                     <table class="table table-striped" style="border:1px">
@@ -137,7 +151,7 @@
                         </p>
                         
                         <p>Phí vận chuyển:  
-                            @if ( $total > 500000 )
+                            @if ( $total > 500000 || $shipping_array['shipping_method_receive']=='0')
                             0 VNĐ
                             @php                          
                                 $fee = 0;                                                   

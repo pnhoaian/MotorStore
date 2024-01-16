@@ -78,7 +78,9 @@
 
                 @endforeach
                     <tr>
-
+                        <td>
+                            <li>Nhận trực tiếp tại cửa hàng hoặc mua hàng với giá đơn >500,000đ Quý khách sẽ được miễn phí ship</li>
+                        </td>
                         <td><input type="submit" value="Cập Nhật giỏ hàng" name="update-qty" class="check_out btn btn-default btn-sm"></td>
                         <td>
                             <a class="btn btn-default check_out" href="{{URL::to('/del-all-product')}}">Xóa tất cả</a>
@@ -142,8 +144,8 @@
                         }
                         
                     @endphp
-
-                        <li>Phí vận chuyển: 
+{{-- || $data['shipping_method_receive'] =='0' --}}
+                        {{-- <li>Phí vận chuyển: 
                             @if ( $total_after > 500000 )
                                 0đ
                                 @php                          
@@ -151,24 +153,29 @@
                                 @endphp
                             @else
                                 20.000 VNĐ
+                                <p style="color: #0213B0; font-style: italic">* 0đ nếu nhận trực tiếp tại cửa hàng</p>
                                 @php
                                     $fee = 20000;                     
                                 @endphp
                             @endif
-                        </li>
+                        </li> --}}
 
-                        <li style="color: #D0021B;">Tổng thanh toán:
+                        <li style="color: #D0021B;">Tổng thanh toán chưa bao gồm phí vận chuyển 20k:
+                            <p></p>
                             @php
                                 if ( Session::get('coupon')) {
                                     $total_after = $total_after_coupon;
-                                    $total_after = $total_after + $fee;
+                                    // $total_after = $total_after + $fee;
+                                    $total_after = $total_after ;
                                     if($total_after < 0){
                                         $total_after = 0;
                                     }
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 } elseif ( !Session::get('coupon')) {
                                     $total_after = $total;
-                                    echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
+                                    echo number_format($total_after , 0, ',', '.') . ' VNĐ';
+                                    
+                                    // echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
                                 }
 
                             @endphp

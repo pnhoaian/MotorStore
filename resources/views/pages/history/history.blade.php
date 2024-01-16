@@ -74,7 +74,7 @@
 
               {{-- <td><span class="text-ellipsis">10/07/2023</span></td> --}}
               <td style="margin-left: 70px">
-                @if($ord->order_status != 2)
+                @if($ord->order_status == 1)
                                     <!-- Trigger the modal with a button -->
                    <p><button type="button" class="btn btn-danger" data-toggle="modal" data-target="#huydon">Hủy đơn hàng</button></p>
                   @endif

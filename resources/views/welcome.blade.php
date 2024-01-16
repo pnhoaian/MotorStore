@@ -696,42 +696,44 @@
 			// if (shipping_name == '' || shipping_phone == '' || shipping_address == '') {
 			//     alert('Chưa nhập thông tin yêu cầu');
 			// }
+			if (confirm('Xác nhận đặt hàng?')) {
+				$.ajax({
+					url: '{{ url('/confirm-order') }}',
+					method: 'POST',
+					data: {
+						shipping_email: shipping_email,
+						shipping_name: shipping_name,
+						shipping_phone: shipping_phone,
+						shipping_address: shipping_address,
+						shipping_note: shipping_note,
+						_token: _token,
+						order_coupon: order_coupon,
+						shipping_method_pay: shipping_method_pay,
+						shipping_method_receive: shipping_method_receive
+					},
+					success: function() {
+						alert('Đặt hàng thành công, chi tiết đơn đặt hàng sẽ được gửi qua mail của Quý khách');
+						if (shipping_method_pay == 0) {
+							window.location.href =
+								"{{ url('/checkout') }}";
+						} else {
+							window.location.href =
+								"{{ url('/gioi-thieu') }}";
+						}
 
-			$.ajax({
-				url: '{{ url('/confirm-order') }}',
-				method: 'POST',
-				data: {
-					shipping_email: shipping_email,
-					shipping_name: shipping_name,
-					shipping_phone: shipping_phone,
-					shipping_address: shipping_address,
-					shipping_note: shipping_note,
-					_token: _token,
-					order_coupon: order_coupon,
-					shipping_method_pay: shipping_method_pay,
-					shipping_method_receive: shipping_method_receive
-				},
-				success: function() {
-					if (shipping_method_pay == 0) {
-						window.location.href =
-							"{{ url('/checkout') }}";
-					} else {
-						window.location.href =
-							"{{ url('/gioi-thieu') }}";
+					},
+					error: function(error) {
+						var formErr = error.responseJSON.errors;
+						var str = ' <ul>';
+						for (var err in formErr) {
+							str += '<li> ' + formErr[err][0] +
+								'</li>';
+						}
+						str += '</ul>';
+						$('#form-errors').html(str);
 					}
-
-				},
-				error: function(error) {
-					var formErr = error.responseJSON.errors;
-					var str = ' <ul>';
-					for (var err in formErr) {
-						str += '<li> ' + formErr[err][0] +
-							'</li>';
-					}
-					str += '</ul>';
-					$('#form-errors').html(str);
-				}
-			});
+				});
+			}
 
 		});
 

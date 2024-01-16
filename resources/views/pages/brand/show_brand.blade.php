@@ -17,7 +17,11 @@
 		<option value="{{ Request::url() }}?sort_by=cap_sac">----- Dây sạc | Cáp | Hub -----</option>
 		<option value="{{ Request::url() }}?sort_by=cu_sac">----- Adapter | Củ sạc -----</option>
 	</select>
-</form>									
+</form>	
+
+{{-- <div>
+	<p>Số sản phẩm:  </p>
+</div> --}}
 													
 <div class="features_items">
                         <!--       features_items            -->
@@ -31,7 +35,7 @@
 									<div class="product-image-wrapper">
 										<div class="single-products">
 												<div class="productinfo text-center">
-													<form style="height: 386px;">
+													<form style="height: 390px;">
 														@csrf
 														<input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
 														<input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
@@ -102,11 +106,11 @@
 													</form>
 												</div>
 										</div>
-										<div class="choose">
+										{{-- <div class="choose">
 											<ul class="nav nav-pills nav-justified">
 												<li><a href="#"><i class=""></i></a></li>
 											</ul>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 						@endforeach

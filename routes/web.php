@@ -145,8 +145,10 @@ Route::post('/register-admin-account', [AdminController::class, 'register_admin_
 
 //Thống kê
 Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);
+Route::post('/days-order', [AdminController::class, 'days_order']);
+Route::post('/dashboard-filter', [AdminController::class, 'dashboard_filter']);
 
- 
+
 //// ************************************************** Bài viết  *******************************************************
 Route::get('/danh-muc-bai-viet/{post_slug}', [PostController::class, 'danh_muc_bai_viet']);
 Route::get('/bai-viet/{post_slug}', [PostController::class, 'bai_viet']);

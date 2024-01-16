@@ -70,7 +70,7 @@
 										<div class="product-image-wrapper">
 											<div class="single-products">
 													<div class="productinfo text-center">
-														<form style="height: 386px;">
+														<form style="height: 390px;">
 															@csrf
 															<input type="hidden" value="{{$product->product_id}}" class="cart_product_id_{{$product->product_id}}">
 															<input type="hidden" value="{{$product->product_name}}" class="cart_product_name_{{$product->product_id}}">
@@ -141,11 +141,7 @@
 														</form>
 													</div>
 											</div>
-											<div class="choose">
-												<ul class="nav nav-pills nav-justified">
-													<li><a href="#"><i class=""></i></a></li>
-												</ul>
-											</div>
+
 										</div>
 									</div>
 						@endforeach

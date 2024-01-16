@@ -95,7 +95,8 @@ class CartController extends Controller
     //Đóng mới thêm s/d
     }
     }
-    //gio-hang
+
+    //trang gio-hang
     public function show_cart(Request $request){
         $slider = Slider::orderby('slider_id','desc')->where('slider_status','1')->take(4)->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_id','desc')->get();

@@ -42,6 +42,11 @@
 <script src="{{asset('public/backend/js/jquery2.0.3.min.js')}}"></script>
 <script src="{{asset('public/backend/js/raphael-min.js')}}"></script>
 <script src="{{asset('public/backend/js/morris.js')}}"></script>
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 <!-- //thư viện Phân trang -->
 <script src="{{asset('public/backend/js/jquery.dataTables.min.js')}}"></script>
 
@@ -298,6 +303,8 @@
 <script src="{{ asset('public/backend/js/morris.min.js') }}"></script>
 <script src="{{ asset('public/backend/js/raphael-min.js') }}"></script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
 <!--Hiện thị thông báo-->
 {!! Toastr::message() !!}
 
@@ -327,19 +334,99 @@
             },
             // dataType:"JSON",
             success: function(data) {
-
                 alert('Cập nhật số lượng thành công');
-
                 location.reload();
-
             }
         });
 
     });
 </script>
 
+<!-- Biểu đồ thống kế doanh số -->
+<script type="text/javascript">
+    $(document).ready(function() {
 
+        // new Morris.Bar({
+        //     element: 'chart',
+        //     data: [
+        //         { year: '2008', value: 20 },
+        //         { year: '2009', value: 10 },
+        //         { year: '2010', value: 5 },
+        //         { year: '2011', value: 5 },
+        //         { year: '2012', value: 20 }
+        //     ],
+        //     xkey: 'year',
+        //     ykeys: ['value'],
+        //     labels: ['Value']
+        // });
 
+        chart30daysorder();
+
+        var chart = new Morris.Bar({
+            element: 'chart',
+            barColors: ['#37D2FF', '#5854F7'],
+            lineColors: ['#819c79', '#fc8710', '#ff6541', '#a4add3', '#766b56'],
+            gridTextColor: ['#000'],
+            parseTime: false,
+            hideHover: 'auto',
+            xkey: 'period',
+            ykeys: ['order', 'sales', 'profit', 'quantity'],
+            labels: ['Đơn hàng', 'Doanh số', 'Lợi nhuận', 'Số lượng']
+        });
+
+        function chart30daysorder() {
+            $.ajax({
+                url: '{{ url('/days-order') }}',
+                method: "POST",
+                dataType: "JSON",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function(data) {
+                    chart.setData(data);
+                }
+            });
+        }
+        $('.dashboard-filter').change(function() {
+            var dashboard_value = $(this).val();
+            // .val() => lấy giá trị select ngày
+            var _token = $('input[name="_token"]').val();
+            // alert(dashboard_value);
+            $.ajax({
+                url: '{{ url('/dashboard-filter') }}',
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    dashboard_value: dashboard_value,
+                    _token: _token
+                },
+                success: function(data) {
+                    chart.setData(data);
+                }
+            });
+        });
+
+        $('#btn-dashboard-filter').click(function() {
+            var _token = $('input[name="_token"]').val();
+            var from_date = $('#datepicker').val();
+            var to_date = $('#datepicker2').val();
+            $.ajax({
+                url: '{{ url('/filter-by-date') }}',
+                method: "POST",
+                dataType: "JSON",
+                data: {
+                    from_date: from_date,
+                    to_date: to_date,
+                    _token: _token
+                },
+                success: function(data) {
+                    chart.setData(data);
+                }
+            });
+        });
+
+    });
+</script>
 
 <!-- Reply Comment -->
 <script type="text/javascript">
@@ -512,49 +599,7 @@
     } );
 </script>
 
-<script type="text/javascript">
-    $(document).ready(function){
-        chart30daysorder(){
-            var chart = new Morris.Bar({
-                element: 'myFirstchart',
-                lineColors:['#819C79','#fc8710','#FF6541','#A4ADD3','#'],
-                pointFillColors: ['black'],
-                fillOpacity:0.6,
-                hideHover:'auto',
-                parseTime: false,
-                xkey: 'period',
-                ykeys:['order','sales','profit','quantity'],
-                behaveLikeLine: true,
-                labels: ['đơn hàng','doanh số','lợi nhuận','số lượng']
-            });
-            function chart30daysorder(){
 
-            }
-
-
-            $('.dashboard-filter').change(function(){
-
-            });
-
-            $('#btn-dashboard-filter').click(function(){
-                var _token = $('input[name="_token"]').val();
-                var from_date = $('#datepicker').val();
-                var to_date = $('#datepicker2').val();
-                
-                $.ajax({
-                    url:"{{ url('/filter-by-date') }}",
-                    method:"POST",
-                    dateType:"JSON",
-                    data:{form_date:form_date,to_date:to_date,_token:_token},
-                    success:function(data)
-                    {
-                        chart.setData(data);
-                    }
-                });
-            });
-        }
-    }
-</script>
 
 <!--TV s/d Ckeditor-->
 <script>

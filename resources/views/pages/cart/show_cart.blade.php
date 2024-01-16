@@ -139,34 +139,37 @@
                             $total_after = $total;
                         }
                     @endphp
+{{-- || $data['shipping_method_receive'] =='0' --}}
 
-
-                    <li>Phí vận chuyển: 
+                    {{-- <li>Phí vận chuyển: 
                         @if ( $total_after > 500000 )
                             0đ
                             @php                          
                                  $fee = 0;                                                   
                              @endphp
                         @else
-                             20.000 VNĐ
+                             20.000 VNĐ 
+                             <p style="color: #0213B0; font-style: italic">* 0đ nếu nhận trực tiếp tại cửa hàng</p>
                              @php
                                 $fee = 20000;                     
                               @endphp
                         @endif
-                    </li>
+                    </li> --}}
 
                         <li style="color: #D0021B;">Tổng thanh toán:
                             @php
                                 if ( Session::get('coupon')) {
                                     $total_after = $total_after_coupon;
-                                    $total_after = $total_after + $fee;
+                                    // $total_after = $total_after + $fee;
+                                    $total_after = $total_after;
                                     if($total_after < 0){
                                         $total_after = 0;
                                     }
                                     echo number_format($total_after, 0, ',', '.') . ' VNĐ';
                                 } elseif ( !Session::get('coupon')) {
                                     $total_after = $total;
-                                    echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
+                                    echo number_format($total_after, 0, ',', '.') . ' VNĐ';
+                                    // echo number_format($total_after + $fee, 0, ',', '.') . ' VNĐ';
                                 }
 
                             @endphp
@@ -176,7 +179,7 @@
                     <tr >
                         <td colspan="5" style="text-align: right">
                             @if (Session::get('customer_id'))
-                            <a class="btn btn-default check_out " href="{{ url('/checkout') }}">Thanh Toán</a>
+                            <a class="btn btn-default check_out " href="{{ url('/checkout') }}">Kiểm tra thông tin nhận hàng</a>
                             @else
                             <a class="btn btn-default check_out " href="{{ url('/login') }}">Thanh Toán</a>
                             @endif

@@ -44,20 +44,9 @@ class AppServiceProvider extends ServiceProvider
             $orderr = Order::all()->count();
             $customerr = Customer::all()->count();
 
-            $sldonngay = DB::table('tbl_order')->where('order_date','like','2024-01-01')->get();
-            $demdon = $sldonngay->count();
+            $sldon = DB::table('tbl_order')->where('order_date','like','2024')->get();
+            $demsldon = $sldon->count();
 
-            $slbann = DB::table('tbl_order_details')->where('Order_code','c72b9')->get();
-            $dem = $slbann->count();
-        //     $productt = Product::all()->count();
-        // $postt = Post::all()->count();
-        // $orderr = Order::all()->count();
-        // $customerr = Customer::all()->count();
-        // $adminn = Admin::all()->count();
-        // $thongtinlienhe = Contact::where('info_id',1)->get();
-        // $productbanchay = Product::orderBy('product_sold','DESC')->take(10)->get();
-        // $productkhongbanduoc = Product::orderBy('product_sold','ASC')->take(10)->get();
-        // $customerrrr = Customer::find(Session::get('customer_id'));
 
             $view->with('min_price',$min_price)
             ->with('max_price',$max_price)
@@ -72,10 +61,9 @@ class AppServiceProvider extends ServiceProvider
             ->with('orderr',$orderr)
             ->with('customerr',$customerr)
             ->with('product_soldd',$product_soldd)
-            ->with('slbann',$slbann)
-            ->with('sldonngay',$sldonngay)
-            ->with('dem',$dem)
-            ->with('demdon',$demdon)
+
+            ->with('sldon',$sldon)
+            ->with('demsldon',$demsldon)
             
             
             ;

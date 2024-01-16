@@ -62,6 +62,7 @@
                             <th style="width:120px; line-height:30px">Số điện thoại</th>
                             <th style="width:200px; line-height:30px; text-align: center">Email</th>
                             <th style="line-height:30px; text-align: center" >Phương thức thanh toán</th>
+                            <th style="line-height:30px; text-align: center" >Phương thức nhận hàng</th>
                             <th style="width:180px; line-height:30px">Ghi chú</th>
                         </tr>
                     </thead>
@@ -75,11 +76,21 @@
 
                             <td style="text-align: center">
                                 @if ($shipping->shipping_method_pay == 0)
-                                    Chuyển khoản
-                                @else
                                     Tiền mặt
+                                @else
+                                    Chuyển khoản
                                 @endif
                             </td>
+
+                         {{-- // --}}
+                        <td style="text-align: center">
+                            @if ($shipping->shipping_method_receive == 0)
+                                Nhận tại cửa hàng
+                            @else
+                                Giao hàng tận nơi
+                            @endif
+                        </td>
+                        {{-- // --}}
 
                             <td>{{ $shipping->shipping_note }}</td>
                         </tr>
@@ -210,7 +221,7 @@
                     <td>
                         Phí ship: 
 
-                        @if ( $total > 500000 )
+                        @if ( $total > 500000 || $shipping->shipping_method_receive == '0')
                         0đ
                         @php                          
                             $fee = 0;                                                   

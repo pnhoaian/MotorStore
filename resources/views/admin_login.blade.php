@@ -61,7 +61,7 @@
 		
 </div>
 </div>
-<div style="text-align: center ;color:white">
+<div style="text-align: center ;color:#002795">
 	<p>&copy; 2023 All rights reserved | Design by <a href="#">Hoài An Store</a></p>
 </div>
 <script src="{{asset('public/backend/js/bootstrap.js')}}"></script>

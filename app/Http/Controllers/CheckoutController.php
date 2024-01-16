@@ -257,11 +257,6 @@ class CheckoutController extends Controller
 
             //$coupon_mail_method = $coupon->coupon_condition;
             //$coupon_mail_number = $coupon->coupon_number;
-
-
-
-
-            
             
          );
         

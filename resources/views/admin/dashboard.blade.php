@@ -1,65 +1,56 @@
 @extends('admin_layout')
 @section('admin_content')
 
-    <div class="row">
-            <h2 class="title_ThongKe" style="text-align: center; margin-bottom: 10px;color: #EE3E38;">THỐNG KÊ DOANH SỐ BÁN HÀNG</h2>
-            <form autocomplete="off">
-                @csrf
-                <div class="col-md-2" style="margin-left: 30px">
-                    <p>Từ ngày: <input type="text" id="datepicker" class="form-control"></p>
-                    <input type="button" id="btn-dashboard-filter" class="btn btn-primary btn-sm" value="Lọc Kết quả">
-                </div>
-                <div class="col-md-2" style="margin-left: 30px">
-                    <p>Đến ngày: <input type="text" id="datepicker2" class="form-control"></p>
-                </div>
+<div class="row" style="background: blanchedalmond;padding: 10px;border: 1px solid #eff1f4; margin:10px; border-radius: 10px">
+    <h3 style="text-align: center;color: #EE3E38; margin-bottom: 15px">THỐNG KÊ DOANH SỐ BÁN HÀNG</h3>
 
-                <div class="col-md-2">
-                    <p>
-                        Lọc theo: 
-                        <select class="dashboard-filter form-control">
-                            <option>----- Chọn -----</option>
-                            <option value="7ngay">7 Ngày qua</option>
-                            <option value="thangtruoc">Tháng trước</option>
-                            <option value="thangnay">Tháng này</option>
-                            <option value="365ngayqua">365 Ngày qua</option>
-                        </select>
-                    </p>
-            </form>
+    <form autocomplete="off">
+        @csrf
+        <div class="col-md-3" style="margin-left: 12px;">
+            <p style="display: flex"><label style="margin-right: 5px;
+                line-height: 28px;">Từ
+                    ngày:</label> <input type="text" id="datepicker" style="width:65%;border:1px solid #000"
+                    class="form-control"></p>
         </div>
+        <div class="col-md-3" style="margin-left:-30px">
 
-                {{-- 
-        <p style="text-align: center">Tên bài viết | Số lượt xem</p>
-            <ol>
-                
-                    <li>
-                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: #337ab7;white;"> | <span style="color: black"></span></a>
-                    </li>
-               
-            </ol> --}}
-    
+            <p style="display: flex"><label
+                    style="margin-right: 5px;
+                line-height: 28px;">Đến ngày: </label> <input
+                    type="text" id="datepicker2" style="width:65%;border:1px solid #000;" class="form-control">
+            </p>
+        </div>
+        <div class="col-md-2">
 
-    <div class="col-md-4 col-xs-12">
-        
-        <p style="text-align: center"> Ngày bán</p>
-            @foreach ($sldonngay as $key => $ngayban)
-                <p>Ngày bán: {{ $ngayban->order_date }}</p>
-                <p>Mã đơn hàng: {{ $ngayban->order_code }}</p>
-                <p>Tổng số đơn: {{ $demdon }}</p>
-            @endforeach
+            <input type="button" id="btn-dashboard-filter" class="button-chitiet"
+                style="margin-left: -15px; height: 34px; background:#002795; border-radius: 10px; color: wheat  " value="Lọc kết quả">
 
 
-            <p style="text-align: center"> Số lượng bán được</p>
-            @foreach ($slbann as $key=> $sl)
-            <p>Số lượng bán được: {{ $dem }}</p>
-            @endforeach
+        </div>
+        <div class="col-md-3" style="margin-left: -40px;">
+            <p style="display: flex">
+                <label style="margin-right: 5px;
+                line-height: 28px;">Lọc theo:</label>
+                <select class="dashboard-filter form-control" style="width:65%;border:1px solid #000">
+                    <option>--Chọn--</option>
+                    <option value="7ngay">7 ngày qua</option>
+                    <option value="thangnay">tháng này</option>
+                    <option value="thangtruoc">tháng trước</option>
+                    <option value="365ngayqua">1 năm qua</option>
+
+                </select>
+            </p>
+
+        </div>
+    </form>
+
+    <div class="col-md-12">
+        <div id="chart" style="height: 260px"></div>
     </div>
-        
+
 </div>
 
 
-        <div class="col-md-12">
-            <div id="myfirstchart" style="height: 300px;"></div>
-        </div>
 
 <div style="margin-top: 20px ;">
     <div class="col-md-12 col-xs-12">
@@ -72,55 +63,6 @@ z-index: 999;
 background: #fff;" >
     <li class="a" style="list-style-type: none;width:100%">&nbsp</li> 
  </div>
-
-
-        
-        
-    
-    {{--  ************* Thống kê truy cập Admin ************--}}
-{{-- <div class="row">
-                <div class="col-md-12 ">
-                    <style type="text/css">
-                        table.table.table-bordered.table-dark {
-                            background: #FF4040;
-                        }
-    
-                        table.table.table-bordered.table-dark tr th {
-                            color: #fff;
-                            text-align: center;
-                        }
-                        table.table.table-bordered.table-dark td {
-                            color: #fff;
-                            text-align: center;
-                        }
-                    </style>
-                    <h3 class="title_ThongKe" style="text-align: center; margin-bottom: 10px">THỐNG KÊ ADMIN TRUY CẬP</h3>
-                    <table class="table table-bordered table-dark">
-                        <thead>
-                            <tr>
-                                <th scope="col">Đang online</th>
-                                <th scope="col">Tổng tháng trước</th>
-                                <th scope="col">Tổng tháng này</th>
-                                <th scope="col">Tổng một năm</th>
-                                <th scope="col">Tổng truy cập</th>
-                            </tr>
-                        </thead>
-    
-                        <tbody>
-                            <tr>
-                                <td>{{ $visitor_count }}</td>
-                                <td>{{ $visitor_last_month_count }}</td>
-                                <td>{{ $visitor_this_month_count }}</td>
-                                <td>{{ $visitor_year_count }}</td>
-                                <td>{{ $visitors_total }}</td>
-                            </tr>                    
-                        </tbody>
-                    </table>
-                </div>
-</div> --}}
-
-
-
 
 <div style="margin-top: 10px ;">
     <div class="col-md-12 col-xs-12" style="background: blanchedalmond;padding-top: 10px;padding-bottom: 10px;border-radius: 15px;">
@@ -224,43 +166,7 @@ background: #fff;" >
         </div>
     </div>
 <br>
-        {{-- 
-        <p style="text-align: center">Tên bài viết | Số lượt xem</p>
-            <ol>
-                
-                    <li>
-                        <a target="_blank" href="{{ URL('/bai-viet/'.$post->post_id) }}" style="color: #337ab7;white;"> | <span style="color: black"></span></a>
-                    </li>
-               
-            </ol> --}}
     
-
-    {{-- <div class="col-md-4 col-xs-12">
-        
-        <p style="text-align: center"> | Số lượt xem</p>
-        <ol>
-            @foreach ($product_vieww as $key=>$pro)
-                <li style="color: #337ab7;">
-                    <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;;"> {{ $pro->product_name }} | <span style="color: black">{{ $pro->product_view }}</span></a>
-                </li>
-            @endforeach
-        </ol>
-    </div> --}}
-
-
-    {{-- <div class="col-md-4 col-xs-12">
-        <h3 style="text-align: center">THỐNG KÊ SẢN PHẨM BÁN CHẠY </h3>
-        <p style="text-align: center">Tên sản phẩm | Số lượt bán</p>
-        <ol>
-            @foreach ($product_soldd as $key=>$pro)
-                <li style="color: #337ab7;">
-                    <a target="_blank" href="{{ URL('/chi-tiet-san-pham/'.$pro->product_id) }}" style="color: #337ab7;;">  | <span style="color: black">{{ $pro->product_sold }}</span></a>
-                </li>
-            @endforeach
-        </ol>
-    </div> --}}
-    
-
 </div>
 
 
