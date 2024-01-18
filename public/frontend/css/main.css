@@ -1071,7 +1071,12 @@ list-style-type: none;
 	background:#EE3E38;
 	color:#fff;
 }
-
+.sticky{
+  z-index: 1000;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
 .nav-tabs  li.active  a, .nav-tabs  li.active  a:hover, .nav-tabs  li.active  a:focus {
   -moz-border-bottom-colors: none;
   -moz-border-left-colors: none;

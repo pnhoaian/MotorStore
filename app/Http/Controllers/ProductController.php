@@ -61,6 +61,7 @@ class ProductController extends Controller
                 'product_image' => 'required|image',
                 'product_price' => 'required|numeric',
                 'product_price_sale' => 'required|numeric',
+                'product_cost' => 'required|numeric',
                 'product_quantity' => 'required|numeric',
                 'category_id' => 'required',
                 'brand_id' => 'required',
@@ -84,6 +85,9 @@ class ProductController extends Controller
                 'product_price.numeric' => '"Giá sản phẩm" không phải định dạng số ',
                 'product_price.required' => 'Yêu cầu nhập "GIÁ GỐC" cho sản phẩm ',
 
+                'product_cost.required' => 'Yêu cầu nhập "GIÁ Nhập" cho sản phẩm ',
+                'product_cost.numeric' => '"Giá nhập" không phải định dạng số ',
+
                 'product_price_sale.required' => 'Yêu cầu nhập "GIÁ KHUYẾN MÃI" cho sản phẩm ',
                 'product_price_sale.numeric' => '"Giá Khuyến mãi sản phẩm" không phải định dạng số ',
 
@@ -101,6 +105,9 @@ class ProductController extends Controller
         $product->product_desc = $data['product_desc'];
         $product->product_price = $data['product_price'];
         $product->product_price_sale = $data['product_price_sale'];
+
+        $product->product_cost = $data['product_cost'];
+
         $product->product_quantity = $data['product_quantity'];
         if($product->product_price <= 0 ){
             Toastr::warning('Số tiền gốc không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
@@ -188,6 +195,7 @@ class ProductController extends Controller
                 'product_image' => 'image',
                 'product_price' => 'required|numeric',
                 'product_price_sale' => 'required|numeric',
+                'product_cost' => 'required|numeric',
                 'product_quantity' => 'required|numeric',
                 'category_id' => 'required',
                 'brand_id' => 'required',
@@ -212,6 +220,9 @@ class ProductController extends Controller
                 'product_price_sale.required' => 'Yêu cầu nhập "GIÁ KHUYẾN MÃI" cho sản phẩm ',
                 'product_price_sale.numeric' => '"Giá Khuyến mãi sản phẩm" không phải định dạng số ',
 
+                'product_cost.required' => 'Yêu cầu nhập "GIÁ Nhập" cho sản phẩm ',
+                'product_cost.numeric' => '"Giá nhập" không phải định dạng số ',
+
                 'product_quantity.required' => 'Yêu cầu nhập số lượng sản phẩm ' ,
                 'product_quantity.numeric' => '"Số lượng sản phẩm" không phải định dạng số ',
 
@@ -227,6 +238,7 @@ class ProductController extends Controller
             $product->product_desc = $data['product_desc'];
             $product->product_price = $data['product_price'];
             $product->product_price_sale = $data['product_price_sale'];
+            $product->product_cost = $data['product_cost'];
             $product->product_quantity = $data['product_quantity'];
             //them 15/1
             if($product->product_price <= 0 ){

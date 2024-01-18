@@ -112,7 +112,7 @@
 		
 		<!--/end header_top-->
 		
-		<div class="header-middle"><!--header-middle-->
+		<div class="header-middle" style="background: #fff;padding-bottom: 10px; border-bottom: 1px solid #000" id="navbar"><!--header-middle-->
 			<div class="container">
 				<div class="row">
 					<div class="col-sm-3">
@@ -413,7 +413,29 @@
     <script src="{{ asset('public/frontend/js/prettify.js') }}"></script>
 	<script src="{{ asset('public/frontend/js/lightgallery-all.min.js') }}"></script>
 	{!! Toastr::message() !!}
-
+	<script type="text/javascript">
+		// When the user scrolls the page, execute myFunction
+		window.onscroll = function() {
+			myFunction()
+		};
+	
+		// Get the navbar
+		var navbar = document.getElementById("navbar");
+	
+		// Get the offset position of the navbar
+		var sticky = navbar.offsetTop;
+	
+		// Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll
+		position
+	
+		function myFunction() {
+			if (window.pageYOffset >= sticky) {
+				navbar.classList.add("sticky")
+			} else {
+				navbar.classList.remove("sticky");
+			}
+		}
+	</script>
     <div id="fb-root"></div>
     <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v16.0"
         nonce="ObII9EbG">
@@ -444,6 +466,7 @@
 			});
 		});
 	</script>
+	
 
 
 
@@ -601,6 +624,9 @@
 	});
 	});
 </script>
+
+
+
 
 
 {{-- thêm giỏ hàng sản phẩm bán chạy --}}

@@ -82,6 +82,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="exampleInputEmail1">Giá Nhập</label>
+                            <input type="text" name="product_cost" value="{{ old('product_cost') }}" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Sản phẩm">
+                        </div>
+
+                        <div class="form-group">
                             <label for="exampleInputEmail1">Giá Khuyến Mãi</label>
                             <input type="text" name="product_price_sale" value="{{ old('product_price_sale') }}" class="form-control" id="exampleInputEmail1" placeholder="Nhập giá Khuyến mãi">
                         </div>

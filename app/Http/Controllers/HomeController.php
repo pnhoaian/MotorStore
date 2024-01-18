@@ -89,7 +89,8 @@ class HomeController extends Controller
 
         if($data['query']){
             $product = Product::where('product_status',1)->where('product_name','LIKE','%'.$data['query'].'%')->limit(5)->get();
-            $output ='<ul class="dropdown-menu" style="display:block; position:relative">';
+            $output ='<ul class="dropdown-menu" style="display:block;">';
+            $count = $product->count();
             foreach($product as $key =>$val){
                 $output.='
                 <div style="display:flex;margin-bottom:5px">
@@ -102,6 +103,17 @@ class HomeController extends Controller
                 
                 ';
                 
+            }
+            if($count == 0){
+                $output.='
+                <div style="display:flex;margin-bottom:5px">
+                    <div>
+                        <li  class="li_search_ajax"><a style="font-weight: 600;text-align:center; padding: 5px">Không tìm thấy</a></li>
+                        
+                    </div>
+                </div>
+                
+                ';
             }
             // <li style="width:110px; class="li_search_ajax"><a>Giá: '.number_format($val->product_price_sale).' '.'đ'.'</a></li>
             $output .='</ul>';
