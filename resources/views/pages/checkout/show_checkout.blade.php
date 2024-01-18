@@ -1,8 +1,9 @@
 @extends('welcome')
 @section('content')
-@section('footer')
+
+{{-- @section('footer')
 	@include("pages.include.footer")
-@endsection()
+@endsection() --}}
 
 <section id="cart_items">
     <div class="container">
@@ -57,7 +58,7 @@
 
                             </td>
                             <td class="cart_description">
-                                <h4 style=" text-align:center"><a>{{ $cart['product_name']}}</a></h4>
+                                <h4 style=" text-align:center"><a href="{{URL::to('/chi-tiet-san-pham/'.$cart['product_id'])}}">{{ $cart['product_name']}}</a></h4>
                             </td>
                             <td class="cart_price">
                                 <p>{{ number_format($cart['product_price_sale'],0,',','.' )}} VNĐ</p>
@@ -86,13 +87,15 @@
                             <a class="btn btn-default check_out" href="{{URL::to('/del-all-product')}}">Xóa tất cả</a>
                         </td>
 
+
                         <td>
                             @if (Session::get('coupon'))
                             <a class="btn btn-default check_out" href="{{URL::to('/unset-coupon')}}">Xóa mã Coupon</a>
                             @endif
                         </td>
 
-                        <td class="bill" style="width:550px;padding-left:40px">
+
+                        <td class="bill" style="width:550px;padding-left:30px">
                             <li>Tổng thành tiền: <span>{{ number_format($total,0,',','.' )}} VNĐ</span></li>
                             {{-- <li>Thuế: <span></span></li> --}}
 
@@ -181,6 +184,7 @@
                             @endphp
                         </li>
                         </td>
+
                     </tr>
                    
                 </tbody>
@@ -207,9 +211,27 @@
                             <input type="submit" class="btn btn-default check_coupon" value="Áp dụng Coupon" name="check_coupon">
                             </div>
                         </form>
-
-                        
                     </td>
+
+                
+                    {{-- <td>
+                            <form method="POST" action="{{URL::to('/vnpay-payment')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="total-vnpay" value={{ $total_after }}>
+                                <button type="submit" class="btn btn-default check_out" name="redirect" style="margin-left:30px">
+                                Thanh toán VNPAY
+                            </button>
+                            </form>
+
+                            <form method="POST" action="{{URL::to('/momo-payment')}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="total-momo" value={{ $total_after }}>
+                                <button type="submit" class="btn btn-default check_out" name="payUrl" style="margin-left:30px">
+                                Thanh toán MOMO
+                            </button>
+                            </form>
+                        </td> --}}
+                    
                 </tr>
             @endif
             </table>
@@ -228,7 +250,7 @@
 
         @if(Session::get('cart'))
 
-        <div id="form-errors" class="text-danger"></div>
+      
 
 
     <div class="shopper-informations">
@@ -245,22 +267,22 @@
                             font-size: 15px;">* Khách hàng vui lòng kiểm tra lại thông tin chi tiết giao hàng</p>
                             <div>
                                 <li class="lithongtin">Tên khách hàng</li>
-                                <input value="{{ Session::get('customer_name') }}" type="text" name="shipping_name" class="shipping_name textboxthongtin">
+                                <input value="{{ $customer->customer_name }}" type="text" name="shipping_name" class="shipping_name textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Email</li>
-                                <input value="{{ Session::get('customer_email') }}" type="text" name="shipping_email" class="shipping_email textboxthongtin">
+                                <input value="{{ $customer->customer_email }}" type="text" name="shipping_email" class="shipping_email textboxthongtin">
                             </div>
 
                             <div> 
                                 <li class="lithongtin">Số điện thoại</li>
-                                <input value="{{ Session::get('customer_phone') }}" type="text" name="shipping_phone" class="shipping_phone textboxthongtin">
+                                <input value="{{ $customer->customer_phone }}" type="text" name="shipping_phone" class="shipping_phone textboxthongtin">
                             </div>
 
                             <div>
                                 <li class="lithongtin">Địa chỉ</li>
-                                <input value="{{ Session::get('customer_address') }}" type="text" name="shipping_address" class="shipping_address textboxthongtin">
+                                <input value="{{ $customer->customer_address }}" type="text" name="shipping_address" class="shipping_address textboxthongtin">
                             </div>
 
                             <li class="lithongtin">Phương thức nhận hàng</li>
@@ -277,7 +299,9 @@
                             <p>Ghi chú đơn hàng</p>
                             <textarea name="shipping_note" class="shipping_note" rows="8"></textarea>
                             <button type="button" name="send_order" class="btn btn-primary send_order"  style="float: right;">OK</button>
+                            <div id="form-error" class="text-danger" style="margin-top: 10px;margin-left: -10px">
 
+                            </div>
                         </form>
                     </div>
                 

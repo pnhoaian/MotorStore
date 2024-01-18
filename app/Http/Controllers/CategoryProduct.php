@@ -41,13 +41,15 @@ class CategoryProduct extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'category_name' => 'required|unique:tbl_category_product',   
+                'category_name' => 'required|max:255|unique:tbl_category_product',   
                 'category_desc' => 'required',
                 'category_status' => 'required',
             ],
             [
                 'category_name.required' => 'Yêu cầu nhập tên danh mục sản phẩm',
                 'category_name.unique' => 'Tên danh mục sản phẩm đã tồn tại trên hệ thống',
+                'category_name.max' => 'Tên danh mục sản phẩm quá dài',
+
                 'category_desc.required' => 'Yêu cầu nhập mô tả danh mục sản phẩm ',
                 'category_status.required' => 'Yêu cầu nhập tình trạng hiển thị danh mục sản phẩm ',
             ]
@@ -96,12 +98,14 @@ class CategoryProduct extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'category_name' => 'required',   
+                'category_name' => 'required|max:255',   
                 'category_desc' => 'required',
             ],
             [
                 'category_name.required' => 'Yêu cầu nhập tên danh mục sản phẩm',
-                'category_name.unique' => 'Tên danh mục sản phẩm đã tồn tại trên hệ thống',
+                'category_name.max' => 'Tên danh mục sản phẩm quá dài',
+
+                // 'category_name.unique' => 'Tên danh mục sản phẩm đã tồn tại trên hệ thống',
                 'category_desc.required' => 'Yêu cầu nhập mô tả danh mục sản phẩm ',
             ]
             );

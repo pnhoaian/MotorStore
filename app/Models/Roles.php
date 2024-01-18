@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Roles extends Model
 {
     public $timestamps = false; //set time la false
-    protected $fillable = ['name',];
+    protected $fillable = ['name'];
     protected $primaryKey = 'id_roles';
 
     protected $table = 'tbl_roles';

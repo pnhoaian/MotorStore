@@ -114,10 +114,14 @@ class CartController extends Controller
         $data = $request->all();
         $session_id = substr(md5(microtime()),rand(0,26),5);
         $cart = Session::get('cart');
+
+
+
         if($cart==true){
             $is_avaiable = 0;
             foreach($cart as $key => $val){
                 if($val['product_id']==$data['cart_product_id']){
+
                     $is_avaiable++;
                     $cart[$key] = array(
                     'session_id' => $val['session_id'],
@@ -129,11 +133,43 @@ class CartController extends Controller
                     'product_price' => $val['product_price'],
                     'product_price_sale' => $val['product_price_sale']
                     );
-                    Session::put('cart',$cart);
+                    if($val['product_qty'] >= $val['product_quantity']){
+                        $cart[$key] = array(
+                            'session_id' => $val['session_id'],
+                            'product_name' => $val['product_name'],
+                            'product_quantity' => $val['product_quantity'],
+                            'product_id' => $val['product_id'],
+                            'product_image' => $val['product_image'],
+                            'product_qty' => $val['product_quantity'],
+                            'product_price' => $val['product_price'],
+                            'product_price_sale' => $val['product_price_sale']
+                        );
+                    }elseif($val['product_qty']+$data['cart_product_qty'] > $val['product_quantity']){ 
+                        $cart[$key] = array(
+                            'session_id' => $val['session_id'],
+                            'product_name' => $val['product_name'],
+                            'product_quantity' => $val['product_quantity'],
+                            'product_id' => $val['product_id'],
+                            'product_image' => $val['product_image'],
+                            'product_qty' => $val['product_quantity'],
+                            'product_price' => $val['product_price'],
+                            'product_price_sale' => $val['product_price_sale']
+                            
+                        );
+                        Session::put('cart',$cart);
+                    }
+                    else{
+                        Session::put('cart',$cart);
+                    }
+                    
+
+
+                    
+                    
                 }
 
             }
-            if($is_avaiable==0){
+            if($is_avaiable==0){;
                 $cart[] = array(
                     'session_id' =>  $session_id,
                     'product_name' => $data['cart_product_name'],
@@ -147,17 +183,34 @@ class CartController extends Controller
                 Session::put('cart',$cart);
             }
         }else{
-            $cart[] = array(
-                'session_id' => $session_id,
-                'product_name' => $data['cart_product_name'],
-                'product_quantity' => $data['cart_product_quantity'],
-                'product_id' => $data['cart_product_id'],
-                'product_image' => $data['cart_product_image'],
-                'product_qty' => $data['cart_product_qty'],
-                'product_price' => $data['cart_product_price'],
-                'product_price_sale' => $data['cart_product_price_sale']
-            );
-            Session::put('cart',$cart);
+            
+            if($data['cart_product_qty'] > $data['cart_product_quantity']){
+                $cart[] = array(
+                    'session_id' => $session_id,
+                    'product_name' => $data['cart_product_name'],
+                    'product_quantity' => $data['cart_product_quantity'],
+                    'product_id' => $data['cart_product_id'],
+                    'product_image' => $data['cart_product_image'],
+                    'product_qty' => $data['cart_product_quantity'],
+                    'product_price' => $data['cart_product_price'],
+                    'product_price_sale' => $data['cart_product_price_sale']
+                );
+                Session::put('cart',$cart);
+            }else{
+                $cart[] = array(
+                    'session_id' => $session_id,
+                    'product_name' => $data['cart_product_name'],
+                    'product_quantity' => $data['cart_product_quantity'],
+                    'product_id' => $data['cart_product_id'],
+                    'product_image' => $data['cart_product_image'],
+                    'product_qty' => $data['cart_product_qty'],
+                    'product_price' => $data['cart_product_price'],
+                    'product_price_sale' => $data['cart_product_price_sale']
+                );
+                Session::put('cart',$cart);
+            }
+            
+            
         }
         
         Session::save();
@@ -186,31 +239,32 @@ class CartController extends Controller
             // $message ='';
 
             foreach($data['cart_qty'] as $key => $qty){
-                // $i=0;
+                 $i=0;
                 foreach($cart as $session => $val){
-                    // $i++;
+                    // dd($cart);
+                    $i++;
 
                     // if($val['session_id']==$key && $qty < $cart[$session]['product_quantity']){
                     if($val['session_id']==$key){
                         $cart[$session]['product_qty'] = $qty;
+                        if($qty > $cart[$session]['product_quantity'] ){
+                            $message =''.$i.') Cập nhật số lượng '.$cart[$session]['product_name'].' không thành công do không đủ số lượng tồn kho';
+                            return redirect()->back()->with('error',$message);
+                        }
+                        else{
+                            $message =''.$i.') Cập nhật số lượng '.$cart[$session]['product_name'].' thành công';
+                            Session::put('cart',$cart);
+                            return redirect()->back()->with('message',$message);
+                        }
                         
                         
-                        // $message ='<p style="color:green">'.$i.') Cập nhật số lượng '.$cart[$session]['product_name'].' thành công</p>';
+                         
                     // }elseif($val['session_id']==$key && $qty > $cart[$session]['product_quantity']){
                     //     $message ='<p style="color:green">'.$i.') Cập nhật số lượng '.$cart[$session]['product_name'].' thất bại</p>';
                     // }
                 }
 
-                
-            }
-        }
-           Session::put('cart',$cart);
-        //    return redirect()->back()->with('message',$message);
-        return redirect()->back()->with('message','Cập nhật thành công');
-        }else{
-
-            return redirect()->back()->with('message','Cập nhật thất bại');
-        }
+                }}}
     }
 
     public function del_all_product(){

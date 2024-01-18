@@ -41,10 +41,10 @@ class CouponController extends Controller
         $today = Carbon::now('Asia/Ho_Chi_Minh')->format('d/m/Y');
         $data = $request->validate(
             [
-                'coupon_name' => 'required|unique:tbl_coupon',
+                'coupon_name' => 'required|max:255|unique:tbl_coupon',
                 'coupon_date_start' => 'required',
                 'coupon_date_end' => 'required',  
-                'coupon_code' => 'required',
+                'coupon_code' => 'required|max:50',
                 'coupon_times' => 'required|numeric',
                 'coupon_number' => 'required|numeric',
                 'coupon_condition' => 'required',
@@ -54,9 +54,13 @@ class CouponController extends Controller
             [
                 'coupon_name.required' => 'Yêu cầu nhập tên chương trình khuyến mãi',
                 'coupon_name.unique' => 'Đã có chương trình khuyến mãi trong hệ thống',
+                'coupon_name.max' => 'Tên chương trình khuyến mãi quá dài',
+
                 'coupon_date_start.required' => 'Yêu cầu thêm NGÀY BẮT ĐẦU khuyến mãi ',
                 'coupon_date_end.required' => 'Yêu cầu thêm NGÀY KẾT THÚC khuyến mãi ',
                 'coupon_code.required' => 'Yêu cầu nhập mã khuyến mãi ',
+                'coupon_code.max' => 'Mã code khuyến mãi quá dài, < 50 ký tự',
+
                 'coupon_times.required' => 'Yêu cầu nhập số lượng Coupon khuyến mãi ',
                 'coupon_times.numeric' => 'Số lượng coupon không phải định dạng số ',
                 'coupon_number.required' => 'Yêu cầu nhập "SỐ TIỀN" hoặc "PHẦN TRĂM KHUYẾN MÃI" ',

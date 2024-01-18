@@ -56,7 +56,7 @@ class ProductController extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'product_name' => 'required|unique:tbl_product',   
+                'product_name' => 'required|max:255|unique:tbl_product',   
                 'product_desc' => 'required',
                 'product_image' => 'required|image',
                 'product_price' => 'required|numeric',
@@ -71,6 +71,7 @@ class ProductController extends Controller
             [
                 'product_name.required' => 'Yêu cầu nhập tên sản phẩm',
                 'product_name.unique' => 'Đã có sản phẩm trong hệ thống',
+                'product_name.max' => 'Tên sản phẩm quá dài',
 
                 'category_id.required' => 'Yêu cầu thêm danh mục sản phẩm ',
                 'brand_id.required' => 'Yêu cầu thêm thương hiệu sản phẩm ',
@@ -182,7 +183,7 @@ class ProductController extends Controller
         
         $data = $request->validate(
             [
-                'product_name' => 'required',   
+                'product_name' => 'required|max:255',   
                 'product_desc' => 'required',
                 'product_image' => 'image',
                 'product_price' => 'required|numeric',
@@ -196,6 +197,7 @@ class ProductController extends Controller
             ],
             [
                 'product_name.required' => 'Yêu cầu nhập tên sản phẩm',
+                'product_name.max' => 'Tên sản phẩm quá dài',
 
                 'category_id.required' => 'Yêu cầu thêm danh mục sản phẩm ',
                 'brand_id.required' => 'Yêu cầu thêm thương hiệu sản phẩm ',
@@ -229,19 +231,16 @@ class ProductController extends Controller
             //them 15/1
             if($product->product_price <= 0 ){
                 Toastr::warning('Số tiền gốc không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-                return Redirect::to('add-product');
+                return redirect()->back();
             }elseif($product->product_price_sale <= 0 ){
                 Toastr::warning('Số tiền khuyến mãi không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-                return Redirect::to('add-product');
             }elseif($product->product_price_sale > $product->product_price){
                 Toastr::warning('Số tiền khuyến mãi không được lớn giá gốc','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-                return Redirect::to('add-product');
-            }elseif($product->product_quantity <= 0 ){
+            }elseif($product->product_quantity < 0 ){
                 Toastr::warning('Số lượng sản phẩm không được nhỏ hơn 0','Cảnh báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-                return Redirect::to('add-product');
-            }
-            //
-            $product->product_status = $data['product_status'];
+                return redirect()->back();
+            }else{
+                $product->product_status = $data['product_status'];
             $get_image = $request->file('product_image');
             if ($get_image){
                 $get_name_image = $get_image->getClientOriginalName();
@@ -254,6 +253,9 @@ class ProductController extends Controller
         $product->save();
         Toastr::success('Đã cập nhật sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
             return Redirect::to('all-product');
+            }
+            //
+            
     }
     //End Admin Page
 

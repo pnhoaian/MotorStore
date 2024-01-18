@@ -43,14 +43,18 @@ class CategoryPost extends Controller
 //* unique đã có rồi
         $data = $request->validate(
             [
-                'cate_post_name' => 'required|unique:tbl_category_post',   
-                'cate_post_desc' => 'required',
+                'cate_post_name' => 'required|max:255|unique:tbl_category_post',   
+                'cate_post_desc' => 'required|max:255',
                 'cate_post_status' => 'required'
             ],
             [
                 'cate_post_name.required' => 'Yêu cầu nhập tên danh mục bài viết',
                 'cate_post_name.unique' => 'Tên danh mục bài viết đã tồn tại trên hệ thống',
+                'cate_post_name.max' => 'Tên danh mục bài viết quá dài',
+
                 'cate_post_desc.required' => 'Yêu cầu nhập mô tả danh mục bài viết ',
+                'cate_post_desc.max' => 'Mô tả danh mục bài viết quá dài',
+
                 'cate_post_status.required' => 'Yêu cầu thêm trạng thái danh mục bài viết ',
             ]
             );

@@ -86,6 +86,8 @@
                 <span class="username">
                     <?php 
                     $name = Session::get('admin_name');
+                    // $name = Auth::user->admin_name;
+                    
                     if($name){
                         echo 'Xin chào, ';
                         echo $name;
@@ -98,6 +100,7 @@
                 <li><a href="#"><i class=" fa fa-suitcase"></i>Chỉnh sửa thông tin</a></li>
                 <li><a href="#"><i class="fa fa-cog"></i> Cài Đặt</a></li>
                 <li><a href="{{ URL::to('/logout') }}"><i class="fa fa-key"></i> Đăng Xuất</a></li>
+                {{-- <li><a href="{{ URL::to('/logout-auth') }}"><i class="fa fa-key"></i> Đăng Xuất</a></li> --}}
             </ul>
         </li>
         <!-- user login dropdown end -->
@@ -228,25 +231,27 @@
                         <li><a href="mail_compose.html">Compose Mail</a></li>
                     </ul>
                 </li> --}}
-
+                @hasrole('admin')
                 <li class="sub-menu">
                     <a href="javascript:">
                         <i class="fa fa-user-secret"></i>
                         <span>Tài khoản quản trị</span>
                     </a>
                     <ul class="sub">
-                        <li><a href="#">Thêm tài khoản mới</a></li>
-                        <li><a href="#">Danh sách tài khoản</a></li>
+                        <li><a href="{{URL::to('/add-user')}}">Thêm tài khoản mới</a></li>
+                        <li><a href="{{URL::to('/all-user')}}">Danh sách tài khoản</a></li>
                     </ul>
                 </li>
+                @endhasrole
 
-                {{-- <li>
-                    <a href="{{URL::to('/introduce')}}">
+                @impersonate
+                <li class="sub-menu">
+                    <a href="{{URL::to('/impersonate-destroy')}}">
                         <i class="fa fa-user-secret"></i>
-                        <span>Tài khoản quản trị</span>
+                        <span>Hủy trao quyền</span>
                     </a>
-                </li> --}}
-
+                </li>
+                @endimpersonate
                 <li>
                     <a href="{{URL::to('/introduce')}}">
                         <i class="fa fa-info"></i>
@@ -342,6 +347,33 @@
     });
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#myTable').DataTable();
+    });
+</script>
+
+<!-- Datepicker Coupon -->
+<script type="text/javascript">
+    $( function() {
+      $( "#datepickerkm" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+
+      $( "#datepickerkm2" ).datepicker({
+        prevText:"Tháng trước",
+        nextText:"Tháng sau",
+        dateFormat:"dd/mm/yy",
+        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
+        duration:"slow"
+      });
+    } );
+</script>
+
 <!-- Biểu đồ thống kế doanh số -->
 <script type="text/javascript">
     $(document).ready(function() {
@@ -428,6 +460,8 @@
     });
 </script>
 
+
+
 <!-- Reply Comment -->
 <script type="text/javascript">
    $('.btn-reply-comment').click(function() {
@@ -464,32 +498,9 @@
 </script>
 
 <!--TV s/d phân trang-->
-<script type="text/javascript">
-    $(document).ready(function() {
-        $('#myTable').DataTable();
-    });
-</script>
 
-<!-- Datepicker Coupon -->
-<script type="text/javascript">
-    $( function() {
-      $( "#datepickerkm" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"dd/mm/yy",
-        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
-        duration:"slow"
-      });
 
-      $( "#datepickerkm2" ).datepicker({
-        prevText:"Tháng trước",
-        nextText:"Tháng sau",
-        dateFormat:"dd/mm/yy",
-        dayNamesMin:["Thứ 2","Thứ 3","Thứ 4","Thứ 5","Thứ 6","Thứ 7","Chúa nhật",],
-        duration:"slow"
-      });
-    } );
-</script>
+
 
 
 

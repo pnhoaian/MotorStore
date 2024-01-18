@@ -47,7 +47,7 @@ class BrandProduct extends Controller
         $data = $request->all();
         $data = $request->validate(
             [
-                'brand_name' => 'required|unique:tbl_brand',   
+                'brand_name' => 'required|max:255|unique:tbl_brand',   
                 'brand_desc' => 'required',
                 'brand_image' => 'required|image',
                 'brand_status' => 'required',
@@ -56,6 +56,8 @@ class BrandProduct extends Controller
             [
                 'brand_name.required' => 'Yêu cầu nhập tên thương hiệu',
                 'brand_name.unique' => 'Đã có thương hiệu trong hệ thống',
+                'brand_name.max' => 'Tên thương hiệu quá dài',
+
                 'brand_desc.required' => 'Yêu cầu nhập mô tả thương hiệu ',
                 'brand_image.required' => 'Thêm hình ảnh cho thương hiệu sản phẩm ',
                 'brand_image.image' => 'Không phải định dạng hình ảnh ',
@@ -134,14 +136,16 @@ class BrandProduct extends Controller
         // $this->AuthLogin();
         $data = $request->validate(
             [
-                'brand_name' => 'required',   
+                'brand_name' => 'required|max:255',   
                 'brand_desc' => 'required',
                 'brand_image' => 'image',
                 
             ],
             [
                 'brand_name.required' => 'Yêu cầu nhập tên thương hiệu',
-                'brand_name.unique' => 'Đã có thương hiệu trong hệ thống',
+                'brand_name.max' => 'Tên thương hiệu quá dài',
+
+
                 'brand_desc.required' => 'Yêu cầu nhập mô tả thương hiệu ',
                 'brand_image.image' => 'Không phải định dạng hình ảnh ',
             ]

@@ -1,9 +1,9 @@
 @extends('welcome')
 @section('content')
 
-@section('footer')
+{{-- @section('footer')
 	@include("pages.include.footer")
-@endsection()
+@endsection() --}}
 
 <section id="cart_items">
     <div class="container">
@@ -38,9 +38,9 @@
                 </thead>
                 <tbody>
                     @if(Session::get('cart'))
-                    @php
-                        $total = 0;
-                    @endphp
+                        @php
+                            $total = 0;
+                        @endphp
                     @foreach (Session::get('cart') as $key => $cart)
                         @php
  
@@ -53,7 +53,7 @@
 
                             </td>
                             <td class="cart_description">
-                                <h4 style=" text-align:center"><a>{{ $cart['product_name']}}</a></h4>
+                                <h4 style=" text-align:center"><a href="{{URL::to('/chi-tiet-san-pham/'.$cart['product_id'])}}">{{ $cart['product_name']}}</a></h4>
                             </td>
                             <td class="cart_price">
                                 <p>{{ number_format($cart['product_price_sale'],0,',','.' )}} VNĐ</p>

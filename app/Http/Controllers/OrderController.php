@@ -178,8 +178,20 @@ class OrderController extends Controller
         if($product_coupon != 'no'){
 			$coupon = Coupon::where('coupon_code',$product_coupon)->first();
             // Lấy giá trị bảng order_detail đối chiếu để lấy số tiền giảm bảng Coupon
-			$coupon_condition = $coupon->coupon_condition;
-			$coupon_number = $coupon->coupon_number;
+
+
+            if($coupon !=null){
+               $coupon_condition = $coupon->coupon_condition;
+               $coupon_number = $coupon->coupon_number;}
+               else{
+               $coupon_condition=1;
+               $coupon_number=0; 
+            }
+			// $coupon_condition = $coupon->coupon_condition;
+			// $coupon_number = $coupon->coupon_number;
+
+
+
 
 			if($coupon_condition==0){
 				$coupon_echo = $coupon_number.'%';

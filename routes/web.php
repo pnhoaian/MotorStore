@@ -18,6 +18,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\MailController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -129,19 +130,28 @@ Route::get('/thuong-hieu-san-pham/{brand_id}',[BrandProduct::class,'show_brand_h
 Route::get('/chi-tiet-san-pham/{product_id}',[ProductController::class,'detail_product']);
 
 
+
+//*****************************************************      //Authentication roles //*****************************************************
+//view đăng ký account admin
+Route::get('/register-admin', [AuthController::class, 'register_admin']);
+//đăng ký tài khoản admin
+Route::post('/register-admin-account', [AuthController::class, 'register_admin_account']);
+
+//
+Route::get('/logout-auth', [AuthController::class, 'logout_auth']);
+
+//view đăng nhập account auth
+Route::get('/login-auth', [AuthController::class, 'login_auth']);
+
+// đăng nhập account auth
+Route::post('/login-customuser', [AuthController::class, 'login_customuser']);
+
+
 //***************************************************************** Admin ***************************************************************
 Route::get('/admin', [AdminController::class, 'index']);
 Route::get('/dashboard', [AdminController::class, 'show_dashboard']);
 Route::get('/logout', [AdminController::class, 'logout']);
 Route::post('/admin-dashboard', [AdminController::class, 'dashboard']);
-
-//Authentication roles
-
-//view đăng ký account admin
-Route::get('/register-admin', [AdminController::class, 'register_admin']);
-//đăng ký tài khoản admin
-Route::post('/register-admin-account', [AdminController::class, 'register_admin_account']);
-
 
 //Thống kê
 Route::post('/filter-by-date', [AdminController::class, 'filter_by_date']);

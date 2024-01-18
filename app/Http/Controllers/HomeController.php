@@ -88,16 +88,25 @@ class HomeController extends Controller
         $data = $request->all();
 
         if($data['query']){
-            $product = Product::where('product_status',1)->where('product_name','LIKE','%'.$data['query'].'%')->get();
+            $product = Product::where('product_status',1)->where('product_name','LIKE','%'.$data['query'].'%')->limit(5)->get();
             $output ='<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach($product as $key =>$val){
                 $output.='
-                <li class="li_search_ajax"><a href="#">'.$val->product_name.'</a></li>';
+                <div style="display:flex;margin-bottom:5px">
+                    <img style="width:70px; height:80px"  src="'.asset('public/upload/product/'.$val->product_image).'" alt="">
+                    <div>
+                        <li  class="li_search_ajax"><a style="font-weight: 600;" href="'.url('/chi-tiet-san-pham/' .$val->product_id).'">'.$val->product_name.'</a></li>
+                        
+                    </div>
+                </div>
+                
+                ';
+                
             }
+            // <li style="width:110px; class="li_search_ajax"><a>Giá: '.number_format($val->product_price_sale).' '.'đ'.'</a></li>
             $output .='</ul>';
             echo $output;
         }
     }
     
-
 }

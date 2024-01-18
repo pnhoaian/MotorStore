@@ -293,10 +293,10 @@
 		<div class="footer-top">
 			<div class="container">
 				<div class="row">
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="companyinfo">
 							<h2><span>Hoài An</span> Store</h2>
-							<p>Tự hào là nhà phân phối phụ kiện pin, sạc chính hãng - chất lượng - an toàn - giá thành thành tốt nhất hàng đầu tại TP.HCM.</p>
+							<p>Tự hào là nhà phân phối phụ kiện sạc chính hãng - chất lượng - an toàn - giá thành thành tốt nhất hàng đầu tại TP.HCM.</p>
 						</div>
 					</div>
 
@@ -324,7 +324,7 @@
 						</div>
 					</div> --}}
 
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
 							<h2>Thông tin</h2>
 							<ul class="nav nav-pills nav-stacked">
@@ -333,7 +333,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
 							<h2>Sản Phẩm & Dịch Vụ</h2>
 							<ul class="nav nav-pills nav-stacked"></ul>
@@ -344,7 +344,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-3">
 						<div class="single-widget">
 							<h2>Chính Sách</h2>
 							<ul class="nav nav-pills nav-stacked">
@@ -353,7 +353,7 @@
 							</ul>
 						</div>
 					</div>
-					<div class="col-sm-3 col-sm-offset-1">
+					{{-- <div class="col-sm-3 col-sm-offset-1">
 						<div class="single-widget">
 							<h2>Đăng ký nhận tin</h2>
 								<ul class="nav nav-pills nav-stacked">
@@ -361,13 +361,8 @@
 									<li><p>Nhận thông tin khuyến mãi</p></li>
 									<li><p>Góp ý - Khiếu nại về dịch vụ, sản phẩm</p></li>
 								</ul>
-								{{-- <form action="#" class="searchform">
-									<input type="text" placeholder="Gmail" />
-									<button type="submit" class="btn btn-default"><i class="fa fa-arrow-circle-o-right"></i></button>
-									
-							</form> --}}
 						</div>
-					</div>
+					</div> --}}
 
 				</div>
 			</div>
@@ -575,8 +570,8 @@
 			var _token = $('input[name="_token"]').val();
 
 			//them parseInt(cart_product_qty) >
-
-				if((cart_product_qty <=0) || cart_product_qty > cart_product_quantity){
+				
+				if((cart_product_qty <=0)){
 				alert('Số lượng sản phẩm đặt hàng không phù hơn, vui lòng thay đổi số lượng ');
 			}else{
 			
@@ -730,7 +725,7 @@
 								'</li>';
 						}
 						str += '</ul>';
-						$('#form-errors').html(str);
+						$('#form-error').html(str);
 					}
 				});
 			}

@@ -74,7 +74,7 @@
                             font-weight: 700;
                             color: #000000;">Vận
                                     Chuyển</span></h2>
-                            <p>Miễn phí giao hàng tận nơi hoặc nhận trực tiếp cửa hàng</p>
+                            <p>Giao hàng tận nơi hoặc nhận trực tiếp cửa hàng</p>
 
                             <style>
                                 #text-2973815044 {
@@ -118,7 +118,7 @@
                             font-size: 20px;
                             font-weight: 700;
                             color: #000000;">Thanh Toán</span></h2>
-                            <p>Chấp nhận thanh toán bằng thẻ, tiền mặt hoặc hỗ trợ trả góp các hình thức khác</p>
+                            <p>Chấp nhận thanh toán online hoặc tiền mặt </p>
 
                             <style>
                                 #text-3652484110 {

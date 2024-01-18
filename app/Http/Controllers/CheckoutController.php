@@ -83,17 +83,27 @@ class CheckoutController extends Controller
     }
 
     public function checkout(Request $request){
+       
 
+
+
+
+
+
+        
         
         $category_post = CatePost::OrderBy('cate_post_id','Desc')->where('cate_post_status','1')->get();
         $cate_product =DB::table('tbl_category_product')->where('category_status','1')->orderby('category_name','asc')->get();
         $brand_product = DB::table('tbl_brand')->where('brand_status','1')->orderby('brand_name','asc')->get();
         // Toastr::info(' Vui lòng kiểm tra thông tin nhận hàng','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        $customer = Customer::find(Session::get('customer_id'));
 
         return view('pages.checkout.show_checkout')
         ->with('category', $cate_product)
         ->with('brand', $brand_product)
-        ->with('category_post',$category_post);
+        ->with('category_post',$category_post)
+        ->with('customer',$customer)
+        ;
     }
 
     public function save_checkout_customer(Request $request){
@@ -129,9 +139,10 @@ class CheckoutController extends Controller
         
         $data = $request->validate(
             [
-                'shipping_name' => 'required|max:150',   
+                'shipping_name' => 'required|max:255',   
                 'shipping_phone' => 'required|numeric|regex:/(0)[0-9]/|not_regex:/[a-z]/|min:9',
-                'shipping_address' => 'required',          
+                'shipping_address' => 'required|max:255',   
+                'shipping_email' => 'required',        
             ],
             [
                 'shipping_name.required' => 'Yêu cầu nhập tên người nhận hàng ',
@@ -139,6 +150,7 @@ class CheckoutController extends Controller
                 'shipping_phone.numeric' => 'Số điện thoại phải là dạng số ',
                 'shipping_phone.regex' => 'Số điện thoại không đúng định dạng ',
                 'shipping_address.required' => 'Yêu cầu nhập địa chỉ nhận hàng',
+                'shipping_email.required' => 'Yêu cầu nhập Email',
             ]
             ); 
         
@@ -311,17 +323,24 @@ class CheckoutController extends Controller
 
                 $data = $request->validate(
             [
-                'customer_name' => 'required',   
-                'customer_email' => 'required|email',   
-                'customer_phone' => 'numeric|required',
+                'customer_name' => 'required|max:255',   
+                'customer_email' => 'required|email|max:255',   
+                // 'customer_phone' => 'numeric|required|max:12|min:9|max:12',
+                'customer_phone' => 'required|numeric|regex:/(0)[0-9]/',
                 'customer_address' => 'required',
             ],
             [
                 'customer_name.required' => 'Tên người nhận hàng không được để trống',
+                'customer_name.max' => 'Tên người nhận quá dài, < 255 ký tự',
                 'customer_email.required' => 'Email không được để trống',
                 'customer_email.email' => 'Không phải định dạng "@email.com"',
+                'customer_email.max' => 'Địa chỉ email quá dài',
                 'customer_phone.required' => 'SĐT người nhận hàng không được để trống',
                 'customer_phone.numeric' => 'SĐT định dạng bằng ký tự số',
+                'customer_phone.regex' => 'SĐT không đúng định dạng',
+                
+                // 'customer_phone.min' => 'SĐT quá ngắn không hợp lệ, sđt gồm 11 số',
+                // 'customer_phone.max' => 'SĐT quá dài không hợp lệ, sđt gồm 11 số',
                 'customer_address.required' => 'Địa chỉ nhận hàng không được để trống',
             ]
             );

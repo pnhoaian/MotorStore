@@ -46,7 +46,7 @@ class PostController extends Controller
 
         $data = $request->validate(
             [
-                'post_title' => 'required|unique:tbl_posts',   
+                'post_title' => 'required|max:255|unique:tbl_posts',   
                 'post_desc' => 'required',
                 'post_content' => 'required',
                 'post_image' => 'required|image',
@@ -57,6 +57,8 @@ class PostController extends Controller
             [
                 'post_title.required' => 'Yêu cầu nhập tên bài viết',
                 'post_title.unique' => 'Tên bài viết đã tồn tại trên hệ thống',
+                'post_title.max' => 'Tên bài viết quá dài',
+
                 'post_desc.required' => 'Yêu cầu nhập mô tả ngắn bài viết ',
                 'post_image.required' => 'Thêm hình ảnh cho bài viết ',
                 'post_content.required' => 'Yêu cầu nhập mô tả cho bài viết ',
