@@ -180,9 +180,25 @@ class ProductController extends Controller
 
     public function delete_product($product_id){
         $this->AuthLogin();
-        DB::table('tbl_product')->where('product_id',$product_id)->delete();
-        Toastr::success('Đã xóa sản phẩm!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
+        
+
+        $order = DB::table('tbl_order')
+        ->join('tbl_order_details','tbl_order.order_code','=','tbl_order_details.order_code')
+        ->where('tbl_order.order_status',1)->where('tbl_order_details.product_id',$product_id)
+        ->first();
+
+        if($order){
+           Toastr::warning('Sản phẩm đang tồn tại trong 1 đơn hàng chưa được xử lý,vui lòng xử lý đơn hàng trước khi xóa.','Thông báo !');
+           
+        }else{
+            DB::table('tbl_product')->where('product_id', $product_id)->delete();
+            Toastr::success('Xóa sản phẩm thành công.','Thông báo !');
+        }
         return Redirect::to('all-product');
+
+
+
+
     }
 
     public function update_product(Request $request, $product_id){

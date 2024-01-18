@@ -67,21 +67,34 @@
 function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- Meta tag Keywords -->
 <!-- css files -->
+<link href="{{asset('public/frontend/css/bootstrap.min.css')}}" rel="stylesheet">
+<script src="{{asset('public/frontend/js/bootstrap.min.js')}}"></script>
+<link href="{{asset('public/frontend/css/toastr.min.css')}}" rel="stylesheet">
 <link href="{{asset('public/frontend/css/style.css')}}" rel='stylesheet' type='text/css' media="all" /><!-- Style-CSS --> 
 <link href="{{asset('public/frontend/css/font-awesome1.css')}}" rel="stylesheet"> <!-- Font-Awesome-Icons-CSS -->
 <!-- //css files -->
-
+<script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 <link rel="shortcut icon" href="{{asset('public/frontend/images/favicon.png')}}">
 <!-- online-fonts -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese" rel="stylesheet">
 <link href="//fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800&amp;subset=latin-ext" rel="stylesheet">
 <!-- //online-fonts -->
+
 </head>
 <body>
-<!-- main -->
+	@if(session()->has('message'))
+                <div class="alert alert-success">
+                    {{ session()->get('message') }}
+                </div>
+            @elseif(session()->has('error'))
+                <div class="alert alert-danger">
+                    {{ session()->get('error') }}
+                </div>
+                @endif
+
 <script src="{{asset('public/backend/js/toastr.min.js')}}"></script> 
 	<link href="{{asset('public/backend/css/toastr.min.css')}}" rel="stylesheet">
-	{!! Toastr::message() !!}
+
 <div class="center-container">
 	<!--header-->
 	<div class="header-w3l">
@@ -105,6 +118,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 									@endif --}}
 									{{-- End --}}
 			</div>
+			{!! Toastr::message() !!}
 			<form action="{{URL::to('/login-customer')}}" method="post">
 				{{ csrf_field() }}
 				<div class="pom-agile">

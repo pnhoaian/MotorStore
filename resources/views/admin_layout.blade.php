@@ -244,14 +244,14 @@
                 </li>
                 @endhasrole
 
-                @impersonate
+                
                 <li class="sub-menu">
                     <a href="{{URL::to('/impersonate-destroy')}}">
                         <i class="fa fa-user-secret"></i>
                         <span>Hủy trao quyền</span>
                     </a>
                 </li>
-                @endimpersonate
+                
                 <li>
                     <a href="{{URL::to('/introduce')}}">
                         <i class="fa fa-info"></i>

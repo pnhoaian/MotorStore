@@ -333,8 +333,6 @@ class OrderController extends Controller
         
 
 
-
-
         if($order->order_status==0){
             $total_order = 0;
 			$sales = 0;

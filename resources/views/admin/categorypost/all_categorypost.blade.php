@@ -94,7 +94,7 @@
               <td>
                 <a href="{{URL::to('/edit-category-post/'.$cate_post->cate_post_id)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
-                <a onclick="return confirm('Xác nhận xóa Danh mục này?')" href="{{URL::to('/delete-category-post/'.$cate_post->cate_post_id)}}" class="active styling" ui-toggle-class=""> 
+                <a onclick="return confirm('Xóa danh mục bài viết sẽ xóa luôn tất cả bài viết thuộc danh mục này. Bạn có chắc chắn không?')" href="{{URL::to('/delete-category-post/'.$cate_post->cate_post_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

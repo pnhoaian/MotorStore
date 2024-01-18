@@ -99,6 +99,9 @@ class CategoryPost extends Controller
         $category_post->delete();
         Toastr::warning('Xóa danh mục bài viết thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('/all-category-post');
+
+
+        
     }
 
     public function update_category_post(Request $request, $cate_id){

@@ -55,8 +55,8 @@ class CheckoutController extends Controller
         Toastr::success('Đăng nhập thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "680","progressBar"=> true,"closeButton"=> true]);
         return redirect::to('/trang-chu');
     }else{
-        Toastr::error('Thông tin tài khoản hoặc mật khẩu không đúng!','Đăng nhập thất bại !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
-        return redirect::to('/login');
+        return redirect()->back()->with('error','Thông tin đăng nhập sai');
+    
     }
     }
 

@@ -94,7 +94,7 @@
               <td>
                 <a href="{{URL::to('/edit-brand-product/'.$brand_pro->brand_id)}}" class="active styling" ui-toggle-class="">
                   <i class="fa fa-pencil-square-o text-success text-active"></i>
-                <a onclick="return confirm('Xác nhận xóa Hãng - Thương hiệu này?')" href="{{URL::to('/delete-brand-product/'.$brand_pro->brand_id)}}" class="active styling" ui-toggle-class=""> 
+                <a onclick="return confirm('Xóa Hãng này sẽ xóa luôn tất cả sản phẩm thuộc thương hiệu này. Bạn có chắc chắn không?')" href="{{URL::to('/delete-brand-product/'.$brand_pro->brand_id)}}" class="active styling" ui-toggle-class=""> 
                   <i class="fa fa-trash"></i></a>
               </td>
             </tr>

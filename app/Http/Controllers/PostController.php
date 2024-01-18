@@ -116,6 +116,7 @@ class PostController extends Controller
         $post->delete();
         Toastr::warning('Xóa bài viết thành công!','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
         return Redirect::to('/all-post');
+        
     }
 
     public function update_post(Request $request, $post_id){
