@@ -49,7 +49,7 @@
                             <label for="exampleInputPassword1">Danh mục</label>
                             <select name="cate_post_id" class="form-control m-bot15">
                                 @foreach ($cate_post as $key =>$cate) 
-                                 <option {{ $cate->cate_post_id == $cate->cate_post_id ? 'selected' : ''}} value="{{$cate->cate_post_id}}">{{ $cate->cate_post_name }}</option>
+                                 <option {{ $post->cate_post_id == $cate->cate_post_id ? 'selected' : ''}} value="{{$cate->cate_post_id}}">{{ $cate->cate_post_name }}</option>
                                 @endforeach   
                             </select>
                         </div>

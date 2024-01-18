@@ -111,7 +111,7 @@ class AdminController extends Controller
         
         $result = DB::table('tbl_admin')-> where('admin_user',$admin_user)->where('admin_password',$admin_password)->first();
         if ($result) {
-			Session::put('admin_name',$result->admin_user);
+			Session::put('admin_name',$result->admin_name);
 			Session::put('admin_id',$result->admin_id);
             Toastr::success('Đăng nhập thành công.','Thông báo !', ["positionClass" => "toast-top-right","timeOut" => "2000","progressBar"=> true,"closeButton"=> true]);
 			
@@ -137,10 +137,10 @@ class AdminController extends Controller
         $from_date = $data['from_date'];
         $to_date = $data['to_date'];
 
-        $get = Statistic::whereBetween('order_date',[$from_date,$to_date])->orderBy('order_date','asc')->get();
-
-        foreach($get as $key =>$val){
-            $chart_data[]= array(
+        $get = Statistic::whereBetween('order_date',[$from_date,$to_date])->orderBy('order_date','ASC')->get();
+        
+        foreach($get as $key => $val){
+            $chart_data[] = array(
                 'period' => $val->order_date,
                 'order' => $val->total_order,
                 'sales' => $val->sales,
