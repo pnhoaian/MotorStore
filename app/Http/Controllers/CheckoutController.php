@@ -528,7 +528,5 @@ class CheckoutController extends Controller
         }
         // vui lòng tham khảo thêm tại code demo
         }
-        
 
-    
 }
